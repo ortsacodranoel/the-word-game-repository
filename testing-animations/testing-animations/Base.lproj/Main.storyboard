@@ -93,30 +93,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wf-r9-ZNq" userLabel="SelectButtonView">
-                                <rect key="frame" x="158" y="228" width="285" height="57"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z36-w8-L3G" userLabel="SelectButton">
-                                        <rect key="frame" x="0.0" y="1" width="285" height="56"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="select_button"/>
-                                        <connections>
-                                            <segue destination="Sav-rh-bmW" kind="showDetail" animates="NO" id="A4k-pK-voJ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="285" id="Zm2-dU-ULR"/>
-                                    <constraint firstAttribute="height" constant="57" id="kUP-Ac-Ruq"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qg2-86-sEz" userLabel="DescriptionView">
-                                <rect key="frame" x="150" y="85" width="300" height="128"/>
+                                <rect key="frame" x="150" y="236" width="300" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="dEF-a7-kWV"/>
-                                    <constraint firstAttribute="height" constant="128" id="jny-3B-xdW"/>
+                                    <constraint firstAttribute="height" constant="128" id="miG-KK-Ydg"/>
+                                    <constraint firstAttribute="width" constant="300" id="r3K-J9-Jky"/>
                                 </constraints>
                             </view>
                             <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDN-Ix-uGz" userLabel="TitleView">
@@ -152,17 +134,35 @@
                                     <constraint firstAttribute="height" constant="87" id="cwu-yg-y28"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wf-r9-ZNq" userLabel="SelectButtonView">
+                                <rect key="frame" x="158" y="382" width="285" height="57"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z36-w8-L3G" userLabel="SelectButton">
+                                        <rect key="frame" x="0.0" y="1" width="285" height="56"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="select_button"/>
+                                        <connections>
+                                            <segue destination="Sav-rh-bmW" kind="showDetail" animates="NO" id="A4k-pK-voJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="Dsh-ZA-9U7"/>
+                                    <constraint firstAttribute="width" constant="285" id="YGE-sK-XZJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.50196078431372548" green="0.38823529411764707" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mDN-Ix-uGz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="0cy-d7-tIH"/>
-                            <constraint firstItem="qg2-86-sEz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="AVT-kP-0if"/>
+                            <constraint firstItem="qg2-86-sEz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="8Q5-d1-gQi"/>
+                            <constraint firstItem="8wf-r9-ZNq" firstAttribute="top" secondItem="qg2-86-sEz" secondAttribute="bottom" constant="18" id="JgK-nj-aON"/>
+                            <constraint firstItem="8wf-r9-ZNq" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="KDm-Gz-txE"/>
                             <constraint firstItem="Wpg-nJ-zhp" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="Tgq-Fb-FKj"/>
-                            <constraint firstItem="8wf-r9-ZNq" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" constant="228" id="YWu-d7-WxB"/>
-                            <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" constant="85" id="YxH-Uc-5O9"/>
+                            <constraint firstItem="qg2-86-sEz" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="aFD-ur-NgB"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Wpg-nJ-zhp" secondAttribute="leading" id="hcw-Qi-83I"/>
                             <constraint firstItem="mDN-Ix-uGz" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" constant="27" id="lWt-aw-FZ8"/>
-                            <constraint firstItem="8wf-r9-ZNq" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="zit-Rb-Tja"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
