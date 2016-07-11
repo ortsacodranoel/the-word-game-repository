@@ -135,13 +135,29 @@
                                     <constraint firstAttribute="width" constant="300" id="WHt-xI-IuZ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-nJ-zhp" userLabel="ButtonView">
+                                <rect key="frame" x="20" y="256" width="80" height="87"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="BackButton">
+                                        <rect key="frame" x="33" y="33" width="13" height="22"/>
+                                        <state key="normal" image="Back Chevron"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="a92-IU-X0f"/>
+                                    <constraint firstAttribute="height" constant="87" id="cwu-yg-y28"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.50196078431372548" green="0.38823529411764707" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mDN-Ix-uGz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="0cy-d7-tIH"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="AVT-kP-0if"/>
+                            <constraint firstItem="Wpg-nJ-zhp" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="Tgq-Fb-FKj"/>
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" constant="228" id="YWu-d7-WxB"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" constant="85" id="YxH-Uc-5O9"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Wpg-nJ-zhp" secondAttribute="leading" id="hcw-Qi-83I"/>
                             <constraint firstItem="mDN-Ix-uGz" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" constant="27" id="lWt-aw-FZ8"/>
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="zit-Rb-Tja"/>
                         </constraints>
@@ -152,6 +168,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="TitleView" destination="mDN-Ix-uGz" id="ckg-0M-KgB"/>
+                        <outlet property="backButtonView" destination="Wpg-nJ-zhp" id="kGe-xw-3YF"/>
                         <outlet property="descriptionView" destination="qg2-86-sEz" id="f4b-Id-ohW"/>
                         <outlet property="selectButton" destination="z36-w8-L3G" id="A75-YL-I2n"/>
                         <outlet property="selectButtonView" destination="8wf-r9-ZNq" id="Pg9-8w-F7R"/>
@@ -283,8 +300,8 @@
                                     <constraint firstAttribute="width" constant="30" id="u78-5x-B1a"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="99C-Fk-cpx" userLabel="TeamView">
-                                <rect key="frame" x="180" y="87" width="240" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99C-Fk-cpx" userLabel="TeamView">
+                                <rect key="frame" x="180" y="132" width="240" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEAM 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwG-cN-2AD">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
@@ -294,6 +311,10 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Npz-6Q-HuE"/>
+                                    <constraint firstAttribute="width" constant="240" id="esA-dh-HsD"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.43805719893777506" green="0.7934680676790844" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -310,8 +331,10 @@
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="QxV-Dj-kVK" secondAttribute="bottom" constant="8" id="fIT-j0-3sh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="i50-N2-Dkt" secondAttribute="leading" id="fRJ-9t-zPh"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="3vS-XO-ytW" secondAttribute="bottom" constant="9" id="gW3-2Q-whJ"/>
+                            <constraint firstItem="99C-Fk-cpx" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="s1I-dO-Vno"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="UBE-go-gAA" secondAttribute="bottom" constant="8" id="sp2-IX-cn0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UBE-go-gAA" secondAttribute="trailing" constant="52" id="sxc-Kf-fRj"/>
+                            <constraint firstItem="99C-Fk-cpx" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="132" id="wck-7J-17C"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -358,6 +381,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Back Chevron" width="13" height="21"/>
         <image name="Menu" width="26" height="21"/>
         <image name="scoreContainer" width="45" height="41"/>
         <image name="select_button" width="285" height="56"/>

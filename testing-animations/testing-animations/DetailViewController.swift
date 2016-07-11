@@ -23,16 +23,17 @@ class DetailViewController: UIViewController {
     // MARK: - Views.
     @IBOutlet weak var TitleView: UIView!
     @IBOutlet weak var descriptionView: UIView!
-    @IBOutlet weak var backButtonView: UIView!
     @IBOutlet weak var selectButtonView: UIView!
+    @IBOutlet weak var backButtonView: UIView!
    
     
     
     // MARK: - Actions.
+
     @IBAction func backButtonTapped(sender: AnyObject) {
-    
+        
         performSegueWithIdentifier("unwindToCategories", sender: self)
-       // exitAnimations()
+        // exitAnimations()
     }
     
     // MARK: - Data.
