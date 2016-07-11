@@ -27,6 +27,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var selectButtonView: UIView!
     @IBOutlet weak var backButtonView: UIView!
    
+    // MARK: - Labels.
+    @IBOutlet weak var descriptionViewLabel: UILabel!
+    
     
     
     // MARK: - Actions.
@@ -41,7 +44,8 @@ class DetailViewController: UIViewController {
     
     
     // MARK: - Data.
-    let titles = ["Jesus","People","Places", "Famous", "Worship", "Books", "Concordance", "Feasts", "Angels", "Sunday School", "Revelation", "Doctrine", "Sins", "Commands"]
+    let titles = ["JESUS","PEOPLE","PLACES", "FAMOUS", "WORSHIP", "BOOKS", "CONCORDANCE", "FEASTS", "ANGELS", "SUNDAY SCHOOL", "REVELATION", "DOCTRINE", "SINS", "COMMANDS"]
+    
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
                     UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),  // People
                     UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1),  // Places
@@ -58,6 +62,23 @@ class DetailViewController: UIViewController {
                     UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
                     ]
     
+    let descriptions = ["HIS MANY NAMES, ADJECTIVES TO DESCRIBE HIS CHARACTER, AND WORDS ASSOCIATED WITH OUR LORD JESUS CHRIST.",
+                        "THE MEN AND WOMEN OF WHOM THERE ARE STORIES IN THE BIBLE.",
+                        "COUNTRIES, CITIES, LANDS, BODIES OF WATER, GEOLOGICAL LANDMARKS, AND MAN-MADE STRUCTURES IN AND OF THE TIMES OF THE BIBLE.",
+                        "CHRISTIAN CELEBRITIES, TV EVANGELISTS, HISTORICAL AND INFLUENTIAL CHRISTIANS.",
+                        "HYMNS, SONG OF WORSHIP, CHRISTIAN BANDS AND SINGERS, WORDS OF WORSHIP, AS WELL AS MUSICAL INSTRUMENTS FROM THE BIBLE. * IF THE ANSWER IS A SONG TITLE IN QUOTATION MARKS, YOUR TEAM DOES NOT HAVE TO GET THE EXACT TITLE, BUT IT MUST CONTAIN THE MAIN WORDS.",
+                        "CHRISTIAN AND CHRISTIAN-FRIENDLY BOOKS AND MOVIES, AS WELL AS THE BOOKS OF THE BIBLE.",
+                        "WORDS FOUND IN THE CONCORDANCE OF A BIBLE, EXCLUDING NAMES AND PLACES.",
+                        "BIBLICAL AND CHRISTIAN HOLIDAYS AS WELL AS FOOD AND DRINK MENTIONED IN THE BIBLE.",
+                        "THE NAMES OF THE ANGELS FROM THE BIBLE AND FROM CHRISTIAN-JUDEO MYTHOLOGY.",
+                        "STORIES FROM THE BIBLE AS WELL AS JESUS’ PARABLES. * YOUR TEAM DOES NOT HAVE TO USE THE EXACT WORDS AS WRITTEN IN THE ANSWER, BUT MUST CLEARLY GUESS THE CORRECT BIBLE STORY. REMEMBER NOT TO SAY ANY PART OF THE ANSWER WHEN GIVING CLUES.",
+                        "WORDS AND PHRASES OF THE PROPHETIC LAST BOOK OF THE BIBLE.",
+                        "CHRISTIAN DENOMINATIONS, BELIEFS AND PRACTICES WITHIN DIFFERENT DENOMINATIONS, WORDS ASSOCIATED WITH DIFFERENT DENOMINATIONS.",
+                        "WORDS OF BIBLICAL TRANSGRESSIONS. * ANSWERS WITH MORE THAN ONE WORD DO NOT HAVE TO BE GUESSED EXACTLY AS WRITTEN, BUT MUST CONTAIN THE MAIN WORDS.",
+                        "WORDS OF BIBLICAL MANDATES. * ANSWERS WITH MORE THAN ONE WORD DO NOT HAVE TO BE GUESSED EXACTLY AS WRITTEN, BUT MUST CONTAIN THE MAIN WORDS."
+                        ]
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +93,9 @@ class DetailViewController: UIViewController {
         self.descriptionView.center.x = 720
         self.selectButton.center.y = 720
         
-
-        
         setCategory(categoryTapped)
         setColor(categoryTapped)
+        setDescription(categoryTapped)
         
         self.startAnimations()
     }
@@ -96,10 +116,8 @@ class DetailViewController: UIViewController {
     func handleSwipes(sender: UISwipeGestureRecognizer) {
         if(sender.direction == .Right) {
             performSegueWithIdentifier("unwindToCategories", sender: self)
-
         }
     }
-    
     
     
     func setCategory(category: Int) {
@@ -109,6 +127,15 @@ class DetailViewController: UIViewController {
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
     }
+    
+    func setDescription(category: Int) {
+        self.descriptionViewLabel.text = descriptions[category]
+    }
+    
+    
+    
+    
+    
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
