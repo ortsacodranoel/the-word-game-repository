@@ -19,6 +19,7 @@ class DetailViewController: UIViewController {
     // MARK: - Buttons.
     @IBOutlet weak var selectButton: UIButton!
     
+
     
     // MARK: - Views.
     @IBOutlet weak var TitleView: UIView!
@@ -30,11 +31,14 @@ class DetailViewController: UIViewController {
     
     // MARK: - Actions.
 
+    @IBOutlet var mainView: UIView!
+    
     @IBAction func backButtonTapped(sender: AnyObject) {
-        
         performSegueWithIdentifier("unwindToCategories", sender: self)
         // exitAnimations()
     }
+
+    
     
     // MARK: - Data.
     let titles = ["Jesus","People","Places", "Famous", "Worship", "Books", "Concordance", "Feasts", "Angels", "Sunday School", "Revelation", "Doctrine", "Sins", "Commands"]
@@ -58,6 +62,11 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add Gesture Recognizer to enable swiping back to Categories Menu.
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleSwipes(_:)))
+        rightSwipe.direction = .Right
+        view.addGestureRecognizer(rightSwipe)
+        
         self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
         self.TitleView.center.x = 720
         self.descriptionView.center.x = 720
@@ -79,7 +88,20 @@ class DetailViewController: UIViewController {
     }
     
 
-    // MARK: -
+    // MARK: - Custom Methods.
+    
+    
+    
+    
+    func handleSwipes(sender: UISwipeGestureRecognizer) {
+        if(sender.direction == .Right) {
+            performSegueWithIdentifier("unwindToCategories", sender: self)
+
+        }
+    }
+    
+    
+    
     func setCategory(category: Int) {
         titleLabel.text = titles[category]
     }

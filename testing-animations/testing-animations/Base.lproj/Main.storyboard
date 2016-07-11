@@ -141,6 +141,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="BackButton">
                                         <rect key="frame" x="33" y="33" width="13" height="22"/>
                                         <state key="normal" image="Back Chevron"/>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="3Q2-Zv-7vH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -168,8 +171,9 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="TitleView" destination="mDN-Ix-uGz" id="ckg-0M-KgB"/>
-                        <outlet property="backButtonView" destination="Wpg-nJ-zhp" id="kGe-xw-3YF"/>
+                        <outlet property="backButtonView" destination="Wpg-nJ-zhp" id="GhZ-ku-auJ"/>
                         <outlet property="descriptionView" destination="qg2-86-sEz" id="f4b-Id-ohW"/>
+                        <outlet property="mainView" destination="Hu0-ky-z89" id="Nsd-Dj-uzc"/>
                         <outlet property="selectButton" destination="z36-w8-L3G" id="A75-YL-I2n"/>
                         <outlet property="selectButtonView" destination="8wf-r9-ZNq" id="Pg9-8w-F7R"/>
                         <outlet property="titleLabel" destination="pOC-zj-eJK" id="aKR-pg-Iqd"/>
