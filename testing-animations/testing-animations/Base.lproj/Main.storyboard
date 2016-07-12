@@ -9,7 +9,7 @@
         <!--UICollectionView-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CategoriesViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoriesViewController" id="BYZ-38-t0r" customClass="CategoriesViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -79,7 +79,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="1933"/>
+            <point key="canvasLocation" x="-720" y="1751"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="qAj-CK-xCL">
@@ -193,7 +193,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSv-aA-bF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eNv-UB-MxU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="827" y="1427"/>
+            <point key="canvasLocation" x="211" y="1751"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="IdY-Nk-VWO">
@@ -300,20 +300,6 @@
                                     <constraint firstAttribute="height" constant="40" id="s7P-TH-X2M"/>
                                 </constraints>
                             </view>
-                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
-                                <rect key="frame" x="20" y="8" width="30" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0">
-                                        <rect key="frame" x="2" y="4" width="26" height="22"/>
-                                        <state key="normal" image="Menu"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Dna-kO-7F8"/>
-                                    <constraint firstAttribute="width" constant="30" id="u78-5x-B1a"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99C-Fk-cpx" userLabel="TeamView">
                                 <rect key="frame" x="180" y="132" width="240" height="50"/>
                                 <subviews>
@@ -330,6 +316,23 @@
                                     <constraint firstAttribute="width" constant="240" id="esA-dh-HsD"/>
                                 </constraints>
                             </view>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
+                                <rect key="frame" x="20" y="13" width="30" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="26"/>
+                                        <state key="normal" image="Menu"/>
+                                        <connections>
+                                            <action selector="menuButtonTapped:" destination="Sav-rh-bmW" eventType="touchUpInside" id="qeK-HK-2yq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Dna-kO-7F8"/>
+                                    <constraint firstAttribute="width" constant="30" id="u78-5x-B1a"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.43805719893777506" green="0.7934680676790844" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -339,7 +342,7 @@
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="NQG-Eh-Uum"/>
                             <constraint firstItem="yRW-TZ-RsK" firstAttribute="leading" secondItem="QDg-XT-9rl" secondAttribute="leadingMargin" constant="130" id="S7b-Mh-Fvt"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="yRW-TZ-RsK" secondAttribute="bottom" constant="9" id="TVL-FD-1ZS"/>
-                            <constraint firstItem="i50-N2-Dkt" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="8" id="VBo-M7-2AL"/>
+                            <constraint firstItem="i50-N2-Dkt" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="13" id="VBo-M7-2AL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u3y-YN-CRe" secondAttribute="trailing" id="YfQ-z5-kAf"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="SMM-dS-Xrm" secondAttribute="bottom" constant="100" id="c8n-wT-RYB"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="QxV-Dj-kVK" secondAttribute="bottom" constant="8" id="fIT-j0-3sh"/>
@@ -365,11 +368,13 @@
                         <outlet property="teamTwoScoreTitleView" destination="UBE-go-gAA" id="6Qv-Zt-b02"/>
                         <outlet property="timeLeftLabel" destination="fNe-I9-jHn" id="L1B-0t-wMc"/>
                         <outlet property="timerView" destination="u3y-YN-CRe" id="uYj-SV-4Fv"/>
+                        <segue destination="QvE-dB-5dm" kind="unwind" identifier="returnToMenu" unwindAction="unwindToCategories:" id="d7H-Io-ZKa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QvE-dB-5dm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1568" y="1427"/>
+            <point key="canvasLocation" x="1054" y="763"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4wf-mE-sp2">
@@ -391,7 +396,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pX-0K-wQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-217" y="1043"/>
+            <point key="canvasLocation" x="-1052" y="690"/>
         </scene>
     </scenes>
     <resources>

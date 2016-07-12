@@ -13,7 +13,7 @@ class DetailViewController: UIViewController {
     // MARK: - Variables.
     var categoryTapped = Int()
     var backgroundColor = UIColor()
-    @IBOutlet weak var titleLabel: UILabel!
+
     
     
     // MARK: - Buttons.
@@ -26,22 +26,22 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var selectButtonView: UIView!
     @IBOutlet weak var backButtonView: UIView!
-   
+    @IBOutlet var mainView: UIView!
+    
+    
     // MARK: - Labels.
     @IBOutlet weak var descriptionViewLabel: UILabel!
-    
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     // MARK: - Actions.
 
-    @IBOutlet var mainView: UIView!
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("unwindToCategories", sender: self)
         // exitAnimations()
     }
 
-    
     
     // MARK: - Data.
     let titles = ["JESUS","PEOPLE","PLACES", "FAMOUS", "WORSHIP", "BOOKS", "CONCORDANCE", "FEASTS", "ANGELS", "SUNDAY SCHOOL", "REVELATION", "DOCTRINE", "SINS", "COMMANDS"]
@@ -108,14 +108,17 @@ class DetailViewController: UIViewController {
     }
     
 
+    
+    
+    
+    
+    
+    
     // MARK: - Custom Methods.
-    
-    
-    
     
     func handleSwipes(sender: UISwipeGestureRecognizer) {
         if(sender.direction == .Right) {
-            performSegueWithIdentifier("unwindToCategories", sender: self)
+            performSegueWithIdentifier("unwindtToCategories", sender: self)
         }
     }
     
@@ -133,16 +136,13 @@ class DetailViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as? GameViewController
         destinationVC?.categoryTapped = self.categoryTapped
-
     }
+    
+    
+    
     
     
     func startAnimations() {

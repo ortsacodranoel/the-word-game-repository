@@ -45,11 +45,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
-        
         cell.categoryButton.setBackgroundImage(self.categories[indexPath.row], forState: UIControlState.Normal)
-        
         cell.categoryButton.setBackgroundImage(self.categoriesSelected[indexPath.row], forState: UIControlState.Highlighted)
-        
         cell.tag = indexPath.row
         
         return cell

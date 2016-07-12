@@ -10,11 +10,10 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    
-    
     // MARK: - Variables.
     var answer = true
-
+    var categoryTapped = Int()
+    
     
     // MARK: - Data.
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
@@ -33,12 +32,10 @@ class GameViewController: UIViewController {
         UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
     ]
     
-    var categoryTapped = Int()
-    
+
     // MARK: - Label
     @IBOutlet weak var timeLeftLabel: UILabel!
 
-    
     
     // MARK: - Views.
     @IBOutlet weak var timerView: UIView!
@@ -56,6 +53,17 @@ class GameViewController: UIViewController {
     var counter = 60
     var time : String = ""
     
+    @IBAction func menuButtonTapped(sender: AnyObject) {
+        print("Button Tapped")
+       
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CategoriesViewController") as! CategoriesViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+
+    }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +87,7 @@ class GameViewController: UIViewController {
         
         if !timer.valid {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
-            timer.fire()
+            //timer.fire()
         }
     }
 
@@ -106,8 +114,7 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
+
     
     
     
@@ -193,10 +200,6 @@ class GameViewController: UIViewController {
                                     self.startButtonView.alpha = 1.0
                                     self.startButtonView.center.y = 25
             }, completion: nil)
-        
-        
-        
-        
     }
 
 
