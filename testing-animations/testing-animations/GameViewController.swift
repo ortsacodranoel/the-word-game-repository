@@ -55,13 +55,15 @@ class GameViewController: UIViewController {
     
     @IBAction func menuButtonTapped(sender: AnyObject) {
         print("Button Tapped")
-       
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CategoriesViewController") as! CategoriesViewController
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+        //navigationController!.popToViewController(navigationController!.viewControllers[1] as UIViewController,animated: false)
 
+        
     }
+    
+    
     
 
     
@@ -119,8 +121,6 @@ class GameViewController: UIViewController {
     
     
     //MARK: - Custom methods.
-    
-    
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
     }

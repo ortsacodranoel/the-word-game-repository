@@ -21,6 +21,33 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let categoriesSelected = [UIImage(named:"jesusCategorySelected"),UIImage(named:"peopleCategorySelected"),UIImage(named:"placesCategorySelected"),UIImage(named:"famousCategorySelected"),UIImage(named:"worshipCategorySelected"),UIImage(named:"booksCategorySelected"),UIImage(named:"concordanceCategorySelected"),UIImage(named:"feastsCategorySelected"),UIImage(named:"angelsCategorySelected"), UIImage(named:"sundayCategorySelected"),UIImage(named:"revelationCategorySelected"), UIImage(named:"doctrineCategorySelected"), UIImage(named:"sinsCategorySelected"), UIImage(named:"commandsCategorySelected")]
     
+    let transitionManager = TransitionManager()
+    
+    
+    @IBAction func categoryButtonTapped(sender: AnyObject) {
+ 
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,20 +81,27 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            
-            let button = sender as! UIButton
-            let view = button.superview!
-            let cell = view.superview! as! CollectionViewCell
-            let indexPath = collectionView.indexPathForCell(cell)
-            
-            // Create DetailViewController.
-            // let detailView = self.storyboard?.instantiateViewControllerWithIdentifier("detailViewController") as! DetailViewController
-            
-            // Assign the value of the category that was selected to the new DetailViewController's categoryTapped.
-            // detailView.categoryTapped = (indexPath!.row)
-     
-            let destinationVC = segue.destinationViewController as? DetailViewController
-            destinationVC?.categoryTapped = (indexPath!.row)
+        
+        let toViewController = segue.destinationViewController as! DetailViewController
+        
+        toViewController.transitioningDelegate = self.transitionManager
+
+        
+        
+        
+//            let button = sender as! UIButton
+//            let view = button.superview!
+//            let cell = view.superview! as! CollectionViewCell
+//            let indexPath = collectionView.indexPathForCell(cell)
+//            
+//            // Create DetailViewController.
+//            // let detailView = self.storyboard?.instantiateViewControllerWithIdentifier("detailViewController") as! DetailViewController
+//            
+//            // Assign the value of the category that was selected to the new DetailViewController's categoryTapped.
+//            // detailView.categoryTapped = (indexPath!.row)
+//     
+//            let destinationVC = segue.destinationViewController as? DetailViewController
+//            destinationVC?.categoryTapped = (indexPath!.row)
     }
 
     

@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     var categoryTapped = Int()
     var backgroundColor = UIColor()
 
+    @IBOutlet weak var BackgroundView: UIView!
     
     
     // MARK: - Buttons.
@@ -37,10 +38,7 @@ class DetailViewController: UIViewController {
     // MARK: - Actions.
 
     
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("unwindToCategories", sender: self)
-        // exitAnimations()
-    }
+    @IBAction func backButtonTapped(sender: AnyObject)  { }
 
     
     // MARK: - Data.
@@ -92,15 +90,18 @@ class DetailViewController: UIViewController {
         self.TitleView.center.x = 720
         self.descriptionView.center.x = 720
         self.selectButton.center.y = 720
+        self.backButtonView.center.x = 720
         
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
         
         self.startAnimations()
+        
+
     }
 
-    
+    override func viewDidAppear(animated: Bool) {}
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -146,6 +147,16 @@ class DetailViewController: UIViewController {
     
     
     func startAnimations() {
+        
+        
+        UIView.animateWithDuration(0.2, delay: 0.1,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
+                                    
+                                    self.BackgroundView.center.x = 0
+            }, completion: nil)
+        
         
         UIView.animateWithDuration(0.2, delay: 0.2,
                                    usingSpringWithDamping: 0.8,
