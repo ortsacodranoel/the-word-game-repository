@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     var categoryTapped = Int()
     var backgroundColor = UIColor()
 
+    @IBOutlet weak var BackgroundView: UIView!
     
     
     // MARK: - Buttons.
@@ -37,10 +38,7 @@ class DetailViewController: UIViewController {
     // MARK: - Actions.
 
     
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("unwindToCategories", sender: self)
-        // exitAnimations()
-    }
+    @IBAction func backButtonTapped(sender: AnyObject)  { }
 
     
     // MARK: - Data.
@@ -78,6 +76,26 @@ class DetailViewController: UIViewController {
                         "WORDS OF BIBLICAL MANDATES. * ANSWERS WITH MORE THAN ONE WORD DO NOT HAVE TO BE GUESSED EXACTLY AS WRITTEN, BUT MUST CONTAIN THE MAIN WORDS."
                         ]
     
+    // Create GameScreenTransitionManager to handle transition game screen.
+    let gameScreenTransitionManager = GameScreenTransitionManager()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -92,15 +110,18 @@ class DetailViewController: UIViewController {
         self.TitleView.center.x = 720
         self.descriptionView.center.x = 720
         self.selectButton.center.y = 720
+        self.backButtonView.center.x = 720
         
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
         
         self.startAnimations()
+        
+
     }
 
-    
+    override func viewDidAppear(animated: Bool) {}
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -137,15 +158,40 @@ class DetailViewController: UIViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationVC = segue.destinationViewController as? GameViewController
-        destinationVC?.categoryTapped = self.categoryTapped
+        //let destinationVC = segue.destinationViewController as? GameViewController
+        //destinationVC?.categoryTapped = self.categoryTapped
+        
+        if segue.identifier == "segueToGame" {
+            let toViewController = segue.destinationViewController as! GameViewController
+            toViewController.transitioningDelegate = self.gameScreenTransitionManager
+        }
     }
     
     
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func startAnimations() {
+        
+        
+        UIView.animateWithDuration(0.2, delay: 0.1,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
+                                    
+                                    self.BackgroundView.center.x = 0
+            }, completion: nil)
+        
         
         UIView.animateWithDuration(0.2, delay: 0.2,
                                    usingSpringWithDamping: 0.8,
