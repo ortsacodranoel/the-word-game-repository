@@ -82,10 +82,10 @@
             </objects>
             <point key="canvasLocation" x="-568" y="1751"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
             <objects>
-                <viewController storyboardIdentifier="detailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Fc-eW-5Eo" customClass="DetailViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailViewController" title="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Fc-eW-5Eo" customClass="DetailViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kKD-HC-37C"/>
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
@@ -105,6 +105,9 @@
                                         <rect key="frame" x="0.0" y="1" width="285" height="56"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="select_button"/>
+                                        <connections>
+                                            <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="hjj-Gg-oFL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -154,7 +157,7 @@
                                         <state key="normal" image="Back Chevron"/>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="3Q2-Zv-7vH"/>
-                                            <segue destination="jEr-zt-sSa" kind="unwind" unwindAction="unwindToCategories:" id="gRz-WM-Bmc"/>
+                                            <segue destination="jEr-zt-sSa" kind="unwind" identifier="" unwindAction="unwindToCategories:" id="gRz-WM-Bmc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -220,6 +223,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-Ej-eue" userLabel="startButton">
                                         <rect key="frame" x="0.0" y="0.0" width="286" height="56"/>
                                         <state key="normal" image="start_button"/>
+                                        <connections>
+                                            <segue destination="LJF-0V-4cl" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="HXM-Yo-R8H"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -378,6 +384,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="LJF-0V-4cl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="906" y="1751"/>
         </scene>

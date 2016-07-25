@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
 		B3EC594A1D45524800E122A6 /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC59491D45524800E122A6 /* CustomSegue.swift */; };
+		B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */; };
 		B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B413DBDD1D2DF1900006FB9D /* Game.swift */; };
 		B4752B421D28849500A042E0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4752B411D28849500A042E0 /* GameViewController.swift */; };
 		D604D4801D21839B00FBCC2B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604D47F1D21839B00FBCC2B /* DetailViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		B3EC59491D45524800E122A6 /* CustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
+		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
 		B413DBDD1D2DF1900006FB9D /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		B4752B411D28849500A042E0 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D604D47F1D21839B00FBCC2B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3F39C6C1D4672D80049F8FB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
+				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
+				B4752B411D28849500A042E0 /* GameViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		D67774C51D1C392B0051C634 = {
 			isa = PBXGroup;
 			children = (
@@ -111,14 +123,13 @@
 		D67774D01D1C392B0051C634 /* testing-animations */ = {
 			isa = PBXGroup;
 			children = (
-				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
+				B3F39C6C1D4672D80049F8FB /* View Controllers */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
-				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
-				B4752B411D28849500A042E0 /* GameViewController.swift */,
 				D67774D11D1C392B0051C634 /* AppDelegate.swift */,
 				D67774D51D1C392B0051C634 /* Main.storyboard */,
 				B3EC59491D45524800E122A6 /* CustomSegue.swift */,
 				B32AF2651D458AC60097AFD2 /* TransitionManager.swift */,
+				B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774DD1D1C392B0051C634 /* LaunchScreen.storyboard */,
@@ -284,6 +295,7 @@
 				B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */,
 				D604D4801D21839B00FBCC2B /* DetailViewController.swift in Sources */,
 				D67775031D1C4FDC0051C634 /* CollectionViewCell.swift in Sources */,
+				B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */,
 				B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */,
 				B4752B421D28849500A042E0 /* GameViewController.swift in Sources */,
 				D67774D21D1C392B0051C634 /* AppDelegate.swift in Sources */,

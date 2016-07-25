@@ -55,12 +55,7 @@ class GameViewController: UIViewController {
     
     @IBAction func menuButtonTapped(sender: AnyObject) {
         print("Button Tapped")
-        
-        
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-        //navigationController!.popToViewController(navigationController!.viewControllers[1] as UIViewController,animated: false)
-
-        
+        performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
     

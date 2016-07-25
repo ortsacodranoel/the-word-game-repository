@@ -76,6 +76,26 @@ class DetailViewController: UIViewController {
                         "WORDS OF BIBLICAL MANDATES. * ANSWERS WITH MORE THAN ONE WORD DO NOT HAVE TO BE GUESSED EXACTLY AS WRITTEN, BUT MUST CONTAIN THE MAIN WORDS."
                         ]
     
+    // Create GameScreenTransitionManager to handle transition game screen.
+    let gameScreenTransitionManager = GameScreenTransitionManager()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -138,9 +158,24 @@ class DetailViewController: UIViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationVC = segue.destinationViewController as? GameViewController
-        destinationVC?.categoryTapped = self.categoryTapped
+        //let destinationVC = segue.destinationViewController as? GameViewController
+        //destinationVC?.categoryTapped = self.categoryTapped
+        
+        if segue.identifier == "segueToGame" {
+            let toViewController = segue.destinationViewController as! GameViewController
+            toViewController.transitioningDelegate = self.gameScreenTransitionManager
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

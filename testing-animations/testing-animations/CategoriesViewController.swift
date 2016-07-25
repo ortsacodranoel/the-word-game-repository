@@ -24,10 +24,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     let transitionManager = TransitionManager()
     
     
-    @IBAction func categoryButtonTapped(sender: AnyObject) {
- 
-    
-    }
+    @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
     
     
