@@ -13,8 +13,6 @@ class DetailViewController: UIViewController {
     // MARK: - Variables.
     var categoryTapped = Int()
     var backgroundColor = UIColor()
-
-    @IBOutlet weak var BackgroundView: UIView!
     
     
     // MARK: - Buttons.
@@ -182,15 +180,6 @@ class DetailViewController: UIViewController {
     
     
     func startAnimations() {
-        
-        
-        UIView.animateWithDuration(0.2, delay: 0.1,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.BackgroundView.center.x = 0
-            }, completion: nil)
         
         
         UIView.animateWithDuration(0.2, delay: 0.2,
