@@ -77,60 +77,40 @@ class DetailViewController: UIViewController {
     // Create GameScreenTransitionManager to handle transition game screen.
     let gameScreenTransitionManager = GameScreenTransitionManager()
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         
         // Add Gesture Recognizer to enable swiping back to Categories Menu.
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleSwipes(_:)))
         rightSwipe.direction = .Right
         view.addGestureRecognizer(rightSwipe)
-        
+       
         self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
-        self.TitleView.center.x = 720
-        self.descriptionView.center.x = 720
-        self.selectButton.center.y = 720
-        self.backButtonView.center.x = 720
         
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
         
-        self.startAnimations()
         
-
     }
-
-    override func viewDidAppear(animated: Bool) {}
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    
-    
-    
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        startAnimations()
+    }
     
     
     // MARK: - Custom Methods.
@@ -140,7 +120,6 @@ class DetailViewController: UIViewController {
             performSegueWithIdentifier("unwindtToCategories", sender: self)
         }
     }
-    
     
     func setCategory(category: Int) {
         titleLabel.text = titles[category]
@@ -154,10 +133,7 @@ class DetailViewController: UIViewController {
         self.descriptionViewLabel.text = descriptions[category]
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //let destinationVC = segue.destinationViewController as? GameViewController
-        //destinationVC?.categoryTapped = self.categoryTapped
         
         if segue.identifier == "segueToGame" {
             let toViewController = segue.destinationViewController as! GameViewController
@@ -165,29 +141,17 @@ class DetailViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     func startAnimations() {
-        
         
         UIView.animateWithDuration(0.2, delay: 0.2,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    self.TitleView.center.x = 0
+                                    self.TitleView.center.x -= self.view.bounds.width
+                                 
         }, completion: nil)
         
         
@@ -195,7 +159,7 @@ class DetailViewController: UIViewController {
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
-                                    self.descriptionView.center.x = 0
+                                    self.descriptionView.center.x -= self.view.bounds.width
             }, completion: nil)
         
         
@@ -204,7 +168,7 @@ class DetailViewController: UIViewController {
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    self.selectButton.center.y = 0
+                                    self.selectButton.center.y -= self.view.bounds.width
                                     
             }, completion: nil)
         
@@ -218,51 +182,5 @@ class DetailViewController: UIViewController {
                                     
             }, completion: nil)
     }
-    
-    
-    func exitAnimations() {
-        
-        if self.backButtonView.alpha == 1.0 {
-        
-        UIView.animateWithDuration(0.2, delay: 0.2,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.TitleView.center.x = 720
-            }, completion: nil)
-        
-        
-        UIView.animateWithDuration(0.2, delay: 0.4,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    self.descriptionView.center.x = 720
-            }, completion: nil)
-        
-        
-        UIView.animateWithDuration(0.2, delay: 0.6,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.selectButton.center.y = 720
-                                    
-            }, completion: nil)
-        
-        
-        UIView.animateWithDuration(0.5, delay: 0.8,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.backButtonView.alpha = 0
-                                    
-            }, completion: nil)
-    
-        } else {
-            return     }
-    }
-    
     
 } // END

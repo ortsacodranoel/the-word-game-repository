@@ -145,7 +145,7 @@
                                     <constraint firstAttribute="width" constant="425" id="unR-Wh-Gye"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-nJ-zhp" userLabel="ButtonView">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-nJ-zhp" userLabel="ButtonView">
                                 <rect key="frame" x="20" y="240" width="40" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="BackButton">
