@@ -73,20 +73,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Change view background color.
         setColor(categoryTapped)
-        
-        // Setup view alpha levels for animations.
-        timerView.alpha = 0
-        teamOneScoreTitleView.alpha = 0
-        teamTwoScoreTitleView.alpha = 0
-        teamTwoScore.alpha = 0
-        teamOneScore.alpha = 0
-        menuView.alpha = 0
-        TeamTitleView.alpha = 0
-        startButtonView.alpha = 0
-
+    
         timeLeftLabel.text = String(counter)
     }
     
@@ -130,9 +119,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-        
     func startAnimations() {
       
         UIView.animateWithDuration(0.2, delay: 1.8,
