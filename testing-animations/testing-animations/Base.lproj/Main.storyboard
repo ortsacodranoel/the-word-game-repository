@@ -215,7 +215,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="286" height="56"/>
                                         <state key="normal" image="start_button"/>
                                         <connections>
-                                            <segue destination="LJF-0V-4cl" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="HXM-Yo-R8H"/>
+                                            <action selector="startButtonTapped:" destination="Sav-rh-bmW" eventType="touchUpInside" id="O6i-h5-wXm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -372,6 +372,7 @@
                         <outlet property="teamTwoScoreTitleView" destination="UBE-go-gAA" id="6Qv-Zt-b02"/>
                         <outlet property="timeLeftLabel" destination="fNe-I9-jHn" id="L1B-0t-wMc"/>
                         <outlet property="timerView" destination="u3y-YN-CRe" id="uYj-SV-4Fv"/>
+                        <segue destination="LJF-0V-4cl" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="eC9-7p-Egi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

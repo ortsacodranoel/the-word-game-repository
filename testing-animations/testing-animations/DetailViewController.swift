@@ -84,9 +84,7 @@ class DetailViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         
         // Add Gesture Recognizer to enable swiping back to Categories Menu.
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleSwipes(_:)))
@@ -98,8 +96,6 @@ class DetailViewController: UIViewController {
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,6 +133,7 @@ class DetailViewController: UIViewController {
         
         if segue.identifier == "segueToGame" {
             let toViewController = segue.destinationViewController as! GameViewController
+            toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
         }
     }
@@ -178,7 +175,7 @@ class DetailViewController: UIViewController {
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    self.backButtonView.alpha = 1.0
+                                   self.backButtonView.alpha = 1.0
                                     
             }, completion: nil)
     }

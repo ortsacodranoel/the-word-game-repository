@@ -13,6 +13,9 @@ class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
     private var presenting = true
     
+    // MARK: Information passed.
+    var CategoryTapped = Int()
+    
     // Animate transition between View Controllers.
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         

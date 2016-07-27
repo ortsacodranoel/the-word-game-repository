@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     // MARK: - Variables.
     var answer = true
     var categoryTapped = Int()
-    
+    var gameStart = false
     
     // MARK: - Data.
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
@@ -59,11 +59,23 @@ class GameViewController: UIViewController {
     }
     
     
+    @IBAction func startButtonTapped(sender: AnyObject) {
+        print("start tapped")
+        gameStart = true
+        if !timer.valid {
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
+        }
+    }
     
-
     
+    
+    // Apple code ===================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Change view background color.
+        setColor(categoryTapped)
         
         // Setup view alpha levels for animations.
         timerView.alpha = 0
@@ -74,34 +86,8 @@ class GameViewController: UIViewController {
         menuView.alpha = 0
         TeamTitleView.alpha = 0
         startButtonView.alpha = 0
-        
-        // Change view background color.
-        setColor(categoryTapped)
 
-
-        // Timer configuration.
-        
-        
-        if !timer.valid {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
-            //timer.fire()
-        }
-    }
-
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        // Setup view positions for animations.
-        timerView.center.y = -200
-        teamOneScoreTitleView.center.y = 200
-        teamOneScore.center.y = 200
-        teamTwoScoreTitleView.center.y = 200
-        teamTwoScore.center.y = 200
-        menuView.center.y = -200
-        TeamTitleView.center.y = -200
-        startButtonView.center.y = 200
-        
-        self.startAnimations()
+        timeLeftLabel.text = String(counter)
     }
     
     
@@ -110,8 +96,10 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        startAnimations()
+    }
     
     
     
@@ -120,18 +108,31 @@ class GameViewController: UIViewController {
         self.view.backgroundColor = colors[category]
     }
     
-    func updateTime() {
-        counter -= 1
-        self.timeLeftLabel.text = String(counter)
-//        if counter == 57 {
-//            
-//            print("Stop")
-//            timer.invalidate()
-//            return
-//        }
     
+    func updateTime() {
+        
+        if (self.gameStart == true)
+        {
+            counter -= 1
+            self.timeLeftLabel.text = String(counter)
+            
+            // Check if time has run out.
+                if counter == 0 {
+                    
+                    timer.invalidate()
+                    gameStart = false
+                    counter = 0
+                    self.timeLeftLabel.text = String(counter)
+                    print("Time's up!")
+                    return
+                }
+        } else { return }
     }
     
+    
+    
+    
+        
     func startAnimations() {
       
         UIView.animateWithDuration(0.2, delay: 1.8,
@@ -140,7 +141,7 @@ class GameViewController: UIViewController {
                                    options: [], animations: {
                                     
                                     self.timerView.alpha = 1.0
-                                    self.timerView.center.y = 25
+                                    self.timerView.center.y -= self.view.bounds.height
             }, completion: nil)
         
         UIView.animateWithDuration(0.2, delay: 1.0,
@@ -149,7 +150,7 @@ class GameViewController: UIViewController {
                                    options: [], animations: {
                                     
                                     self.teamOneScoreTitleView.alpha = 1.0
-                                    self.teamOneScoreTitleView.center.y = 25
+                                    self.teamOneScoreTitleView.center.y -= self.view.bounds.height
             }, completion: nil)
         
         UIView.animateWithDuration(0.2, delay: 1.2,
@@ -158,7 +159,7 @@ class GameViewController: UIViewController {
                                    options: [], animations: {
                                     
                                     self.teamOneScore.alpha = 1.0
-                                    self.teamOneScore.center.y = 25
+                                    self.teamOneScore.center.y -= self.view.bounds.height
             }, completion: nil)
         
         
@@ -168,7 +169,7 @@ class GameViewController: UIViewController {
                                    options: [], animations: {
                                     
                                     self.teamTwoScoreTitleView.alpha = 1.0
-                                    self.teamTwoScoreTitleView.center.y = 25
+                                    self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
             }, completion: nil)
         
         
@@ -181,7 +182,7 @@ class GameViewController: UIViewController {
                                     self.teamTwoScore.alpha = 1.0
                                     self.teamTwoScore.center.y = 25
                                     self.menuView.alpha = 1.0
-                                    self.menuView.center.y = 25
+                                    self.menuView.center.y -= self.view.bounds.height
             }, completion: nil)
         
         // Team turn TitleView.
@@ -191,11 +192,12 @@ class GameViewController: UIViewController {
                                    options: [], animations: {
                                     
                                     self.TeamTitleView.alpha = 1.0
-                                    self.TeamTitleView.center.y = 25
+                                    self.TeamTitleView.center.y += self.view.bounds.height
                                     self.startButtonView.alpha = 1.0
-                                    self.startButtonView.center.y = 25
+                                    self.startButtonView.center.y -= self.view.bounds.height
             }, completion: nil)
     }
 
 
 }
+
