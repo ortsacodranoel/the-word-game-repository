@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     // MARK: - Variables.
     var answer = true
     var categoryTapped = Int()
-    var gameStart = false
+    var gameStarted = false
     
     // MARK: - Data.
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
@@ -60,9 +60,6 @@ class GameViewController: UIViewController {
     
     
     @IBAction func startButtonTapped(sender: AnyObject) {
-        print("start tapped")
-        
-
         
         // Run the timer.
         if !timer.valid {
@@ -88,13 +85,13 @@ class GameViewController: UIViewController {
             }, completion: nil)
         
         // Start a new game countdown.
-        gameStart = true
+        gameStarted = true
         
     }
     
     
     
-    // Apple code ===================================================================================================================
+    // Apple code ############################################################################################################################################################################
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,7 +113,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
     //MARK: - Custom methods.
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
@@ -125,35 +121,81 @@ class GameViewController: UIViewController {
     
     func updateTime() {
         
-        if (self.gameStart == true)
+        if (self.gameStarted == true)
         {
             counter -= 1
             self.timeLeftLabel.text = String(counter)
             
             // Check if time has run out.
-                if counter == 0 {
+                if counter == 57 {
                     
+                    // Stop timer.
                     timer.invalidate()
-                    gameStart = false
-                    counter = 0
+                    
+                    
+                    // Reset for next team.
+                    gameStarted = false
+                    counter = 60
                     self.timeLeftLabel.text = String(counter)
                     print("Time's up!")
+                    
+                    resetAnimations()
+                    
+                    
                     return
                 }
         } else { return }
     }
     
     
-    func startAnimations() {
-      
-        UIView.animateWithDuration(0.2, delay: 1.8,
+    // MARK: Animations ############################################################################################################################################################################
+    
+    /*
+     This method resets the menuView, StartButtonView, and TeamView by placing them
+     at their original start positions, increasing alpha values, and enabling user interaction.
+     */
+    func resetAnimations() {
+        self.menuView.alpha = 1
+        self.TeamTitleView.alpha = 1
+        self.startButtonView.alpha = 1
+        
+        self.menuView.userInteractionEnabled = true
+        self.TeamTitleView.userInteractionEnabled = true
+        self.startButtonView.userInteractionEnabled = true
+        
+        UIView.animateWithDuration(0.2, delay: 0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    self.timerView.alpha = 1.0
-                                    self.timerView.center.y -= self.view.bounds.height
+                                    self.menuView.center.y += self.view.bounds.height
+                                    self.TeamTitleView.center.y += self.view.bounds.height
+                                    self.startButtonView.center.y -= self.view.bounds.height
+                                    
             }, completion: nil)
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func startAnimations() {
         
         UIView.animateWithDuration(0.2, delay: 1.0,
                                    usingSpringWithDamping: 0.8,
@@ -184,19 +226,27 @@ class GameViewController: UIViewController {
             }, completion: nil)
         
         
-        // Menu and Timer animations.
+
         UIView.animateWithDuration(0.2, delay: 1.6,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
+                                    
+                                    // teamTwoScore animations.
                                     self.teamTwoScore.alpha = 1.0
-                                    self.teamTwoScore.center.y = 25
+                                    self.teamTwoScore.center.y -= self.view.bounds.height
+                                    
+                                    // menuView animations.
                                     self.menuView.alpha = 1.0
-                                    self.menuView.center.y -= self.view.bounds.height
+                                    self.menuView.center.y += self.view.bounds.height
+                                    
+                                    // timerView animations.
+                                    self.timerView.alpha = 1.0
+                                    self.timerView.center.y += self.view.bounds.height
             }, completion: nil)
         
-        // Team turn TitleView.
+
         UIView.animateWithDuration(0.2, delay: 2.4,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
@@ -209,6 +259,11 @@ class GameViewController: UIViewController {
             }, completion: nil)
     }
 
+    
+    
+    
+    
+    
 
 }
 
