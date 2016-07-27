@@ -94,10 +94,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V50-Ja-wRM" userLabel="BackgroundView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.7946488129" green="0.50101046520000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wf-r9-ZNq" userLabel="SelectButtonView">
                                 <rect key="frame" x="153" y="393" width="285" height="57"/>
                                 <subviews>
@@ -149,7 +145,7 @@
                                     <constraint firstAttribute="width" constant="425" id="unR-Wh-Gye"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-nJ-zhp" userLabel="ButtonView">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-nJ-zhp" userLabel="ButtonView">
                                 <rect key="frame" x="20" y="240" width="40" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="BackButton">
@@ -171,16 +167,12 @@
                         <color key="backgroundColor" red="0.50196078431372548" green="0.38823529411764707" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="2dk-1F-MXL"/>
-                            <constraint firstItem="V50-Ja-wRM" firstAttribute="top" secondItem="kKD-HC-37C" secondAttribute="bottom" id="5BJ-3i-pq2"/>
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="top" secondItem="qg2-86-sEz" secondAttribute="bottom" constant="28" id="626-IL-JyL"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="A3u-Zd-33p"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="8wf-r9-ZNq" secondAttribute="trailing" constant="-350" id="A8i-dh-RGg"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="mDN-Ix-uGz" secondAttribute="trailing" constant="-350" id="ITk-Pb-NSE"/>
-                            <constraint firstAttribute="trailing" secondItem="V50-Ja-wRM" secondAttribute="trailing" id="Rwn-BS-P4l"/>
                             <constraint firstItem="Wpg-nJ-zhp" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="Y8b-Dm-pdD"/>
-                            <constraint firstItem="V50-Ja-wRM" firstAttribute="leading" secondItem="Hu0-ky-z89" secondAttribute="leading" id="bRN-hh-mU1"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Wpg-nJ-zhp" secondAttribute="leading" id="eOv-6Q-STA"/>
-                            <constraint firstItem="oTV-zm-k0o" firstAttribute="top" secondItem="V50-Ja-wRM" secondAttribute="bottom" id="jPu-WP-Q12"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="mDN-Ix-uGz" secondAttribute="bottom" constant="8" id="nRm-oM-MMY"/>
                         </constraints>
                     </view>
@@ -189,7 +181,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="BackgroundView" destination="V50-Ja-wRM" id="AWb-kB-XiU"/>
                         <outlet property="TitleView" destination="mDN-Ix-uGz" id="ckg-0M-KgB"/>
                         <outlet property="backButtonView" destination="Wpg-nJ-zhp" id="GhZ-ku-auJ"/>
                         <outlet property="descriptionView" destination="qg2-86-sEz" id="f4b-Id-ohW"/>
@@ -224,7 +215,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="286" height="56"/>
                                         <state key="normal" image="start_button"/>
                                         <connections>
-                                            <segue destination="LJF-0V-4cl" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="HXM-Yo-R8H"/>
+                                            <action selector="startButtonTapped:" destination="Sav-rh-bmW" eventType="touchUpInside" id="O6i-h5-wXm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -381,6 +372,7 @@
                         <outlet property="teamTwoScoreTitleView" destination="UBE-go-gAA" id="6Qv-Zt-b02"/>
                         <outlet property="timeLeftLabel" destination="fNe-I9-jHn" id="L1B-0t-wMc"/>
                         <outlet property="timerView" destination="u3y-YN-CRe" id="uYj-SV-4Fv"/>
+                        <segue destination="LJF-0V-4cl" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="eC9-7p-Egi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

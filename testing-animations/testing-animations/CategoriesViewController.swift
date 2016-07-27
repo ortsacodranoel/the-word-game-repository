@@ -21,29 +21,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let categoriesSelected = [UIImage(named:"jesusCategorySelected"),UIImage(named:"peopleCategorySelected"),UIImage(named:"placesCategorySelected"),UIImage(named:"famousCategorySelected"),UIImage(named:"worshipCategorySelected"),UIImage(named:"booksCategorySelected"),UIImage(named:"concordanceCategorySelected"),UIImage(named:"feastsCategorySelected"),UIImage(named:"angelsCategorySelected"), UIImage(named:"sundayCategorySelected"),UIImage(named:"revelationCategorySelected"), UIImage(named:"doctrineCategorySelected"), UIImage(named:"sinsCategorySelected"), UIImage(named:"commandsCategorySelected")]
     
-    let transitionManager = TransitionManager()
-    
-    
+    // MARK: Button Actions.
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    let transitionManager = TransitionManager()
     
     
     override func viewDidLoad() {
@@ -79,18 +60,21 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        // Retrieve the indexPath row.
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview! as! CollectionViewCell
+        let indexPath = collectionView.indexPathForCell(cell)
+
+        // Prepare destinationVC.
         let toViewController = segue.destinationViewController as! DetailViewController
-        
+        toViewController.categoryTapped = (indexPath!.row)
         toViewController.transitioningDelegate = self.transitionManager
 
         
         
         
-//            let button = sender as! UIButton
-//            let view = button.superview!
-//            let cell = view.superview! as! CollectionViewCell
-//            let indexPath = collectionView.indexPathForCell(cell)
-//            
+//
 //            // Create DetailViewController.
 //            // let detailView = self.storyboard?.instantiateViewControllerWithIdentifier("detailViewController") as! DetailViewController
 //            
