@@ -61,10 +61,35 @@ class GameViewController: UIViewController {
     
     @IBAction func startButtonTapped(sender: AnyObject) {
         print("start tapped")
-        gameStart = true
+        
+
+        
+        // Run the timer.
         if !timer.valid {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
         }
+        
+        // Animate offscreen: startButtonView and menuView
+        UIView.animateWithDuration(1.0, delay: 0,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
+                                    
+                                    self.menuView.center.y -= self.view.bounds.height
+                                    self.TeamTitleView.center.y -= self.view.bounds.height
+                                    self.startButtonView.center.y += self.view.bounds.height
+                                    
+                                    self.menuView.userInteractionEnabled = false
+                                    self.startButtonView.userInteractionEnabled = false
+                                    
+                                    self.startButtonView.alpha = 0
+                                    self.TeamTitleView.alpha = 0
+                                    self.menuView.alpha = 0
+            }, completion: nil)
+        
+        // Start a new game countdown.
+        gameStart = true
+        
     }
     
     
