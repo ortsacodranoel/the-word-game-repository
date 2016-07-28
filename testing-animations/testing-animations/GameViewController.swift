@@ -166,35 +166,41 @@ class GameViewController: UIViewController {
     
     // MARK: Animations
 
-    // Remove startButton, teamLabel, and menuView from screen.
+    // Move startButton, teamLabel, and menuView OFF screen.
     func removeAnimations() {
         
         UIView.animateWithDuration(0.5, delay:0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
+
+                                    self.startButton.userInteractionEnabled = false
+                                    self.startButton.center.y += self.view.bounds.height
+                                    self.startButton.alpha = 0
+                                    
+                                    // TeamLabel setup.
+                                    self.teamLabel.center.y -= self.view.bounds.height
+                                    self.teamLabel.alpha = 0
+
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.5, delay:0.2,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
                                     
                                     
                                     self.menuView.userInteractionEnabled = false
-                                    self.startButton.userInteractionEnabled = false
-                                    
-                                    self.menuView.center.y -= self.view.bounds.height
-                                    self.teamLabel.center.y -= self.view.bounds.height
-                                    self.startButton.center.y += self.view.bounds.height
-                                    
-                                    self.startButton.alpha = 0
-                                    self.teamLabel.alpha = 0
                                     self.menuView.alpha = 0
+                                    self.menuView.center.y -= self.view.bounds.height
+                                
             }, completion: nil)
     }
 
     
     
     
-    /*
-     This method resets the menuView, StartButtonView, and TeamView by placing them
-     at their original start positions, increasing alpha values, and enabling user interaction.
-     */
+    // RESET startButton, teamLabel, and menuView.
     func resetAnimations () {
         
         updateGameInfo()
@@ -204,80 +210,165 @@ class GameViewController: UIViewController {
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    
                                     self.menuView.userInteractionEnabled = true
-                                    self.startButton.userInteractionEnabled = true
-                                    
+                                    self.menuView.alpha = 1
                                     self.menuView.center.y += self.view.bounds.height
-                                    self.teamLabel.center.y += self.view.bounds.height
-                                    self.startButton.center.y -= self.view.bounds.height
-                                    
-                                    self.startButton.alpha = 1
-                                    self.teamLabel.alpha = 1
-                                    
-            }, completion: nil)
+                                               }, completion: nil)
 
         UIView.animateWithDuration(0.5, delay:0.2,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
+                                    self.startButton.userInteractionEnabled = true
+                                    self.startButton.center.y -= self.view.bounds.height
+                                    self.startButton.alpha = 1
                                     
-                                    self.menuView.userInteractionEnabled = true
-                                    self.menuView.alpha = 1
-                                    self.menuView.center.y += self.view.bounds.height
-
+                                    self.teamLabel.alpha = 1
+                                    self.teamLabel.center.y += self.view.bounds.height
+                                    
             }, completion: nil)
-        
-        
     }
     
     
+    
+    
+    
+    
+    
 
     
-    
-    
-    
-    
-    
-    
+    // The method start all animations once the GameVC loads.
     func startAnimations() {
+      
+        // TEAM 1
+        UIView.animateWithDuration(0.5, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+
+            self.teamOneScoreTitleView.alpha = 1
+            self.teamOneScoreTitleView.center.y -= self.view.bounds.height
+                
+        }, completion: nil)
+       
+        // TEAM 1 SCORE.
+        UIView.animateWithDuration(0.5, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamOneScore.alpha = 1
+            self.teamOneScore.center.y -= self.view.bounds.height
+            
+        }, completion: nil)
         
-        UIView.animateWithDuration(0, delay: 0,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    // Team 1 & Team 2.
-                                    self.teamOneScoreTitleView.alpha = 1
-                                    self.teamOneScoreTitleView.center.y -= self.view.bounds.height
-                                    self.teamTwoScoreTitleView.alpha = 1
-                                    self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
-                                   
-                                    
-                                    // Scores.
-                                    self.teamOneScore.alpha = 1
-                                    self.teamOneScore.center.y -= self.view.bounds.height
-                                   
-                                    self.teamTwoScore.alpha = 1
-                                    self.teamTwoScore.center.y -= self.view.bounds.height
-                                    
-                                    
-                                    // Menu.
-                                    self.menuView.alpha = 1
-                                    self.menuView.center.y += self.view.bounds.height
-                                    
-                                    // Timer.
-                                    self.timerView.alpha = 1
-                                    self.timerView.center.y += self.view.bounds.height
-                                    
-                                    
-                                    self.TeamTitleView.alpha = 1
-                                    self.TeamTitleView.center.y += self.view.bounds.height
-                                    
-                                    self.startButton.alpha = 1
-                                    self.startButton.center.y -= self.view.bounds.height
-            }, completion: nil)
+        //TEAM 2.
+        UIView.animateWithDuration(0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamTwoScoreTitleView.alpha = 1
+            self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
+        
+        }, completion: nil)
+        
+        // TEAM 2 SCORE.
+        UIView.animateWithDuration(0.5, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamTwoScore.alpha = 1
+            self.teamTwoScore.center.y -= self.view.bounds.height
+            
+        }, completion: nil)
+        
+        
+        // Start and Title.
+        UIView.animateWithDuration(0.5, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.TeamTitleView.alpha = 1
+            self.TeamTitleView.center.y += self.view.bounds.height
+
+            self.startButton.alpha = 1
+            self.startButton.center.y -= self.view.bounds.height
+            
+        }, completion: nil)
+        
+        
+        
+        
+        
+
+//        UIView.animateWithDuration(0.5, delay: 0,
+//                                   usingSpringWithDamping: 0.8,
+//                                   initialSpringVelocity: 0.9,
+//                                   options: [], animations: {
+//                                    
+//                                    // Team 1 & Team 2.
+//                                    self.teamOneScoreTitleView.alpha = 1
+//                                    self.teamOneScoreTitleView.center.y -= self.view.bounds.height
+//                                    self.teamTwoScoreTitleView.alpha = 1
+//                                    self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
+//                                    
+//                                    
+//                                    // Scores.
+//                                    self.teamOneScore.alpha = 1
+//                                    self.teamOneScore.center.y -= self.view.bounds.height
+//                                    
+//                                    self.teamTwoScore.alpha = 1
+//                                    self.teamTwoScore.center.y -= self.view.bounds.height
+//                                    
+//                                    
+//                                    // Team 1 & Team 2.
+//                                    self.teamOneScoreTitleView.alpha = 1
+//                                    self.teamOneScoreTitleView.center.y -= self.view.bounds.height
+//                                    self.teamTwoScoreTitleView.alpha = 1
+//                                    self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
+//                                    
+//                                    
+//                                    // Scores.
+//                                    self.teamOneScore.alpha = 1
+//                                    self.teamOneScore.center.y -= self.view.bounds.height
+//                                    
+//                                    
+//            }, completion: nil)
+//
+//        
+//        
+//        
+        
+        
+        
+//        UIView.animateWithDuration(0.5, delay: 0.4,
+//                                   usingSpringWithDamping: 0.8,
+//                                   initialSpringVelocity: 0.9,
+//                                   options: [], animations: {
+//
+//                                    
+//                                    self.teamTwoScore.alpha = 1
+//                                    self.teamTwoScore.center.y -= self.view.bounds.height
+//                                    
+//                                    
+
+//                                    
+//                     
+//            }, completion: nil)
+//        
+//        UIView.animateWithDuration(0.5, delay: 0.4,
+//                                   usingSpringWithDamping: 0.8,
+//                                   initialSpringVelocity:60.9,
+//                                   options: [], animations: {
+//                                    
+//
+//                                    // Menu.
+//                                    self.menuView.alpha = 1
+//                                    self.menuView.center.y += self.view.bounds.height
+//                                    
+//                                    // Timer.
+//                                    self.timerView.alpha = 1
+//                                    self.timerView.center.y += self.view.bounds.height
+//                                    
+//                                    
+//                                    self.TeamTitleView.alpha = 1
+//                                    self.TeamTitleView.center.y += self.view.bounds.height
+//                                    
+//                                    self.startButton.alpha = 1
+//                                    self.startButton.center.y -= self.view.bounds.height
+//            }, completion: nil)
+        
+        
+        
         }
 
     
