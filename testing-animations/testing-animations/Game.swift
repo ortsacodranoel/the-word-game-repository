@@ -12,11 +12,12 @@ class Game {
     
     var teamOneScore : Int
     var teamTwoScore : Int
-
+    var teamOneTurn : Bool
    
     init() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
+        teamOneTurn = true
     }
     
     
@@ -24,6 +25,12 @@ class Game {
     func start() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
+    }
+    
+    
+    // The method updates current game variables.
+    func updateGame() {
+        
     }
     
     
@@ -41,4 +48,17 @@ class Game {
     
     // If someone swipes right, increment the teams score by one.
     
+
+    // Return team who's turn it is.
+    func getCurrentTeamTurn() -> String {
+        if self.teamOneTurn == true {
+            return "TEAM 1"
+        } else {
+            return "TEAM 2"
+        }
+    }
+
+
+
+
 }

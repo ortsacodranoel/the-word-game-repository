@@ -10,10 +10,18 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    
+    // Game Object:
+    let game = Game()
+    
     // MARK: - Variables.
     var answer = true
     var categoryTapped = Int()
     var gameStarted = false
+    var teamTwoTurn = false
+    
+    // Variable to start animations. 
+    var initialAnimations = true
     
     // MARK: - Data.
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
@@ -33,9 +41,12 @@ class GameViewController: UIViewController {
     ]
     
 
-    // MARK: - Label
+    // MARK: - Outlets
     @IBOutlet weak var timeLeftLabel: UILabel!
-
+    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var teamOneScoreLabel: UILabel!
+    @IBOutlet weak var teamTwoScoreLabel: UILabel!
+    @IBOutlet weak var startButton: UIButton!
     
     // MARK: - Views.
     @IBOutlet weak var timerView: UIView!
@@ -53,6 +64,9 @@ class GameViewController: UIViewController {
     var counter = 60
     var time : String = ""
     
+    
+    // MARK: Button Actions.
+
     @IBAction func menuButtonTapped(sender: AnyObject) {
         print("Button Tapped")
         performSegueWithIdentifier("unwindToCategories", sender: self)
@@ -61,59 +75,60 @@ class GameViewController: UIViewController {
     
     @IBAction func startButtonTapped(sender: AnyObject) {
         
-        // Run the timer.
-        if !timer.valid {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
-        }
-        
-        // Animate offscreen: startButtonView and menuView
-        UIView.animateWithDuration(1.0, delay: 0,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.menuView.center.y -= self.view.bounds.height
-                                    self.TeamTitleView.center.y -= self.view.bounds.height
-                                    self.startButtonView.center.y += self.view.bounds.height
-                                    
-                                    self.menuView.userInteractionEnabled = false
-                                    self.startButtonView.userInteractionEnabled = false
-                                    
-                                    self.startButtonView.alpha = 0
-                                    self.TeamTitleView.alpha = 0
-                                    self.menuView.alpha = 0
-            }, completion: nil)
-        
         // Start a new game countdown.
         gameStarted = true
         
-    }
-    
-    
-    
-    // Apple code ############################################################################################################################################################################
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
-        // Change view background color.
-        setColor(categoryTapped)
-    
-        timeLeftLabel.text = String(counter)
+        // Run the timer.
+        if !timer.valid {
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
+            print("in timer loop")
+        }
+        
+        // Animate offscreen: startButtonView and menuView
+        removeAnimations()
     }
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        startAnimations()
+    
+    func updateGameInfo() {
+
+        // Update team turn variable.
+        if game.teamOneTurn == true {
+            
+            game.teamOneTurn = false
+            
+            print("Team 2 turn")
+            
+            teamLabel.text = game.getCurrentTeamTurn()
+            
+            return
+            
+        } else {
+            
+            game.teamOneTurn = true
+            
+            teamLabel.text = game.getCurrentTeamTurn()
+            
+            return
+        }
     }
+
+    
+    
+    
+    
+
     
     
     //MARK: - Custom methods.
+    
+    func setTeamTitle() {
+            teamLabel.text = game.getCurrentTeamTurn()
+    }
+    
+
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
     }
@@ -141,53 +156,84 @@ class GameViewController: UIViewController {
                     
                     resetAnimations()
                     
-                    
                     return
                 }
-        } else { return }
+        } else {  }
     }
     
     
-    // MARK: Animations ############################################################################################################################################################################
+
+    
+    // MARK: Animations
+
+    // Remove startButton, teamLabel, and menuView from screen.
+    func removeAnimations() {
+        
+        UIView.animateWithDuration(0.5, delay:0,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
+                                    
+                                    
+                                    self.menuView.userInteractionEnabled = false
+                                    self.startButton.userInteractionEnabled = false
+                                    
+                                    self.menuView.center.y -= self.view.bounds.height
+                                    self.teamLabel.center.y -= self.view.bounds.height
+                                    self.startButton.center.y += self.view.bounds.height
+                                    
+                                    self.startButton.alpha = 0
+                                    self.teamLabel.alpha = 0
+                                    self.menuView.alpha = 0
+            }, completion: nil)
+    }
+
+    
+    
     
     /*
      This method resets the menuView, StartButtonView, and TeamView by placing them
      at their original start positions, increasing alpha values, and enabling user interaction.
      */
-    func resetAnimations() {
-        self.menuView.alpha = 1
-        self.TeamTitleView.alpha = 1
-        self.startButtonView.alpha = 1
+    func resetAnimations () {
         
-        self.menuView.userInteractionEnabled = true
-        self.TeamTitleView.userInteractionEnabled = true
-        self.startButtonView.userInteractionEnabled = true
+        updateGameInfo()
         
-        UIView.animateWithDuration(0.2, delay: 0,
+        UIView.animateWithDuration(0.5, delay:0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    self.menuView.center.y += self.view.bounds.height
-                                    self.TeamTitleView.center.y += self.view.bounds.height
-                                    self.startButtonView.center.y -= self.view.bounds.height
                                     
+                                    self.menuView.userInteractionEnabled = true
+                                    self.startButton.userInteractionEnabled = true
+                                    
+                                    self.menuView.center.y += self.view.bounds.height
+                                    self.teamLabel.center.y += self.view.bounds.height
+                                    self.startButton.center.y -= self.view.bounds.height
+                                    
+                                    self.startButton.alpha = 1
+                                    self.teamLabel.alpha = 1
+                                    
+            }, completion: nil)
+
+        UIView.animateWithDuration(0.5, delay:0.2,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
+                                    
+                                    
+                                    self.menuView.userInteractionEnabled = true
+                                    self.menuView.alpha = 1
+                                    self.menuView.center.y += self.view.bounds.height
+
             }, completion: nil)
         
         
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
@@ -197,68 +243,91 @@ class GameViewController: UIViewController {
     
     func startAnimations() {
         
-        UIView.animateWithDuration(0.2, delay: 1.0,
+        UIView.animateWithDuration(0, delay: 0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    self.teamOneScoreTitleView.alpha = 1.0
+                                    // Team 1 & Team 2.
+                                    self.teamOneScoreTitleView.alpha = 1
                                     self.teamOneScoreTitleView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        
-        UIView.animateWithDuration(0.2, delay: 1.2,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.teamOneScore.alpha = 1.0
-                                    self.teamOneScore.center.y -= self.view.bounds.height
-            }, completion: nil)
-        
-        
-        UIView.animateWithDuration(0.2, delay: 1.4,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.teamTwoScoreTitleView.alpha = 1.0
+                                    self.teamTwoScoreTitleView.alpha = 1
                                     self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        
-        
-
-        UIView.animateWithDuration(0.2, delay: 1.6,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
+                                   
                                     
-                                    
-                                    // teamTwoScore animations.
-                                    self.teamTwoScore.alpha = 1.0
+                                    // Scores.
+                                    self.teamOneScore.alpha = 1
+                                    self.teamOneScore.center.y -= self.view.bounds.height
+                                   
+                                    self.teamTwoScore.alpha = 1
                                     self.teamTwoScore.center.y -= self.view.bounds.height
                                     
-                                    // menuView animations.
-                                    self.menuView.alpha = 1.0
+                                    
+                                    // Menu.
+                                    self.menuView.alpha = 1
                                     self.menuView.center.y += self.view.bounds.height
                                     
-                                    // timerView animations.
-                                    self.timerView.alpha = 1.0
+                                    // Timer.
+                                    self.timerView.alpha = 1
                                     self.timerView.center.y += self.view.bounds.height
-            }, completion: nil)
-        
-
-        UIView.animateWithDuration(0.2, delay: 2.4,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
                                     
-                                    self.TeamTitleView.alpha = 1.0
+                                    
+                                    self.TeamTitleView.alpha = 1
                                     self.TeamTitleView.center.y += self.view.bounds.height
-                                    self.startButtonView.alpha = 1.0
-                                    self.startButtonView.center.y -= self.view.bounds.height
+                                    
+                                    self.startButton.alpha = 1
+                                    self.startButton.center.y -= self.view.bounds.height
             }, completion: nil)
-    }
+        }
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    // Apple Code #############################
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("viewDidLoad")
+        
+        // Change view background color.
+        setColor(categoryTapped)
+        
+        // Set the team title.
+        setTeamTitle()
+        
+        // Set current team scores.
+        teamOneScoreLabel.text = String(game.getTeamOneScore())
+        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+        
+        // Set the time.
+        timeLeftLabel.text = String(counter)
+        
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if initialAnimations == true {
+            print("viewDidAppear")
+            startAnimations()
+            initialAnimations = false
+        }
+    }
+    
+    
+    
     
     
     

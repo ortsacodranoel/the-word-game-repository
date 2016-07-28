@@ -243,7 +243,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scoreContainer" translatesAutoresizingMaskIntoConstraints="NO" id="Pli-3x-VHp">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBs-zu-feM" userLabel="number">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBs-zu-feM" userLabel="teamOneScoreLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -262,9 +262,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vS-XO-ytW" userLabel="teamTwoScore">
                                 <rect key="frame" x="536" y="547" width="44" height="44"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scoreContainer" translatesAutoresizingMaskIntoConstraints="NO" id="pHN-VI-R7g">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scoreContainer" translatesAutoresizingMaskIntoConstraints="NO" id="4Dv-K0-qxW">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-tb-udB" userLabel="teamTwoScoreLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -307,7 +314,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99C-Fk-cpx" userLabel="TeamView">
                                 <rect key="frame" x="180" y="132" width="240" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEAM 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwG-cN-2AD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwG-cN-2AD" userLabel="TeamLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -365,10 +372,14 @@
                     <connections>
                         <outlet property="TeamTitleView" destination="99C-Fk-cpx" id="c66-hD-3Xt"/>
                         <outlet property="menuView" destination="i50-N2-Dkt" id="cKd-0w-8Sm"/>
+                        <outlet property="startButton" destination="1gx-Ej-eue" id="fwi-xY-f1b"/>
                         <outlet property="startButtonView" destination="SMM-dS-Xrm" id="ELg-2R-ah9"/>
+                        <outlet property="teamLabel" destination="YwG-cN-2AD" id="GNJ-Xr-UL9"/>
                         <outlet property="teamOneScore" destination="yRW-TZ-RsK" id="rf9-gI-mrO"/>
+                        <outlet property="teamOneScoreLabel" destination="hBs-zu-feM" id="XLr-XK-vgk"/>
                         <outlet property="teamOneScoreTitleView" destination="QxV-Dj-kVK" id="WtT-Oh-GM1"/>
                         <outlet property="teamTwoScore" destination="3vS-XO-ytW" id="wEu-Km-AGm"/>
+                        <outlet property="teamTwoScoreLabel" destination="fZw-tb-udB" id="c1F-3h-23p"/>
                         <outlet property="teamTwoScoreTitleView" destination="UBE-go-gAA" id="6Qv-Zt-b02"/>
                         <outlet property="timeLeftLabel" destination="fNe-I9-jHn" id="L1B-0t-wMc"/>
                         <outlet property="timerView" destination="u3y-YN-CRe" id="uYj-SV-4Fv"/>
