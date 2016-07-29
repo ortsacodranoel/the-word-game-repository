@@ -74,12 +74,14 @@ class GameViewController: UIViewController {
     
     
     /**
-     
-     View methods. ********************************************************************************************************
-     
+        
+     MARK: View methods. *************************************************************************************************************
+    
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set initial values.
         
         // Change view background color.
         setColor(categoryTapped)
@@ -114,8 +116,6 @@ class GameViewController: UIViewController {
             // Decrease wordContainerView's alpha.
             self.wordContainerView.alpha = 0
             
-            
-            
             startAnimations()
         }
     }
@@ -123,9 +123,10 @@ class GameViewController: UIViewController {
     
     /**
      
-     Custom view methods. *******************************************************************************************************
+     MARK: Additional methods. *******************************************************************************************************
      
      **/
+    
     
     //Button Actions.
     @IBAction func menuButtonTapped(sender: AnyObject) {
@@ -181,12 +182,6 @@ class GameViewController: UIViewController {
     
     
     
-    
-
-    
-    
-    //MARK: - Custom methods.
-    
     func setTeamTitle() {
             teamLabel.text = game.getCurrentTeamTurn()
     }
@@ -195,6 +190,7 @@ class GameViewController: UIViewController {
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
     }
+    
     
     // MARK: GAMEPLAY
     
@@ -272,8 +268,6 @@ class GameViewController: UIViewController {
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
-            
-            print("in presentWord()")
             
             }, completion: nil)
     }
