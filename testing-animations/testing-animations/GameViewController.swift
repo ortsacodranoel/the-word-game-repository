@@ -10,18 +10,12 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    
     // Game Object:
     let game = Game()
     
-    // MARK: - Variables.
-    var answer = true
-    var categoryTapped = Int()
-    var gameStarted = false
-    var teamTwoTurn = false
-    
     // Variable to start animations. 
     var initialAnimations = true
+    
     
     // MARK: - Data.
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
@@ -40,15 +34,17 @@ class GameViewController: UIViewController {
         UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
     ]
     
-
-    // MARK: - Outlets
+    
+    // Labels.
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var teamOneScoreLabel: UILabel!
     @IBOutlet weak var teamTwoScoreLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var wordLabel: UILabel!
     
-    // MARK: - Views.
+    
+    // Views.
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var teamOneScoreTitleView: UIView!
     @IBOutlet weak var teamOneScore: UIView!
@@ -57,16 +53,81 @@ class GameViewController: UIViewController {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var TeamTitleView: UIView!
     @IBOutlet weak var startButtonView: UIView!
+    @IBOutlet weak var wordContainerView: UIView!
     
  
-    // MARK: - Timer variables.
+    // Timer variables.
     var timer = NSTimer()
     var counter = 60
     var time : String = ""
     
-    
-    // MARK: Button Actions.
 
+    // Constraints.
+    @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
+
+    
+    // Additional variables.
+    var answer = true
+    var categoryTapped = Int()
+    var teamTwoTurn = false
+    var wordOnScreen = false
+    
+    
+    /**
+     
+     View methods. ********************************************************************************************************
+     
+    **/
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Change view background color.
+        setColor(categoryTapped)
+        
+        // Set the team title.
+        setTeamTitle()
+        
+        // Set current team scores.
+        teamOneScoreLabel.text = String(game.getTeamOneScore())
+        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+        
+        // Set the time.
+        timeLeftLabel.text = String(counter)
+        
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if initialAnimations == true {
+        
+            // Move the wordContainerView just out of view.
+            self.centerAlignWordContainer.constant -= view.bounds.width
+            
+            // Decrease wordContainerView's alpha.
+            self.wordContainerView.alpha = 0
+            
+            
+            
+            startAnimations()
+        }
+    }
+    
+    
+    /**
+     
+     Custom view methods. *******************************************************************************************************
+     
+     **/
+    
+    //Button Actions.
     @IBAction func menuButtonTapped(sender: AnyObject) {
         print("Button Tapped")
         performSegueWithIdentifier("unwindToCategories", sender: self)
@@ -75,19 +136,21 @@ class GameViewController: UIViewController {
     
     @IBAction func startButtonTapped(sender: AnyObject) {
         
-        // Start a new game countdown.
-        gameStarted = true
+        // Start a new game.
+        game.isActive = true
         
         
         // Run the timer.
         if !timer.valid {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.updateTime), userInfo:nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
             print("in timer loop")
         }
         
         // Animate offscreen: startButtonView and menuView
         removeAnimations()
     }
+    
+    
     
     
     
@@ -133,36 +196,89 @@ class GameViewController: UIViewController {
         self.view.backgroundColor = colors[category]
     }
     
+    // MARK: GAMEPLAY
     
-    func updateTime() {
+    /**
+    
+     
+     
+    **/
+    func startRound() {
         
-        if (self.gameStarted == true)
+        if game.isActive
         {
+            
+            // Decrease the time.
             counter -= 1
+            
+            // Update timer display.
             self.timeLeftLabel.text = String(counter)
             
+            // Create a new Word.
+            self.wordLabel.text = game.getWord(self.categoryTapped)
+            
+            
+            if wordOnScreen == false {
+                presentWord()
+            }
+        
+            // Validate the answer. 
+            
+            // Swipe left when guessed.
+            
+            // Swipe right to pass.
+            
+            
+            
+            
+            
+            
             // Check if time has run out.
-                if counter == 57 {
-                    
-                    // Stop timer.
-                    timer.invalidate()
-                    
-                    
-                    // Reset for next team.
-                    gameStarted = false
-                    counter = 60
-                    self.timeLeftLabel.text = String(counter)
-                    print("Time's up!")
-                    
-                    resetAnimations()
-                    
-                    return
-                }
-        } else {  }
+            if counter == 0 {
+                
+                // Stop timer.
+                timer.invalidate()
+                
+                
+                // Reset for next team.
+                //gameStarted = false
+                counter = 60
+                self.timeLeftLabel.text = String(counter)
+                print("Time's up!")
+                
+                resetAnimations()
+                
+                return
+            }
+        } else {
+        
+
+            }
+    }
+    
+    /**
+     
+     - Creates animates the wordContainer.
+     
+     Parameters: word to place in container.
+     
+    **/
+    func presentWord() {
+        
+        wordOnScreen = true
+        
+        UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.wordContainerView.alpha = 1
+            self.centerAlignWordContainer.constant += self.view.bounds.width
+            self.view.layoutIfNeeded()
+            
+            print("in presentWord()")
+            
+            }, completion: nil)
     }
     
     
-
     
     // MARK: Animations
 
@@ -285,145 +401,6 @@ class GameViewController: UIViewController {
             
         }, completion: nil)
         
-        
-        
-        
-        
-
-//        UIView.animateWithDuration(0.5, delay: 0,
-//                                   usingSpringWithDamping: 0.8,
-//                                   initialSpringVelocity: 0.9,
-//                                   options: [], animations: {
-//                                    
-//                                    // Team 1 & Team 2.
-//                                    self.teamOneScoreTitleView.alpha = 1
-//                                    self.teamOneScoreTitleView.center.y -= self.view.bounds.height
-//                                    self.teamTwoScoreTitleView.alpha = 1
-//                                    self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
-//                                    
-//                                    
-//                                    // Scores.
-//                                    self.teamOneScore.alpha = 1
-//                                    self.teamOneScore.center.y -= self.view.bounds.height
-//                                    
-//                                    self.teamTwoScore.alpha = 1
-//                                    self.teamTwoScore.center.y -= self.view.bounds.height
-//                                    
-//                                    
-//                                    // Team 1 & Team 2.
-//                                    self.teamOneScoreTitleView.alpha = 1
-//                                    self.teamOneScoreTitleView.center.y -= self.view.bounds.height
-//                                    self.teamTwoScoreTitleView.alpha = 1
-//                                    self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
-//                                    
-//                                    
-//                                    // Scores.
-//                                    self.teamOneScore.alpha = 1
-//                                    self.teamOneScore.center.y -= self.view.bounds.height
-//                                    
-//                                    
-//            }, completion: nil)
-//
-//        
-//        
-//        
-        
-        
-        
-//        UIView.animateWithDuration(0.5, delay: 0.4,
-//                                   usingSpringWithDamping: 0.8,
-//                                   initialSpringVelocity: 0.9,
-//                                   options: [], animations: {
-//
-//                                    
-//                                    self.teamTwoScore.alpha = 1
-//                                    self.teamTwoScore.center.y -= self.view.bounds.height
-//                                    
-//                                    
-
-//                                    
-//                     
-//            }, completion: nil)
-//        
-//        UIView.animateWithDuration(0.5, delay: 0.4,
-//                                   usingSpringWithDamping: 0.8,
-//                                   initialSpringVelocity:60.9,
-//                                   options: [], animations: {
-//                                    
-//
-//                                    // Menu.
-//                                    self.menuView.alpha = 1
-//                                    self.menuView.center.y += self.view.bounds.height
-//                                    
-//                                    // Timer.
-//                                    self.timerView.alpha = 1
-//                                    self.timerView.center.y += self.view.bounds.height
-//                                    
-//                                    
-//                                    self.TeamTitleView.alpha = 1
-//                                    self.TeamTitleView.center.y += self.view.bounds.height
-//                                    
-//                                    self.startButton.alpha = 1
-//                                    self.startButton.center.y -= self.view.bounds.height
-//            }, completion: nil)
-        
-        
-        
-        }
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    // Apple Code #############################
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print("viewDidLoad")
-        
-        // Change view background color.
-        setColor(categoryTapped)
-        
-        // Set the team title.
-        setTeamTitle()
-        
-        // Set current team scores.
-        teamOneScoreLabel.text = String(game.getTeamOneScore())
-        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-        
-        // Set the time.
-        timeLeftLabel.text = String(counter)
-        
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        if initialAnimations == true {
-            print("viewDidAppear")
-            startAnimations()
-            initialAnimations = false
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 

@@ -14,6 +14,12 @@ class Game {
     var teamTwoScore : Int
     var teamOneTurn : Bool
    
+    // Used to check if a game is in process.
+    var isActive = false
+    
+    // Used to deterimine if the player has swiped.
+    var hasSwiped = false
+    
     init() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
@@ -25,6 +31,25 @@ class Game {
     func start() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
+        
+        // If neither teams have reached 25, generate a word.
+        
+    }
+    
+    
+    /**
+     
+        Generates a random word from the desired word category. 
+     
+        - Parameter category: the number of the selected category.
+
+     
+        - Returns: A random word from the selected category.
+     
+     **/
+    func getWord(category: Int) -> String {
+    
+        return "Hello"
     }
     
     

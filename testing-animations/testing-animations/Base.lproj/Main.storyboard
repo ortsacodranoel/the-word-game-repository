@@ -344,9 +344,26 @@
                                     <constraint firstAttribute="width" constant="30" id="u78-5x-B1a"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-GX-TCY" userLabel="wordContainerView">
+                                <rect key="frame" x="180" y="270" width="240" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CONVERSATION SUPREME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KkW-I4-FqT" userLabel="wordLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="NMY-ua-ynU"/>
+                                    <constraint firstAttribute="height" constant="60" id="REg-vn-rj4"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.43805719893777506" green="0.7934680676790844" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="YAC-GX-TCY" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="4aF-Zi-lRV"/>
                             <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="3" id="9Cb-Th-gll"/>
                             <constraint firstAttribute="leadingMargin" secondItem="QxV-Dj-kVK" secondAttribute="leading" id="InU-7M-YXh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3vS-XO-ytW" secondAttribute="trailing" id="Klv-sq-EkC"/>
@@ -355,6 +372,7 @@
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="yRW-TZ-RsK" secondAttribute="bottom" constant="9" id="TVL-FD-1ZS"/>
                             <constraint firstItem="i50-N2-Dkt" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="13" id="VBo-M7-2AL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u3y-YN-CRe" secondAttribute="trailing" id="YfQ-z5-kAf"/>
+                            <constraint firstItem="YAC-GX-TCY" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="a8Z-Kr-kYk"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="SMM-dS-Xrm" secondAttribute="bottom" constant="100" id="c8n-wT-RYB"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="QxV-Dj-kVK" secondAttribute="bottom" constant="8" id="fIT-j0-3sh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="i50-N2-Dkt" secondAttribute="leading" id="fRJ-9t-zPh"/>
@@ -371,6 +389,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="TeamTitleView" destination="99C-Fk-cpx" id="c66-hD-3Xt"/>
+                        <outlet property="centerAlignWordContainer" destination="4aF-Zi-lRV" id="Bei-ic-XgD"/>
                         <outlet property="menuView" destination="i50-N2-Dkt" id="cKd-0w-8Sm"/>
                         <outlet property="startButton" destination="1gx-Ej-eue" id="fwi-xY-f1b"/>
                         <outlet property="startButtonView" destination="SMM-dS-Xrm" id="ELg-2R-ah9"/>
@@ -383,6 +402,8 @@
                         <outlet property="teamTwoScoreTitleView" destination="UBE-go-gAA" id="6Qv-Zt-b02"/>
                         <outlet property="timeLeftLabel" destination="fNe-I9-jHn" id="L1B-0t-wMc"/>
                         <outlet property="timerView" destination="u3y-YN-CRe" id="uYj-SV-4Fv"/>
+                        <outlet property="wordContainerView" destination="YAC-GX-TCY" id="Bhj-WD-hKJ"/>
+                        <outlet property="wordLabel" destination="KkW-I4-FqT" id="CgG-2K-q4T"/>
                         <segue destination="LJF-0V-4cl" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="eC9-7p-Egi"/>
                     </connections>
                 </viewController>
