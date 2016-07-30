@@ -50,16 +50,6 @@ class Game {
     }
     
     
-    // Sets the score variables to 0 in order to start a new game. 
-    func start() {
-        self.teamOneScore = 0
-        self.teamTwoScore = 0
-        
-        // If neither teams have reached 25, generate a word.
-        
-    }
-    
-    
     /**
      
         Generates a random word from the desired word category. 

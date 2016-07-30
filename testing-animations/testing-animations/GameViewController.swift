@@ -138,8 +138,6 @@ class GameViewController: UIViewController {
     @IBAction func startButtonTapped(sender: AnyObject) {
         
         // Start a new game.
-        game.isActive = true
-        
         
         // Run the timer.
         if !timer.valid {
@@ -154,15 +152,21 @@ class GameViewController: UIViewController {
     
     /**
      
-        Changes the teamLabel to the current teams turn.
+        Sets the title for the current team.
      
         - Parameters: None. 
      
         - Return: N/A
      
     **/
-    func setTeamTitle() {
-            teamLabel.text = game.getTurn()
+    func displayTeam () {
+        
+        if game.teamOneIsActive {
+            teamLabel.text = "TEAM 1"
+        } else {
+            teamLabel.text = "TEAM 2"
+        }
+        
     }
     
 
