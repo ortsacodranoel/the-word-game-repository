@@ -60,7 +60,7 @@ class GameViewController: UIViewController {
     var timer = NSTimer()
     var counter = 60
     var time : String = ""
-    
+    var timeIsUp = false
 
     // Constraints.
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
@@ -111,7 +111,7 @@ class GameViewController: UIViewController {
         if initialAnimations == true {
         
             // Move the wordContainerView just out of view.
-            self.centerAlignWordContainer.constant -= view.bounds.width
+            self.centerAlignWordContainer.constant += view.bounds.width
             
             // Decrease wordContainerView's alpha.
             self.wordContainerView.alpha = 0
@@ -152,38 +152,17 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    func updateGameInfo() {
-
-        // Update team turn variable.
-        if game.teamOneTurn == true {
-            
-            game.teamOneTurn = false
-            
-            print("Team 2 turn")
-            
-            teamLabel.text = game.getCurrentTeamTurn()
-            
-            return
-            
-        } else {
-            
-            game.teamOneTurn = true
-            
-            teamLabel.text = game.getCurrentTeamTurn()
-            
-            return
-        }
-    }
-
-    
-    
-    
+    /**
+     
+        Changes the teamLabel to the current teams turn.
+     
+        - Parameters: None. 
+     
+        - Return: N/A
+     
+    **/
     func setTeamTitle() {
-            teamLabel.text = game.getCurrentTeamTurn()
+            teamLabel.text = game.getTurn()
     }
     
 
@@ -216,6 +195,8 @@ class GameViewController: UIViewController {
             
             if wordOnScreen == false {
                 presentWord()
+            } else {
+               // removeWord()
             }
         
             // Validate the answer. 
@@ -225,20 +206,27 @@ class GameViewController: UIViewController {
             // Swipe right to pass.
             
             
-            
-            
-            
-            
             // Check if time has run out.
-            if counter == 0 {
+            if counter == 55 {
+                
+                
+                removeWord()
                 
                 // Stop timer.
                 timer.invalidate()
                 
+                // Time up. 
+                timeIsUp = true
+                
+                // Reset time.
+                counter = 60
+                
+                // Move word off-screen left.
+                
                 
                 // Reset for next team.
                 //gameStarted = false
-                counter = 60
+
                 self.timeLeftLabel.text = String(counter)
                 print("Time's up!")
                 
@@ -252,25 +240,53 @@ class GameViewController: UIViewController {
             }
     }
     
+    
     /**
      
-     - Creates animates the wordContainer.
+     - Moves wordContainerView to the left.
      
      Parameters: word to place in container.
      
     **/
     func presentWord() {
         
-        wordOnScreen = true
-        
         UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.wordContainerView.alpha = 1
-            self.centerAlignWordContainer.constant += self.view.bounds.width
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
             
             }, completion: nil)
+    
+        // Notify that there is a word currently on the screen.
+        wordOnScreen = true
     }
+    
+    
+    /**
+     
+     - Moves wordContainerView to the left.
+     
+     Parameters:
+     
+     **/
+    func removeWord() {
+        
+        // Animates word containing view from the right of the screen.
+
+        UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.wordContainerView.alpha = 1
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+        
+        // Notify that there is a word currently on the screen.
+        wordOnScreen = false
+        
+    }
+    
     
     
     

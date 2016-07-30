@@ -10,20 +10,43 @@ import Foundation
 
 class Game {
     
-    var teamOneScore : Int
-    var teamTwoScore : Int
-    var teamOneTurn : Bool
-   
-    // Used to check if a game is in process.
+    // Used to verify that a new game has been initiated.
     var isActive = false
     
-    // Used to deterimine if the player has swiped.
-    var hasSwiped = false
+    // Used to determine if a team is still playing its turn.
+    var roundInProgress : Bool
     
+    // Used to determine if Team 1 is playing.
+    var teamOneIsActive = false
+    
+    // Used to determine if Team 2 is playing.
+    var teamTwoIsActive = false
+    
+    // Keeps the score of the first team.
+    var teamOneScore : Int
+    
+    // Keeps the score of the second team.
+    var teamTwoScore : Int
+    
+    
+
+    /**
+     
+        Initializes a new game and sets the current turn to Team 1.
+     
+        Parameters:
+     
+        Returns:
+     
+    **/
     init() {
+        
         self.teamOneScore = 0
         self.teamTwoScore = 0
-        teamOneTurn = true
+        self.isActive = true
+        self.roundInProgress = true
+        self.teamOneIsActive = true
+        self.roundInProgress = true
     }
     
     
@@ -70,20 +93,5 @@ class Game {
         return teamTwoScore
     }
     
-    
-    // If someone swipes right, increment the teams score by one.
-    
-
-    // Return team who's turn it is.
-    func getCurrentTeamTurn() -> String {
-        if self.teamOneTurn == true {
-            return "TEAM 1"
-        } else {
-            return "TEAM 2"
-        }
-    }
-
-
-
 
 }
