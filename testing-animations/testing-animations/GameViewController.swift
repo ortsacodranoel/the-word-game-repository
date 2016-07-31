@@ -93,9 +93,6 @@ class GameViewController: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeLeft)
         
-        
-        
-        
         // Set initial values.
         displayTeam()
         
@@ -126,30 +123,52 @@ class GameViewController: UIViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.Right:
-                print("Swiped right")
-            case UISwipeGestureRecognizerDirection.Down:
-                print("Swiped down")
             
-            case UISwipeGestureRecognizerDirection.Left:
+                case UISwipeGestureRecognizerDirection.Right:
                 
-                print("Swiped left")
-                // Increment the current team's score.
-                if game.teamOneIsActive {
-                    game.teamOneScore += 1
-                    teamOneScoreLabel.text = String(game.getTeamOneScore())
-                } else if game.teamTwoIsActive {
-                    game.teamTwoScore += 1
-                    teamTwoScoreLabel.text = String(game.getTeamOneScore())
+                    print("Passes on word.")
+                
+                
+                
+                
+                case UISwipeGestureRecognizerDirection.Left:
+                    
+                    if game.teamOneIsActive && timeIsUp == false{
+                        
+                        
+                        
+                        // Increment Team 1 score.
+                        game.teamOneScore += 1
+                        
+                        // Remove the word left of screen.
+                        removeWord()
+                        
+                        // Add a new word.
+                        presentWord()
+                        
+                        // Update score label.
+                        teamOneScoreLabel.text = String(game.getTeamOneScore())
+     
+                    } else if timeIsUp == false {
+                       
+                        // Increment Team 2 score.
+                        game.teamTwoScore += 1
+                        
+                        // Remove the word left of screen.
+                        removeWord()
+                        
+                        // Add a new word.
+                        presentWord()
+                        
+                        
+                        // Update score label.
+                        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
 
+                    }
+                
+                default:
+                    break
                 }
-                
-                
-            case UISwipeGestureRecognizerDirection.Up:
-                print("Swiped up")
-            default:
-                break
-            }
         }
     }
     
@@ -163,7 +182,6 @@ class GameViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if initialAnimations == true {
-        
             
             // Move the wordContainerView just out of view.
             self.centerAlignWordContainer.constant += view.bounds.width
@@ -227,8 +245,7 @@ class GameViewController: UIViewController {
         self.view.backgroundColor = colors[category]
     }
     
-    
-    // MARK: GAMEPLAY
+
     
     /**
     
@@ -239,6 +256,8 @@ class GameViewController: UIViewController {
         
         if game.isActive
         {
+            timeIsUp = false
+            
             // Animate the timer.
             animateTimer()
             
@@ -254,19 +273,22 @@ class GameViewController: UIViewController {
         
             
             // Check if time has run out.
-            if counter == 55 {
+            if counter == 50 {
             
+                timeIsUp = true
+                
+                // Stop timer.
+                timer.invalidate()
+                
                 // Change team. 
-                game.updateTeamTurn()
+                game.switchTeams()
                 
                 // Update team titleLabel
                 displayTeam()
                 
                 // Remove the word from the screen.
                 removeWord()
-                
-                // Stop timer.
-                timer.invalidate()
+
                 
                 // Time up. 
                 timeIsUp = true
@@ -285,10 +307,7 @@ class GameViewController: UIViewController {
                 
                 return
             }
-        } else {
-        
-
-            }
+        } else {}
     }
     
     
@@ -354,10 +373,6 @@ class GameViewController: UIViewController {
         
     }
     
-    
-    
-    
-    // MARK: Animations
 
     // Move startButton, teamLabel, and menuView OFF screen.
     func removeAnimations() {
@@ -421,13 +436,6 @@ class GameViewController: UIViewController {
             }, completion: nil)
     }
     
-    
-    
-    
-    
-    
-    
-
     
     // The method start all animations once the GameVC loads.
     func startAnimations() {
