@@ -30,8 +30,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Start a new game.
         let newGame = Game()
-        newGame.start()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -71,18 +71,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         toViewController.categoryTapped = (indexPath!.row)
         toViewController.transitioningDelegate = self.transitionManager
 
-        
-        
-        
-//
-//            // Create DetailViewController.
-//            // let detailView = self.storyboard?.instantiateViewControllerWithIdentifier("detailViewController") as! DetailViewController
-//            
-//            // Assign the value of the category that was selected to the new DetailViewController's categoryTapped.
-//            // detailView.categoryTapped = (indexPath!.row)
-//     
-//            let destinationVC = segue.destinationViewController as? DetailViewController
-//            destinationVC?.categoryTapped = (indexPath!.row)
     }
 
     

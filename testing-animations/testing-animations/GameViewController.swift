@@ -60,7 +60,7 @@ class GameViewController: UIViewController {
     var timer = NSTimer()
     var counter = 60
     var time : String = ""
-    
+    var timeIsUp = false
 
     // Constraints.
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
@@ -82,12 +82,12 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // Set initial values.
+        displayTeam()
         
         // Change view background color.
         setColor(categoryTapped)
         
         // Set the team title.
-        setTeamTitle()
         
         // Set current team scores.
         teamOneScoreLabel.text = String(game.getTeamOneScore())
@@ -110,8 +110,9 @@ class GameViewController: UIViewController {
         
         if initialAnimations == true {
         
+            
             // Move the wordContainerView just out of view.
-            self.centerAlignWordContainer.constant -= view.bounds.width
+            self.centerAlignWordContainer.constant += view.bounds.width
             
             // Decrease wordContainerView's alpha.
             self.wordContainerView.alpha = 0
@@ -137,10 +138,6 @@ class GameViewController: UIViewController {
     
     @IBAction func startButtonTapped(sender: AnyObject) {
         
-        // Start a new game.
-        game.isActive = true
-        
-        
         // Run the timer.
         if !timer.valid {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
@@ -152,38 +149,23 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    func updateGameInfo() {
-
-        // Update team turn variable.
-        if game.teamOneTurn == true {
-            
-            game.teamOneTurn = false
-            
-            print("Team 2 turn")
-            
-            teamLabel.text = game.getCurrentTeamTurn()
-            
-            return
-            
+    /**
+     
+        Sets the title for the current team.
+     
+        - Parameters: None. 
+     
+        - Return: N/A
+     
+    **/
+    func displayTeam () {
+        
+        if game.teamOneIsActive {
+            teamLabel.text = "TEAM 1"
         } else {
-            
-            game.teamOneTurn = true
-            
-            teamLabel.text = game.getCurrentTeamTurn()
-            
-            return
+            teamLabel.text = "TEAM 2"
         }
-    }
-
-    
-    
-    
-    func setTeamTitle() {
-            teamLabel.text = game.getCurrentTeamTurn()
+        
     }
     
 
@@ -203,42 +185,45 @@ class GameViewController: UIViewController {
         
         if game.isActive
         {
-            
-            // Decrease the time.
-            counter -= 1
-            
-            // Update timer display.
-            self.timeLeftLabel.text = String(counter)
+            // Animate the timer.
+            animateTimer()
             
             // Create a new Word.
             self.wordLabel.text = game.getWord(self.categoryTapped)
             
-            
+            // Check if word is on screen.
             if wordOnScreen == false {
                 presentWord()
+            } else {
+               // removeWord()
             }
         
-            // Validate the answer. 
-            
-            // Swipe left when guessed.
-            
-            // Swipe right to pass.
-            
-            
-            
-            
-            
             
             // Check if time has run out.
-            if counter == 0 {
+            if counter == 55 {
+            
+                // Change team. 
+                game.updateTeamTurn()
+                
+                // Update team titleLabel
+                displayTeam()
+                
+                // Remove the word from the screen.
+                removeWord()
                 
                 // Stop timer.
                 timer.invalidate()
                 
+                // Time up. 
+                timeIsUp = true
+                
+                // Reset time.
+                counter = 60
+                
                 
                 // Reset for next team.
                 //gameStarted = false
-                counter = 60
+
                 self.timeLeftLabel.text = String(counter)
                 print("Time's up!")
                 
@@ -252,25 +237,69 @@ class GameViewController: UIViewController {
             }
     }
     
+    
+    /**
+    
+        - Animates timer.
+ 
+    **/
+    func animateTimer() {
+        
+        // Decrease the time.
+        counter -= 1
+        
+        // Update timer display.
+        self.timeLeftLabel.text = String(counter)
+        
+    }
+    
+    
     /**
      
-     - Creates animates the wordContainer.
+     - Moves wordContainerView to the left.
      
      Parameters: word to place in container.
      
     **/
     func presentWord() {
         
-        wordOnScreen = true
-        
         UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.wordContainerView.alpha = 1
-            self.centerAlignWordContainer.constant += self.view.bounds.width
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
             
             }, completion: nil)
+    
+        // Notify that there is a word currently on the screen.
+        wordOnScreen = true
     }
+    
+    
+    /**
+     
+     - Moves wordContainerView to the left.
+     
+     Parameters:
+     
+     **/
+    func removeWord() {
+        
+        // Animates word containing view from the right of the screen.
+
+        UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.wordContainerView.alpha = 1
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+        
+        // Notify that there is a word currently on the screen.
+        wordOnScreen = false
+        
+    }
+    
     
     
     
@@ -312,8 +341,6 @@ class GameViewController: UIViewController {
     
     // RESET startButton, teamLabel, and menuView.
     func resetAnimations () {
-        
-        updateGameInfo()
         
         UIView.animateWithDuration(0.5, delay:0,
                                    usingSpringWithDamping: 0.8,
