@@ -79,7 +79,7 @@ class GameViewController: UIViewController {
     
     /**
         
-     MARK: View methods. *************************************************************************************************************
+        MARK: View methods. *************************************************************************************************************
     
     **/
     override func viewDidLoad() {
@@ -110,6 +110,27 @@ class GameViewController: UIViewController {
         
     }
     
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if initialAnimations == true {
+            
+            // Move the wordContainerView just out of view.
+            self.centerAlignWordContainer.constant += view.bounds.width
+            
+            // Decrease wordContainerView's alpha.
+            self.wordContainerView.alpha = 0
+            
+            startAnimations()
+        }
+    }
     
     
     
@@ -171,28 +192,7 @@ class GameViewController: UIViewController {
                 }
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if initialAnimations == true {
-            
-            // Move the wordContainerView just out of view.
-            self.centerAlignWordContainer.constant += view.bounds.width
-            
-            // Decrease wordContainerView's alpha.
-            self.wordContainerView.alpha = 0
-            
-            startAnimations()
-        }
-    }
-    
+
     
     /**
      
@@ -358,8 +358,7 @@ class GameViewController: UIViewController {
      **/
     func removeWord() {
         
-        // Animates word containing view from the right of the screen.
-
+        // Animates the word to the left off the screen.
         UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.wordContainerView.alpha = 1
@@ -367,6 +366,18 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: nil)
+        
+        
+        // Moves the word back to its starting position to the right of the screen.
+        UIView.animateWithDuration(0, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.wordContainerView.alpha = 0
+            self.centerAlignWordContainer.constant += self.view.bounds.width * 2
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+        
+        
         
         // Notify that there is a word currently on the screen.
         wordOnScreen = false
