@@ -30,8 +30,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Start a new game.
-        let newGame = Game()
         
         // Do any additional setup after loading the view, typically from a nib.
     }

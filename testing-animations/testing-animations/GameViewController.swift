@@ -113,18 +113,38 @@ class GameViewController: UIViewController {
         
     }
     
+    
+    
+    
+    /** 
+ 
+        - When the team know the answer they will swipe left. 
+ 
+    **/
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            
             
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.Right:
                 print("Swiped right")
             case UISwipeGestureRecognizerDirection.Down:
                 print("Swiped down")
+            
             case UISwipeGestureRecognizerDirection.Left:
+                
                 print("Swiped left")
+                // Increment the current team's score.
+                if game.teamOneIsActive {
+                    game.teamOneScore += 1
+                    teamOneScoreLabel.text = String(game.getTeamOneScore())
+                } else if game.teamTwoIsActive {
+                    game.teamTwoScore += 1
+                    teamTwoScoreLabel.text = String(game.getTeamOneScore())
+
+                }
+                
+                
             case UISwipeGestureRecognizerDirection.Up:
                 print("Swiped up")
             default:
