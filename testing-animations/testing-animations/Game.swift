@@ -67,8 +67,14 @@ class Game {
     
     
     // The method updates current game variables.
-    func updateGame() {
-        
+    func updateTeamTurn() {
+        if self.teamOneIsActive {
+            self.teamOneIsActive = false
+            return
+        } else if self.teamOneIsActive == false {
+            self.teamOneIsActive = true
+            return
+        }
     }
     
     

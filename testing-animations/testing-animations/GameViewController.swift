@@ -82,12 +82,12 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // Set initial values.
+        displayTeam()
         
         // Change view background color.
         setColor(categoryTapped)
         
         // Set the team title.
-        setTeamTitle()
         
         // Set current team scores.
         teamOneScoreLabel.text = String(game.getTeamOneScore())
@@ -110,6 +110,7 @@ class GameViewController: UIViewController {
         
         if initialAnimations == true {
         
+            
             // Move the wordContainerView just out of view.
             self.centerAlignWordContainer.constant += view.bounds.width
             
@@ -136,8 +137,6 @@ class GameViewController: UIViewController {
     
     
     @IBAction func startButtonTapped(sender: AnyObject) {
-        
-        // Start a new game.
         
         // Run the timer.
         if !timer.valid {
@@ -186,34 +185,30 @@ class GameViewController: UIViewController {
         
         if game.isActive
         {
-            
-            // Decrease the time.
-            counter -= 1
-            
-            // Update timer display.
-            self.timeLeftLabel.text = String(counter)
+            // Animate the timer.
+            animateTimer()
             
             // Create a new Word.
             self.wordLabel.text = game.getWord(self.categoryTapped)
             
-            
+            // Check if word is on screen.
             if wordOnScreen == false {
                 presentWord()
             } else {
                // removeWord()
             }
         
-            // Validate the answer. 
-            
-            // Swipe left when guessed.
-            
-            // Swipe right to pass.
-            
             
             // Check if time has run out.
             if counter == 55 {
+            
+                // Change team. 
+                game.updateTeamTurn()
                 
+                // Update team titleLabel
+                displayTeam()
                 
+                // Remove the word from the screen.
                 removeWord()
                 
                 // Stop timer.
@@ -224,8 +219,6 @@ class GameViewController: UIViewController {
                 
                 // Reset time.
                 counter = 60
-                
-                // Move word off-screen left.
                 
                 
                 // Reset for next team.
@@ -242,6 +235,22 @@ class GameViewController: UIViewController {
         
 
             }
+    }
+    
+    
+    /**
+    
+        - Animates timer.
+ 
+    **/
+    func animateTimer() {
+        
+        // Decrease the time.
+        counter -= 1
+        
+        // Update timer display.
+        self.timeLeftLabel.text = String(counter)
+        
     }
     
     
@@ -332,8 +341,6 @@ class GameViewController: UIViewController {
     
     // RESET startButton, teamLabel, and menuView.
     func resetAnimations () {
-        
-        updateGameInfo()
         
         UIView.animateWithDuration(0.5, delay:0,
                                    usingSpringWithDamping: 0.8,
