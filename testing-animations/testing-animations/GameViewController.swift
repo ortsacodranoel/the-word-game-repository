@@ -66,6 +66,10 @@ class GameViewController: UIViewController {
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
 
     
+    // GestureRecognizers. 
+    let swipeRecognizer = UISwipeGestureRecognizer()
+    
+    
     // Additional variables.
     var answer = true
     var categoryTapped = Int()
@@ -80,6 +84,17 @@ class GameViewController: UIViewController {
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        
+        
         
         // Set initial values.
         displayTeam()
@@ -98,6 +113,25 @@ class GameViewController: UIViewController {
         
     }
     
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Right:
+                print("Swiped right")
+            case UISwipeGestureRecognizerDirection.Down:
+                print("Swiped down")
+            case UISwipeGestureRecognizerDirection.Left:
+                print("Swiped left")
+            case UISwipeGestureRecognizerDirection.Up:
+                print("Swiped up")
+            default:
+                break
+            }
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
