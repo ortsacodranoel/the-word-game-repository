@@ -10,6 +10,10 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    // Used to keep track of the current game.
+    var game = Game()
+    
+    
     // MARK: - Variables.
     var categoryTapped = Int()
     var backgroundColor = UIColor()
@@ -133,6 +137,10 @@ class DetailViewController: UIViewController {
         
         if segue.identifier == "segueToGame" {
             let toViewController = segue.destinationViewController as! GameViewController
+            
+            // Pass it the game object. 
+            toViewController.game = self.game
+            
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
         }

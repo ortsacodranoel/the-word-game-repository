@@ -10,8 +10,9 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    // Game Object:
-    let game = Game()
+    // Used to keep track of the current game.
+    var game = Game()
+    
     
     // Variable to start animations. 
     var initialAnimations = true

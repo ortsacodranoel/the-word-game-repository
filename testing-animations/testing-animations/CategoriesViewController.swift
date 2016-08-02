@@ -8,11 +8,13 @@
 
 import UIKit
 
-
-
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
 
+    // Used to keep track of the current game.
+    let game = Game()
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -21,15 +23,18 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let categoriesSelected = [UIImage(named:"jesusCategorySelected"),UIImage(named:"peopleCategorySelected"),UIImage(named:"placesCategorySelected"),UIImage(named:"famousCategorySelected"),UIImage(named:"worshipCategorySelected"),UIImage(named:"booksCategorySelected"),UIImage(named:"concordanceCategorySelected"),UIImage(named:"feastsCategorySelected"),UIImage(named:"angelsCategorySelected"), UIImage(named:"sundayCategorySelected"),UIImage(named:"revelationCategorySelected"), UIImage(named:"doctrineCategorySelected"), UIImage(named:"sinsCategorySelected"), UIImage(named:"commandsCategorySelected")]
     
-    // MARK: Button Actions.
+    
+    
+    // Button actions.
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
     let transitionManager = TransitionManager()
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -66,6 +71,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
         // Prepare destinationVC.
         let toViewController = segue.destinationViewController as! DetailViewController
+        toViewController.game = self.game
         toViewController.categoryTapped = (indexPath!.row)
         toViewController.transitioningDelegate = self.transitionManager
 
