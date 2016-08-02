@@ -76,6 +76,13 @@ class GameViewController: UIViewController {
     var teamTwoTurn = false
     var wordOnScreen = false
     var wordReset = true
+    var wordRemoved = false
+    var animationInProgress = false
+    
+    
+    var swipedRight = false
+    
+    
     
     /**
         
@@ -84,8 +91,6 @@ class GameViewController: UIViewController {
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
@@ -122,18 +127,16 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if initialAnimations == true {
-            
-            
-            
             // Move the wordContainerView just out of view.
             self.centerAlignWordContainer.constant += view.bounds.width
+            
+            print("VWA view position:\(self.centerAlignWordContainer.constant)")
             
             // Decrease wordContainerView's alpha.
             self.wordContainerView.alpha = 0
             
             startAnimations()
-        }
+        
     }
     
     
@@ -155,13 +158,21 @@ class GameViewController: UIViewController {
             
             switch swipeGesture.direction {
             
+                // Right - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Right:
+                    
+                        swipedRight = true
+                        
+                        // Remove the word to the right of the screen. 
+                        if self.wordOnScreen == true {
+
+                                removeWordPassed()
+                        }
+            
+                        animateWordLeft()
                 
-                    print("Passes on word.")
                 
-                
-                
-                
+                // Left - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Left:
                     
                     if game.teamOneIsActive && timeIsUp == false {
@@ -169,10 +180,10 @@ class GameViewController: UIViewController {
                         // Increment Team 1 score.
                         game.teamOneScore += 1
                         
-                        // Remove the word left of screen.
-                        removeWord()
+                        if wordOnScreen == true {
+                            removeWord()
+                        }
                         
-                        // Add a new word.
                         animateWordLeft()
                         
                         // Update score label.
@@ -184,9 +195,11 @@ class GameViewController: UIViewController {
                         game.teamTwoScore += 1
                         
                         // Remove the word left of screen.
-                        removeWord()
-                        
-                       animateWordLeft()
+                        if wordOnScreen == true {
+                            removeWord()
+                        }
+                        // Display a new word.
+                        animateWordLeft()
                         
                         
                         // Update score label.
@@ -223,7 +236,7 @@ class GameViewController: UIViewController {
         }
         
         // Animate offscreen: startButtonView and menuView
-        removeAnimations()
+        removeMenuAnimations()
     }
     
     
@@ -235,13 +248,11 @@ class GameViewController: UIViewController {
      
     */
     func displayTeam () {
-        
         if game.teamOneIsActive {
             teamLabel.text = "TEAM 1"
         } else {
             teamLabel.text = "TEAM 2"
         }
-        
     }
     
 
@@ -253,105 +264,106 @@ class GameViewController: UIViewController {
     
     /**
     
-     
+     START METHOD
      
     **/
     func startRound() {
         
-        if game.isActive
-        {
-            timeIsUp = false
-            
-            // Animate the timer.
-            animateTimer()
-            
-            // Create a new Word.
-            self.wordLabel.text = game.getWord(self.categoryTapped)
-            
-            // Check if word is on screen.
-            if wordOnScreen == false {
-                animateWordLeft()
-            }
+        timeIsUp = false
         
-            // Check if time has run out.
-            if counter == 50 {
+        // Animate the timer.
+        animateTimer()
             
-                timeIsUp = true
-                
-                // Stop timer.
-                timer.invalidate()
-                
-                // Change team. 
-                game.switchTeams()
-                
-                // Update team titleLabel
-                displayTeam()
-                
-                // Remove the word from the screen.
+        // Create a new Word.
+        self.wordLabel.text = game.getWord(self.categoryTapped)
+        
+        // If there isn't a word on screen run this...
+        if wordOnScreen == false && animationInProgress == false {
+            animateWordLeft()
+        }
+    
+        // Check if time has run out.
+        if counter == 40 {
+        
+            timeIsUp = true
+            
+            // Stop timer.
+            timer.invalidate()
+            
+            // Change team. 
+            game.switchTeams()
+            
+            // Update team titleLabel
+            displayTeam()
+            
+            // Remove the word from the screen.
+            if wordOnScreen == true {
                 removeWord()
-                
-                // Reset counter.
-                counter = 60
-                
-                // Update the timer display.
-                self.timeLeftLabel.text = String(counter)
-            
-                // Reset animations
-                resetAnimations()
-                
             }
+            
+            // Reset counter.
+            counter = 60
+            
+            // Update the timer display.
+            self.timeLeftLabel.text = String(counter)
+        
+            // Reset animations
+            resetMenuAnimations()
+            
         }
     }
     
 
-    /**
-    
-    MARK: Additional methods. *******************************************************************************************************
 
-    **/
- 
- 
-    /**
-    
-     Animates the timer.
- 
-    **/
-    func animateTimer() {
-        
-        // Decrease the time.
-        counter -= 1
-        
-        // Update timer display.
-        self.timeLeftLabel.text = String(counter)
-        
-    }
-    
-    
+    // ANIMATIONS ************************************************************************************************************************************************
     /**
      
-     Moves wordContainerView to the left.
+     ANIMATE WORD LEFT
      
-     
-    **/
+     **/
     func animateWordLeft() {
         
+        // Update word on screen. 
+        wordOnScreen = true
+        
         // Checks to see if the word in the reset position.
-        if wordReset == true {
-            UIView.animateWithDuration(0.5, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                 
                 self.wordContainerView.alpha = 1
                 self.centerAlignWordContainer.constant -= self.view.bounds.width
                 self.view.layoutIfNeeded()
-
+                
                 }, completion: nil)
         
-            // Notify that there is a word currently on the screen.
-            wordOnScreen = true
-            wordReset = false
-    
-        }
+        print("AnimateWordLeft view position: \(self.centerAlignWordContainer.constant)")
     }
     
+
+
+    func removeWordPassed() {
+       
+        animationInProgress = true
+        
+        // Animates the word to the left off the screen.
+        UIView.animateWithDuration(0.6, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5,options: [], animations: {
+            
+            self.centerAlignWordContainer.constant += self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+        
+        animationInProgress = false
+        wordOnScreen = false
+    }
+    
+    
+    
+    
+    
+    
+    
+
     /**
      
      - Moves wordContainerView to the left.
@@ -361,39 +373,130 @@ class GameViewController: UIViewController {
      **/
     func removeWord() {
         
+        animationInProgress = true
+        
         // Animates the word to the left off the screen.
-        UIView.animateWithDuration(1.0, delay:0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0,options: [], animations: {
+        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0,options: [], animations: {
             
-
             self.centerAlignWordContainer.constant -= self.view.bounds.width
-            self.wordContainerView.alpha = 0
+            self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
             
             }, completion: nil)
         
-        // Notify that there is a word currently on the screen.
-        wordOnScreen = false
+        print("In removeWord() view currently at:\(self.centerAlignWordContainer.constant)")
+
         
-        resetWord()
+        
+        animationInProgress = false
+        
+        
+        if animationInProgress == false {
+            resetWord()
+        }
     }
     
-
+    
+    
+    
+    
+    /**
+     
+     - Moves wordContainerView to the left.
+     
+     Parameters:
+     
+     **/
     func resetWord() {
         
+        animationInProgress = true
+            
         // Animates the word to the left off the screen.
-        UIView.animateWithDuration(0, delay:0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.0, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.2,options: [], animations: {
             
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.view.layoutIfNeeded()
             
             }, completion: nil)
     
-        wordReset = true
+
+        
+        print("restWord() moved word to:\(self.centerAlignWordContainer.constant)")
+    
+        animationInProgress = false
+        wordOnScreen = false
+        
+
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Move startButton, teamLabel, and menuView OFF screen.
-    func removeAnimations() {
+    func removeMenuAnimations() {
         
         UIView.animateWithDuration(0.5, delay:0,
                                    usingSpringWithDamping: 0.8,
@@ -426,10 +529,10 @@ class GameViewController: UIViewController {
     
     /**
      
-     Animates the start button, the title label, and the movie view off screen.
+     Animates the start button, the title label, and the menu view off screen.
      
     */
-    func resetAnimations () {
+    func resetMenuAnimations () {
         
         UIView.animateWithDuration(0.5, delay:0,
                                    usingSpringWithDamping: 0.8,
@@ -505,5 +608,22 @@ class GameViewController: UIViewController {
         }, completion: nil)
         
     }
+    
+    
+    /**
+     
+     Animates the timer.
+     
+     **/
+    func animateTimer() {
+        
+        // Decrease the time.
+        counter -= 1
+        
+        // Update timer display.
+        self.timeLeftLabel.text = String(counter)
+        
+    }
+    
 }
 
