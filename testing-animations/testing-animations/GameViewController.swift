@@ -89,14 +89,12 @@ class GameViewController: UIViewController {
     
     /**
         
-        MARK: View methods  *************************************************************************************************************
+        MARK: View Methods  *************************************************************************************************************
     
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeRight)
@@ -134,8 +132,6 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
         // Timer configuration.
         seconds = 00
         minutes = 01
@@ -151,18 +147,14 @@ class GameViewController: UIViewController {
         // Decrease wordContainerView's alpha.
         self.wordContainerView.alpha = 0
         
+        
         startAnimations()
         
     }
     
-    
-    /**
-     
-        MARK: Gesture Recognizers *******************************************************************************************************
-    
-     **/
-    
-    
+
+    // MARK: Gesture Recognizers *******************************************************************************************************
+
     /**
  
      When the team know the answer they will swipe left.
@@ -236,31 +228,42 @@ class GameViewController: UIViewController {
      
      **/
     
-    
-    //Button Actions.
+    /**
+        
+        When the Menu Button is tapped it calls the segue to unwind
+        back to the initial categories screen.
+
+     */
     @IBAction func menuButtonTapped(sender: AnyObject) {
-        print("Button Tapped")
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
-    
+    /**
+     
+        Tapping the Start button calls the methods to remove the Start Button,
+        the Categories Menu, and the current Team Title from the screen. It also
+        sets the initial value of the Timer laber to 59, and calls the timer method
+        to start counting down from 59.
+     
+     */
     @IBAction func startButtonTapped(sender: AnyObject) {
         
+        // Animate offscreen: startButtonView and menuView
+        removeTitleAnimations()
+        // Animate the categories menu off screen.
+        removeCategoriesMenu()
+        
+        // Set initial value for timer.
         seconds = 59
         minutes = 0
-
         let strMinutes = String(format: "%02d", minutes)
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-        
         
         // Run the timer.
         if !timer.valid {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
-        
-        // Animate offscreen: startButtonView and menuView
-        removeMenuAnimations()
     }
     
     
@@ -354,7 +357,8 @@ class GameViewController: UIViewController {
         wordOnScreen = true
         
         // Checks to see if the word in the reset position.
-            UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        
+            UIView.animateWithDuration(0.4, delay:0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                 
                 self.wordContainerView.alpha = 1
                 self.centerAlignWordContainer.constant -= self.view.bounds.width
@@ -385,12 +389,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-
     /**
      
      - Moves wordContainerView to the left.
@@ -447,7 +445,6 @@ class GameViewController: UIViewController {
             }, completion: nil)
     
 
-        
         print("restWord() moved word to:\(self.centerAlignWordContainer.constant)")
     
         animationInProgress = false
@@ -459,9 +456,9 @@ class GameViewController: UIViewController {
 
     
     // Move startButton, teamLabel, and menuView OFF screen.
-    func removeMenuAnimations() {
+    func removeTitleAnimations() {
         
-        UIView.animateWithDuration(0.5, delay:0,
+        UIView.animateWithDuration(0.5, delay:0.0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
@@ -473,31 +470,41 @@ class GameViewController: UIViewController {
                                     // TeamLabel setup.
                                     self.teamLabel.center.y -= self.view.bounds.height
                                     self.teamLabel.alpha = 0
+                                    
+                              //    self.menuView.alpha = 0
+                              //    self.menu  View.userInteractionEnabled = false
+                              //    self.menuView.center.y -= self.view.bounds.height
 
             }, completion: nil)
+    }
+    
+    
+    /**
+     
+     Removes the categories menu button by animating the menu up off
+     the screen.
+     
+     */
+    func removeCategoriesMenu() {
         
-        UIView.animateWithDuration(0.5, delay:0.2,
+        UIView.animateWithDuration(0.0, delay:0.0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
-                                    
-                                    self.menuView.userInteractionEnabled = false
                                     self.menuView.alpha = 0
-                                    self.menuView.center.y -= self.view.bounds.height
-                                
+                                    self.menuView.userInteractionEnabled = false
+                                    self.menuView.center.y += self.view.bounds.height
+                                    
             }, completion: nil)
     }
 
     
-    /**
-     
-     Animates the start button, the title label, and the menu view off screen.
-     
-    */
+    
+
     func resetMenuAnimations () {
         
-        UIView.animateWithDuration(0.5, delay:0,
+        UIView.animateWithDuration(0.5, delay:0.0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
@@ -569,6 +576,15 @@ class GameViewController: UIViewController {
             self.startButton.center.y -= self.view.bounds.height
             
         }, completion: nil)
+        
+        // Categories Menu button animations.
+        UIView.animateWithDuration(0.5, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+          self.menuView.alpha = 1
+          self.menuView.center.y += self.view.bounds.height
+          
+            }, completion: nil)
+        
         
     }
     
