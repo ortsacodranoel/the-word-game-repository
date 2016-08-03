@@ -59,9 +59,11 @@ class GameViewController: UIViewController {
  
     // Timer variables.
     var timer = NSTimer()
-    var counter = 60
+    
+    var seconds = 00
     var time : String = ""
     var timeIsUp = false
+    var minutes = 1
 
     // Constraints.
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
@@ -92,6 +94,8 @@ class GameViewController: UIViewController {
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
@@ -114,7 +118,9 @@ class GameViewController: UIViewController {
         teamTwoScoreLabel.text = String(game.getTeamTwoScore())
         
         // Set the time.
-        timeLeftLabel.text = String(counter)
+        //timeLeftLabel.text = String(seconds)
+    
+        
         
     }
     
@@ -128,15 +134,24 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-            // Move the wordContainerView just out of view.
-            self.centerAlignWordContainer.constant += view.bounds.width
-            
-            print("VWA view position:\(self.centerAlignWordContainer.constant)")
-            
-            // Decrease wordContainerView's alpha.
-            self.wordContainerView.alpha = 0
-            
-            startAnimations()
+        
+        
+        // Timer configuration.
+        seconds = 00
+        minutes = 01
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+        
+        // Move the wordContainerView just out of view.
+        self.centerAlignWordContainer.constant += view.bounds.width
+        
+        print("VWA view position:\(self.centerAlignWordContainer.constant)")
+        
+        // Decrease wordContainerView's alpha.
+        self.wordContainerView.alpha = 0
+        
+        startAnimations()
         
     }
     
@@ -231,6 +246,14 @@ class GameViewController: UIViewController {
     
     @IBAction func startButtonTapped(sender: AnyObject) {
         
+        seconds = 59
+        minutes = 0
+
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+        
+        
         // Run the timer.
         if !timer.valid {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
@@ -284,7 +307,7 @@ class GameViewController: UIViewController {
         }
     
         // Check if time has run out.
-        if counter == 40 {
+        if seconds == 0 {
         
             timeIsUp = true
             
@@ -303,10 +326,13 @@ class GameViewController: UIViewController {
             }
             
             // Reset counter.
-            counter = 60
             
-            // Update the timer display.
-            self.timeLeftLabel.text = String(counter)
+            // Timer configuration.
+            seconds = 00
+            minutes = 01
+            let strMinutes = String(format: "%02d", minutes)
+            let strSeconds = String(format: "%02d", seconds)
+            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
         
             // Reset animations
             resetMenuAnimations()
@@ -430,71 +456,7 @@ class GameViewController: UIViewController {
 
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     // Move startButton, teamLabel, and menuView OFF screen.
     func removeMenuAnimations() {
@@ -619,10 +581,18 @@ class GameViewController: UIViewController {
     func animateTimer() {
         
         // Decrease the time.
-        counter -= 1
+        seconds -= 1
+        minutes = 0
+        
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+
+
+        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
         
         // Update timer display.
-        self.timeLeftLabel.text = String(counter)
+        //self.timeLeftLabel.text = String(counter)
+        
         
     }
     
