@@ -142,11 +142,8 @@ class GameViewController: UIViewController {
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
         
-        print("VWA view position:\(self.centerAlignWordContainer.constant)")
-        
         // Decrease wordContainerView's alpha.
         self.wordContainerView.alpha = 0
-        
         
         startAnimations()
         
@@ -171,16 +168,17 @@ class GameViewController: UIViewController {
                     
                         swipedRight = true
                         
+                        if wordOnScreen == false && animationInProgress == false {
+                            animateWordLeft()
+                        }
+                        
+                        
                         // Remove the word to the right of the screen. 
                         if self.wordOnScreen == true {
-
-                                removeWordPassed()
+                            removeWordPassed()
                         }
-            
-                        animateWordLeft()
-                
-                
-                // Left - GestureRecognizer.
+
+                // LEFT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Left:
                     
                     if game.teamOneIsActive && timeIsUp == false {
@@ -188,11 +186,13 @@ class GameViewController: UIViewController {
                         // Increment Team 1 score.
                         game.teamOneScore += 1
                         
+                        if wordOnScreen == false && animationInProgress == false {
+                            animateWordLeft()
+                        }
+
                         if wordOnScreen == true {
                             removeWord()
                         }
-                        
-                        animateWordLeft()
                         
                         // Update score label.
                         teamOneScoreLabel.text = String(game.getTeamOneScore())
@@ -202,17 +202,17 @@ class GameViewController: UIViewController {
                         // Increment Team 2 score.
                         game.teamTwoScore += 1
                         
-                        // Remove the word left of screen.
+                        if wordOnScreen == false && animationInProgress == false {
+                            animateWordLeft()
+                        }
+                        
                         if wordOnScreen == true {
                             removeWord()
                         }
-                        // Display a new word.
-                        animateWordLeft()
-                        
+
                         
                         // Update score label.
                         teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-
                     }
                 
                 default:
@@ -250,6 +250,7 @@ class GameViewController: UIViewController {
         
         // Animate offscreen: startButtonView and menuView
         removeTitleAnimations()
+        
         // Animate the categories menu off screen.
         removeCategoriesMenu()
         
@@ -264,6 +265,14 @@ class GameViewController: UIViewController {
         if !timer.valid {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
+    
+        // Set initial word.
+        self.wordLabel.text = game.getWord()
+        // Animate word label onto screen.
+        self.animateWordLeft()
+        // Update word on screen. 
+        self.wordOnScreen = true
+    
     }
     
     
@@ -283,6 +292,13 @@ class GameViewController: UIViewController {
     }
     
 
+    /**
+     
+     Sets the color of the background based on the category selected.
+     
+     - Parameter category: Int
+     
+     */
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
     }
@@ -290,8 +306,8 @@ class GameViewController: UIViewController {
 
     
     /**
-    
-     START METHOD
+     
+     MARK: Start Method **************************************************************************************************************
      
     **/
     func startRound() {
@@ -302,12 +318,18 @@ class GameViewController: UIViewController {
         animateTimer()
             
         // Create a new Word.
-        self.wordLabel.text = game.getWord(self.categoryTapped)
+        //self.wordLabel.text = game.getWord(self.categoryTapped)
+
         
-        // If there isn't a word on screen run this...
-        if wordOnScreen == false && animationInProgress == false {
-            animateWordLeft()
+        if wordOnScreen == false {
+            // Set initial word.
+            self.wordLabel.text = game.getWord()
+            // Animate word label onto screen.
+            self.animateWordLeft()
+            // Update word on screen.
+            self.wordOnScreen = true
         }
+        
     
         // Check if time has run out.
         if seconds == 0 {
@@ -342,8 +364,25 @@ class GameViewController: UIViewController {
             
         }
     }
-    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     // ANIMATIONS ************************************************************************************************************************************************
     /**
@@ -356,6 +395,7 @@ class GameViewController: UIViewController {
         // Update word on screen. 
         wordOnScreen = true
         
+        
         // Checks to see if the word in the reset position.
         
             UIView.animateWithDuration(0.4, delay:0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -365,12 +405,13 @@ class GameViewController: UIViewController {
                 self.view.layoutIfNeeded()
                 
                 }, completion: nil)
-        
-        print("AnimateWordLeft view position: \(self.centerAlignWordContainer.constant)")
+
     }
     
-
-
+    
+    
+    
+    
     func removeWordPassed() {
        
         animationInProgress = true
@@ -409,21 +450,16 @@ class GameViewController: UIViewController {
             
             }, completion: nil)
         
-        print("In removeWord() view currently at:\(self.centerAlignWordContainer.constant)")
+            animationInProgress = false
+ 
+        
 
-        
-        
-        animationInProgress = false
         
         
         if animationInProgress == false {
             resetWord()
         }
     }
-    
-    
-    
-    
     
     /**
      
@@ -444,18 +480,30 @@ class GameViewController: UIViewController {
             
             }, completion: nil)
     
-
-        print("restWord() moved word to:\(self.centerAlignWordContainer.constant)")
-    
         animationInProgress = false
         wordOnScreen = false
-        
+    
 
+    
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    // MENU ANIMATIONS *******************************************************************************************************************************************
 
     
-    // Move startButton, teamLabel, and menuView OFF screen.
+    /**
+     Move startButton, teamLabel, and menuView OFF screen.
+    */
     func removeTitleAnimations() {
         
         UIView.animateWithDuration(0.5, delay:0.0,
@@ -470,11 +518,6 @@ class GameViewController: UIViewController {
                                     // TeamLabel setup.
                                     self.teamLabel.center.y -= self.view.bounds.height
                                     self.teamLabel.alpha = 0
-                                    
-                              //    self.menuView.alpha = 0
-                              //    self.menu  View.userInteractionEnabled = false
-                              //    self.menuView.center.y -= self.view.bounds.height
-
             }, completion: nil)
     }
     
@@ -499,9 +542,6 @@ class GameViewController: UIViewController {
             }, completion: nil)
     }
 
-    
-    
-
     func resetMenuAnimations () {
         
         UIView.animateWithDuration(0.5, delay:0.0,
@@ -518,7 +558,7 @@ class GameViewController: UIViewController {
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
-                                    
+                                
                                     self.startButton.userInteractionEnabled = true
                                     self.startButton.center.y -= self.view.bounds.height
                                     self.startButton.alpha = 1
@@ -565,7 +605,6 @@ class GameViewController: UIViewController {
             
         }, completion: nil)
         
-        
         // Start and Title.
         UIView.animateWithDuration(0.5, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
             
@@ -584,8 +623,6 @@ class GameViewController: UIViewController {
           self.menuView.center.y += self.view.bounds.height
           
             }, completion: nil)
-        
-        
     }
     
     
@@ -602,14 +639,7 @@ class GameViewController: UIViewController {
         
         let strMinutes = String(format: "%02d", minutes)
         let strSeconds = String(format: "%02d", seconds)
-
-
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-        
-        // Update timer display.
-        //self.timeLeftLabel.text = String(counter)
-        
-        
     }
     
 }

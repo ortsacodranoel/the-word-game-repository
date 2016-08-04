@@ -27,6 +27,9 @@ class Game {
     
     // Keeps the score of the second team.
     var teamTwoScore : Int
+
+    
+    var people = ["Agrippa","Alexander","Ammon","Amos","Andrew","Andronicus","Arad","Arod","Asher","Balaam","Balak","Barabbas","Barnabas","Bartholomew","Belshazzar","Delilah","Ben-Hur","Dorcas","Benjamin","Boaz","Elisabeth","Ceasar","Caiaphas","Cain","Caleb","Claudius","Cornelius","Eve","Cush","Hadassah","Hagar","Cyrus","Dan","Darius","David","Demetrius","Eli","Elijah","Enoch","Enos","Ephron","Ephraim","Erastus","Esau","Ethan","Ezekiel","Ezra","Felix","Jemima","Festus","Jezebel","Gad","Gaius","Gideon","Goliath","Judith","Gomer","Gog","Gilead","Habakkuk","Leah","Lydia","Haggai","Ham","Martha","Mary Magdalene","Mary","Haman","Herod","Herod Agrippa","Hosea","Miriam","Hezekiah","Ibsam","Naomi","Ichabod","Isaac","Isaiah","Issachar","Phoebe","Pricilla","Rachel","Rahab","Rebecca","Ishmael","Israel","Ruth","Sapphira","Sarah","Sheerah","Jacob","James","Japheth","Susanna","Tabitha","Jason","Jedidiah","Jeremiah","Jesse","Jesus","Jethro","Vashti","Zebudah","Joab","Job","Joel","John","John the Baptist","Zipporah","Jonah","Jonathan","Joram","Josaphat","Joseph","Joshua","Josiah","Jubal","Judas","Judah","Jude","Julius","Lazarus","Levi","Lot","Lucifer","Luke","Malachi","Mark","Matthias","Matthew","Menasheh","Meshach","Methuselah","Micah","Michael","Moab","Mordecai","Moses","Nahum","Naboth","Naphtali","Narcissus","Nathan","Nathanael","Nebuchadnezzar","Nehemiah","Nicodemus","Nicolas","Nimrod","Noah","Obadiah","Paul","Peter","Pharaoh","Philemon","Philip","Pontius Pilate","Phinehas","Potiphar","Reuben","Rufus","Samson","Samuel","Saul","Seth","Shadrach","Sheba","Shem","Silas","Simeon","Simon","Solomon","Sosthenes","Stephen","Thaddaeus","Thomas","Tiberius","Timothy","Timon","Titus","Tyrannus","Uriah","Yam","Zaccheaus","Zacharias","Zebadiah","Zebedee","Zebulun","Zephaniah"]
     
     
 
@@ -60,9 +63,11 @@ class Game {
         - Returns: A random word from the selected category.
      
      **/
-    func getWord(category: Int) -> String {
+    func getWord() -> String {
     
-        return "Hello"
+        let randomIndex = Int(arc4random_uniform(UInt32(people.count)))
+
+            return people[randomIndex]
     }
     
     
