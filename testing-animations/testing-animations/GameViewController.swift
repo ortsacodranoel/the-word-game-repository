@@ -175,7 +175,7 @@ class GameViewController: UIViewController {
                         
                         // Remove the word to the right of the screen. 
                         if self.wordOnScreen == true {
-                            removeWordPassed()
+                           animateWordRight()
                         }
 
                 // LEFT - GestureRecognizer.
@@ -191,7 +191,7 @@ class GameViewController: UIViewController {
                         }
 
                         if wordOnScreen == true {
-                            removeWord()
+                            removeWordLeft()
                         }
                         
                         // Update score label.
@@ -207,7 +207,7 @@ class GameViewController: UIViewController {
                         }
                         
                         if wordOnScreen == true {
-                            removeWord()
+                            removeWordLeft()
                         }
 
                         
@@ -347,7 +347,7 @@ class GameViewController: UIViewController {
             
             // Remove the word from the screen.
             if wordOnScreen == true {
-                removeWord()
+                removeWordLeft()
             }
             
             // Reset counter.
@@ -395,16 +395,13 @@ class GameViewController: UIViewController {
         // Update word on screen. 
         wordOnScreen = true
         
-        
-        // Checks to see if the word in the reset position.
-        
-            UIView.animateWithDuration(0.4, delay:0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                
-                self.wordContainerView.alpha = 1
-                self.centerAlignWordContainer.constant -= self.view.bounds.width
-                self.view.layoutIfNeeded()
-                
-                }, completion: nil)
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.wordContainerView.alpha = 1
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
 
     }
     
@@ -412,12 +409,12 @@ class GameViewController: UIViewController {
     
     
     
-    func removeWordPassed() {
+    func animateWordRight() {
        
         animationInProgress = true
         
         // Animates the word to the left off the screen.
-        UIView.animateWithDuration(0.6, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5,options: [], animations: {
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -437,12 +434,12 @@ class GameViewController: UIViewController {
      Parameters:
      
      **/
-    func removeWord() {
+    func removeWordLeft() {
         
         animationInProgress = true
         
         // Animates the word to the left off the screen.
-        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0,options: [], animations: {
+        UIView.animateWithDuration(0.5, delay:0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -473,8 +470,8 @@ class GameViewController: UIViewController {
         animationInProgress = true
             
         // Animates the word to the left off the screen.
-        UIView.animateWithDuration(0.0, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.2,options: [], animations: {
-            
+        UIView.animateWithDuration(0.0, delay: 0.6, usingSpringWithDamping: 0, initialSpringVelocity: 3.0,options: [], animations: {
+            self.wordContainerView.alpha = 0
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.view.layoutIfNeeded()
             
