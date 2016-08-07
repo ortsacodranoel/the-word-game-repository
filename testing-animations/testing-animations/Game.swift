@@ -101,52 +101,6 @@ class Game {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /**
      
         Initializes a new game and sets the current turn to Team 1.
@@ -180,8 +134,9 @@ class Game {
     func getWord() -> String {
     
         let randomIndex = Int(arc4random_uniform(UInt32(people.count)))
-
-            return people[randomIndex]
+            let word = people[randomIndex]
+            print(word)
+            return word
     }
     
     
