@@ -252,7 +252,7 @@ class GameViewController: UIViewController {
         }
     
         // Get a new word.
-        self.wordLabel.text = game.getWord()
+        self.wordLabel.text = game.getWord(self.categoryTapped)
 
         // Animate word label onto screen.
         self.animateInitialWord()
@@ -377,7 +377,9 @@ class GameViewController: UIViewController {
                 self.view.layoutIfNeeded()
                 
             }, completion: {(Bool) in
-                self.wordLabel.text = self.game.getWord()
+                
+                // Get a new word.
+                self.wordLabel.text = self.game.getWord(self.categoryTapped)
                 })
 
         
@@ -409,7 +411,9 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: {(Bool) in
-                self.wordLabel.text = self.game.getWord()
+                
+                // Get a new word.
+                self.wordLabel.text = self.game.getWord(self.categoryTapped)
         })
 
 

@@ -131,10 +131,47 @@ class Game {
         - Returns: A random word from the selected category.
      
      **/
-    func getWord() -> String {
+    func getWord(categorySelected: Int) -> String {
     
-        let randomIndex = Int(arc4random_uniform(UInt32(people.count)))
-            let word = people[randomIndex]
+        var selectedArray = [String()]
+        
+        
+        switch categorySelected {
+        case 0:
+            selectedArray = jesus
+        case 1:
+            selectedArray = people
+        case 2:
+            selectedArray = places
+        case 3:
+            selectedArray = famousChristians
+        case 4:
+            selectedArray = worship
+        case 5:
+            selectedArray = booksAndMovies
+        case 6:
+            selectedArray = concordance
+        case 7:
+            selectedArray = feasts
+        case 8:
+            selectedArray = angels
+        case 9:
+            selectedArray = sundaySchool
+        case 10:
+            selectedArray = revelation
+        case 11:
+            selectedArray = doctrine
+        case 12:
+            selectedArray = sins
+        case 13:
+            selectedArray = commands
+        default:
+                print("Category has not been selected.")
+        }
+        
+        let randomIndex = Int(arc4random_uniform(UInt32(selectedArray.count)))
+        
+            let word = selectedArray[randomIndex]
             print(word)
             return word
     }
