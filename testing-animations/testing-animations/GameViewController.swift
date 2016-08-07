@@ -169,7 +169,7 @@ class GameViewController: UIViewController {
                 // RIGHT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Right:
                 
-                    
+                    // Animate word to the right offscreen and create a new word.
                     if wordOnScreen {
                         animatePassAnimation()
                     }
@@ -178,30 +178,26 @@ class GameViewController: UIViewController {
                 // LEFT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Left:
                 
-                    // Increment the score for the current team if the time is not up.
+                    // Check if team one is active and that time is still valid.
                     if game.teamOneIsActive && timeIsUp == false {
-                        
-                        // - SCORE UPDATES
                         
                         // Increment Team 1 score.
                         game.teamOneScore += 1
                         // Update Team 1 score text.
                         teamOneScoreLabel.text = String(game.getTeamOneScore())
                         
-                        
-                        // Generate new word.
+                        // Create new word.
                         animateToWordOrigin()
                         
                     } else if timeIsUp == false {
                        
                         // Increment Team 2 score.
                         game.teamTwoScore += 1
-                        
-                        // Present first WORD.
-                        self.wordLabel.text = game.getWord()
-                        
                         // Update score label.
                         teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+                    
+                        // Create new word.
+                        animateToWordOrigin()
                     }
                 
                 default:
@@ -305,7 +301,7 @@ class GameViewController: UIViewController {
             
 
         // Check if time has run out.
-        if seconds == 0 {
+        if seconds == 50 {
         
             timeIsUp = true
             
