@@ -90,11 +90,9 @@ class GameViewController: UIViewController {
     
     
     
-    /**
-        
-        MARK: View Methods  *************************************************************************************************************
+
+    // ******************************************** MARK: View Methods *************************************************** //
     
-    **/
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -148,8 +146,8 @@ class GameViewController: UIViewController {
     }
     
 
-    // MARK: Gesture Recognizers *******************************************************************************************************
-
+    // ******************************************** MARK: Gesture Recognizers ******************************************** //
+    
     /**
  
      When the team know the answer they will swipe left.

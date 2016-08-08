@@ -71,16 +71,10 @@ class DetailViewController: UIViewController {
     
     
     
-    
-    
+    // ******************************************** MARK: View Methods *************************************************** //
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.respondToSwipeGesture(_:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
-        self.view.addGestureRecognizer(swipeRight)
-        
        
         self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
         
@@ -100,37 +94,7 @@ class DetailViewController: UIViewController {
     }
     
 
-    // MARK: Gesture Recognizers *******************************************************************************************************
-    
-    /**
-     
-     When the team know the answer they will swipe left.
-     
-     **/
-    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            
-            switch swipeGesture.direction {
-                
-            // RIGHT - GestureRecognizer.
-            case UISwipeGestureRecognizerDirection.Right:
-                print("Swiped right")
-                performSegueWithIdentifier("segueToCategories", sender: self)
-                
-            default:
-                break
-            }
-        }
-    }
-
-    
-    
-    
-    
-    
-    
-    // MARK: - Custom Methods.
+    // ******************************************** MARK: Additional Methods ********************************************* //
     
 
     func setCategory(category: Int) {
@@ -158,19 +122,11 @@ class DetailViewController: UIViewController {
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
         }
         
-        else if segue.identifier == "segueToCategories" {
-            
-            let categoriesViewController = segue.destinationViewController as! CategoriesViewController
-            
-            // Pass it the game object.
-            categoriesViewController.game = self.game
-            
-            categoriesViewController.transitioningDelegate = self.categoryScreenTransitionManager
-            
-            
-        }
+
     }
     
+    
+    // ******************************************** MARK: Animations ***************************************************** //
 
     
     func startAnimations() {
