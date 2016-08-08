@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
 
     
     // MARK: - Data.
-    let titles = ["Jesus","PEOPLE","PLACES", "FAMOUS", "WORSHIP", "BOOKS", "CONCORDANCE", "FEASTS", "ANGELS", "SUNDAY SCHOOL", "REVELATION", "DOCTRINE", "SINS", "COMMANDS"]
+    let titles = ["Jesus","People","Places", "Famous", "Worship", "Books", "Concordance", "Feasts", "Angels", "Sunday School", "Revelation", "Doctrine", "Sins", "Commands"]
     
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
                     UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),  // People
