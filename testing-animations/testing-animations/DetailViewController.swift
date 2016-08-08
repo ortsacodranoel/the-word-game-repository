@@ -62,21 +62,7 @@ class DetailViewController: UIViewController {
                     UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
                     ]
     
-    let descriptions = ["HIS MANY NAMES, ADJECTIVES TO DESCRIBE HIS CHARACTER, AND WORDS ASSOCIATED WITH OUR LORD JESUS CHRIST.",
-                        "THE MEN AND WOMEN OF WHOM THERE ARE STORIES IN THE BIBLE.",
-                        "COUNTRIES, CITIES, LANDS, BODIES OF WATER, GEOLOGICAL LANDMARKS, AND MAN-MADE STRUCTURES IN AND OF THE TIMES OF THE BIBLE.",
-                        "CHRISTIAN CELEBRITIES, TV EVANGELISTS, HISTORICAL AND INFLUENTIAL CHRISTIANS.",
-                        "HYMNS, SONG OF WORSHIP, CHRISTIAN BANDS AND SINGERS, WORDS OF WORSHIP, AS WELL AS MUSICAL INSTRUMENTS FROM THE BIBLE. * IF THE ANSWER IS A SONG TITLE IN QUOTATION MARKS, YOUR TEAM DOES NOT HAVE TO GET THE EXACT TITLE, BUT IT MUST CONTAIN THE MAIN WORDS.",
-                        "CHRISTIAN AND CHRISTIAN-FRIENDLY BOOKS AND MOVIES, AS WELL AS THE BOOKS OF THE BIBLE.",
-                        "WORDS FOUND IN THE CONCORDANCE OF A BIBLE, EXCLUDING NAMES AND PLACES.",
-                        "BIBLICAL AND CHRISTIAN HOLIDAYS AS WELL AS FOOD AND DRINK MENTIONED IN THE BIBLE.",
-                        "THE NAMES OF THE ANGELS FROM THE BIBLE AND FROM CHRISTIAN-JUDEO MYTHOLOGY.",
-                        "STORIES FROM THE BIBLE AS WELL AS JESUS’ PARABLES. * YOUR TEAM DOES NOT HAVE TO USE THE EXACT WORDS AS WRITTEN IN THE ANSWER, BUT MUST CLEARLY GUESS THE CORRECT BIBLE STORY. REMEMBER NOT TO SAY ANY PART OF THE ANSWER WHEN GIVING CLUES.",
-                        "WORDS AND PHRASES OF THE PROPHETIC LAST BOOK OF THE BIBLE.",
-                        "CHRISTIAN DENOMINATIONS, BELIEFS AND PRACTICES WITHIN DIFFERENT DENOMINATIONS, WORDS ASSOCIATED WITH DIFFERENT DENOMINATIONS.",
-                        "WORDS OF BIBLICAL TRANSGRESSIONS. * ANSWERS WITH MORE THAN ONE WORD DO NOT HAVE TO BE GUESSED EXACTLY AS WRITTEN, BUT MUST CONTAIN THE MAIN WORDS.",
-                        "WORDS OF BIBLICAL MANDATES. * ANSWERS WITH MORE THAN ONE WORD DO NOT HAVE TO BE GUESSED EXACTLY AS WRITTEN, BUT MUST CONTAIN THE MAIN WORDS."
-                        ]
+    let descriptions = ["His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ.","The men and women of whom there are stories in the Bible.","Countries, cities, lands, bodies of water, geological landmarks, and man-made structures in and of the times of the Bible.","Christian celebrities, TV evangelists, historical and influential christians.","Hymns, song of worship, christian bands and singers, words of worship, as well as musical instruments from the Bible. * If the answer is a song title in quotation marks, your team does not have to get the exact title, but it must contain the main words.","Christian and christian-friendly books and movies, as well as the books of the Bible.","Words found in the concordance of a Bible, excluding names and places.","Biblical and christian holidays as well as food and drink mentioned in the Bible.", "The names of the angels from the Bible and from christian-judeo mythology.","Stories from the Bible as well as Jesus’ parables. * Your team does not have to use the exact words as written in the answer, but must clearly guess the correct bible story. Remember not to say any part of the answer when giving clues.","Words and phrases of the prophetic last book of the Bible.","Christian denominations, beliefs and practices within different denominations, words associated with different denominations.","Words of biblical transgressions. * Answers with more than one word do not have to be guessed exactly as written, but must contain the main words.","Words of biblical mandates. * Answers with more than one word do not have to be guessed exactly as written, but must contain the main words."]
     
     // Create GameScreenTransitionManager to handle transition game screen.
     let gameScreenTransitionManager = GameScreenTransitionManager()
@@ -90,10 +76,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add Gesture Recognizer to enable swiping back to Categories Menu.
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleSwipes(_:)))
-        rightSwipe.direction = .Right
-        view.addGestureRecognizer(rightSwipe)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipeLeft)
+        
        
         self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
         
@@ -112,15 +98,45 @@ class DetailViewController: UIViewController {
         startAnimations()
     }
     
+
+    // MARK: Gesture Recognizers *******************************************************************************************************
+    
+    /**
+     
+     When the team know the answer they will swipe left.
+     
+     **/
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+                
+            // RIGHT - GestureRecognizer.
+            case UISwipeGestureRecognizerDirection.Right:
+                print("Swiped right")
+
+                
+            // LEFT - GestureRecognizer.
+            case UISwipeGestureRecognizerDirection.Left:
+               performSegueWithIdentifier("unwindtToCategories", sender: self)
+                print("Swiped left")
+                
+            default:
+                break
+            }
+        }
+    }
+
+    
+    
+    
+    
+    
     
     // MARK: - Custom Methods.
     
-    func handleSwipes(sender: UISwipeGestureRecognizer) {
-        if(sender.direction == .Right) {
-            performSegueWithIdentifier("unwindtToCategories", sender: self)
-        }
-    }
-    
+
     func setCategory(category: Int) {
         titleLabel.text = titles[category]
     }
