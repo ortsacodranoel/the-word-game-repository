@@ -118,11 +118,6 @@ class GameViewController: UIViewController {
         teamOneScoreLabel.text = String(game.getTeamOneScore())
         teamTwoScoreLabel.text = String(game.getTeamTwoScore())
         
-        // Set the time.
-        //timeLeftLabel.text = String(seconds)
-    
-        
-        
     }
     
     
@@ -300,6 +295,11 @@ class GameViewController: UIViewController {
         animateTimer()
             
 
+        if seconds == 52 {
+            self.timeRunningOut()
+        }
+        
+        
         // Check if time has run out.
         if seconds == 50 {
         
@@ -333,6 +333,29 @@ class GameViewController: UIViewController {
     
 
     // ******************************************************************************** Animations ******************************************************************************** //
+    
+    
+    
+    /**
+     
+     Changes the color of the screen to red when timer is running out. 
+     
+     **/
+    func timeRunningOut() {
+        
+        UIView.animateWithDuration(2.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.view.backgroundColor = UIColor.redColor()
+            }, completion: {(Bool) in
+                
+                // Set original background color.
+                self.setColor(self.categoryTapped)
+        })
+
+    }
+
+    
+    
     
     
     

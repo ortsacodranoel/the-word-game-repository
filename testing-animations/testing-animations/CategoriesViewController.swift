@@ -12,7 +12,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 {
 
     // Used to keep track of the current game.
-    let game = Game()
+    var game = Game()
     
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -79,7 +79,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     @IBAction func unwindToCategories(segue: UIStoryboardSegue){}
-    
+
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue){}
+
 }
 
 

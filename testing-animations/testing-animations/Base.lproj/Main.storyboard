@@ -137,7 +137,6 @@
                                         <state key="normal" image="Back Chevron"/>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="3Q2-Zv-7vH"/>
-                                            <segue destination="jEr-zt-sSa" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="gRz-WM-Bmc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -189,11 +188,9 @@
                         <outlet property="selectButton" destination="z36-w8-L3G" id="A75-YL-I2n"/>
                         <outlet property="selectButtonView" destination="8wf-r9-ZNq" id="Pg9-8w-F7R"/>
                         <outlet property="titleLabel" destination="pOC-zj-eJK" id="aKR-pg-Iqd"/>
-                        <segue destination="jEr-zt-sSa" kind="unwind" unwindAction="unwindToCategories:" id="e9v-Ti-zJx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSv-aA-bF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="jEr-zt-sSa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="211" y="1751"/>
         </scene>

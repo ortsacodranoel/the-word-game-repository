@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
 
     
     // MARK: - Data.
-    let titles = ["JESUS","PEOPLE","PLACES", "FAMOUS", "WORSHIP", "BOOKS", "CONCORDANCE", "FEASTS", "ANGELS", "SUNDAY SCHOOL", "REVELATION", "DOCTRINE", "SINS", "COMMANDS"]
+    let titles = ["Jesus","PEOPLE","PLACES", "FAMOUS", "WORSHIP", "BOOKS", "CONCORDANCE", "FEASTS", "ANGELS", "SUNDAY SCHOOL", "REVELATION", "DOCTRINE", "SINS", "COMMANDS"]
     
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
                     UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),  // People
@@ -66,8 +66,9 @@ class DetailViewController: UIViewController {
     
     // Create GameScreenTransitionManager to handle transition game screen.
     let gameScreenTransitionManager = GameScreenTransitionManager()
-    
+    let categoryScreenTransitionManager = CategoriesTransitionManager()
 
+    
     
     
     
@@ -76,9 +77,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
-        self.view.addGestureRecognizer(swipeLeft)
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipeRight)
         
        
         self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
@@ -115,12 +116,7 @@ class DetailViewController: UIViewController {
             // RIGHT - GestureRecognizer.
             case UISwipeGestureRecognizerDirection.Right:
                 print("Swiped right")
-
-                
-            // LEFT - GestureRecognizer.
-            case UISwipeGestureRecognizerDirection.Left:
-               performSegueWithIdentifier("unwindtToCategories", sender: self)
-                print("Swiped left")
+                performSegueWithIdentifier("segueToCategories", sender: self)
                 
             default:
                 break
@@ -152,6 +148,7 @@ class DetailViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueToGame" {
+           
             let toViewController = segue.destinationViewController as! GameViewController
             
             // Pass it the game object. 
@@ -159,6 +156,18 @@ class DetailViewController: UIViewController {
             
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
+        }
+        
+        else if segue.identifier == "segueToCategories" {
+            
+            let categoriesViewController = segue.destinationViewController as! CategoriesViewController
+            
+            // Pass it the game object.
+            categoriesViewController.game = self.game
+            
+            categoriesViewController.transitioningDelegate = self.categoryScreenTransitionManager
+            
+            
         }
     }
     
