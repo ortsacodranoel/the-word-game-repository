@@ -164,6 +164,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.50196078431372548" green="0.38823529411764707" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="2dk-1F-MXL"/>
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="top" secondItem="qg2-86-sEz" secondAttribute="bottom" constant="28" id="626-IL-JyL"/>
@@ -174,6 +175,9 @@
                             <constraint firstAttribute="leadingMargin" secondItem="Wpg-nJ-zhp" secondAttribute="leading" id="eOv-6Q-STA"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="mDN-Ix-uGz" secondAttribute="bottom" constant="-1" id="nRm-oM-MMY"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="S0e-5v-Ozr" appends="YES" id="1iY-uV-uKH"/>
+                        </connections>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -191,6 +195,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSv-aA-bF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="apA-et-R0A" userLabel="Exit" sceneMemberID="exit"/>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="right" id="S0e-5v-Ozr">
+                    <connections>
+                        <segue destination="apA-et-R0A" kind="unwind" unwindAction="unwindToCategories:" id="D9d-ty-NOw"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="211" y="1751"/>
         </scene>
