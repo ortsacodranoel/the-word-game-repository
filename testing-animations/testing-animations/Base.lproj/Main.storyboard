@@ -41,6 +41,8 @@
                                                     <accessibility key="accessibilityConfiguration" identifier="categoryButton">
                                                         <accessibilityTraits key="traits" button="YES" allowsDirectInteraction="YES"/>
                                                     </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                                    <state key="normal" title=""/>
                                                     <connections>
                                                         <action selector="buttonTouched:" destination="jYI-0V-R3N" eventType="touchUpInside" id="5SD-1b-LLV"/>
                                                         <action selector="categoryButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mtw-Hs-85B"/>
@@ -115,9 +117,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qg2-86-sEz" userLabel="DescriptionView">
                                 <rect key="frame" x="88" y="235" width="425" height="130"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMu-6I-1qy" userLabel="descriptionViewLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMu-6I-1qy" userLabel="descriptionViewLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="425" height="130"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
