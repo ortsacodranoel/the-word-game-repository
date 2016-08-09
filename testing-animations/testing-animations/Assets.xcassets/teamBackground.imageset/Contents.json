@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "teamTwoScoreTitle.png",
+      "filename" : "teamBackground.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "teamTwoScoreTitle@2x.png",
+      "filename" : "teamBackground@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "teamTwoScoreTitle@3x.png",
+      "filename" : "teamBackground@3x.png",
       "scale" : "3x"
     }
   ],
