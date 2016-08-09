@@ -36,7 +36,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nok-sc-Lxj">
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nok-sc-Lxj">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                                     <accessibility key="accessibilityConfiguration" identifier="categoryButton">
                                                         <accessibilityTraits key="traits" button="YES" allowsDirectInteraction="YES"/>
@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-568" y="1751"/>
+            <point key="canvasLocation" x="-457" y="1751"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -99,10 +99,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wf-r9-ZNq" userLabel="SelectButtonView">
                                 <rect key="frame" x="153" y="393" width="285" height="57"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z36-w8-L3G" userLabel="SelectButton">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z36-w8-L3G" userLabel="SelectButton">
                                         <rect key="frame" x="0.0" y="1" width="285" height="56"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="select_button"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                        <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                                        <state key="normal" title="Select"/>
                                         <connections>
                                             <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="hjj-Gg-oFL"/>
                                         </connections>
@@ -119,7 +121,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMu-6I-1qy" userLabel="descriptionViewLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="425" height="130"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -237,7 +239,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxV-Dj-kVK" userLabel="teamOneScoreTitleView">
                                 <rect key="frame" x="20" y="547" width="122" height="45"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teamOneScoreTitle" translatesAutoresizingMaskIntoConstraints="NO" id="YhS-MS-r1g">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm1-mC-G1w" userLabel="team1Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="122" height="45"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teamBackground" translatesAutoresizingMaskIntoConstraints="NO" id="YhS-MS-r1g">
                                         <rect key="frame" x="0.0" y="0.0" width="122" height="45"/>
                                     </imageView>
                                 </subviews>
@@ -255,7 +263,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBs-zu-feM" userLabel="teamOneScoreLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -275,10 +283,10 @@
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scoreContainer" translatesAutoresizingMaskIntoConstraints="NO" id="4Dv-K0-qxW">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-tb-udB" userLabel="teamTwoScoreLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-tb-udB" userLabel="teamTwoScoreLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -295,7 +303,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBE-go-gAA" userLabel="teamTwoScoreTitleView">
                                 <rect key="frame" x="406" y="547" width="122" height="45"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teamTwoScoreTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Fbu-YK-lmi" userLabel="teamTwoScoreTitle">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HtP-ad-ob6" userLabel="team2Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="122" height="45"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teamBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Fbu-YK-lmi" userLabel="teamTwoScoreTitle">
                                         <rect key="frame" x="0.0" y="0.0" width="122" height="45"/>
                                     </imageView>
                                 </subviews>
@@ -419,9 +433,11 @@
                     <connections>
                         <outlet property="TeamTitleView" destination="99C-Fk-cpx" id="c66-hD-3Xt"/>
                         <outlet property="centerAlignWordContainer" destination="bEo-yz-Ydw" id="FGr-tQ-beu"/>
+                        <outlet property="mainView" destination="QDg-XT-9rl" id="QBd-pK-EPs"/>
                         <outlet property="menuView" destination="i50-N2-Dkt" id="cKd-0w-8Sm"/>
                         <outlet property="startButton" destination="1gx-Ej-eue" id="fwi-xY-f1b"/>
                         <outlet property="startButtonView" destination="SMM-dS-Xrm" id="ELg-2R-ah9"/>
+                        <outlet property="team1Label" destination="cm1-mC-G1w" id="F9p-2t-lkF"/>
                         <outlet property="teamLabel" destination="YwG-cN-2AD" id="GNJ-Xr-UL9"/>
                         <outlet property="teamOneScore" destination="yRW-TZ-RsK" id="rf9-gI-mrO"/>
                         <outlet property="teamOneScoreLabel" destination="hBs-zu-feM" id="XLr-XK-vgk"/>
@@ -447,10 +463,8 @@
         <image name="Back Chevron" width="13" height="21"/>
         <image name="Menu" width="26" height="21"/>
         <image name="scoreContainer" width="45" height="41"/>
-        <image name="select_button" width="285" height="56"/>
         <image name="start_button" width="286" height="56"/>
-        <image name="teamOneScoreTitle" width="115" height="42"/>
-        <image name="teamTwoScoreTitle" width="115" height="42"/>
+        <image name="teamBackground" width="115" height="42"/>
     </resources>
     <color key="tintColor" red="1" green="0.31764356668945781" blue="0.16261317787767937" alpha="1" colorSpace="calibratedRGB"/>
 </document>

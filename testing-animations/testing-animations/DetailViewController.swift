@@ -21,16 +21,15 @@ class DetailViewController: UIViewController {
     
     // MARK: - Buttons.
     @IBOutlet weak var selectButton: UIButton!
-    
 
     
     // MARK: - Views.
+    @IBOutlet var mainView: UIView!
     @IBOutlet weak var TitleView: UIView!
     @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var selectButtonView: UIView!
     @IBOutlet weak var backButtonView: UIView!
-    @IBOutlet var mainView: UIView!
-    
+
     
     // MARK: - Labels.
     @IBOutlet weak var descriptionViewLabel: UILabel!
@@ -76,7 +75,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
+        // Set the background of the select button when tapped.
+        //self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
+        
+        // Configure the Select button.
+        self.selectButton.layer.cornerRadius = 7
+        self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.selectButton.layer.borderWidth = 3
+        
         
         setCategory(categoryTapped)
         setColor(categoryTapped)
@@ -121,8 +127,6 @@ class DetailViewController: UIViewController {
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
         }
-        
-
     }
     
     

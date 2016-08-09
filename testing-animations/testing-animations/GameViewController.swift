@@ -43,6 +43,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var teamTwoScoreLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var team1Label: UILabel!
     
     
     // Views.
@@ -56,6 +57,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var startButtonView: UIView!
     @IBOutlet weak var wordContainerView: UIView!
     @IBOutlet weak var timeUpView: UIView!
+    @IBOutlet var mainView: UIView!
     
     
     // Animation variables. 
@@ -134,15 +136,21 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
         
+
+        // Setup team labels.
+        team1Label.text = "Team 1"
+
+        
+        
+        
+        
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
         
-        // Decrease wordContainerView's alpha.
+
         self.timeUpView.alpha = 0
         self.timeUpView.userInteractionEnabled = false
         
-        // Setup timeUpView.
-        self.timeUpView.alpha = 0
 
         animationsStart()
     }
@@ -161,7 +169,7 @@ class GameViewController: UIViewController {
         animateTimer()
         
         
-        if seconds == 52 {
+        if seconds == 50 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
             
@@ -171,7 +179,6 @@ class GameViewController: UIViewController {
             // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
         }
-        
         
         // Check if time has run out.
         if seconds == 50 {
@@ -623,7 +630,8 @@ class GameViewController: UIViewController {
      */
     func animateTimeRunningOutFadeIn() {
         
-        UIView.animateWithDuration(3.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        
+        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.view.backgroundColor = UIColor.redColor()
             }, completion: {(Bool) in
@@ -639,7 +647,7 @@ class GameViewController: UIViewController {
     */
     func animateTimeRunningOutFade() {
         
-        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             // Set original background color.
             self.setColor(self.categoryTapped)
