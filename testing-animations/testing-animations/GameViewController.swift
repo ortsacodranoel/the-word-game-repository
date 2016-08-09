@@ -55,6 +55,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var TeamTitleView: UIView!
     @IBOutlet weak var startButtonView: UIView!
     @IBOutlet weak var wordContainerView: UIView!
+    @IBOutlet weak var timeUpView: UIView!
     
     
     // Animation variables. 
@@ -137,9 +138,13 @@ class GameViewController: UIViewController {
         self.centerAlignWordContainer.constant += view.bounds.width
         
         // Decrease wordContainerView's alpha.
-        self.wordContainerView.alpha = 0
+        self.timeUpView.alpha = 0
+        self.timeUpView.userInteractionEnabled = false
         
-        startAnimations()
+        // Setup timeUpView.
+        self.timeUpView.alpha = 0
+
+        animationsStart()
     }
     
 
@@ -158,13 +163,13 @@ class GameViewController: UIViewController {
         
         if seconds == 52 {
             // Make the screen turn red to indicate time running out.
-            self.animateTimeRunningOut()
+            self.animateTimeRunningOutFadeIn()
             
         }
         
         if seconds == 50 {
             // Display label with 'Time's Up!' message.
-            self.animateTimeIsUpMessage()
+            self.animateTimeIsUpMessageOnScreen()
         }
         
         
@@ -192,8 +197,6 @@ class GameViewController: UIViewController {
             let strSeconds = String(format: "%02d", seconds)
             self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
             
-            // Reset animations
-            //resetMenuAnimations()
         }
     }
 
@@ -273,10 +276,7 @@ class GameViewController: UIViewController {
     @IBAction func startButtonTapped(sender: AnyObject) {
         
         // Animate offscreen: startButtonView and menuView
-        removeTitleAnimations()
-        
-        // Animate the categories menu off screen.
-        removeCategoriesMenu()
+        animateTitleOffScreen()
         
         // Set initial value for timer.
         seconds = 59
@@ -324,7 +324,80 @@ class GameViewController: UIViewController {
     }
     
 
-
+    
+    // ******************************************** MARK: Animations (Swipes) ******************************************** //
+    
+    /**
+     Animates the wordViewContainer left off-screen, followed by an animation of the container
+     back to its original position to the right off-screen, finalizing by animating a new word
+     to the middle of the screen. It also calls the .getWord() method to create the new word
+     that is animated onto the screen.
+     */
+    func animateNewWordLeftSwipe() {
+        
+        // Animates wordViewContainer to the left off-screen.
+        UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+        
+        // Places wordContainerView in its original position to the right of the screen.
+        UIView.animateWithDuration(0.0, delay:0.3, options: [], animations: {
+            
+            self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            
+            }, completion: {(Bool) in
+                
+                // Get a new word.
+                self.wordLabel.text = self.game.getWord(self.categoryTapped)
+        })
+        
+        // Animates wordViewController to the middle of the screen.
+        UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+    }
+    
+    
+    /**
+     The initial word animation moves the wordContainerView into view from the left side
+     of the screen.
+     */
+    func animateNewWordRightSwipe() {
+        
+        // If pass count less than 2 then ...
+        
+        
+        // Animates right offscreen.
+        UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.centerAlignWordContainer.constant += self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            
+            }, completion: {(Bool) in
+                
+                // Get a new word.
+                self.wordLabel.text = self.game.getWord(self.categoryTapped)
+        })
+        
+        
+        UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
+            
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+    }
     
 
     // ******************************************** MARK: Animations ***************************************************** //
@@ -333,7 +406,7 @@ class GameViewController: UIViewController {
     /**
      Animates all objects when the GameViewController loads.
     */
-    func startAnimations() {
+    func animationsStart() {
         
         // Team 1 - Score view
         UIView.animateWithDuration(0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
@@ -403,81 +476,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    // ******************************************** MARK: Animations (Swipes) ******************************************** //
-    
-    /**
-     Animates the wordViewContainer left off-screen, followed by an animation of the container
-     back to its original position to the right off-screen, finalizing by animating a new word 
-     to the middle of the screen. It also calls the .getWord() method to create the new word
-     that is animated onto the screen.
-    */
-    func animateNewWordLeftSwipe() {
-       
-        // Animates wordViewContainer to the left off-screen.
-        UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
-            self.centerAlignWordContainer.constant -= self.view.bounds.width
-            self.wordContainerView.alpha = 1
-            self.view.layoutIfNeeded()
-
-        }, completion: nil)
-        
-        // Places wordContainerView in its original position to the right of the screen.
-        UIView.animateWithDuration(0.0, delay:0.3, options: [], animations: {
-
-                self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
-                self.wordContainerView.alpha = 1
-                self.view.layoutIfNeeded()
-                
-            }, completion: {(Bool) in
-                
-                // Get a new word.
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
-                })
-
-        // Animates wordViewController to the middle of the screen.
-        UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
-            self.centerAlignWordContainer.constant -= self.view.bounds.width
-            self.wordContainerView.alpha = 1
-            self.view.layoutIfNeeded()
-            
-            }, completion: nil)
-    }
-    
-    
-    /**
-     The initial word animation moves the wordContainerView into view from the left side
-     of the screen.
-    */
-    func animateNewWordRightSwipe() {
-        
-        // If pass count less than 2 then ...
-        
-        
-        // Animates right offscreen.
-        UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
-            self.centerAlignWordContainer.constant += self.view.bounds.width
-            self.wordContainerView.alpha = 1
-            self.view.layoutIfNeeded()
-            
-            }, completion: {(Bool) in
-                
-                // Get a new word.
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
-        })
-
-
-        UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
-            
-            self.centerAlignWordContainer.constant -= self.view.bounds.width
-            self.wordContainerView.alpha = 1
-            self.view.layoutIfNeeded()
-            
-            }, completion: nil)
-    }
-
 
     // ******************************************** MARK: Animations (Removing) ****************************************** //
     
@@ -487,8 +485,8 @@ class GameViewController: UIViewController {
     */
     func removeWord() {
         
-        UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
-            
+        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
+
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
@@ -498,53 +496,11 @@ class GameViewController: UIViewController {
     
     
     /**
-     
-     */
-    func animateTeamLabelOffScreen() {
-
-        UIView.animateWithDuration(0.5, delay:0.7,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 1.0,
-                                   options: [], animations: {
-                                    
-                                    self.teamLabel.alpha = 1
-                                    self.teamLabel.center.y += self.view.bounds.height
-            }, completion: { (bool) in
-                
-                self.resetMenuAnimations()
-        })
-        
-    }
-    
-    
-    /**
-     Animate startButton and teamLabel off-screen.
-    */
-    func removeTitleAnimations() {
-        
-        UIView.animateWithDuration(0.5, delay:0.0,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    // startButton properties.
-                                    self.startButton.userInteractionEnabled = false
-                                    self.startButton.center.y += self.view.bounds.height
-                                    self.startButton.alpha = 0
-                                    
-                                    // teamLabel properties.
-                                    self.teamLabel.center.y -= self.view.bounds.height
-                                    self.teamLabel.alpha = 0
-            }, completion: nil)
-    }
-    
-    
-    /**
      Animates menuView off-screen.
     */
-    func removeCategoriesMenu() {
+    func animateMenuOffScreen() {
         
-        UIView.animateWithDuration(0.0, delay:1.0,
+        UIView.animateWithDuration(0.3, delay:0.0,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
@@ -552,26 +508,29 @@ class GameViewController: UIViewController {
                                     // menuView properties.
                                     self.menuView.alpha = 0
                                     self.menuView.userInteractionEnabled = false
-                                    self.menuView.center.y += self.view.bounds.height
+                                    self.menuView.center.y -= self.view.bounds.height
                                     
             }, completion: nil)
+        
+        print("Animated Categories Menu off-screen")
     }
 
     
     /**
      Animates menuView, startButton, and teamLabel to their initial positions on-screen.
     */
-    func resetMenuAnimations() {
+    func animateTitleOnScreen() {
         
-        UIView.animateWithDuration(0.5, delay:1.0,
+        UIView.animateWithDuration(0.5, delay:0.2,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.9,
                                    options: [], animations: {
                                     
                                     self.menuView.userInteractionEnabled = true
                                     self.menuView.alpha = 1
-                                    self.menuView.center.y += self.view.bounds.height
-                                               }, completion: nil)
+
+                                    
+            }, completion: nil)
 
         UIView.animateWithDuration(0.5, delay:0.2,
                                    usingSpringWithDamping: 0.8,
@@ -588,59 +547,106 @@ class GameViewController: UIViewController {
             }, completion: nil)
     }
     
-    
-    
 
+    /**
+     Animate startButton and teamLabel off-screen.
+     */
+    func animateTitleOffScreen() {
+        
+        UIView.animateWithDuration(0.5, delay:0.0,
+                                   usingSpringWithDamping: 0.8,
+                                   initialSpringVelocity: 0.9,
+                                   options: [], animations: {
+                                    
+                                    // startButton properties.
+                                    self.startButton.userInteractionEnabled = false
+                                    self.startButton.center.y += self.view.bounds.height
+                                    self.startButton.alpha = 0
+                                    
+                                    // teamLabel properties.
+                                    self.teamLabel.center.y -= self.view.bounds.height
+                                    self.teamLabel.alpha = 0
+                                    
+                                    self.animateMenuOffScreen()
+                                    
+            }, completion: nil)
+    }
     
 
     // ******************************************** MARK: Animations Time Running Out ************************************ //
     
     /**
-     Animates teamLabel with the message "Time's up!". Setup so that in executes a few 
-     seconds after the word is animated off-screen.
+     Animates TimeUpView on-screen.
     */
-    func animateTimeIsUpMessage() {
+    func animateTimeIsUpMessageOnScreen() {
 
-            UIView.animateWithDuration(0.3, delay:0.2,
+            UIView.animateWithDuration(0.2, delay:0.2,
                                        usingSpringWithDamping: 0.8,
                                        initialSpringVelocity: 0.9,
                                        options: [], animations: {
                                         
-                                        self.teamLabel.font = self.teamLabel.font.fontWithSize(45)
-                                        self.teamLabel.text = "TIME'S UP!"
-                                        self.teamLabel.alpha = 1
-                                        self.teamLabel.center.y += self.view.bounds.height
+                                        self.timeUpView.alpha = 1
+                                        self.timeUpView.center.y += self.view.bounds.height
 
                 }, completion: { (bool) in
-             
-                    self.animateTeamLabelOffScreen()
                     
-                })
+                    self.animateTimeIsUpMessageOffScreen()
+            })
     }
     
     
-
+    /**
+     Animates TimeUpView with the message "Time's up!" off-screen.
+    */
+   func animateTimeIsUpMessageOffScreen() {
+  
+        UIView.animateWithDuration(0.2, delay:1.0,
+                               usingSpringWithDamping: 0.8,
+                               initialSpringVelocity: 0.9,
+                               options: [], animations: {
+                                
+                                self.timeUpView.alpha = 0
+                                self.timeUpView.center.y -= self.view.bounds.height
+                                
+            }, completion: { (bool) in
+                
+                // Reset the menu items.
+                self.animateTitleOnScreen()
+        })
     
+   }
     
     
     /**
-     Changes the color of the screen to red with a duration of 2.0 seconds. On completion it restes the 
+     Changes the color of the screen to red with a duration of 2.0 seconds. On completion it restes the
      color back to its original state.
      */
-    func animateTimeRunningOut() {
+    func animateTimeRunningOutFadeIn() {
         
-        UIView.animateWithDuration(2.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(3.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             self.view.backgroundColor = UIColor.redColor()
             }, completion: {(Bool) in
                 
                 // Set original background color.
-                self.setColor(self.categoryTapped)
+                self.animateTimeRunningOutFade()
         })
     }
 
-
-    // ******************************************** MARK: Animations (Timer) ********************************************* //
+    
+    /**
+     Changes the color from red to the original background color.
+    */
+    func animateTimeRunningOutFade() {
+        
+        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            // Set original background color.
+            self.setColor(self.categoryTapped)
+            
+            }, completion: nil)
+    }
+    
     
     /**
      Animates the timer.
@@ -655,8 +661,5 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
     }
-    
-    
-    
 }
 
