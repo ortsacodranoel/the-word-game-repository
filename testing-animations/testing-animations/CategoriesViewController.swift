@@ -18,12 +18,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-   let categories = [UIImage(named:"jesusCategory"),UIImage(named:"peopleCategory"),UIImage(named:"placesCategory"),UIImage(named:"famousCategory"),UIImage(named:"worshipCategory"),UIImage(named:"booksCategory"),UIImage(named:"concordanceCategory"),UIImage(named:"feastsCategory"),UIImage(named:"angelsCategory"), UIImage(named:"sundayCategory"),UIImage(named:"revelationCategory"), UIImage(named:"doctrineCategory"), UIImage(named:"sinsCategory"), UIImage(named:"commandsCategory")]
+   let categories = [UIImage(named:"Jesus"),UIImage(named:"People"),UIImage(named:"Places"),UIImage(named:"FamousChristians"),UIImage(named:"Worship"),UIImage(named:"Booksandmovies"),UIImage(named:"Concordance"),UIImage(named:"Feasts"),UIImage(named:"Angels"), UIImage(named:"SundaySchool"),UIImage(named:"Revelation"), UIImage(named:"Doctrine"), UIImage(named:"Sins"), UIImage(named:"Commands")]
     
-    
-    let categoriesSelected = [UIImage(named:"jesusCategorySelected"),UIImage(named:"peopleCategorySelected"),UIImage(named:"placesCategorySelected"),UIImage(named:"famousCategorySelected"),UIImage(named:"worshipCategorySelected"),UIImage(named:"booksCategorySelected"),UIImage(named:"concordanceCategorySelected"),UIImage(named:"feastsCategorySelected"),UIImage(named:"angelsCategorySelected"), UIImage(named:"sundayCategorySelected"),UIImage(named:"revelationCategorySelected"), UIImage(named:"doctrineCategorySelected"), UIImage(named:"sinsCategorySelected"), UIImage(named:"commandsCategorySelected")]
-    
-    
+    let titles = ["Jesus","People","Places","Famous Christians","Worship","Books and Movies","Concordance","Feasts","Angels","Sunday School","Revelation","Doctrine","Sins","Commands"]
     
     // Button actions.
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
@@ -54,7 +51,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         cell.categoryButton.setBackgroundImage(self.categories[indexPath.row], forState: UIControlState.Normal)
-        cell.categoryButton.setBackgroundImage(self.categoriesSelected[indexPath.row], forState: UIControlState.Highlighted)
+        
+        cell.categoryButton.setTitle(self.titles[indexPath.row], forState: UIControlState.Normal)
+
         cell.tag = indexPath.row
         
         return cell
@@ -79,8 +78,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     @IBAction func unwindToCategories(segue: UIStoryboardSegue){}
-
-    @IBAction func unwindToMenu(segue: UIStoryboardSegue){}
 
 }
 
