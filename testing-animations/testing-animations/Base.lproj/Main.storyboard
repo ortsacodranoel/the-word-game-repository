@@ -371,6 +371,22 @@
                                     <constraint firstAttribute="width" constant="275" id="esA-dh-HsD"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQF-qB-udX" userLabel="TimeUpView">
+                                <rect key="frame" x="100" y="270" width="400" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time's Up!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1SS-Hg-9Q5">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="42"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="2Tr-10-lKz"/>
+                                    <constraint firstAttribute="width" constant="400" id="erS-u6-xiT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.43805719893777506" green="0.7934680676790844" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -385,9 +401,11 @@
                             <constraint firstItem="i50-N2-Dkt" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="13" id="VBo-M7-2AL"/>
                             <constraint firstItem="YAC-GX-TCY" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="bEo-yz-Ydw"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="SMM-dS-Xrm" secondAttribute="bottom" constant="100" id="c8n-wT-RYB"/>
+                            <constraint firstItem="IQF-qB-udX" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="cjT-ux-Saf"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="QxV-Dj-kVK" secondAttribute="bottom" constant="8" id="fIT-j0-3sh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="i50-N2-Dkt" secondAttribute="leading" id="fRJ-9t-zPh"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="3vS-XO-ytW" secondAttribute="bottom" constant="9" id="gW3-2Q-whJ"/>
+                            <constraint firstItem="IQF-qB-udX" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="my2-Sx-V7A"/>
                             <constraint firstItem="99C-Fk-cpx" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" constant="0.5" id="s1I-dO-Vno"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="UBE-go-gAA" secondAttribute="bottom" constant="8" id="sp2-IX-cn0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UBE-go-gAA" secondAttribute="trailing" constant="52" id="sxc-Kf-fRj"/>
@@ -412,6 +430,7 @@
                         <outlet property="teamTwoScoreLabel" destination="fZw-tb-udB" id="c1F-3h-23p"/>
                         <outlet property="teamTwoScoreTitleView" destination="UBE-go-gAA" id="6Qv-Zt-b02"/>
                         <outlet property="timeLeftLabel" destination="fNe-I9-jHn" id="L1B-0t-wMc"/>
+                        <outlet property="timeUpView" destination="IQF-qB-udX" id="2ri-tg-0II"/>
                         <outlet property="timerView" destination="u3y-YN-CRe" id="uYj-SV-4Fv"/>
                         <outlet property="wordContainerView" destination="YAC-GX-TCY" id="Bhj-WD-hKJ"/>
                         <outlet property="wordLabel" destination="KkW-I4-FqT" id="CgG-2K-q4T"/>
