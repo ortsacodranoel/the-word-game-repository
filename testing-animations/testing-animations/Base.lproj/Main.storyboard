@@ -338,8 +338,8 @@
                             <view alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
                                 <rect key="frame" x="20" y="13" width="30" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="26"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
+                                        <rect key="frame" x="-20" y="-20" width="70" height="70"/>
                                         <state key="normal" image="Menu"/>
                                         <connections>
                                             <action selector="menuButtonTapped:" destination="Sav-rh-bmW" eventType="touchUpInside" id="qeK-HK-2yq"/>
@@ -356,9 +356,9 @@
                                 <rect key="frame" x="100" y="270" width="400" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KkW-I4-FqT" userLabel="wordLabel">
-                                        <rect key="frame" x="-3" y="0.0" width="405" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="405" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
