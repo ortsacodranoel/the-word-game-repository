@@ -44,6 +44,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var team1Label: UILabel!
+    @IBOutlet weak var passesLabel: UILabel!
     
     
     // Views.
@@ -62,7 +63,7 @@ class GameViewController: UIViewController {
     
     // Animation variables. 
     var animatingLeft = false
- 
+    
     // Timer variables.
     var timer = NSTimer()
     
@@ -78,6 +79,8 @@ class GameViewController: UIViewController {
     // GestureRecognizers variables.
     let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
+    var timesSwipedRight = 0
+    
     
     // Additional variables.
     var answer = true
@@ -111,6 +114,9 @@ class GameViewController: UIViewController {
         // Set initial value to display current team turn.
         displayTeam()
         
+        
+
+        
         // Change view background color.
         setColor(categoryTapped)
         
@@ -138,7 +144,8 @@ class GameViewController: UIViewController {
 
         // Setup team labels.
         team1Label.text = "Team 1"
-
+        
+        self.passesLabel.alpha = 0
         
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
@@ -160,6 +167,7 @@ class GameViewController: UIViewController {
     func startRound() {
         
         timeIsUp = false
+
         
         // Animate the timer.
         animateTimer()
@@ -208,7 +216,8 @@ class GameViewController: UIViewController {
     // ******************************************** MARK: Gesture Recognizers ******************************************** //
     
     /**
-     When the team know the answer they will swipe left.
+     When the team know the answer they will swipe left. When they do not, they can pass on the 
+     word by swiping right. Each team is limited to 2 passes per round.
     */
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
@@ -218,11 +227,24 @@ class GameViewController: UIViewController {
             
                 // RIGHT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Right:
+                    
+
+                    
+                    print("in gesture:\(timesSwipedRight)")
+                    
                 
                     // Animate word to the right offscreen and create a new word.
-                    if wordOnScreen {
+                    if wordOnScreen && timesSwipedRight < 2 {
+                      
+                        // Increase times swiped right.
+                        timesSwipedRight += 1
+                        
+                        // Create and display new word.
                         animateNewWordRightSwipe()
+                    } else {
+                        animatePassMessage()
                     }
+                
                 
 
                 // LEFT - GestureRecognizer.
@@ -260,10 +282,8 @@ class GameViewController: UIViewController {
     // ******************************************** MARK: Button Actions ************************************************* //
     
     /**
-        
         When the Menu Button is tapped it calls the segue to unwind
         back to the initial categories screen.
-
      */
     @IBAction func menuButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("unwindToCategories", sender: self)
@@ -277,6 +297,10 @@ class GameViewController: UIViewController {
      to start counting down from 59.
     */
     @IBAction func startButtonTapped(sender: AnyObject) {
+        
+        // Reset right swipe count.
+        self.timesSwipedRight = 0
+        
         
         // Animate offscreen: startButtonView and menuView
         animateTitleOffScreen()
@@ -331,6 +355,35 @@ class GameViewController: UIViewController {
     // ******************************************** MARK: Animations (Swipes) ******************************************** //
     
     /**
+     Only two passes are allowed per game. This method fades in the 'Only 2 Passes' message with a duration of 0.5 seconds.
+    */
+    func animatePassMessage() {
+      
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+                self.passesLabel.alpha = 1
+            
+            }, completion: {(bool) in
+                self.animatePassMessageFadeOut()
+        })
+    }
+    
+    
+    /**
+     Fadeout
+     
+    */
+    func animatePassMessageFadeOut(){
+        
+        UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.passesLabel.alpha = 0
+            
+            }, completion: nil)
+    }
+    
+    
+    /**
      Animates the wordViewContainer left off-screen, followed by an animation of the container
      back to its original position to the right off-screen, finalizing by animating a new word
      to the middle of the screen. It also calls the .getWord() method to create the new word
@@ -376,9 +429,6 @@ class GameViewController: UIViewController {
      */
     func animateNewWordRightSwipe() {
         
-        // If pass count less than 2 then ...
-        
-        
         // Animates right offscreen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
@@ -400,6 +450,8 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: nil)
+    
+        
     }
     
 
@@ -515,7 +567,7 @@ class GameViewController: UIViewController {
                                     
             }, completion: nil)
         
-        print("Animated Categories Menu off-screen")
+
     }
 
     
@@ -665,5 +717,5 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
     }
-}
 
+}

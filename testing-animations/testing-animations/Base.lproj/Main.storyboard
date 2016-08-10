@@ -405,9 +405,16 @@ Cgo
                                     <constraint firstAttribute="width" constant="400" id="stn-ED-Xcx"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Only 2 passes &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wa9-Jv-BNt" userLabel="passesLabel">
+                                <rect key="frame" x="202" y="558" width="196" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.43805719893777506" green="0.7934680676790844" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Wa9-Jv-BNt" firstAttribute="centerY" secondItem="yRW-TZ-RsK" secondAttribute="centerY" id="6IA-S2-nKS"/>
                             <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="3" id="8cO-60-skb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u3y-YN-CRe" secondAttribute="trailing" id="HP2-0m-zr7"/>
                             <constraint firstAttribute="leadingMargin" secondItem="QxV-Dj-kVK" secondAttribute="leading" id="InU-7M-YXh"/>
@@ -420,9 +427,11 @@ Cgo
                             <constraint firstItem="YAC-GX-TCY" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="bEo-yz-Ydw"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="SMM-dS-Xrm" secondAttribute="bottom" constant="100" id="c8n-wT-RYB"/>
                             <constraint firstItem="IQF-qB-udX" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="cjT-ux-Saf"/>
+                            <constraint firstItem="UBE-go-gAA" firstAttribute="leading" secondItem="Wa9-Jv-BNt" secondAttribute="trailing" constant="8" symbolic="YES" id="dB2-Mg-F8b"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="QxV-Dj-kVK" secondAttribute="bottom" constant="8" id="fIT-j0-3sh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="i50-N2-Dkt" secondAttribute="leading" id="fRJ-9t-zPh"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="3vS-XO-ytW" secondAttribute="bottom" constant="9" id="gW3-2Q-whJ"/>
+                            <constraint firstItem="Wa9-Jv-BNt" firstAttribute="leading" secondItem="yRW-TZ-RsK" secondAttribute="trailing" constant="8" symbolic="YES" id="mMm-jy-J0A"/>
                             <constraint firstItem="IQF-qB-udX" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="my2-Sx-V7A"/>
                             <constraint firstItem="99C-Fk-cpx" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" constant="0.5" id="s1I-dO-Vno"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="UBE-go-gAA" secondAttribute="bottom" constant="8" id="sp2-IX-cn0"/>
@@ -439,6 +448,7 @@ Cgo
                         <outlet property="centerAlignWordContainer" destination="bEo-yz-Ydw" id="FGr-tQ-beu"/>
                         <outlet property="mainView" destination="QDg-XT-9rl" id="QBd-pK-EPs"/>
                         <outlet property="menuView" destination="i50-N2-Dkt" id="cKd-0w-8Sm"/>
+                        <outlet property="passesLabel" destination="Wa9-Jv-BNt" id="vMf-nI-tdg"/>
                         <outlet property="startButton" destination="1gx-Ej-eue" id="fwi-xY-f1b"/>
                         <outlet property="startButtonView" destination="SMM-dS-Xrm" id="ELg-2R-ah9"/>
                         <outlet property="team1Label" destination="cm1-mC-G1w" id="F9p-2t-lkF"/>
