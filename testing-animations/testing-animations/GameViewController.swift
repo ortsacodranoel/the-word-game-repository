@@ -44,6 +44,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var team1Label: UILabel!
+    @IBOutlet weak var passesLabel: UILabel!
     
     
     // Views.
@@ -62,7 +63,7 @@ class GameViewController: UIViewController {
     
     // Animation variables. 
     var animatingLeft = false
- 
+    
     // Timer variables.
     var timer = NSTimer()
     
@@ -78,6 +79,8 @@ class GameViewController: UIViewController {
     // GestureRecognizers variables.
     let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
+    var timesSwiped = 0
+    
     
     // Additional variables.
     var answer = true
@@ -111,6 +114,9 @@ class GameViewController: UIViewController {
         // Set initial value to display current team turn.
         displayTeam()
         
+        
+
+        
         // Change view background color.
         setColor(categoryTapped)
         
@@ -138,7 +144,8 @@ class GameViewController: UIViewController {
 
         // Setup team labels.
         team1Label.text = "Team 1"
-
+        
+        self.passesLabel.alpha = 0
         
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
@@ -160,6 +167,10 @@ class GameViewController: UIViewController {
     func startRound() {
         
         timeIsUp = false
+        
+        // Reset the pass variable to 0
+        
+        
         
         // Animate the timer.
         animateTimer()
@@ -208,7 +219,8 @@ class GameViewController: UIViewController {
     // ******************************************** MARK: Gesture Recognizers ******************************************** //
     
     /**
-     When the team know the answer they will swipe left.
+     When the team know the answer they will swipe left. When they do not, they can pass on the 
+     word by swiping right. Each team is limited to 2 passes per round.
     */
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
@@ -218,6 +230,22 @@ class GameViewController: UIViewController {
             
                 // RIGHT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Right:
+                    
+                    // Hold a count of times swiped.
+                    timesSwiped += 1
+                    print(timesSwiped)
+                    
+                    if timesSwiped == 2 {
+                        
+                        self.animatePassMessage()
+                        swipeGesture.enabled = false
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
                 
                     // Animate word to the right offscreen and create a new word.
                     if wordOnScreen {
@@ -227,6 +255,9 @@ class GameViewController: UIViewController {
 
                 // LEFT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Left:
+                    
+                    
+            
                 
                     // Check if team one is active and that time is still valid.
                     if game.teamOneIsActive && timeIsUp == false {
@@ -277,6 +308,9 @@ class GameViewController: UIViewController {
      to start counting down from 59.
     */
     @IBAction func startButtonTapped(sender: AnyObject) {
+        
+        // Reset right swipe count.
+        self.timesSwiped = 0
         
         // Animate offscreen: startButtonView and menuView
         animateTitleOffScreen()
@@ -329,6 +363,35 @@ class GameViewController: UIViewController {
 
     
     // ******************************************** MARK: Animations (Swipes) ******************************************** //
+    
+    /**
+     Only two passes are allowed per game. This method fades in the 'Only 2 Passes' message with a duration of 0.5 seconds.
+    */
+    func animatePassMessage() {
+      
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+                self.passesLabel.alpha = 1
+            
+            }, completion: {(bool) in
+                self.animatePassMessageFadeOut()
+        })
+    }
+    
+    
+    /**
+     Fadeout
+     
+    */
+    func animatePassMessageFadeOut(){
+        
+        UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.passesLabel.alpha = 0
+            
+            }, completion: nil)
+    }
+    
     
     /**
      Animates the wordViewContainer left off-screen, followed by an animation of the container
