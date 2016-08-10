@@ -79,7 +79,7 @@ class GameViewController: UIViewController {
     // GestureRecognizers variables.
     let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
-    var timesSwiped = 0
+    var timesSwipedRight = 0
     
     
     // Additional variables.
@@ -167,10 +167,7 @@ class GameViewController: UIViewController {
     func startRound() {
         
         timeIsUp = false
-        
-        // Reset the pass variable to 0
-        
-        
+
         
         // Animate the timer.
         animateTimer()
@@ -231,33 +228,27 @@ class GameViewController: UIViewController {
                 // RIGHT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Right:
                     
-                    // Hold a count of times swiped.
-                    timesSwiped += 1
-                    print(timesSwiped)
+
                     
-                    if timesSwiped == 2 {
-                        
-                        self.animatePassMessage()
-                        swipeGesture.enabled = false
-                        
-                    }
-                    
-                    
-                    
-                    
+                    print("in gesture:\(timesSwipedRight)")
                     
                 
                     // Animate word to the right offscreen and create a new word.
-                    if wordOnScreen {
+                    if wordOnScreen && timesSwipedRight < 2 {
+                      
+                        // Increase times swiped right.
+                        timesSwipedRight += 1
+                        
+                        // Create and display new word.
                         animateNewWordRightSwipe()
+                    } else {
+                        animatePassMessage()
                     }
+                
                 
 
                 // LEFT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Left:
-                    
-                    
-            
                 
                     // Check if team one is active and that time is still valid.
                     if game.teamOneIsActive && timeIsUp == false {
@@ -291,10 +282,8 @@ class GameViewController: UIViewController {
     // ******************************************** MARK: Button Actions ************************************************* //
     
     /**
-        
         When the Menu Button is tapped it calls the segue to unwind
         back to the initial categories screen.
-
      */
     @IBAction func menuButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("unwindToCategories", sender: self)
@@ -310,7 +299,8 @@ class GameViewController: UIViewController {
     @IBAction func startButtonTapped(sender: AnyObject) {
         
         // Reset right swipe count.
-        self.timesSwiped = 0
+        self.timesSwipedRight = 0
+        
         
         // Animate offscreen: startButtonView and menuView
         animateTitleOffScreen()
@@ -439,9 +429,6 @@ class GameViewController: UIViewController {
      */
     func animateNewWordRightSwipe() {
         
-        // If pass count less than 2 then ...
-        
-        
         // Animates right offscreen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
@@ -463,6 +450,8 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: nil)
+    
+        
     }
     
 
@@ -578,7 +567,7 @@ class GameViewController: UIViewController {
                                     
             }, completion: nil)
         
-        print("Animated Categories Menu off-screen")
+
     }
 
     
@@ -728,5 +717,5 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
     }
-}
 
+}
