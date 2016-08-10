@@ -75,9 +75,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
 
     
-    // GestureRecognizers. 
+    // GestureRecognizers variables.
     let swipeRecognizer = UISwipeGestureRecognizer()
-    
+    var swipedRight = false
     
     // Additional variables.
     var answer = true
@@ -88,8 +88,7 @@ class GameViewController: UIViewController {
     var wordRemoved = false
     var animationInProgress = false
     
-    
-    var swipedRight = false
+
     
     
     
@@ -141,9 +140,6 @@ class GameViewController: UIViewController {
         team1Label.text = "Team 1"
 
         
-        
-        
-        
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
         
@@ -192,7 +188,7 @@ class GameViewController: UIViewController {
             game.switchTeams()
             
             // Update team titleLabel
-            //displayTeam()
+            displayTeam()
             
             // Remove word.
             removeWord()
