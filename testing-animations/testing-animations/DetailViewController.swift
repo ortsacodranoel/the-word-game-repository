@@ -74,9 +74,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        // Set the background of the select button when tapped.
-        //self.selectButton.setBackgroundImage(UIImage(named:"select_tapped"), forState: .Highlighted)
         
         // Configure the Select button.
         self.selectButton.layer.cornerRadius = 7
