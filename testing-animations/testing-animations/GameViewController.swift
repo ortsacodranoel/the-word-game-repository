@@ -325,19 +325,17 @@ class GameViewController: UIViewController {
     */
     func displayTeam () {
         if game.teamOneIsActive {
-            teamLabel.text = "Team 1"
+            teamLabel.text = "Team One"
         } else {
-            teamLabel.text = "Team 2"
+            teamLabel.text = "Team Two"
         }
     }
     
 
     /**
-     
      Sets the color of the background based on the category selected.
      
      - Parameter category: Int
-     
      */
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
