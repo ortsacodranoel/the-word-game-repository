@@ -114,16 +114,12 @@ class GameViewController: UIViewController {
         // Set initial value to display current team turn.
         displayTeam()
         
-        
-
-        
         // Change view background color.
         setColor(categoryTapped)
         
         // Set current team scores.
         teamOneScoreLabel.text = String(game.getTeamOneScore())
         teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -166,8 +162,8 @@ class GameViewController: UIViewController {
      */
     func startRound() {
         
+        
         timeIsUp = false
-
         
         // Animate the timer.
         animateTimer()
@@ -227,11 +223,6 @@ class GameViewController: UIViewController {
             
                 // RIGHT - GestureRecognizer.
                 case UISwipeGestureRecognizerDirection.Right:
-                    
-
-                    
-                    print("in gesture:\(timesSwipedRight)")
-                    
                 
                     // Animate word to the right offscreen and create a new word.
                     if wordOnScreen && timesSwipedRight < 2 {
