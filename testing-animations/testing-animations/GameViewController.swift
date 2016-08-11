@@ -35,13 +35,15 @@ class GameViewController: UIViewController {
         UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
     ]
     
+    // Buttons Outlets.
+    @IBOutlet weak var startButton: UIButton!
+    
     
     // Labels.
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var teamOneScoreLabel: UILabel!
     @IBOutlet weak var teamTwoScoreLabel: UILabel!
-    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var team1Label: UILabel!
     @IBOutlet weak var passesLabel: UILabel!
@@ -92,10 +94,6 @@ class GameViewController: UIViewController {
     var animationInProgress = false
     
 
-    
-    
-    
-
     // ******************************************** MARK: View Methods *************************************************** //    
     
     override func viewDidLoad() {
@@ -110,6 +108,11 @@ class GameViewController: UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeLeft)
+        
+        // Configure the Start button.
+        self.startButton.layer.cornerRadius = 7
+        self.startButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.startButton.layer.borderWidth = 3
         
         // Set initial value to display current team turn.
         displayTeam()
@@ -161,7 +164,6 @@ class GameViewController: UIViewController {
      
      */
     func startRound() {
-        
         
         timeIsUp = false
         
