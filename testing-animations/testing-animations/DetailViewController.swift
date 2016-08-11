@@ -83,10 +83,10 @@ class DetailViewController: UIViewController {
         self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.selectButton.layer.borderWidth = 3
         
-        
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,7 +102,6 @@ class DetailViewController: UIViewController {
 
     // ******************************************** MARK: Additional Methods ********************************************* //
     
-
     func setCategory(category: Int) {
         titleLabel.text = titles[category]
     }
