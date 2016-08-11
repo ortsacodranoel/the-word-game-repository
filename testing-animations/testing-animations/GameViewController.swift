@@ -13,6 +13,10 @@ class GameViewController: UIViewController {
     // Used to keep track of the current game.
     var game = Game()
     
+    /**
+     Used to determine if a round is currently in progress.
+     */
+    var roundInProgress = false
     
     // Variable to start animations. 
     var initialAnimations = true
@@ -34,6 +38,7 @@ class GameViewController: UIViewController {
         UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),  // Sins
         UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
     ]
+    
     
     // Buttons Outlets.
     @IBOutlet weak var startButton: UIButton!
@@ -94,8 +99,7 @@ class GameViewController: UIViewController {
     var animationInProgress = false
     
 
-    // ******************************************** MARK: View Methods *************************************************** //    
-    
+    // ******************************************** MARK: View Methods *************************************************** //
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -165,16 +169,16 @@ class GameViewController: UIViewController {
      */
     func startRound() {
         
+        self.roundInProgress = true
+        
         timeIsUp = false
         
         // Animate the timer.
         animateTimer()
         
-        
         if seconds == 50 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
-            
         }
         
         if seconds == 50 {
@@ -184,6 +188,8 @@ class GameViewController: UIViewController {
         
         // Check if time has run out.
         if seconds == 50 {
+            
+            self.roundInProgress = false
             
             timeIsUp = true
             
@@ -222,48 +228,54 @@ class GameViewController: UIViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
             switch swipeGesture.direction {
-            
-                // RIGHT - GestureRecognizer.
+        
+                // RIGHT swipe.
                 case UISwipeGestureRecognizerDirection.Right:
-                
-                    // Animate word to the right offscreen and create a new word.
-                    if wordOnScreen && timesSwipedRight < 2 {
-                      
-                        // Increase times swiped right.
-                        timesSwipedRight += 1
-                        
-                        // Create and display new word.
-                        animateNewWordRightSwipe()
-                    } else {
-                        animatePassMessage()
+        
+                    // Check to see if a round has started.
+                    if roundInProgress == true {
+                    
+                        // Animate word to the right offscreen and create a new word.
+                        if wordOnScreen && timesSwipedRight < 2 {
+                          
+                            // Increase times swiped right.
+                            timesSwipedRight += 1
+                            
+                            // Create and display new word.
+                            animateNewWordRightSwipe()
+                        } else {
+                            animatePassMessage()
                     }
-                
-                
+                }
 
-                // LEFT - GestureRecognizer.
+                // LEFT swipe.
                 case UISwipeGestureRecognizerDirection.Left:
                 
-                    // Check if team one is active and that time is still valid.
-                    if game.teamOneIsActive && timeIsUp == false {
-                        
-                        // Increment Team 1 score.
-                        game.teamOneScore += 1
-                        // Update Team 1 score text.
-                        teamOneScoreLabel.text = String(game.getTeamOneScore())
-                        
-                        // Create new word.
-                        animateNewWordLeftSwipe()
-                        
-                    } else if timeIsUp == false {
-                       
-                        // Increment Team 2 score.
-                        game.teamTwoScore += 1
-                        // Update score label.
-                        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+                    // Check if round has started.
+                    if self.roundInProgress == true {
                     
-                        // Create new word.
-                        animateNewWordLeftSwipe()
-                }
+                        // Check if team one is active and that time is still valid.
+                        if game.teamOneIsActive && timeIsUp == false {
+                            
+                            // Increment Team 1 score.
+                            game.teamOneScore += 1
+                            // Update Team 1 score text.
+                            teamOneScoreLabel.text = String(game.getTeamOneScore())
+                            
+                            // Create new word.
+                            animateNewWordLeftSwipe()
+                            
+                        } else if timeIsUp == false {
+                           
+                            // Increment Team 2 score.
+                            game.teamTwoScore += 1
+                            // Update score label.
+                            teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+                        
+                            // Create new word.
+                            animateNewWordLeftSwipe()
+                        }
+                    }
                 
                 default:
                     break
