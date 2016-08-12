@@ -14,6 +14,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Used to keep track of the current game.
     var game = Game()
     
+    private var lastContentOffset: CGFloat = 0
+    
+    // MARK: Button Outlets
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var rulesButton: UIButton!
+    
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -32,7 +39,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -59,6 +66,14 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
 
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y < 0 {
+            self.animateMenuFadeIn()
+        } else if scrollView.contentOffset.y > 30{
+            self.animateMenuFadeOut()
+        }
+    }
     
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -78,6 +93,25 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     @IBAction func unwindToCategories(segue: UIStoryboardSegue){}
+
+    
+    
+    // ******************************************** MARK: Animations ***************************************************** //
+    func animateMenuFadeIn() {
+        
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.rulesButton.alpha = 1
+            }, completion: nil)
+    }
+    
+    func animateMenuFadeOut() {
+        
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.rulesButton.alpha = 0
+            }, completion: nil)
+    }
 
 }
 

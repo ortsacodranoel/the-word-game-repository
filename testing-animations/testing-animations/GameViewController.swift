@@ -161,8 +161,7 @@ class GameViewController: UIViewController {
         animationsStart()
     }
     
-
-    // ******************************************** MARK: Initializers *************************************************** //
+    
     
     /**
      
