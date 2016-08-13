@@ -445,6 +445,22 @@ Cgo
                                     <constraint firstAttribute="width" constant="225" id="F2l-GN-jFK"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjx-Zy-kzK" userLabel="countdownMsgView">
+                                <rect key="frame" x="270" y="270" width="60" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-uF-XT9" userLabel="countdownMsgLabel">
+                                        <rect key="frame" x="-10" y="-10" width="80" height="80"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="4Zz-xL-E3V"/>
+                                    <constraint firstAttribute="height" constant="60" id="TaA-o6-3V4"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.43805719893777506" green="0.7934680676790844" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -453,6 +469,7 @@ Cgo
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="top" secondItem="uJh-bx-0FK" secondAttribute="bottom" id="7nT-NK-rhn"/>
                             <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="3" id="8cO-60-skb"/>
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="92v-3Z-1Rk"/>
+                            <constraint firstItem="fjx-Zy-kzK" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="Gqc-UV-9Vw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u3y-YN-CRe" secondAttribute="trailing" id="HP2-0m-zr7"/>
                             <constraint firstAttribute="leadingMargin" secondItem="QxV-Dj-kVK" secondAttribute="leading" id="InU-7M-YXh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3vS-XO-ytW" secondAttribute="trailing" id="Klv-sq-EkC"/>
@@ -469,6 +486,7 @@ Cgo
                             <constraint firstAttribute="leadingMargin" secondItem="i50-N2-Dkt" secondAttribute="leading" id="fRJ-9t-zPh"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="3vS-XO-ytW" secondAttribute="bottom" constant="9" id="gW3-2Q-whJ"/>
                             <constraint firstItem="YAC-GX-TCY" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="jQq-HM-LJA"/>
+                            <constraint firstItem="fjx-Zy-kzK" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="lKm-GQ-jnS"/>
                             <constraint firstItem="Wa9-Jv-BNt" firstAttribute="leading" secondItem="yRW-TZ-RsK" secondAttribute="trailing" constant="8" symbolic="YES" id="mMm-jy-J0A"/>
                             <constraint firstItem="IQF-qB-udX" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="my2-Sx-V7A"/>
                             <constraint firstItem="uJh-bx-0FK" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="oPe-Q6-lfF"/>
@@ -483,6 +501,8 @@ Cgo
                     <connections>
                         <outlet property="TeamTitleView" destination="99C-Fk-cpx" id="c66-hD-3Xt"/>
                         <outlet property="centerAlignWordContainer" destination="jQq-HM-LJA" id="IAe-ow-z8H"/>
+                        <outlet property="countdownMsgLabel" destination="Mba-uF-XT9" id="gkg-Mb-Vya"/>
+                        <outlet property="countdownMsgView" destination="fjx-Zy-kzK" id="OkH-Gd-uYA"/>
                         <outlet property="mainView" destination="QDg-XT-9rl" id="QBd-pK-EPs"/>
                         <outlet property="menuView" destination="i50-N2-Dkt" id="cKd-0w-8Sm"/>
                         <outlet property="passesLabel" destination="Wa9-Jv-BNt" id="vMf-nI-tdg"/>
