@@ -10,19 +10,22 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    // Used to keep track of the current game.
+    // MARK: - Game Properties
+
     var game = Game()
-    
+    var answer = true
+    var categoryTapped = Int()
+    var teamTwoTurn = false
+    var wordOnScreen = false
+    var wordReset = true
+    var wordRemoved = false
+
     /**
      Used to determine if a round is currently in progress.
      */
     var roundInProgress = false
     
-    // Variable to start animations. 
-    var initialAnimations = true
     
-    
-    // MARK: - Data.
     let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
         UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),  // People
         UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1),  // Places
@@ -40,11 +43,12 @@ class GameViewController: UIViewController {
     ]
     
     
-    // Buttons Outlets.
+    // MARK: - Button Properties
+    
     @IBOutlet weak var startButton: UIButton!
     
+    // MARK: - Label Properties
     
-    // Labels.
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var teamOneScoreLabel: UILabel!
@@ -53,8 +57,14 @@ class GameViewController: UIViewController {
     @IBOutlet weak var team1Label: UILabel!
     @IBOutlet weak var passesLabel: UILabel!
     
+    /**
+        Used to display the messages: '3', '2', '1', and 'Go!'.
+    */
+    @IBOutlet weak var countdownMsgLabel: UILabel!
     
-    // Views.
+    
+    // MARK: - View Properties
+    
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var teamOneScoreTitleView: UIView!
     @IBOutlet weak var teamOneScore: UIView!
@@ -66,40 +76,45 @@ class GameViewController: UIViewController {
     @IBOutlet weak var wordContainerView: UIView!
     @IBOutlet weak var timeUpView: UIView!
     @IBOutlet var mainView: UIView!
+    @IBOutlet weak var countdownMsgView: UIView!
     
     
-    // Animation variables. 
+    // MARK: - Animation Properties
+    
     var animatingLeft = false
+    var animationInProgress = false
     
-    // Timer variables.
-    var timer = NSTimer()
     
+    // MARK: - Timer Properties
+    
+    var gameTimer = NSTimer()
+    var countdownTimer = NSTimer()
     var seconds = 00
     var time : String = ""
     var timeIsUp = false
     var minutes = 1
 
-    // Constraints.
+    /**
+        Used to store the values of the initial countdown and 'Go!' message when a player starts
+        a new game.
+    */
+    var countdownNumber = 3
+    
+    
+    // MARK: - Constraint Properties
+    
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
 
     
-    // GestureRecognizers variables.
+    // MARK: - Swipe Gesture Recognizer Properties
+
     let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
     var timesSwipedRight = 0
     
-    
-    // Additional variables.
-    var answer = true
-    var categoryTapped = Int()
-    var teamTwoTurn = false
-    var wordOnScreen = false
-    var wordReset = true
-    var wordRemoved = false
-    var animationInProgress = false
-    
 
-    // ******************************************** MARK: View Methods *************************************************** //
+    
+    // MARK:- Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -129,10 +144,12 @@ class GameViewController: UIViewController {
         teamTwoScoreLabel.text = String(game.getTeamTwoScore())
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -156,24 +173,21 @@ class GameViewController: UIViewController {
 
         self.timeUpView.alpha = 0
         self.timeUpView.userInteractionEnabled = false
-        
 
         animationsStart()
     }
     
     
-    
     /**
      
      */
-    func startRound() {
+    func newRound() {
         
         self.roundInProgress = true
         
         timeIsUp = false
         
-        // Animate the timer.
-        animateTimer()
+        animateGameTimer()
         
         if seconds == 50 {
             // Make the screen turn red to indicate time running out.
@@ -193,7 +207,7 @@ class GameViewController: UIViewController {
             timeIsUp = true
             
             // Stop timer.
-            timer.invalidate()
+            gameTimer.invalidate()
             
             // Change team.
             game.switchTeams()
@@ -216,7 +230,7 @@ class GameViewController: UIViewController {
 
     
 
-    // ******************************************** MARK: Gesture Recognizers ******************************************** //
+    // MARK: - Gesture Recognizers
     
     /**
      When the team know the answer they will swipe left. When they do not, they can pass on the 
@@ -283,16 +297,7 @@ class GameViewController: UIViewController {
     }
 
     
-    // ******************************************** MARK: Button Actions ************************************************* //
-    
-    /**
-        When the Menu Button is tapped it calls the segue to unwind
-        back to the initial categories screen.
-     */
-    @IBAction func menuButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("unwindToCategories", sender: self)
-    }
-    
+    // MARK: - Button Actions
     
     /**
      Tapping the Start button calls the methods to remove the Start Button,
@@ -302,30 +307,49 @@ class GameViewController: UIViewController {
     */
     @IBAction func startButtonTapped(sender: AnyObject) {
         
+        // FIXME: -
+        
         // Reset right swipe count.
         self.timesSwipedRight = 0
         
-        
         // Animate offscreen: startButtonView and menuView
-        animateTitleOffScreen()
-        
+        self.animateTitleOffScreen()
+
         // Set initial value for timer.
         seconds = 59
         minutes = 0
         let strMinutes = String(format: "%02d", minutes)
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-        
-        // Run the timer.
-        if !timer.valid {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
-        }
-    
-        // Get a new word.
-        self.wordLabel.text = game.getWord(self.categoryTapped)
 
-        // Animate word label onto screen.
-        self.animateInitialWord()
+        
+        // Execute the countdownTimer.
+        if !self.countdownTimer.valid {
+            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.animateCountdownTimer), userInfo:nil, repeats: true)
+        }
+        
+
+
+//        // Run the game timer.
+//        if !self.gameTimer.valid {
+//            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.newRound), userInfo:nil, repeats: true)
+//            print("In GameTimer")
+//        }
+//
+//        // Get a new word.
+//        self.wordLabel.text = game.getWord(self.categoryTapped)
+//
+//        // Animate word label onto screen.
+//        self.animateInitialWord()
+    }
+    
+    
+    /**
+     When the Menu Button is tapped it calls the segue to unwind
+     back to the initial categories screen.
+     */
+    @IBAction func menuButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
     
@@ -351,10 +375,85 @@ class GameViewController: UIViewController {
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
     }
+
+    
+    // MARK: - Initial Animations
+    
+    /**
+     Animates all objects when the GameViewController loads.
+     */
+    func animationsStart() {
+        
+        // Team 1 - Score view
+        UIView.animateWithDuration(0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamOneScoreTitleView.alpha = 1
+            self.teamOneScoreTitleView.center.y -= self.view.bounds.height
+            
+            }, completion: nil)
+        
+        // Team 1 - Score.
+        UIView.animateWithDuration(0.4, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamOneScore.alpha = 1
+            self.teamOneScore.center.y -= self.view.bounds.height
+            
+            }, completion: nil)
+        
+        //Team 2 - Score view.
+        UIView.animateWithDuration(0.4, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamTwoScoreTitleView.alpha = 1
+            self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
+            
+            }, completion: nil)
+        
+        // Team 2 - Score.
+        UIView.animateWithDuration(0.4, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.teamTwoScore.alpha = 1
+            self.teamTwoScore.center.y -= self.view.bounds.height
+            
+            }, completion: nil)
+        
+        // Categories Menu button animations.
+        UIView.animateWithDuration(0.4, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.menuView.alpha = 1
+            self.menuView.center.y += self.view.bounds.height
+            
+            }, completion: nil)
+        
+        // Start and Title.
+        UIView.animateWithDuration(0.4, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.TeamTitleView.alpha = 1
+            self.TeamTitleView.center.y += self.view.bounds.height
+            
+            self.startButton.alpha = 1
+            self.startButton.center.y -= self.view.bounds.height
+            
+            }, completion: nil)
+    }
+    
+    
+    /**
+     Animates word onto the screen from the left side.
+     */
+    func animateInitialWord() {
+        
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.wordContainerView.alpha = 1
+            self.centerAlignWordContainer.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+            self.wordOnScreen = true
+            }, completion: nil)
+    }
     
 
     
-    // ******************************************** MARK: Animations (Swipes) ******************************************** //
+    // MARK: - Swipe Based Animations
     
     /**
      Only two passes are allowed per game. This method fades in the 'Only 2 Passes' message with a duration of 0.5 seconds.
@@ -372,7 +471,7 @@ class GameViewController: UIViewController {
     
     
     /**
-     Fadeout
+     Fade-out animation for...
      
     */
     func animatePassMessageFadeOut(){
@@ -457,85 +556,9 @@ class GameViewController: UIViewController {
     }
     
 
-    // ******************************************** MARK: Animations ***************************************************** //
     
 
-    /**
-     Animates all objects when the GameViewController loads.
-    */
-    func animationsStart() {
-        
-        // Team 1 - Score view
-        UIView.animateWithDuration(0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.teamOneScoreTitleView.alpha = 1
-            self.teamOneScoreTitleView.center.y -= self.view.bounds.height
-            
-            }, completion: nil)
-        
-        // Team 1 - Score.
-        UIView.animateWithDuration(0.4, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.teamOneScore.alpha = 1
-            self.teamOneScore.center.y -= self.view.bounds.height
-            
-            }, completion: nil)
-        
-        //Team 2 - Score view.
-        UIView.animateWithDuration(0.4, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.teamTwoScoreTitleView.alpha = 1
-            self.teamTwoScoreTitleView.center.y -= self.view.bounds.height
-            
-            }, completion: nil)
-        
-        // Team 2 - Score.
-        UIView.animateWithDuration(0.4, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.teamTwoScore.alpha = 1
-            self.teamTwoScore.center.y -= self.view.bounds.height
-            
-            }, completion: nil)
-        
-        // Categories Menu button animations.
-        UIView.animateWithDuration(0.4, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.menuView.alpha = 1
-            self.menuView.center.y += self.view.bounds.height
-            
-            }, completion: nil)
-        
-        // Start and Title.
-        UIView.animateWithDuration(0.4, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.TeamTitleView.alpha = 1
-            self.TeamTitleView.center.y += self.view.bounds.height
-            
-            self.startButton.alpha = 1
-            self.startButton.center.y -= self.view.bounds.height
-            
-            }, completion: nil)
-    }
-
-    
-    /**
-     Animates word onto the screen from the left side.
-     */
-    func animateInitialWord() {
-        
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
-            self.wordContainerView.alpha = 1
-            self.centerAlignWordContainer.constant -= self.view.bounds.width
-            self.view.layoutIfNeeded()
-            self.wordOnScreen = true
-            }, completion: nil)
-    }
-    
-    
-
-    // ******************************************** MARK: Animations (Removing) ****************************************** //
-    
+    // MARK: - Animations (Fade-Out/off-screen)
     
     /**
      Remove the wordContainerView from the screen.
@@ -604,39 +627,34 @@ class GameViewController: UIViewController {
             }, completion: nil)
     }
     
-
     /**
-     Animate startButton and teamLabel off-screen.
+     Animates Start, Team, and Menu off-screen.
+     - Upon completion the animateCountdownFadeIn() method is executed.
      */
     func animateTitleOffScreen() {
-        
-        UIView.animateWithDuration(0.5, delay:0.0,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    // startButton properties.
-                                    self.startButton.userInteractionEnabled = false
-                                    self.startButton.center.y += self.view.bounds.height
-                                    self.startButton.alpha = 0
-                                    
-                                    // teamLabel properties.
-                                    self.teamLabel.center.y -= self.view.bounds.height
-                                    self.teamLabel.alpha = 0
-                                    
-                                    self.animateMenuOffScreen()
-                                    
-            }, completion: nil)
+        UIView.animateWithDuration(0.5, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+                self.startButton.userInteractionEnabled = false
+                self.startButton.center.y += self.view.bounds.height
+                self.startButton.alpha = 0
+            
+                self.teamLabel.center.y -= self.view.bounds.height
+                self.teamLabel.alpha = 0
+            
+                self.animateMenuOffScreen()
+            
+            }, completion: { (bool) in
+                self.animateCountdownFadeIn()
+            })
     }
     
 
-    // ******************************************** MARK: Animations Time Running Out ************************************ //
+    // MARK: - Animations (Time)
     
     /**
      Animates TimeUpView on-screen.
     */
     func animateTimeIsUpMessageOnScreen() {
-
             UIView.animateWithDuration(0.2, delay:0.2,
                                        usingSpringWithDamping: 0.8,
                                        initialSpringVelocity: 0.9,
@@ -656,7 +674,6 @@ class GameViewController: UIViewController {
      Animates TimeUpView with the message "Time's up!" off-screen.
     */
    func animateTimeIsUpMessageOffScreen() {
-  
         UIView.animateWithDuration(0.2, delay:1.0,
                                usingSpringWithDamping: 0.8,
                                initialSpringVelocity: 0.9,
@@ -670,7 +687,6 @@ class GameViewController: UIViewController {
                 // Reset the menu items.
                 self.animateTitleOnScreen()
         })
-    
    }
     
     
@@ -679,16 +695,12 @@ class GameViewController: UIViewController {
      color back to its original state.
      */
     func animateTimeRunningOutFadeIn() {
-        
-        
         UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
             self.view.backgroundColor = UIColor.redColor()
-            }, completion: {(Bool) in
-                
+            }, completion: { (bool) in
                 // Set original background color.
                 self.animateTimeRunningOutFade()
-        })
+            })
     }
 
     
@@ -696,7 +708,6 @@ class GameViewController: UIViewController {
      Changes the color from red to the original background color.
     */
     func animateTimeRunningOutFade() {
-        
         UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             // Set original background color.
@@ -709,15 +720,51 @@ class GameViewController: UIViewController {
     /**
      Animates the timer.
      */
-    func animateTimer() {
-        
-        // Decrease the time.
-        seconds -= 1
-        minutes = 0
-        
+    func animateGameTimer() {
+        self.seconds -= 1
+        self.minutes = 0
         let strMinutes = String(format: "%02d", minutes)
         let strSeconds = String(format: "%02d", seconds)
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
     }
 
+    
+    /**
+     This method is called by the
+    */
+    func animateCountdownTimer() {
+        if self.countdownNumber  > 1 {
+            self.countdownNumber -= 1
+            self.countdownMsgLabel.text = "\(self.countdownNumber)"
+        } else {
+            self.countdownMsgLabel.text = "Go!"
+            self.countdownNumber = 0
+        }
+    }
+    
+    
+    // MARK: Start Animations (Countdown)
+    
+    /**
+        Fade-in animation for countdown and 'Go!' message.
+    */
+    func animateCountdownFadeIn() {
+        UIView.animateWithDuration(0.2, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.countdownMsgLabel.alpha = 1
+            }, completion: {(bool) in
+            
+            // Set original background color.
+            self.animateCountdownFadeOut()
+        })
+    }
+    
+    
+    /**
+        Fade-out animation for countdown and 'Go!' message.
+     */
+    func animateCountdownFadeOut() {
+        UIView.animateWithDuration(0.5, delay:5.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.countdownMsgLabel.alpha = 0
+            }, completion: nil)
+    }
 }
