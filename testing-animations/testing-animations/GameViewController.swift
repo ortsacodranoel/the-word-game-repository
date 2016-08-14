@@ -107,8 +107,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var centerAlignMsgView: NSLayoutConstraint!
     
     
-    
-    
     // MARK: - Swipe Gesture Recognizer Properties
     
     let swipeRecognizer = UISwipeGestureRecognizer()
@@ -172,6 +170,7 @@ class GameViewController: UIViewController {
         
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
+        //self.countdownMsgView.alpha = 0
         
         self.timeUpView.alpha = 0
         self.timeUpView.userInteractionEnabled = false
@@ -179,10 +178,10 @@ class GameViewController: UIViewController {
  
         // FIXME: centerAlignMsgView
         
-        print("Before mode:\(self.centerAlignMsgView.constant)")
-        
+
         // Move countdownMsgView out of view.
         self.centerAlignMsgView.constant += view.bounds.width
+        
         print(self.centerAlignMsgView.constant)
 
         animationsStart()
@@ -198,7 +197,14 @@ class GameViewController: UIViewController {
         
         timeIsUp = false
         
-        animateGameTimer()
+        // FIXME: - Time Problem
+        
+        
+        self.animateGameTimer()
+        
+
+        
+        
         
         if seconds == 50 {
             // Make the screen turn red to indicate time running out.
@@ -326,12 +332,6 @@ class GameViewController: UIViewController {
         
         self.runCountdownTimer()
 
-
-//        // Get a new word.
-//        self.wordLabel.text = game.getWord(self.categoryTapped)
-//
-//        // Animate word label onto screen.
-//        self.animateInitialWord()
     }
     
     
@@ -455,7 +455,7 @@ class GameViewController: UIViewController {
      */
     func animateInitialWord() {
         
-        UIView.animateWithDuration(0.5, delay:4.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             // Get a new word.
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
@@ -738,27 +738,56 @@ class GameViewController: UIViewController {
         method to animate the 'Go' message off-screen is executed.
     */
     func animateCountdownFadeIn() {
-        UIView.animateWithDuration(0.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:  {
-            
-
+        UIView.animateWithDuration(3.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:  {
             
             self.centerAlignMsgView.constant -= self.view.bounds.width
             self.countdownMsgView.alpha = 1
+           
             print(self.centerAlignMsgView.constant)
+            
             }, completion: { (bool) in
-        
-//                // Main Timer setup.
-//                self.seconds = 59
-//                self.minutes = 0
-//                let strMinutes = String(format: "%02d", self.minutes)
-//                let strSeconds = String(format: "%02d", self.seconds)
-//                self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-//                
+
+                self.moveMsgViewLeft()
+                
 
         })
     }
     
-    
+    func moveMsgViewLeft() {
+        
+        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:  {
+
+            print(self.centerAlignMsgView.constant)
+            
+            self.centerAlignMsgView.constant -= self.view.bounds.width
+            self.countdownMsgView.alpha = 1
+            self.view.layoutIfNeeded()
+
+
+            // Main Timer setup.
+            self.seconds = 59
+            self.minutes = 0
+            let strMinutes = String(format: "%02d", self.minutes)
+            let strSeconds = String(format: "%02d", self.seconds)
+            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+            
+            
+            
+            
+            
+            }, completion: {(bool) in
+        
+                // Get a new word.
+                self.wordLabel.text = self.game.getWord(self.categoryTapped)
+        
+                // Animate word label onto screen.
+                self.animateInitialWord()
+        
+        })
+        
+        
+
+    }
 
 
 }
