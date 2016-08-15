@@ -98,8 +98,7 @@ class Game {
             selectedArray = sins
         case 13:
             selectedArray = commands
-        default:
-                print("Category has not been selected.")
+        default: break
         }
         
         // Generate a random number within the range of the count of items in the selected array.
@@ -109,7 +108,6 @@ class Game {
         word = selectedArray[randomIndex]
 
         if arrayOfUsedWords.contains(word) {
-            print("\(word) already exists.")
            
             // Run the method again.
             self.getWord(categorySelected)
@@ -128,8 +126,6 @@ class Game {
      
      **/
     func switchTeams() {
-       
-        print(self.arrayOfUsedWords.count)
         
         if self.teamOneIsActive {
             self.teamOneIsActive = false

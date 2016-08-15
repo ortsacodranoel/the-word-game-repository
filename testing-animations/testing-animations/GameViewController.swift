@@ -98,23 +98,24 @@ class GameViewController: UIViewController {
         Used to store the values of the initial countdown and 'Go!' message when a player starts
         a new game.
     */
-    var countdownNumber = 3
+    var countdownNumber = 4
     
     
     // MARK: - Constraint Properties
     
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
-
+    @IBOutlet weak var centerAlignMsgView: NSLayoutConstraint!
+    
     
     // MARK: - Swipe Gesture Recognizer Properties
-
+    
     let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
     var timesSwipedRight = 0
-    
 
     
     // MARK:- Initialization
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -169,10 +170,15 @@ class GameViewController: UIViewController {
         
         // Move the wordContainerView just out of view.
         self.centerAlignWordContainer.constant += view.bounds.width
+        //self.countdownMsgView.alpha = 0
         
-
         self.timeUpView.alpha = 0
         self.timeUpView.userInteractionEnabled = false
+
+
+        // Move countdownMsgView out of view.
+        self.centerAlignMsgView.constant += view.bounds.width
+        
 
         animationsStart()
     }
@@ -183,28 +189,37 @@ class GameViewController: UIViewController {
      */
     func newRound() {
         
+        if self.seconds == 0 {
+            self.seconds = 59
+            self.minutes = 0
+            let strMinutes = String(format: "%02d", self.minutes)
+            let strSeconds = String(format: "%02d", self.seconds)
+            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+        }
+        
         self.roundInProgress = true
-        
         timeIsUp = false
-        
-        animateGameTimer()
-        
-        if seconds == 50 {
+
+        self.countdownNumber = 4
+        self.animateGameTimer()
+
+        if seconds == 56 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
         }
         
-        if seconds == 50 {
+        if seconds == 56 {
             // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
         }
         
         // Check if time has run out.
-        if seconds == 50 {
-            
+        if seconds == 56 {
+
             self.roundInProgress = false
             
             timeIsUp = true
+
             
             // Stop timer.
             gameTimer.invalidate()
@@ -224,7 +239,6 @@ class GameViewController: UIViewController {
             let strMinutes = String(format: "%02d", minutes)
             let strSeconds = String(format: "%02d", seconds)
             self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-            
         }
     }
 
@@ -306,43 +320,36 @@ class GameViewController: UIViewController {
      to start counting down from 59.
     */
     @IBAction func startButtonTapped(sender: AnyObject) {
-        
-        // FIXME: -
-        
         // Reset right swipe count.
         self.timesSwipedRight = 0
         
         // Animate offscreen: startButtonView and menuView
         self.animateTitleOffScreen()
-
-        // Set initial value for timer.
-        seconds = 59
-        minutes = 0
-        let strMinutes = String(format: "%02d", minutes)
-        let strSeconds = String(format: "%02d", seconds)
-        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-
         
+        //self.runCountdownTimer()
+    }
+    
+    
+    
+    /**
+        Run countdown timer.
+    */
+    func runCountdownTimer() {
         // Execute the countdownTimer.
         if !self.countdownTimer.valid {
             self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.animateCountdownTimer), userInfo:nil, repeats: true)
         }
-        
-
-
-//        // Run the game timer.
-//        if !self.gameTimer.valid {
-//            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.newRound), userInfo:nil, repeats: true)
-//            print("In GameTimer")
-//        }
-//
-//        // Get a new word.
-//        self.wordLabel.text = game.getWord(self.categoryTapped)
-//
-//        // Animate word label onto screen.
-//        self.animateInitialWord()
     }
     
+    
+    /**
+        Run game timer.
+    */
+    func runGameTimer() {
+        if !self.gameTimer.valid {
+        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.newRound), userInfo:nil, repeats: true)
+        }
+    }
     
     /**
      When the Menu Button is tapped it calls the segue to unwind
@@ -441,14 +448,19 @@ class GameViewController: UIViewController {
      Animates word onto the screen from the left side.
      */
     func animateInitialWord() {
-        
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
+        UIView.animateWithDuration(0.5, delay:4.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.wordLabel.text = self.game.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
             self.wordOnScreen = true
-            }, completion: nil)
+            
+            }, completion: {(bool) in
+                
+                self.repositionCountdownMsgView()
+
+                self.runGameTimer()
+        })
     }
     
 
@@ -461,9 +473,7 @@ class GameViewController: UIViewController {
     func animatePassMessage() {
       
         UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
                 self.passesLabel.alpha = 1
-            
             }, completion: {(bool) in
                 self.animatePassMessageFadeOut()
         })
@@ -475,11 +485,8 @@ class GameViewController: UIViewController {
      
     */
     func animatePassMessageFadeOut(){
-        
         UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
             self.passesLabel.alpha = 0
-            
             }, completion: nil)
     }
     
@@ -514,7 +521,10 @@ class GameViewController: UIViewController {
                 self.wordLabel.text = self.game.getWord(self.categoryTapped)
         })
         
+        
+        /**
         // Animates wordViewController to the middle of the screen.
+        */
         UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -551,8 +561,6 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: nil)
-    
-        
     }
     
 
@@ -564,75 +572,41 @@ class GameViewController: UIViewController {
      Remove the wordContainerView from the screen.
     */
     func removeWord() {
-        
         UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
 
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
-            
             }, completion: nil)
     }
     
-    
-    /**
-     Animates menuView off-screen.
-    */
-    func animateMenuOffScreen() {
-        
-        UIView.animateWithDuration(0.3, delay:0.0,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    // menuView properties.
-                                    self.menuView.alpha = 0
-                                    self.menuView.userInteractionEnabled = false
-                                    self.menuView.center.y -= self.view.bounds.height
-                                    
-            }, completion: nil)
-        
-
-    }
-
     
     /**
      Animates menuView, startButton, and teamLabel to their initial positions on-screen.
     */
     func animateTitleOnScreen() {
-        
-        UIView.animateWithDuration(0.5, delay:0.2,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                    
-                                    self.menuView.userInteractionEnabled = true
-                                    self.menuView.alpha = 1
-
-                                    
+        UIView.animateWithDuration(0.5, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                        self.menuView.userInteractionEnabled = true
+                        self.menuView.alpha = 1
             }, completion: nil)
 
-        UIView.animateWithDuration(0.5, delay:0.2,
-                                   usingSpringWithDamping: 0.8,
-                                   initialSpringVelocity: 0.9,
-                                   options: [], animations: {
-                                
-                                    self.startButton.userInteractionEnabled = true
-                                    self.startButton.center.y -= self.view.bounds.height
-                                    self.startButton.alpha = 1
-                                    
-                                    self.teamLabel.alpha = 1
-                                    self.teamLabel.center.y += self.view.bounds.height
-                                    
-            }, completion: nil)
+        UIView.animateWithDuration(0.5, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.startButton.userInteractionEnabled = true
+            self.startButton.center.y -= self.view.bounds.height
+            self.startButton.alpha = 1
+            
+            self.teamLabel.alpha = 1
+            self.teamLabel.center.y += self.view.bounds.height
+        }, completion: nil)
     }
+    
     
     /**
      Animates Start, Team, and Menu off-screen.
      - Upon completion the animateCountdownFadeIn() method is executed.
      */
     func animateTitleOffScreen() {
-        UIView.animateWithDuration(0.5, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.4, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.6,options: [], animations: {
             
                 self.startButton.userInteractionEnabled = false
                 self.startButton.center.y += self.view.bounds.height
@@ -641,11 +615,14 @@ class GameViewController: UIViewController {
                 self.teamLabel.center.y -= self.view.bounds.height
                 self.teamLabel.alpha = 0
             
-                self.animateMenuOffScreen()
-            
-            }, completion: { (bool) in
-                self.animateCountdownFadeIn()
-            })
+                self.menuView.alpha = 0
+                self.menuView.userInteractionEnabled = false
+
+            }, completion: {(bool) in
+                                self.startCountdownMsgView()
+                self.runCountdownTimer()
+
+        })
     }
     
 
@@ -709,10 +686,8 @@ class GameViewController: UIViewController {
     */
     func animateTimeRunningOutFade() {
         UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
             // Set original background color.
             self.setColor(self.categoryTapped)
-            
             }, completion: nil)
     }
     
@@ -733,38 +708,73 @@ class GameViewController: UIViewController {
      This method is called by the
     */
     func animateCountdownTimer() {
+        // FIXME: countdown
+        
+
+        
+        print(self.countdownNumber)
+        
         if self.countdownNumber  > 1 {
             self.countdownNumber -= 1
             self.countdownMsgLabel.text = "\(self.countdownNumber)"
         } else {
             self.countdownMsgLabel.text = "Go!"
-            self.countdownNumber = 0
+            self.countdownTimer.invalidate()
+            self.countdownNumber = 4
+            print("countdown number in animateCT is = \(self.countdownNumber)")
         }
     }
     
     
-    // MARK: Start Animations (Countdown)
+    // MARK: - Animations (Pre-game countdown)
+    
     
     /**
-        Fade-in animation for countdown and 'Go!' message.
-    */
-    func animateCountdownFadeIn() {
-        UIView.animateWithDuration(0.2, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.countdownMsgLabel.alpha = 1
-            }, completion: {(bool) in
-            
-            // Set original background color.
-            self.animateCountdownFadeOut()
+        Fade-in and centering of the countdownMsgView onto the screen. 
+        A 4.0 seconds allows the label text within the view to display 
+        '3','2','1','Go!' with sufficient time.
+     */
+    func startCountdownMsgView() {
+        UIView.animateWithDuration(4.0, animations:  {
+            self.centerAlignMsgView.constant -= self.view.bounds.width
+            self.countdownMsgView.alpha = 1
+        }, completion: { (bool) in
+                self.removeCountdownMsgView()
+                self.animateInitialWord()
         })
     }
     
+    /**
+     Countdown Method
+     
+     Parameters dog: String
+     */
+    func removeCountdownMsgView() {
+        UIView.animateWithDuration(0.4, delay:4.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.centerAlignMsgView.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+
+            print(self.centerAlignMsgView.constant)
+            
+        }, completion: nil)
+    }
+
+    
     
     /**
-        Fade-out animation for countdown and 'Go!' message.
-     */
-    func animateCountdownFadeOut() {
-        UIView.animateWithDuration(0.5, delay:5.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.countdownMsgLabel.alpha = 0
-            }, completion: nil)
+        Moves the countDownMsgView back to it's original position.
+    */
+    func repositionCountdownMsgView() {
+        print("In repositionCountdownMsgView:\(self.centerAlignMsgView.constant)")
+         UIView.animateWithDuration(0.0, animations:  {
+            self.countdownMsgLabel.text = ""
+            self.centerAlignMsgView.constant += self.view.bounds.width + self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
+    
+    
 }
+
+
+
