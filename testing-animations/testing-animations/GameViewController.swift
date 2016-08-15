@@ -98,7 +98,7 @@ class GameViewController: UIViewController {
         Used to store the values of the initial countdown and 'Go!' message when a player starts
         a new game.
     */
-    var countdownNumber = 3
+    var countdownNumber = 4
     
     
     // MARK: - Constraint Properties
@@ -175,14 +175,10 @@ class GameViewController: UIViewController {
         self.timeUpView.alpha = 0
         self.timeUpView.userInteractionEnabled = false
 
- 
-        // FIXME: centerAlignMsgView
-        
 
         // Move countdownMsgView out of view.
         self.centerAlignMsgView.constant += view.bounds.width
         
-        print(self.centerAlignMsgView.constant)
 
         animationsStart()
     }
@@ -193,35 +189,37 @@ class GameViewController: UIViewController {
      */
     func newRound() {
         
+        if self.seconds == 0 {
+            self.seconds = 59
+            self.minutes = 0
+            let strMinutes = String(format: "%02d", self.minutes)
+            let strSeconds = String(format: "%02d", self.seconds)
+            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+        }
+        
         self.roundInProgress = true
-        
         timeIsUp = false
-        
-        // FIXME: - Time Problem
-        
-        
-        self.animateGameTimer()
-        
 
-        
-        
-        
-        if seconds == 50 {
+        self.countdownNumber = 4
+        self.animateGameTimer()
+
+        if seconds == 56 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
         }
         
-        if seconds == 50 {
+        if seconds == 56 {
             // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
         }
         
         // Check if time has run out.
-        if seconds == 50 {
-            
+        if seconds == 56 {
+
             self.roundInProgress = false
             
             timeIsUp = true
+
             
             // Stop timer.
             gameTimer.invalidate()
@@ -241,7 +239,6 @@ class GameViewController: UIViewController {
             let strMinutes = String(format: "%02d", minutes)
             let strSeconds = String(format: "%02d", seconds)
             self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-            
         }
     }
 
@@ -323,17 +320,14 @@ class GameViewController: UIViewController {
      to start counting down from 59.
     */
     @IBAction func startButtonTapped(sender: AnyObject) {
-        
         // Reset right swipe count.
         self.timesSwipedRight = 0
         
         // Animate offscreen: startButtonView and menuView
         self.animateTitleOffScreen()
         
-        self.runCountdownTimer()
-
+        //self.runCountdownTimer()
     }
-    
     
     
     
@@ -454,20 +448,18 @@ class GameViewController: UIViewController {
      Animates word onto the screen from the left side.
      */
     func animateInitialWord() {
-        
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
-            // Get a new word.
+        UIView.animateWithDuration(0.5, delay:4.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
-            
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
             self.wordOnScreen = true
             
             }, completion: {(bool) in
-                self.runGameTimer()
                 
+                self.repositionCountdownMsgView()
+
+                self.runGameTimer()
         })
     }
     
@@ -481,9 +473,7 @@ class GameViewController: UIViewController {
     func animatePassMessage() {
       
         UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
                 self.passesLabel.alpha = 1
-            
             }, completion: {(bool) in
                 self.animatePassMessageFadeOut()
         })
@@ -531,7 +521,10 @@ class GameViewController: UIViewController {
                 self.wordLabel.text = self.game.getWord(self.categoryTapped)
         })
         
+        
+        /**
         // Animates wordViewController to the middle of the screen.
+        */
         UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -568,8 +561,6 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: nil)
-    
-        
     }
     
 
@@ -581,7 +572,6 @@ class GameViewController: UIViewController {
      Remove the wordContainerView from the screen.
     */
     func removeWord() {
-        
         UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
 
             self.centerAlignWordContainer.constant += self.view.bounds.width
@@ -595,7 +585,6 @@ class GameViewController: UIViewController {
      Animates menuView, startButton, and teamLabel to their initial positions on-screen.
     */
     func animateTitleOnScreen() {
-        
         UIView.animateWithDuration(0.5, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                         self.menuView.userInteractionEnabled = true
                         self.menuView.alpha = 1
@@ -617,7 +606,7 @@ class GameViewController: UIViewController {
      - Upon completion the animateCountdownFadeIn() method is executed.
      */
     func animateTitleOffScreen() {
-        UIView.animateWithDuration(0.5, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.4, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
                 self.startButton.userInteractionEnabled = false
                 self.startButton.center.y += self.view.bounds.height
@@ -630,9 +619,9 @@ class GameViewController: UIViewController {
                 self.menuView.userInteractionEnabled = false
 
             }, completion: {(bool) in
-          
-                self.animateCountdownFadeIn()
-                
+                                self.startCountdownMsgView()
+                self.runCountdownTimer()
+
         })
     }
     
@@ -719,77 +708,72 @@ class GameViewController: UIViewController {
      This method is called by the
     */
     func animateCountdownTimer() {
+        // FIXME: countdown
+        
+
+        
+        print(self.countdownNumber)
+        
         if self.countdownNumber  > 1 {
             self.countdownNumber -= 1
             self.countdownMsgLabel.text = "\(self.countdownNumber)"
         } else {
             self.countdownMsgLabel.text = "Go!"
-            self.countdownNumber = 4
             self.countdownTimer.invalidate()
+            self.countdownNumber = 4
+            print("countdown number in animateCT is = \(self.countdownNumber)")
         }
     }
     
     
-    // MARK: - Animations (CountdownMsgView)
+    // MARK: - Animations (Pre-game countdown)
     
     
     /**
-        Fade-in animation for countdown and 'Go!' message. On completion the 
-        method to animate the 'Go' message off-screen is executed.
-    */
-    func animateCountdownFadeIn() {
-        UIView.animateWithDuration(3.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:  {
-            
+        Fade-in and centering of the countdownMsgView onto the screen. 
+        A 4.0 seconds allows the label text within the view to display 
+        '3','2','1','Go!' with sufficient time.
+     */
+    func startCountdownMsgView() {
+        UIView.animateWithDuration(4.0, animations:  {
             self.centerAlignMsgView.constant -= self.view.bounds.width
             self.countdownMsgView.alpha = 1
-           
-            print(self.centerAlignMsgView.constant)
-            
-            }, completion: { (bool) in
-
-                self.moveMsgViewLeft()
-                
-
+        }, completion: { (bool) in
+                self.removeCountdownMsgView()
+                self.animateInitialWord()
         })
     }
     
-    func moveMsgViewLeft() {
-        
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:  {
+    /**
+     Countdown Method
+     
+     Parameters dog: String
+     */
+    func removeCountdownMsgView() {
+        UIView.animateWithDuration(0.4, delay:4.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.centerAlignMsgView.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
 
             print(self.centerAlignMsgView.constant)
             
-            self.centerAlignMsgView.constant -= self.view.bounds.width
-            self.countdownMsgView.alpha = 1
-            self.view.layoutIfNeeded()
-
-
-            // Main Timer setup.
-            self.seconds = 59
-            self.minutes = 0
-            let strMinutes = String(format: "%02d", self.minutes)
-            let strSeconds = String(format: "%02d", self.seconds)
-            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-            
-            
-            
-            
-            
-            }, completion: {(bool) in
-        
-                // Get a new word.
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
-        
-                // Animate word label onto screen.
-                self.animateInitialWord()
-        
-        })
-        
-        
-
+        }, completion: nil)
     }
 
-
+    
+    
+    /**
+        Moves the countDownMsgView back to it's original position.
+    */
+    func repositionCountdownMsgView() {
+        print("In repositionCountdownMsgView:\(self.centerAlignMsgView.constant)")
+         UIView.animateWithDuration(0.0, animations:  {
+            self.countdownMsgLabel.text = ""
+            self.centerAlignMsgView.constant += self.view.bounds.width + self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    
 }
 
 
