@@ -34,7 +34,11 @@ class Game {
     // Variable to temporarily store a word.
     var word = String()
     
+    // Used to verify if team has won the game. 
+    var winner = false
     
+    // Used to temporarily store winner title.
+    var winnerTitle = String()
     
     /**
      Initializes a new game and sets the current turn to Team 1.
@@ -44,7 +48,6 @@ class Game {
      Returns:
     **/
     init() {
-        
         self.teamOneScore = 0
         self.teamTwoScore = 0
         self.isActive = true
@@ -53,12 +56,47 @@ class Game {
         self.roundInProgress = true
     }
     
+    /**
+        Used to reset team scores to 0.
+    */
+    func resetGame() {
+        self.teamOneScore = 0
+        self.teamTwoScore = 0
+    }
+    
+    /**
+    
+    */
+    func checkScore() {
+        if self.teamOneScore == 25 {
+            print("Team one wins!")
+            self.winner = true
+            self.resetGame()
+        } else if self.teamTwoScore == 25 {
+            print("Team TWO wins!")
+            self.winner = true
+            self.resetGame()
+        }
+    }
+    
+    /**
+        Used to get the String value of the team that has won the current game.
+    */
+    func getWinner() -> String {
+        if self.teamOneScore == 25 {
+            self.winnerTitle = "Team One"
+        } else if self.teamTwoScore == 25 {
+            self.winnerTitle = "Team Two"
+        }
+        return  self.winnerTitle
+    }
+    
     
     /**
      
         Generates a random word from the desired word category. 
      
-        - Parameter category: the number of the selected category.
+        - Parameter str: The string to repeat.
 
      
         - Returns: A random word from the selected category.
@@ -147,7 +185,7 @@ class Game {
     }
     
     
-    // ******************************************** MARK: Words Data ***************************************************** //
+    // MARK: - Data
     
     var people = ["Agrippa","Alexander","Ammon","Amos","Andrew","Andronicus","Arad","Arod","Asher","Balaam","Balak","Barabbas","Barnabas","Bartholomew","Belshazzar","Delilah","Ben-Hur","Dorcas","Benjamin","Boaz","Elisabeth","Ceasar","Caiaphas","Cain","Caleb","Claudius","Cornelius","Eve","Cush","Hadassah","Hagar","Cyrus","Dan","Darius","David","Demetrius","Eli","Elijah","Enoch","Enos","Ephron","Ephraim","Erastus","Esau","Ethan","Ezekiel","Ezra","Felix","Jemima","Festus","Jezebel","Gad","Gaius","Gideon","Goliath","Judith","Gomer","Gog","Gilead","Habakkuk","Leah","Lydia","Haggai","Ham","Martha","Mary Magdalene","Mary","Haman","Herod","Herod Agrippa","Hosea","Miriam","Hezekiah","Ibsam","Naomi","Ichabod","Isaac","Isaiah","Issachar","Phoebe","Pricilla","Rachel","Rahab","Rebecca","Ishmael","Israel","Ruth","Sapphira","Sarah","Sheerah","Jacob","James","Japheth","Susanna","Tabitha","Jason","Jedidiah","Jeremiah","Jesse","Jesus","Jethro","Vashti","Zebudah","Joab","Job","Joel","John","John the Baptist","Zipporah","Jonah","Jonathan","Joram","Josaphat","Joseph","Joshua","Josiah","Jubal","Judas","Judah","Jude","Julius","Lazarus","Levi","Lot","Lucifer","Luke","Malachi","Mark","Matthias","Matthew","Menasheh","Meshach","Methuselah","Micah","Michael","Moab","Mordecai","Moses","Nahum","Naboth","Naphtali","Narcissus","Nathan","Nathanael","Nebuchadnezzar","Nehemiah","Nicodemus","Nicolas","Nimrod","Noah","Obadiah","Paul","Peter","Pharaoh","Philemon","Philip","Pontius Pilate","Phinehas","Potiphar","Reuben","Rufus","Samson","Samuel","Saul","Seth","Shadrach","Sheba","Shem","Silas","Simeon","Simon","Solomon","Sosthenes","Stephen","Thaddaeus","Thomas","Tiberius","Timothy","Timon","Titus","Tyrannus","Uriah","Yam","Zaccheaus","Zacharias","Zebadiah","Zebedee","Zebulun","Zephaniah"]
     
