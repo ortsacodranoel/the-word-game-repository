@@ -80,13 +80,11 @@ class GameViewController: UIViewController {
     
     
     // MARK: - Animation Properties
-    
     var animatingLeft = false
     var animationInProgress = false
     
     
     // MARK: - Timer Properties
-    
     var gameTimer = NSTimer()
     var countdownTimer = NSTimer()
     var seconds = 00
@@ -187,8 +185,13 @@ class GameViewController: UIViewController {
     /**
      
      */
-    func newRound() {
+    func currentRound() {
         
+        self.game.checkScore()
+        
+        if game.winner {
+            
+        }
         if self.seconds == 0 {
             self.seconds = 59
             self.minutes = 0
@@ -203,18 +206,18 @@ class GameViewController: UIViewController {
         self.countdownNumber = 4
         self.animateGameTimer()
 
-        if seconds == 56 {
+        if seconds == 55 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
         }
         
-        if seconds == 56 {
+        if seconds == 55 {
             // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
         }
         
         // Check if time has run out.
-        if seconds == 56 {
+        if seconds == 55 {
 
             self.roundInProgress = false
             
@@ -325,8 +328,6 @@ class GameViewController: UIViewController {
         
         // Animate offscreen: startButtonView and menuView
         self.animateTitleOffScreen()
-        
-        //self.runCountdownTimer()
     }
     
     
@@ -337,7 +338,7 @@ class GameViewController: UIViewController {
     func runCountdownTimer() {
         // Execute the countdownTimer.
         if !self.countdownTimer.valid {
-            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.animateCountdownTimer), userInfo:nil, repeats: true)
+            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameViewController.animateCountdownTimer), userInfo:nil, repeats: true)
         }
     }
     
@@ -347,7 +348,7 @@ class GameViewController: UIViewController {
     */
     func runGameTimer() {
         if !self.gameTimer.valid {
-        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.newRound), userInfo:nil, repeats: true)
+        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.currentRound), userInfo:nil, repeats: true)
         }
     }
     
@@ -448,7 +449,7 @@ class GameViewController: UIViewController {
      Animates word onto the screen from the left side.
      */
     func animateInitialWord() {
-        UIView.animateWithDuration(0.5, delay:4.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.5, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
@@ -606,7 +607,7 @@ class GameViewController: UIViewController {
      - Upon completion the animateCountdownFadeIn() method is executed.
      */
     func animateTitleOffScreen() {
-        UIView.animateWithDuration(0.4, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.6,options: [], animations: {
+        UIView.animateWithDuration(0.5, delay:0.0,usingSpringWithDamping: 0.9,initialSpringVelocity: 0.6,options: [], animations: {
             
                 self.startButton.userInteractionEnabled = false
                 self.startButton.center.y += self.view.bounds.height
@@ -619,9 +620,8 @@ class GameViewController: UIViewController {
                 self.menuView.userInteractionEnabled = false
 
             }, completion: {(bool) in
-                                self.startCountdownMsgView()
+                self.startCountdownMsgView()
                 self.runCountdownTimer()
-
         })
     }
     
@@ -651,22 +651,15 @@ class GameViewController: UIViewController {
      Animates TimeUpView with the message "Time's up!" off-screen.
     */
    func animateTimeIsUpMessageOffScreen() {
-        UIView.animateWithDuration(0.2, delay:1.0,
-                               usingSpringWithDamping: 0.8,
-                               initialSpringVelocity: 0.9,
-                               options: [], animations: {
-                                
-                                self.timeUpView.alpha = 0
-                                self.timeUpView.center.y -= self.view.bounds.height
-                                
-            }, completion: { (bool) in
-                
-                // Reset the menu items.
-                self.animateTitleOnScreen()
+     UIView.animateWithDuration(0.2, delay:1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.timeUpView.alpha = 0
+            self.timeUpView.center.y -= self.view.bounds.height
+        }, completion: { (bool) in
+            self.animateTitleOnScreen()
         })
    }
     
-    
+
     /**
      Changes the color of the screen to red with a duration of 2.0 seconds. On completion it restes the
      color back to its original state.
@@ -708,12 +701,6 @@ class GameViewController: UIViewController {
      This method is called by the
     */
     func animateCountdownTimer() {
-        // FIXME: countdown
-        
-
-        
-        print(self.countdownNumber)
-        
         if self.countdownNumber  > 1 {
             self.countdownNumber -= 1
             self.countdownMsgLabel.text = "\(self.countdownNumber)"
@@ -721,7 +708,6 @@ class GameViewController: UIViewController {
             self.countdownMsgLabel.text = "Go!"
             self.countdownTimer.invalidate()
             self.countdownNumber = 4
-            print("countdown number in animateCT is = \(self.countdownNumber)")
         }
     }
     
@@ -735,7 +721,7 @@ class GameViewController: UIViewController {
         '3','2','1','Go!' with sufficient time.
      */
     func startCountdownMsgView() {
-        UIView.animateWithDuration(4.0, animations:  {
+        UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:{
             self.centerAlignMsgView.constant -= self.view.bounds.width
             self.countdownMsgView.alpha = 1
         }, completion: { (bool) in
@@ -747,25 +733,20 @@ class GameViewController: UIViewController {
     /**
      Countdown Method
      
-     Parameters dog: String
+ 
      */
     func removeCountdownMsgView() {
-        UIView.animateWithDuration(0.4, delay:4.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignMsgView.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
-
-            print(self.centerAlignMsgView.constant)
-            
         }, completion: nil)
     }
 
-    
     
     /**
         Moves the countDownMsgView back to it's original position.
     */
     func repositionCountdownMsgView() {
-        print("In repositionCountdownMsgView:\(self.centerAlignMsgView.constant)")
          UIView.animateWithDuration(0.0, animations:  {
             self.countdownMsgLabel.text = ""
             self.centerAlignMsgView.constant += self.view.bounds.width + self.view.bounds.width
