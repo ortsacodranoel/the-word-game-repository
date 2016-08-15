@@ -206,18 +206,18 @@ class GameViewController: UIViewController {
         self.countdownNumber = 4
         self.animateGameTimer()
 
-        if seconds == 55 {
+        if seconds == 50 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
         }
         
-        if seconds == 55 {
+        if seconds == 50 {
             // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
         }
         
         // Check if time has run out.
-        if seconds == 55 {
+        if seconds == 50 {
 
             self.roundInProgress = false
             
