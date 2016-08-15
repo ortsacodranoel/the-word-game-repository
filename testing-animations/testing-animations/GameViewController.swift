@@ -606,7 +606,7 @@ class GameViewController: UIViewController {
      - Upon completion the animateCountdownFadeIn() method is executed.
      */
     func animateTitleOffScreen() {
-        UIView.animateWithDuration(0.4, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.4, delay:0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.6,options: [], animations: {
             
                 self.startButton.userInteractionEnabled = false
                 self.startButton.center.y += self.view.bounds.height
