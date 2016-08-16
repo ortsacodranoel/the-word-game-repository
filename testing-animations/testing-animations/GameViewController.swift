@@ -173,10 +173,8 @@ class GameViewController: UIViewController {
         self.timeUpView.alpha = 0
         self.timeUpView.userInteractionEnabled = false
 
-
         // Move countdownMsgView out of view.
         self.centerAlignMsgView.constant += view.bounds.width
-        
 
         animationsStart()
     }
@@ -188,6 +186,40 @@ class GameViewController: UIViewController {
     func currentRound() {
         
         self.game.checkScore()
+        
+        // Check to see if someone has one the game.
+        if game.winner {
+            
+            print("There is a winner")
+            self.roundInProgress = false
+            
+            timeIsUp = true
+            
+            // Stop timer.
+            gameTimer.invalidate()
+            
+            // Change team.
+            game.switchTeams()
+            
+            // Update team titleLabel
+            displayTeam()
+            
+            // Reset timer configuration.
+            seconds = 00
+            minutes = 01
+            let strMinutes = String(format: "%02d", minutes)
+            let strSeconds = String(format: "%02d", seconds)
+            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+            
+            self.teamOneScoreLabel.text = String(game.getTeamOneScore())
+            self.teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+            
+        
+
+        }
+        
+        
+        
         
         if self.seconds == 0 {
             self.seconds = 59

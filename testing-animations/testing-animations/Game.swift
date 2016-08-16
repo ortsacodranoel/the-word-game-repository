@@ -68,7 +68,7 @@ class Game {
     
     */
     func checkScore() {
-        if self.teamOneScore == 25 {
+        if self.teamOneScore ==  {
             print("Team one wins!")
             self.winner = true
             self.resetGame()
