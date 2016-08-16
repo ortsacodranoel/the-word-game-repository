@@ -189,9 +189,6 @@ class GameViewController: UIViewController {
         
         self.game.checkScore()
         
-        if game.winner {
-            
-        }
         if self.seconds == 0 {
             self.seconds = 59
             self.minutes = 0
@@ -206,18 +203,18 @@ class GameViewController: UIViewController {
         self.countdownNumber = 4
         self.animateGameTimer()
 
-        if seconds == 50 {
+        if seconds == 30 {
             // Make the screen turn red to indicate time running out.
             self.animateTimeRunningOutFadeIn()
         }
         
-        if seconds == 50 {
+        if seconds == 30 {
             // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
         }
         
         // Check if time has run out.
-        if seconds == 50 {
+        if seconds == 30 {
 
             self.roundInProgress = false
             
@@ -518,9 +515,18 @@ class GameViewController: UIViewController {
             
             }, completion: {(Bool) in
                 
-                // Get a new word.
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
-        })
+                if self.game.winner {
+                    if self.game.teamOneScore == 25 {
+                        self.wordLabel.text = "Team One Wins!"
+                        return
+                    } else if self.game.teamTwoScore == 25 {
+                        self.wordLabel.text = "Team Two Winds!"
+                        return
+                    }
+                } else {
+                    self.wordLabel.text = self.game.getWord(self.categoryTapped)
+                }
+            })
         
         
         /**
