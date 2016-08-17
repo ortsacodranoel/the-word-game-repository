@@ -179,25 +179,67 @@ class GameViewController: UIViewController {
         animationsStart()
     }
     
-    
     /**
      
      */
     func currentRound() {
-        self.game.updateWinner()
+        
+        self.game.checkForWinner()
         
         self.startTimer()
         self.animateGameTimer()
         self.updateTeamNameDisplayed()
         self.updateTeamScoreDisplayed()
-        self.endRound(55)
+        self.endRound(40)
     }
     
+    
+    /**
+     
+     */
+    func changeBackgroundColor() {
+        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
+          
+            self.gameTimer.invalidate()
+            self.view.backgroundColor = UIColor.greenColor()
+            self.view.layoutIfNeeded()
+            
+            }, completion: { (bool) in
+                self.resetRound()
+        })
+        
+    }
+    
+    
+    
+    func resetRound() {
+        
+        UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            
+            self.view.backgroundColor = self.colors[self.categoryTapped]
+
+            }, completion: { (bool) in
+                self.game.won = false
+                self.resetTimer()
+                self.game.resetGame()
+
+                self.game.updateTeamTurn()
+                self.updateTeamNameDisplayed()
+                self.updateTeamScoreDisplayed()
+
+                self.removeWord()
+                self.animateTitleOnScreen()
+                
+                
+        })
+
+    }
     
     
     /**
     */
     func startTimer() {
+    
         self.roundInProgress = true
         timeIsUp = false
         
@@ -249,19 +291,7 @@ class GameViewController: UIViewController {
         }
     }
 
-    
-    /**
-     
-     */
-    func changeBackgroundColor() {
-        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-            self.view.backgroundColor = UIColor.greenColor()
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        
-    }
-    
-    
+
     
     
     
@@ -526,8 +556,17 @@ class GameViewController: UIViewController {
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
-            }, completion: {(Bool) in
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
+            
+            }, completion: {(bool) in
+                if self.game.won {
+                    
+                    print(self.game.winnerTitle)
+                    self.wordLabel.text = "\(self.game.winnerTitle) wins!"
+                    self.changeBackgroundColor()
+                    
+                } else {
+                    self.wordLabel.text = self.game.getWord(self.categoryTapped)
+                }
         })
         
         

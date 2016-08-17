@@ -66,27 +66,18 @@ class Game {
         self.teamTwoScore = 0
     }
     
-    /**
-        Used to determine the team that has won and update the 'won' variable.
-    */
-    func updateWinner() {
-        if self.teamOneScore == 5 {
-            self.won = true
-        } else if (self.teamTwoScore == 5) {
-            self.won = true
-        }
-    }
     
     /**
         Used to get the String value of the team that has won the current game.
     */
-    func getWinner() -> String {
+    func checkForWinner() {
         if self.teamOneScore == 5 {
+            self.won = true
             self.winnerTitle = "Team One"
         } else if self.teamTwoScore == 5 {
+            self.won = true
             self.winnerTitle = "Team Two"
         }
-        return  self.winnerTitle
     }
     
     
