@@ -113,15 +113,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Swipe Right - Gesture Recognizer.
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
-        self.view.addGestureRecognizer(swipeRight)
-        
-        // Swipe Left - Gesture Recognizer.
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
-        self.view.addGestureRecognizer(swipeLeft)
+
         
         // Configure the Start button.
         self.startButton.layer.cornerRadius = 7
@@ -148,6 +140,17 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Swipe Right - Gesture Recognizer.
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        // Swipe Left - Gesture Recognizer.
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipeLeft)
+        
         
         // Timer configuration.
         seconds = 00
@@ -179,6 +182,7 @@ class GameViewController: UIViewController {
      
      */
     func currentRound() {
+
         self.startTimer()
         self.animateGameTimer()
         self.updateTeamNameDisplayed()
@@ -232,8 +236,7 @@ class GameViewController: UIViewController {
     /**
     */
     func startTimer() {
-    
-        self.roundInProgress = true
+
         timeIsUp = false
         
         if self.seconds == 0 {
@@ -296,15 +299,9 @@ class GameViewController: UIViewController {
      word by swiping right. Each team is limited to 2 passes per round.
     */
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            
             switch swipeGesture.direction {
-        
-                // RIGHT swipe.
-                case UISwipeGestureRecognizerDirection.Right:
-        
-                    // Check to see if a round has started.
+                case UISwipeGestureRecognizerDirection.Right: // RIGHT SWIPE
                     if roundInProgress == true {
                     
                         // Animate word to the right offscreen and create a new word.
@@ -367,7 +364,7 @@ class GameViewController: UIViewController {
     @IBAction func startButtonTapped(sender: AnyObject) {
         // Reset right swipe count.
         self.timesSwipedRight = 0
-        
+        self.roundInProgress = true
         // Animate offscreen: startButtonView and menuView
         self.animateTitleOffScreen()
     }
@@ -585,20 +582,13 @@ class GameViewController: UIViewController {
      of the screen.
      */
     func animateNewWordRightSwipe() {
-        
-        // Animates right offscreen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
-            
-            }, completion: {(Bool) in
-                
-                // Get a new word.
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
+        }, completion: {(Bool) in
+            self.wordLabel.text = self.game.getWord(self.categoryTapped)
         })
-        
         
         UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
             
@@ -619,7 +609,6 @@ class GameViewController: UIViewController {
     */
     func removeWord() {
         UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()

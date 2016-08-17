@@ -66,7 +66,6 @@ class Game {
         self.teamTwoScore = 0
     }
     
-    
     /**
         Used to get the String value of the team that has won the current game.
     */
