@@ -133,7 +133,7 @@ class GameViewController: UIViewController {
         self.startButton.layer.borderWidth = 3
         
         // Set initial value to display current team turn.
-        displayTeam()
+        self.updateTeamNameDisplayed()
         
         // Change view background color.
         setColor(categoryTapped)
@@ -184,42 +184,22 @@ class GameViewController: UIViewController {
      
      */
     func currentRound() {
+        self.game.updateWinner()
         
-        self.game.checkScore()
-        
-        // Check to see if someone has one the game.
-        if game.winner {
-            
-            print("There is a winner")
-            self.roundInProgress = false
-            
-            timeIsUp = true
-            
-            // Stop timer.
-            gameTimer.invalidate()
-            
-            // Change team.
-            game.switchTeams()
-            
-            // Update team titleLabel
-            displayTeam()
-            
-            // Reset timer configuration.
-            seconds = 00
-            minutes = 01
-            let strMinutes = String(format: "%02d", minutes)
-            let strSeconds = String(format: "%02d", seconds)
-            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
-            
-            self.teamOneScoreLabel.text = String(game.getTeamOneScore())
-            self.teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-            
-        
-
-        }
-        
-        
-        
+        self.startTimer()
+        self.animateGameTimer()
+        self.updateTeamNameDisplayed()
+        self.updateTeamScoreDisplayed()
+        self.endRound(55)
+    }
+    
+    
+    
+    /**
+    */
+    func startTimer() {
+        self.roundInProgress = true
+        timeIsUp = false
         
         if self.seconds == 0 {
             self.seconds = 59
@@ -229,53 +209,63 @@ class GameViewController: UIViewController {
             self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
         }
         
-        self.roundInProgress = true
-        timeIsUp = false
-
+        // Reset the value of the countdown number for the next time the countdown method runs.
         self.countdownNumber = 4
-        self.animateGameTimer()
-
-        if seconds == 30 {
-            // Make the screen turn red to indicate time running out.
+    }
+    
+    /**
+    */
+    func resetTimer() {
+        self.roundInProgress = false
+        self.timeIsUp = true
+        self.gameTimer.invalidate()
+        
+        self.seconds = 00
+        self.minutes = 1
+        let strMinutes = String(format: "%02d", self.minutes)
+        let strSeconds = String(format: "%02d", self.seconds)
+        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+    }
+    
+    
+    /**
+    */
+    func updateTeamScoreDisplayed() {
+        self.teamOneScoreLabel.text = String(game.getTeamOneScore())
+        self.teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+    }
+    
+    
+    /**
+    */
+    func endRound(time: Int) {
+        if self.seconds == time {
+            self.game.updateTeamTurn()
+            self.updateTeamNameDisplayed()
             self.animateTimeRunningOutFadeIn()
-        }
-        
-        if seconds == 30 {
-            // Display label with 'Time's Up!' message.
             self.animateTimeIsUpMessageOnScreen()
-        }
-        
-        // Check if time has run out.
-        if seconds == 30 {
-
-            self.roundInProgress = false
-            
-            timeIsUp = true
-
-            
-            // Stop timer.
-            gameTimer.invalidate()
-            
-            // Change team.
-            game.switchTeams()
-            
-            // Update team titleLabel
-            displayTeam()
-            
-            // Remove word.
-            removeWord()
-            
-            // Reset timer configuration.
-            seconds = 00
-            minutes = 01
-            let strMinutes = String(format: "%02d", minutes)
-            let strSeconds = String(format: "%02d", seconds)
-            self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+            self.resetTimer()
+            self.removeWord()
         }
     }
 
     
-
+    /**
+     
+     */
+    func changeBackgroundColor() {
+        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
+            self.view.backgroundColor = UIColor.greenColor()
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+    }
+    
+    
+    
+    
+    
+    
     // MARK: - Gesture Recognizers
     
     /**
@@ -391,11 +381,9 @@ class GameViewController: UIViewController {
     
     
     /**
-     Sets the title for the current team.
-     
-        - Parameter dog: String
+        Updates the team title displayed based on whose turn it is.
     */
-    func displayTeam () {
+    func updateTeamNameDisplayed() {
         if game.teamOneIsActive {
             teamLabel.text = "Team One"
         } else {
@@ -484,11 +472,8 @@ class GameViewController: UIViewController {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
             self.wordOnScreen = true
-            
             }, completion: {(bool) in
-                
                 self.repositionCountdownMsgView()
-
                 self.runGameTimer()
         })
     }
@@ -501,7 +486,6 @@ class GameViewController: UIViewController {
      Only two passes are allowed per game. This method fades in the 'Only 2 Passes' message with a duration of 0.5 seconds.
     */
     func animatePassMessage() {
-      
         UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                 self.passesLabel.alpha = 1
             }, completion: {(bool) in
@@ -528,7 +512,6 @@ class GameViewController: UIViewController {
      that is animated onto the screen.
      */
     func animateNewWordLeftSwipe() {
-        
         // Animates wordViewContainer to the left off-screen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
@@ -540,25 +523,12 @@ class GameViewController: UIViewController {
         
         // Places wordContainerView in its original position to the right of the screen.
         UIView.animateWithDuration(0.0, delay:0.3, options: [], animations: {
-            
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
-            
             }, completion: {(Bool) in
-                
-                if self.game.winner {
-                    if self.game.teamOneScore == 25 {
-                        self.wordLabel.text = "Team One Wins!"
-                        return
-                    } else if self.game.teamTwoScore == 25 {
-                        self.wordLabel.text = "Team Two Winds!"
-                        return
-                    }
-                } else {
-                    self.wordLabel.text = self.game.getWord(self.categoryTapped)
-                }
-            })
+                self.wordLabel.text = self.game.getWord(self.categoryTapped)
+        })
         
         
         /**
@@ -568,9 +538,10 @@ class GameViewController: UIViewController {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
-            
-            }, completion: nil)
+        }, completion: nil)
     }
+
+
     
     
     /**
@@ -796,4 +767,18 @@ class GameViewController: UIViewController {
 }
 
 
+
+
+
+//                // MARK: Check if there is a winner.
+//
+//                if self.game.won {
+//                    if self.game.teamOneScore == 5 {
+//                        self.wordLabel.text = "TEAM ONE WINS!"
+//                        self.changeBackgroundColor()
+//                    } else if self.game.teamTwoScore == 5 {
+//                        self.wordLabel.text = "TEAM TWO WINS"
+//                        self.changeBackgroundColor()
+//                    }
+//                } else {
 
