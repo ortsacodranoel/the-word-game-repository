@@ -98,15 +98,11 @@ class GameViewController: UIViewController {
     */
     var countdownNumber = 4
     
-    
     // MARK: - Constraint Properties
-    
     @IBOutlet weak var centerAlignWordContainer: NSLayoutConstraint!
     @IBOutlet weak var centerAlignMsgView: NSLayoutConstraint!
     
-    
     // MARK: - Swipe Gesture Recognizer Properties
-    
     let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
     var timesSwipedRight = 0
