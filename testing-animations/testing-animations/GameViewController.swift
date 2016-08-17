@@ -183,9 +183,6 @@ class GameViewController: UIViewController {
      
      */
     func currentRound() {
-        
-        self.game.checkForWinner()
-        
         self.startTimer()
         self.animateGameTimer()
         self.updateTeamNameDisplayed()
@@ -557,7 +554,11 @@ class GameViewController: UIViewController {
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
             
+            self.game.checkForWinner()
+            
+            
             }, completion: {(bool) in
+                
                 if self.game.won {
                     
                     print(self.game.winnerTitle)
