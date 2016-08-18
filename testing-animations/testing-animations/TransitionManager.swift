@@ -8,7 +8,7 @@
 
     import UIKit
     
-    class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
+    class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
         
         // MARK: UIViewControllerAnimatedTransitioning protocol methods
         private var presenting = true
@@ -19,7 +19,6 @@
         // Animate transition between View Controllers.
         func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
             
-
             // Get reference to fromView, toView, and containerView.
             let container = transitionContext.containerView()
             let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!

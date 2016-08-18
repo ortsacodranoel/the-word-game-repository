@@ -32,8 +32,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Button actions.
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
+    // MARK: - Transition Managers
     let transitionManager = TransitionManager()
-    
+    let rulesScreenTransitionManager = RulesTransitionManager()
+
     
     
     
@@ -75,20 +77,29 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // MARK: - Segue Methods
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        // Retrieve the indexPath row.
-        let button = sender as! UIButton
-        let view = button.superview!
-        let cell = view.superview! as! CollectionViewCell
-        let indexPath = collectionView.indexPathForCell(cell)
+        if segue.identifier == "segueToRules" {
+            
+            let rulesViewController = segue.destinationViewController as! RulesViewController
+            rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
+        } else {
+        
+            
+            // Retrieve the indexPath row.
+            let button = sender as! UIButton
+            let view = button.superview!
+            let cell = view.superview! as! CollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)
 
-        // Prepare destinationVC.
-        let toViewController = segue.destinationViewController as! DetailViewController
-        toViewController.game = self.game
-        toViewController.categoryTapped = (indexPath!.row)
-        toViewController.transitioningDelegate = self.transitionManager
-
+            // Prepare destinationVC.
+            let toViewController = segue.destinationViewController as! DetailViewController
+            toViewController.game = self.game
+            toViewController.categoryTapped = (indexPath!.row)
+            toViewController.transitioningDelegate = self.transitionManager
+        }
     }
 
     
@@ -96,7 +107,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     
-    // ******************************************** MARK: Animations ***************************************************** //
+    // MARK: - Animations
     func animateMenuFadeIn() {
         
         UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
