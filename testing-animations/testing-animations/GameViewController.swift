@@ -174,11 +174,7 @@ class GameViewController: UIViewController {
 
         // Move countdownMsgView out of view.
         self.centerAlignMsgView.constant += view.bounds.width
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> initial-swipe-fix
         animationsStart()
     }
     
