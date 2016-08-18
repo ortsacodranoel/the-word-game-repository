@@ -34,8 +34,10 @@ class Game {
     // Variable to temporarily store a word.
     var word = String()
     
-    // Used to verify if team has won the game. 
-    var winner = false
+    /** 
+        Used to determine if a team has one the game.
+    */
+    var won = false
     
     // Used to temporarily store winner title.
     var winnerTitle = String()
@@ -65,30 +67,16 @@ class Game {
     }
     
     /**
-    
-    */
-    func checkScore() {
-        if self.teamOneScore == 25 {
-            print("Team one wins!")
-            self.winner = true
-            self.resetGame()
-        } else if self.teamTwoScore == 25 {
-            print("Team TWO wins!")
-            self.winner = true
-            self.resetGame()
-        }
-    }
-    
-    /**
         Used to get the String value of the team that has won the current game.
     */
-    func getWinner() -> String {
-        if self.teamOneScore == 25 {
+    func checkForWinner() {
+        if self.teamOneScore == 5 {
+            self.won = true
             self.winnerTitle = "Team One"
-        } else if self.teamTwoScore == 25 {
+        } else if self.teamTwoScore == 5 {
+            self.won = true
             self.winnerTitle = "Team Two"
         }
-        return  self.winnerTitle
     }
     
     
@@ -163,8 +151,7 @@ class Game {
      - Updates each team's turn.
      
      **/
-    func switchTeams() {
-        
+    func updateTeamTurn() {
         if self.teamOneIsActive {
             self.teamOneIsActive = false
         } else {
