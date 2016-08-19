@@ -121,7 +121,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-ho-R6a" userLabel="menuView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-ho-R6a" userLabel="menuView">
                                 <rect key="frame" x="0.0" y="265" width="51" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX">
@@ -137,13 +137,17 @@
                                     <constraint firstAttribute="height" constant="70" id="jXh-M1-peM"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62G-uk-sg5">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62G-uk-sg5">
                                 <rect key="frame" x="51" y="0.0" width="498" height="600"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-Pk-RFj">
-                                        <rect key="frame" x="0.0" y="0.0" width="498" height="600"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-Pk-RFj" userLabel="rulesTextView">
+                                        <rect key="frame" x="0.0" y="0.0" width="498" height="703"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <string key="text">Rules:
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="703" id="Ald-ep-6dE"/>
+                                        </constraints>
+                                        <mutableString key="text">
+
 
 [ 1 ]  Swipe left when your team guesses correctly. Each left swipe is a point.
 
@@ -159,14 +163,40 @@
 
 
 
-</string>
+</mutableString>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trW-eg-mu3" userLabel="rulesLabel">
+                                        <rect key="frame" x="189" y="22" width="121" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="121" id="Azh-eT-yRh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="trW-eg-mu3" firstAttribute="top" secondItem="62G-uk-sg5" secondAttribute="top" constant="22" id="FAo-x2-6dp"/>
+                                    <constraint firstAttribute="trailing" secondItem="eLR-Pk-RFj" secondAttribute="trailing" id="PJO-Pa-Wot"/>
+                                    <constraint firstItem="eLR-Pk-RFj" firstAttribute="centerX" secondItem="trW-eg-mu3" secondAttribute="centerX" id="gXL-cO-3Dj"/>
+                                    <constraint firstItem="trW-eg-mu3" firstAttribute="centerX" secondItem="62G-uk-sg5" secondAttribute="centerX" id="k6F-PJ-UO1"/>
+                                    <constraint firstItem="eLR-Pk-RFj" firstAttribute="top" secondItem="62G-uk-sg5" secondAttribute="top" id="q9m-ZW-X0e"/>
+                                    <constraint firstAttribute="bottom" secondItem="eLR-Pk-RFj" secondAttribute="bottom" constant="-103" id="yy1-5g-srY"/>
+                                    <constraint firstItem="eLR-Pk-RFj" firstAttribute="leading" secondItem="62G-uk-sg5" secondAttribute="leading" id="z5G-Lq-szv"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="62G-uk-sg5" firstAttribute="centerY" secondItem="4xx-ho-R6a" secondAttribute="centerY" id="DYB-Uo-DfD"/>
+                            <constraint firstItem="62G-uk-sg5" firstAttribute="leading" secondItem="4xx-ho-R6a" secondAttribute="trailing" id="Qh3-Mc-xTq"/>
+                            <constraint firstItem="62G-uk-sg5" firstAttribute="bottom" secondItem="TdX-dK-yno" secondAttribute="top" id="R7h-be-1E2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="62G-uk-sg5" secondAttribute="trailing" constant="31" id="cIZ-sx-6zl"/>
+                            <constraint firstItem="62G-uk-sg5" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="dNG-y5-if1"/>
+                            <constraint firstItem="62G-uk-sg5" firstAttribute="top" secondItem="4q6-a4-gf1" secondAttribute="top" id="wBv-rg-3b4"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="AcR-VF-W4M" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="Rnd-jW-WEs"/>
@@ -175,7 +205,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="211" y="1038"/>
+            <point key="canvasLocation" x="107" y="881"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
