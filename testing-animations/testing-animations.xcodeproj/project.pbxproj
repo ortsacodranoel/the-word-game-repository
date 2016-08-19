@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
+		B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B37609051D675AA900A678A1 /* LaunchScreen.storyboard */; };
 		B392F42C1D66112F00F3748A /* RulesTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */; };
 		B392F42E1D66146100F3748A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42D1D66146100F3748A /* RulesViewController.swift */; };
 		B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */; };
@@ -20,7 +21,6 @@
 		D67774D71D1C392B0051C634 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D67774D51D1C392B0051C634 /* Main.storyboard */; };
 		D67774DA1D1C392B0051C634 /* testing_animations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D67774D81D1C392B0051C634 /* testing_animations.xcdatamodeld */; };
 		D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D67774DB1D1C392B0051C634 /* Assets.xcassets */; };
-		D67774DF1D1C392B0051C634 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D67774DD1D1C392B0051C634 /* LaunchScreen.storyboard */; };
 		D67774EA1D1C392B0051C634 /* testing_animationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774E91D1C392B0051C634 /* testing_animationsTests.swift */; };
 		D67774F51D1C392B0051C634 /* testing_animationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774F41D1C392B0051C634 /* testing_animationsUITests.swift */; };
 		D67775031D1C4FDC0051C634 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */; };
@@ -45,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		B37609051D675AA900A678A1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesTransitionManager.swift; sourceTree = "<group>"; };
 		B392F42D1D66146100F3748A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		D67774D61D1C392B0051C634 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D67774D91D1C392B0051C634 /* testing_animations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = testing_animations.xcdatamodel; sourceTree = "<group>"; };
 		D67774DB1D1C392B0051C634 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D67774DE1D1C392B0051C634 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D67774E01D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D67774E51D1C392B0051C634 /* testing-animationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testing-animationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774E91D1C392B0051C634 /* testing_animationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testing_animationsTests.swift; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 				B37786021D494B1E00639A8B /* Transition Managers */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
-				D67774DD1D1C392B0051C634 /* LaunchScreen.storyboard */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
+				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
 				D67774D81D1C392B0051C634 /* testing_animations.xcdatamodeld */,
 			);
 			path = "testing-animations";
@@ -276,7 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D67774DF1D1C392B0051C634 /* LaunchScreen.storyboard in Resources */,
+				B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */,
 				D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
 			);
@@ -356,14 +356,6 @@
 				D67774D61D1C392B0051C634 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D67774DD1D1C392B0051C634 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D67774DE1D1C392B0051C634 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

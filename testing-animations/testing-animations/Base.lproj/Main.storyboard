@@ -146,7 +146,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="703" id="Ald-ep-6dE"/>
                                         </constraints>
-                                        <mutableString key="text">
+                                        <string key="text">
 
 
 [ 1 ]  Swipe left when your team guesses correctly. Each left swipe is a point.
@@ -163,7 +163,7 @@
 
 
 
-</mutableString>
+</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
