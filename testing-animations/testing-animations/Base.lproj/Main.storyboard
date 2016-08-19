@@ -28,6 +28,11 @@
                                 <state key="normal" title="?">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="o0C-mE-Sf2" kind="popoverPresentation" identifier="segueToRules" popoverAnchorView="lps-DJ-njf" id="VH8-A9-MdD">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nlr-VK-F1a">
                                 <rect key="frame" x="55" y="20" width="490" height="560"/>
@@ -103,6 +108,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-457" y="1751"/>
+        </scene>
+        <!--Rules View Controller-->
+        <scene sceneID="HXC-YQ-azn">
+            <objects>
+                <viewController id="o0C-mE-Sf2" customClass="RulesViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r6D-Fp-Tj5"/>
+                        <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4q6-a4-gf1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-ho-R6a" userLabel="menuView">
+                                <rect key="frame" x="0.0" y="265" width="51" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="70"/>
+                                        <connections>
+                                            <action selector="menuButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="AVx-XH-0QD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="YNu-xV-Iy2"/>
+                                    <constraint firstAttribute="height" constant="70" id="jXh-M1-peM"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62G-uk-sg5">
+                                <rect key="frame" x="51" y="0.0" width="498" height="600"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-Pk-RFj">
+                                        <rect key="frame" x="0.0" y="0.0" width="498" height="600"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <string key="text">Rules:
+
+[ 1 ]  Swipe left when your team guesses correctly. Each left swipe is a point.
+
+[ 2 ]  Swipe right to pass (you only get 2 passes per minute). Don’t say the word(s) or any form of the word(s) in the answer.
+
+[ 3 ]  If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one. 
+
+[ 4 ]  If you’ve used up both passes, you must let the time run out.
+
+[ 5 ]  A clue-giver cannot go again until all other members of the team have had a turn.
+
+[ 6 ]  The first team to get 25 points, wins.
+
+
+
+</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="AcR-VF-W4M" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="Rnd-jW-WEs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="211" y="1038"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -222,7 +295,7 @@
                 <exit id="apA-et-R0A" userLabel="Exit" sceneMemberID="exit"/>
                 <swipeGestureRecognizer cancelsTouchesInView="NO" direction="right" id="S0e-5v-Ozr">
                     <connections>
-                        <segue destination="apA-et-R0A" kind="unwind" unwindAction="unwindToCategories:" id="D9d-ty-NOw"/>
+                        <segue destination="apA-et-R0A" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="D9d-ty-NOw"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

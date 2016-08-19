@@ -39,7 +39,10 @@ class DetailViewController: UIViewController {
     // MARK: - Actions.
 
     
-    @IBAction func backButtonTapped(sender: AnyObject)  { }
+    @IBAction func backButtonTapped(sender: AnyObject)  {
+        performSegueWithIdentifier("unwindToCategories", sender: self)
+
+    }
 
     
     // MARK: - Data.
@@ -63,14 +66,13 @@ class DetailViewController: UIViewController {
     
     let descriptions = ["His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ.","The men and women of whom there are stories in the Bible.","Countries, cities, lands, bodies of water, geological landmarks, and man-made structures in and of the times of the Bible.","Christian celebrities, TV evangelists, historical and influential christians.","Hymns, song of worship, christian bands and singers, words of worship, as well as musical instruments from the Bible. * If the answer is a song title in quotation marks, your team does not have to get the exact title, but it must contain the main words.","Christian and christian-friendly books and movies, as well as the books of the Bible.","Words found in the concordance of a Bible, excluding names and places.","Biblical and christian holidays as well as food and drink mentioned in the Bible.", "The names of the angels from the Bible and from christian-judeo mythology.","Stories from the Bible as well as Jesus’ parables. * Your team does not have to use the exact words as written in the answer, but must clearly guess the correct bible story. Remember not to say any part of the answer when giving clues.","Words and phrases of the prophetic last book of the Bible.","Christian denominations, beliefs and practices within different denominations, words associated with different denominations.","Words of biblical transgressions. * Answers with more than one word do not have to be guessed exactly as written, but must contain the main words.","Words of biblical mandates. * Answers with more than one word do not have to be guessed exactly as written, but must contain the main words."]
     
-    // Create GameScreenTransitionManager to handle transition game screen.
+    // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
     let categoryScreenTransitionManager = CategoriesTransitionManager()
 
     
     
-    
-    // ******************************************** MARK: View Methods *************************************************** //
+    // MARK: - View Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +85,6 @@ class DetailViewController: UIViewController {
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,6 +112,9 @@ class DetailViewController: UIViewController {
         self.descriptionViewLabel.text = descriptions[category]
     }
     
+    
+    // MARK: - Segue Methods
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueToGame" {
@@ -126,7 +130,7 @@ class DetailViewController: UIViewController {
     }
     
     
-    // ******************************************** MARK: Animations ***************************************************** //
+    // MARK: - Animations
 
     
     func startAnimations() {
