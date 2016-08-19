@@ -143,7 +143,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-Pk-RFj">
                                         <rect key="frame" x="0.0" y="0.0" width="498" height="600"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <mutableString key="text">Rules:
+                                        <string key="text">Rules:
 
 [ 1 ]  Swipe left when your team guesses correctly. Each left swipe is a point.
 
@@ -159,7 +159,7 @@
 
 
 
-</mutableString>
+</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -295,7 +295,7 @@
                 <exit id="apA-et-R0A" userLabel="Exit" sceneMemberID="exit"/>
                 <swipeGestureRecognizer cancelsTouchesInView="NO" direction="right" id="S0e-5v-Ozr">
                     <connections>
-                        <segue destination="apA-et-R0A" kind="unwind" unwindAction="unwindToCategories:" id="D9d-ty-NOw"/>
+                        <segue destination="apA-et-R0A" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="D9d-ty-NOw"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

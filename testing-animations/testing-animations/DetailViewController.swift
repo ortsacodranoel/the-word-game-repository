@@ -39,7 +39,10 @@ class DetailViewController: UIViewController {
     // MARK: - Actions.
 
     
-    @IBAction func backButtonTapped(sender: AnyObject)  { }
+    @IBAction func backButtonTapped(sender: AnyObject)  {
+        performSegueWithIdentifier("unwindToCategories", sender: self)
+
+    }
 
     
     // MARK: - Data.
