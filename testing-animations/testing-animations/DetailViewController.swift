@@ -37,34 +37,50 @@ class DetailViewController: UIViewController {
     
     
     // MARK: - Actions.
-
-    
     @IBAction func backButtonTapped(sender: AnyObject)  {
         performSegueWithIdentifier("unwindToCategories", sender: self)
-
     }
 
     
     // MARK: - Data.
-    let titles = ["Jesus","People","Places", "Famous", "Worship", "Books", "Concordance", "Feasts", "Angels", "Sunday School", "Revelation", "Doctrine", "Sins", "Commands"]
+    let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
-    let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
-                    UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),  // People
-                    UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1),  // Places
-                    UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1),  // Famous
-                    UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1),    // Worship
-                    UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1),  // Books
-                    UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1),  // Concordance
-                    UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1),  // Feasts
-                    UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1),  // Angels
-                    UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1),  // Sunday
-                    UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),  // Revelation
-                    UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),  // Doctrine
-                    UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),  // Sins
-                    UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
-                    ]
     
-    let descriptions = ["His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ.","The men and women of whom there are stories in the Bible.","Countries, cities, lands, bodies of water, geological landmarks, and man-made structures in and of the times of the Bible.","Christian celebrities, TV evangelists, historical and influential christians.","Hymns, song of worship, christian bands and singers, words of worship, as well as musical instruments from the Bible. * If the answer is a song title in quotation marks, your team does not have to get the exact title, but it must contain the main words.","Christian and christian-friendly books and movies, as well as the books of the Bible.","Words found in the concordance of a Bible, excluding names and places.","Biblical and christian holidays as well as food and drink mentioned in the Bible.", "The names of the angels from the Bible and from christian-judeo mythology.","Stories from the Bible as well as Jesus’ parables. * Your team does not have to use the exact words as written in the answer, but must clearly guess the correct bible story. Remember not to say any part of the answer when giving clues.","Words and phrases of the prophetic last book of the Bible.","Christian denominations, beliefs and practices within different denominations, words associated with different denominations.","Words of biblical transgressions. * Answers with more than one word do not have to be guessed exactly as written, but must contain the main words.","Words of biblical mandates. * Answers with more than one word do not have to be guessed exactly as written, but must contain the main words."]
+    let colors  = [
+        UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),             // Jesus
+        UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),              // People
+        UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1),              // Places
+        UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1),             // Sunday School
+        UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1),               // Concordance
+        UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1),              // Famous Christians
+        UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1),              // Worship
+        UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1),             // Books and Movies
+        UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1),              // Feasts
+        UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1),             // Relics and Saints
+        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),               // Revelation
+        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),             // Angels
+        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),             // Doctrine
+        UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),             // Sins
+        UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1)              // Commands
+    ]
+    
+    let descriptions = ["His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ. ",
+                      "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.",
+                      "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times. ",
+                      "Stories from the Bible as well as Jesus’ parables.  * teams need not guess the exact answer, but must clearly guess the correct story or parable.",
+                      "Words found in the concordance of a Bible, excluding names and places.",
+                      "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.",
+                      "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.",
+                      "Christian and Christian-friendly books and movies, as well as the books of the Bible.",
+                      "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.",
+                      "Religious artifacts throughout history and the names of Catholic Saints.",
+                      "Words and phrases of the prophetic last book of the Bible.",
+                      "The names of the Angels from the Bible and from Christian-Judeo mythology.",
+                      "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.",
+                      "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.",
+                      "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words"]
+    
+
     
     // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
