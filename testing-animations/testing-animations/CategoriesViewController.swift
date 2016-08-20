@@ -24,6 +24,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // Used to give background color to the category buttons.
     let buttonBackgroundColor = [
         UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),             // Jesus
         UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),              // People
@@ -75,11 +76,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
-        
-        //cell.categoryButton.backgroundColor(self.categories[indexPath.row], forState: UIControlState.Normal)
-        //self.view.backgroundColor = colors[category]
-        
+
+        cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = buttonBackgroundColor[indexPath.row]
+        
         
         cell.categoryButton.setTitle(self.titles[indexPath.row], forState: UIControlState.Normal)
 
