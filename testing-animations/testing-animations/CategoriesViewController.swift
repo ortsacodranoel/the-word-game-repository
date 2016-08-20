@@ -55,7 +55,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     
-    
+    // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -79,20 +79,19 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = buttonBackgroundColor[indexPath.row]
-        
-        
         cell.categoryButton.setTitle(self.titles[indexPath.row], forState: UIControlState.Normal)
-
         cell.tag = indexPath.row
         
         return cell
     }
 
+    /**
+        Used to animate rules menu fade-in.
+    */
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        if scrollView.contentOffset.y < 0 {
+        if scrollView.contentOffset.y > 30 {
             self.animateMenuFadeIn()
-        } else if scrollView.contentOffset.y > 30{
+        } else if scrollView.contentOffset.y < 30 {
             self.animateMenuFadeOut()
         }
     }

@@ -24,9 +24,9 @@
                                     <constraint firstAttribute="width" constant="46" id="AWz-Pw-OOn"/>
                                     <constraint firstAttribute="height" constant="30" id="jgn-3e-tqa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
                                 <state key="normal" title="?">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.59168826246925621" green="0.3920665085142031" blue="0.87843137979999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="o0C-mE-Sf2" kind="popoverPresentation" identifier="segueToRules" popoverAnchorView="lps-DJ-njf" id="VH8-A9-MdD">
@@ -140,30 +140,25 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62G-uk-sg5">
                                 <rect key="frame" x="51" y="0.0" width="498" height="600"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-Pk-RFj" userLabel="rulesTextView">
-                                        <rect key="frame" x="0.0" y="0.0" width="498" height="703"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-Pk-RFj" userLabel="rulesTextView">
+                                        <rect key="frame" x="0.0" y="0.0" width="498" height="565"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="703" id="Ald-ep-6dE"/>
+                                            <constraint firstAttribute="height" constant="565" id="Ald-ep-6dE"/>
                                         </constraints>
-                                        <string key="text">
+                                        <mutableString key="text">
 
 
 [ 1 ]  Swipe left when your team guesses correctly. Each left swipe is a point.
-
 [ 2 ]  Swipe right to pass (you only get 2 passes per minute). Don’t say the word(s) or any form of the word(s) in the answer.
-
 [ 3 ]  If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one. 
-
 [ 4 ]  If you’ve used up both passes, you must let the time run out.
-
 [ 5 ]  A clue-giver cannot go again until all other members of the team have had a turn.
-
 [ 6 ]  The first team to get 25 points, wins.
 
 
 
-</string>
+</mutableString>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -183,7 +178,7 @@
                                     <constraint firstItem="eLR-Pk-RFj" firstAttribute="centerX" secondItem="trW-eg-mu3" secondAttribute="centerX" id="gXL-cO-3Dj"/>
                                     <constraint firstItem="trW-eg-mu3" firstAttribute="centerX" secondItem="62G-uk-sg5" secondAttribute="centerX" id="k6F-PJ-UO1"/>
                                     <constraint firstItem="eLR-Pk-RFj" firstAttribute="top" secondItem="62G-uk-sg5" secondAttribute="top" id="q9m-ZW-X0e"/>
-                                    <constraint firstAttribute="bottom" secondItem="eLR-Pk-RFj" secondAttribute="bottom" constant="-103" id="yy1-5g-srY"/>
+                                    <constraint firstAttribute="bottom" secondItem="eLR-Pk-RFj" secondAttribute="bottom" constant="35" id="yy1-5g-srY"/>
                                     <constraint firstItem="eLR-Pk-RFj" firstAttribute="leading" secondItem="62G-uk-sg5" secondAttribute="leading" id="z5G-Lq-szv"/>
                                 </constraints>
                             </scrollView>
