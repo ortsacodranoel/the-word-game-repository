@@ -25,9 +25,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-   let categories = [UIImage(named:"Jesus"),UIImage(named:"People"),UIImage(named:"Places"),UIImage(named:"FamousChristians"),UIImage(named:"Worship"),UIImage(named:"Booksandmovies"),UIImage(named:"Concordance"),UIImage(named:"Feasts"),UIImage(named:"Angels"), UIImage(named:"SundaySchool"),UIImage(named:"Revelation"), UIImage(named:"Doctrine"), UIImage(named:"Sins"), UIImage(named:"Commands")]
+   let categories = [UIImage(named:"Jesus"),UIImage(named:"People"),UIImage(named:"Places"),UIImage(named:"Sunday School"),UIImage(named:"Concordance"),UIImage(named:"Booksandmovies"),UIImage(named:"Worship"),UIImage(named:"Feasts"),UIImage(named:"Angels"), UIImage(named:"FamousChristians"),UIImage(named:"Revelation"), UIImage(named:"Doctrine"), UIImage(named:"Sins"), UIImage(named:"Commands")]
     
-    let titles = ["Jesus","People","Places","Famous Christians","Worship","Books and Movies","Concordance","Feasts","Angels","Sunday School","Revelation","Doctrine","Sins","Commands"]
+    let titles = ["Jesus","People","Places","Sunday School","Worship","Books and Movies","Concordance","Feasts","Angels","Famous Christians","Revelation","Doctrine","Sins","Commands"]
     
     // Button actions.
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
