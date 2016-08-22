@@ -78,7 +78,7 @@ class DetailViewController: UIViewController {
                       "The names of the Angels from the Bible and from Christian-Judeo mythology.",
                       "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.",
                       "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.",
-                      "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words"]
+                      "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words."]
     
 
     

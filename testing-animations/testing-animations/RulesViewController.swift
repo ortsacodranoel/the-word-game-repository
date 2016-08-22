@@ -52,6 +52,11 @@ class RulesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+
+        
+        
+        
     }
     
     
@@ -64,6 +69,40 @@ class RulesViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.animateRuleOne()
     }
+    
+    
+    func animateRuleOne() {
+        UIView.animateWithDuration(0.4, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            self.ruleOne.alpha = 1
+            }, completion: { (bool) in
+                self.animateRuleTwo()
+        })
+    }
+    
+    func animateRuleTwo() {
+        UIView.animateWithDuration(0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            self.ruleTwo.alpha = 1
+            }, completion: { (bool) in
+                self.animateRuleThree()
+        })
+    }
+    
+    func animateRuleThree() {
+        UIView.animateWithDuration(0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            self.ruleThree.alpha = 1
+            }, completion: { (bool) in
+                self.animateRuleFour()
+        })
+    }
+    
+    func animateRuleFour() {
+        UIView.animateWithDuration(0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            self.ruleFour.alpha = 1
+            }, completion: nil)
+    }
+    
+    
 }
 
