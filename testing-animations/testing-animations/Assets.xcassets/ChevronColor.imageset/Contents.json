@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Sins.png",
+      "filename" : "cheveronColor.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Sins@2x.png",
+      "filename" : "ChevronColor@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Sins@3x.png",
+      "filename" : "ChevronColor@3x.png",
       "scale" : "3x"
     }
   ],
