@@ -39,8 +39,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),               // Revelation
         UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),             // Angels
         UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),             // Doctrine
-        UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),             // Sins
-        UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1)              // Commands
+        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1),             // Sins
+        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)                // Commands
     ]
     
     // Used to set the button titles.
@@ -106,7 +106,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
         } else {
         
-            
+            // Fade rules if visible. 
+            self.rulesButton.alpha = 0
+
             // Retrieve the indexPath row.
             let button = sender as! UIButton
             let view = button.superview!

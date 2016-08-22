@@ -11,7 +11,6 @@ import UIKit
 class GameViewController: UIViewController {
     
     // MARK: - Game Properties
-
     var game = Game()
     var answer = true
     var categoryTapped = Int()
@@ -26,29 +25,31 @@ class GameViewController: UIViewController {
     var roundInProgress = false
     
     
-    let colors = [UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),   // Jesus
-        UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),  // People
-        UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1),  // Places
-        UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1),  // Famous
-        UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1),  // Worship
-        UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1),  // Books
-        UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1),  // Concordance
-        UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1),  // Feasts
-        UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1),  // Angels
-        UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1),  // Sunday
-        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),  // Revelation
-        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),  // Doctrine
-        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),  // Sins
-        UIColor(red: 150/255, green: 165/255, blue: 141/225, alpha: 1),  // Commands
+    // MARK: - Data
+    let colors  = [
+        UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),             // Jesus
+        UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1),              // People
+        UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1),              // Places
+        UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1),             // Sunday School
+        UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1),               // Concordance
+        UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1),              // Famous Christians
+        UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1),              // Worship
+        UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1),             // Books and Movies
+        UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1),              // Feasts
+        UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1),             // Relics and Saints
+        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),               // Revelation
+        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),             // Angels
+        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),             // Doctrine
+        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1),             // Sins
+        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)                // Commands
     ]
     
     
     // MARK: - Button Properties
-    
     @IBOutlet weak var startButton: UIButton!
     
-    // MARK: - Label Properties
     
+    // MARK: - Label Properties
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var teamOneScoreLabel: UILabel!
@@ -57,6 +58,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var team1Label: UILabel!
     @IBOutlet weak var passesLabel: UILabel!
     
+    
     /**
         Used to display the messages: '3', '2', '1', and 'Go!'.
     */
@@ -64,7 +66,6 @@ class GameViewController: UIViewController {
     
     
     // MARK: - View Properties
-    
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var teamOneScoreTitleView: UIView!
     @IBOutlet weak var teamOneScore: UIView!
