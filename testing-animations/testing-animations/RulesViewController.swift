@@ -14,6 +14,17 @@ class RulesViewController: UIViewController {
 
     @IBOutlet weak var rulesScrollView: UIScrollView!
     
+    // MARK: - Labels
+    @IBOutlet weak var rulesTitle: UILabel!
+    @IBOutlet weak var ruleOne: UILabel!
+    @IBOutlet weak var ruleTwo: UILabel!
+    @IBOutlet weak var ruleThree: UILabel!
+    @IBOutlet weak var ruleFour: UILabel!
+    @IBOutlet weak var ruleFive: UILabel!
+    @IBOutlet weak var ruleSix: UILabel!
+    
+    
+    
     // MARK:- Initialization
     
     
@@ -21,6 +32,16 @@ class RulesViewController: UIViewController {
         performSegueWithIdentifier("unwindToCategories", sender: self)
 
     }
+    
+    /**
+        Used to link to the official rules page.
+    */
+    @IBAction func rulesButtonTapped(sender: AnyObject) {
+        if let url = NSURL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     
     // MARK: - Transition Managers
     let rulesScreenTransitionManager = RulesTransitionManager()
