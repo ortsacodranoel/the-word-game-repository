@@ -68,11 +68,7 @@ class RulesViewController: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeRight)
-        
-        self.animateRuleOne()
-        self.animateRuleTwo()
-        self.animateRuleThree()
-        self.animateRuleFour()
+
     }
     
 
@@ -88,28 +84,5 @@ class RulesViewController: UIViewController {
     }
     
     
-    func animateRuleOne() {
-        UIView.animateWithDuration(0.2, delay: 0.2,usingSpringWithDamping: 0.9,initialSpringVelocity: 0.9, options: [], animations: {
-            self.ruleOne.center.x -= self.view.bounds.width
-            }, completion: nil)
-    }
-    
-    func animateRuleTwo() {
-        UIView.animateWithDuration(0.2, delay: 0.3,usingSpringWithDamping: 0.9,initialSpringVelocity: 0.9, options: [], animations: {
-            self.ruleTwo.center.x -= self.view.bounds.width
-            }, completion: nil)
-    }
-    
-    func animateRuleThree() {
-        UIView.animateWithDuration(0.2, delay: 0.4,usingSpringWithDamping: 0.9,initialSpringVelocity: 0.9, options: [], animations: {
-            self.ruleThree.center.x -= self.view.bounds.width
-            }, completion: nil)
-    }
-    
-    func animateRuleFour() {
-        UIView.animateWithDuration(0.2, delay: 0.5,usingSpringWithDamping: 0.9,initialSpringVelocity: 0.9, options: [], animations: {
-            self.ruleThree.center.x -= self.view.bounds.width
-            }, completion: nil)
-    }
 }
 

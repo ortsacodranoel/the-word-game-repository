@@ -18,20 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
-                                <rect key="frame" x="0.0" y="530" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="AWz-Pw-OOn"/>
-                                    <constraint firstAttribute="height" constant="50" id="jgn-3e-tqa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
-                                <state key="normal" title="?">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="o0C-mE-Sf2" kind="showDetail" identifier="segueToRules" id="0MA-PL-k0W"/>
-                                </connections>
-                            </button>
                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nlr-VK-F1a">
                                 <rect key="frame" x="64" y="20" width="472" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -82,13 +68,27 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Ts6-Ta-N50"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
+                                <rect key="frame" x="6" y="530" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="AWz-Pw-OOn"/>
+                                    <constraint firstAttribute="height" constant="50" id="jgn-3e-tqa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <state key="normal" title="?">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="o0C-mE-Sf2" kind="showDetail" identifier="segueToRules" id="0MA-PL-k0W"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="3us-9G-Ujm"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="44" id="ITm-1H-7mV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="20" id="LPw-6C-yp4"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="20" id="aSB-QC-dsU"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="14" id="aSB-QC-dsU"/>
                             <constraint firstAttribute="bottom" secondItem="nlr-VK-F1a" secondAttribute="bottom" constant="20" symbolic="YES" id="ki7-g3-iA2"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wfR-s7-05h"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xxD-LX-TSZ"/>
@@ -146,112 +146,48 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tym-T6-dxQ">
                                 <rect key="frame" x="95" y="0.0" width="410" height="600"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcz-gl-UqU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick Rules Overview" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcz-gl-UqU">
                                         <rect key="frame" x="1" y="8" width="409" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="YH5-lU-nNs"/>
                                         </constraints>
-                                        <string key="text">Quick Rules Overview:      
-
-  </string>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI">
-                                        <rect key="frame" x="1" y="51" width="409" height="73"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
+                                        <rect key="frame" x="0.0" y="38" width="410" height="448"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="73" id="ay9-6q-CUS"/>
+                                            <constraint firstAttribute="height" constant="448" id="ay9-6q-CUS"/>
                                         </constraints>
-                                        <string key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).
-</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <mutableString key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
+ 3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one.
+ 4. If you've used up both passes, you must let the time run out.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one." lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vh8-YV-EN1">
-                                        <rect key="frame" x="0.0" y="267" width="410" height="104"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="104" id="waH-7F-fPP"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4. If you've used up both passes, you must let the time run out." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMD-kT-MHO">
-                                        <rect key="frame" x="0.0" y="379" width="410" height="93"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="93" id="8to-4V-Url"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6. The first team to get 25 points, wins." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgU-k2-FaQ">
-                                        <rect key="frame" x="1" y="571" width="409" height="58"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="58" id="qqb-QA-rpa"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-5V-XcV" userLabel="ViewFullRulesButton">
-                                        <rect key="frame" x="87" y="640" width="195" height="46"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-5V-XcV" userLabel="ViewFullRulesButton">
+                                        <rect key="frame" x="46" y="494" width="318" height="46"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                         <state key="normal" title="View full rules"/>
                                         <connections>
                                             <action selector="rulesButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="xKz-33-sNW"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="API-Wf-QPD">
-                                        <rect key="frame" x="2" y="132" width="409" height="127"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="127" id="qjB-1W-wdQ"/>
-                                        </constraints>
-                                        <string key="text">2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
-</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5. A clue-giver cannot go again until all other members of the team have had a turn." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqj-me-OX5">
-                                        <rect key="frame" x="0.0" y="480" width="410" height="82"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="82" id="i64-C6-FcW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Zcz-gl-UqU" secondAttribute="trailing" id="1Tb-5F-BuC"/>
-                                    <constraint firstItem="msa-QC-7CI" firstAttribute="leading" secondItem="lqj-me-OX5" secondAttribute="leading" constant="1" id="388-Nk-nbk"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="trailing" secondItem="msa-QC-7CI" secondAttribute="trailing" id="5g5-GO-XNl"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="leading" secondItem="tym-T6-dxQ" secondAttribute="leading" constant="87" id="66T-rr-Mlz"/>
-                                    <constraint firstItem="API-Wf-QPD" firstAttribute="top" secondItem="msa-QC-7CI" secondAttribute="bottom" constant="8" symbolic="YES" id="Bto-wn-TXP"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="leading" secondItem="tym-T6-dxQ" secondAttribute="leading" constant="46" id="66T-rr-Mlz"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="8" id="FVK-Ry-7M4"/>
-                                    <constraint firstItem="vh8-YV-EN1" firstAttribute="trailing" secondItem="aMD-kT-MHO" secondAttribute="trailing" id="Gz2-sa-mr3"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="tym-T6-dxQ" secondAttribute="leading" constant="1" id="HKW-EE-zpH"/>
-                                    <constraint firstItem="lqj-me-OX5" firstAttribute="top" secondItem="aMD-kT-MHO" secondAttribute="bottom" constant="8" symbolic="YES" id="JXw-vo-DGk"/>
-                                    <constraint firstItem="aMD-kT-MHO" firstAttribute="top" secondItem="vh8-YV-EN1" secondAttribute="bottom" constant="8" id="KCb-jj-SWS"/>
-                                    <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="msa-QC-7CI" secondAttribute="leading" id="PMJ-A2-gmS"/>
-                                    <constraint firstItem="API-Wf-QPD" firstAttribute="trailing" secondItem="vh8-YV-EN1" secondAttribute="trailing" constant="1" id="dBU-Zp-bBG"/>
-                                    <constraint firstItem="sgU-k2-FaQ" firstAttribute="top" secondItem="lqj-me-OX5" secondAttribute="bottom" constant="9" id="fS7-oB-oYq"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="sgU-k2-FaQ" secondAttribute="bottom" constant="11" id="gWf-Mj-mnd"/>
-                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" id="hRG-m0-KGB"/>
-                                    <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="16" id="n17-bH-F8T"/>
-                                    <constraint firstItem="API-Wf-QPD" firstAttribute="centerX" secondItem="vh8-YV-EN1" secondAttribute="centerX" constant="1.5" id="n7Y-ve-3W7"/>
-                                    <constraint firstItem="vh8-YV-EN1" firstAttribute="leading" secondItem="aMD-kT-MHO" secondAttribute="leading" id="ocH-8d-S1e"/>
-                                    <constraint firstItem="msa-QC-7CI" firstAttribute="centerX" secondItem="lqj-me-OX5" secondAttribute="centerX" id="p7C-HT-3lM"/>
+                                    <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="msa-QC-7CI" secondAttribute="leading" constant="1" id="PMJ-A2-gmS"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="V5V-0l-xgQ"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="494" id="YUd-D4-XO6"/>
+                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="60" id="hRG-m0-KGB"/>
+                                    <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="3" id="n17-bH-F8T"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="pv4-H7-qEy"/>
-                                    <constraint firstItem="vh8-YV-EN1" firstAttribute="top" secondItem="API-Wf-QPD" secondAttribute="bottom" constant="8" id="r9o-Qq-LjF"/>
-                                    <constraint firstItem="lqj-me-OX5" firstAttribute="centerX" secondItem="sgU-k2-FaQ" secondAttribute="centerX" constant="-0.5" id="s9w-GI-8DK"/>
-                                    <constraint firstItem="API-Wf-QPD" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" constant="1.5" id="tUM-zV-pHj"/>
-                                    <constraint firstItem="lqj-me-OX5" firstAttribute="trailing" secondItem="sgU-k2-FaQ" secondAttribute="trailing" id="vGs-C1-SDX"/>
-                                    <constraint firstItem="API-Wf-QPD" firstAttribute="leading" secondItem="tym-T6-dxQ" secondAttribute="leading" constant="2" id="wZK-GL-Qo7"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -266,12 +202,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ruleFive" destination="lqj-me-OX5" id="rgS-ob-sE6"/>
-                        <outlet property="ruleFour" destination="aMD-kT-MHO" id="4oJ-Cx-dHQ"/>
                         <outlet property="ruleOne" destination="msa-QC-7CI" id="KOb-kc-Vzj"/>
-                        <outlet property="ruleSix" destination="sgU-k2-FaQ" id="woS-jX-X5z"/>
-                        <outlet property="ruleThree" destination="vh8-YV-EN1" id="TJP-al-dXf"/>
-                        <outlet property="ruleTwo" destination="API-Wf-QPD" id="Uzl-6f-Km8"/>
                         <outlet property="rulesTitle" destination="Zcz-gl-UqU" id="JNf-xt-FiT"/>
                         <segue destination="AcR-VF-W4M" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="Rnd-jW-WEs"/>
                     </connections>
@@ -279,7 +210,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="26" y="854"/>
+            <point key="canvasLocation" x="277" y="837"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
