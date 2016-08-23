@@ -8,13 +8,10 @@
 
     import UIKit
     
-    class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
+    class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
         
         // MARK: UIViewControllerAnimatedTransitioning protocol methods
         private var presenting = true
-        
-        // MARK: Information passed.
-        var CategoryTapped = Int()
         
         // Animate transition between View Controllers.
         func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
