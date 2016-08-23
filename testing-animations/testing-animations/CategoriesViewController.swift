@@ -19,10 +19,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: Button Outlets
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
-    
-    
-    
     @IBOutlet weak var collectionView: UICollectionView!
+
+    
+    // MARK: - Data
     
     // Used to give background color to the category buttons.
     let buttonBackgroundColor = [
@@ -46,20 +46,19 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Used to set the button titles.
     let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
-    // Button actions.
+    
+    // MARK - Button Actions
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
+
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
 
     
-    
     // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +75,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
-
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = buttonBackgroundColor[indexPath.row]
         cell.categoryButton.setTitle(self.titles[indexPath.row], forState: UIControlState.Normal)
@@ -97,14 +95,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     // MARK: - Segue Methods
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueToRules" {
             
             let rulesViewController = segue.destinationViewController as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
-        } else {
+      
+        } else if segue.identifier == "segueToDetails" {
+            
         
             // Fade rules if visible. 
             self.rulesButton.alpha = 0
@@ -131,7 +131,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - Animations
     func animateMenuFadeIn() {
         
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.5,animations: {
             
             self.rulesButton.alpha = 1
             }, completion: nil)
@@ -139,7 +139,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func animateMenuFadeOut() {
         
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.5, animations: {
             
             self.rulesButton.alpha = 0
             }, completion: nil)

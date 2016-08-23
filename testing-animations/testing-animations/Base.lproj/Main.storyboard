@@ -18,22 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
-                                <rect key="frame" x="20" y="539" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="AWz-Pw-OOn"/>
-                                    <constraint firstAttribute="height" constant="30" id="jgn-3e-tqa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
-                                <state key="normal" title="?">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="o0C-mE-Sf2" kind="popoverPresentation" identifier="segueToRules" popoverAnchorView="lps-DJ-njf" id="VH8-A9-MdD">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </button>
                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nlr-VK-F1a">
                                 <rect key="frame" x="150" y="20" width="301" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -62,7 +46,7 @@
                                                     <connections>
                                                         <action selector="buttonTouched:" destination="jYI-0V-R3N" eventType="touchUpInside" id="5SD-1b-LLV"/>
                                                         <action selector="categoryButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mtw-Hs-85B"/>
-                                                        <segue destination="4Fc-eW-5Eo" kind="show" id="dnU-hx-LEo"/>
+                                                        <segue destination="4Fc-eW-5Eo" kind="show" identifier="segueToDetails" id="dnU-hx-LEo"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -84,13 +68,27 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Ts6-Ta-N50"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
+                                <rect key="frame" x="0.0" y="530" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="AWz-Pw-OOn"/>
+                                    <constraint firstAttribute="height" constant="50" id="jgn-3e-tqa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <state key="normal" title="?">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="o0C-mE-Sf2" kind="showDetail" identifier="segueToRules" id="0MA-PL-k0W"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="3us-9G-Ujm"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="130" id="ITm-1H-7mV"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="31" id="LPw-6C-yp4"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" id="aSB-QC-dsU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="20" id="LPw-6C-yp4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="20" id="aSB-QC-dsU"/>
                             <constraint firstAttribute="bottom" secondItem="nlr-VK-F1a" secondAttribute="bottom" constant="20" symbolic="YES" id="ki7-g3-iA2"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xxD-LX-TSZ"/>
                         </constraints>
