@@ -156,9 +156,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
-                                        <rect key="frame" x="0.0" y="38" width="410" height="433"/>
+                                        <rect key="frame" x="0.0" y="38" width="410" height="448"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="433" id="ay9-6q-CUS"/>
+                                            <constraint firstAttribute="height" constant="448" id="ay9-6q-CUS"/>
                                         </constraints>
                                         <mutableString key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
  3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one.
@@ -168,7 +168,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-5V-XcV" userLabel="ViewFullRulesButton">
-                                        <rect key="frame" x="46" y="479" width="318" height="46"/>
+                                        <rect key="frame" x="46" y="494" width="318" height="46"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                         <state key="normal" title="View full rules"/>
                                         <connections>
@@ -184,8 +184,8 @@
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="tym-T6-dxQ" secondAttribute="leading" constant="1" id="HKW-EE-zpH"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="msa-QC-7CI" secondAttribute="leading" constant="1" id="PMJ-A2-gmS"/>
                                     <constraint firstItem="CmT-5V-XcV" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="V5V-0l-xgQ"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="479" id="YUd-D4-XO6"/>
-                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="75" id="hRG-m0-KGB"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="494" id="YUd-D4-XO6"/>
+                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="60" id="hRG-m0-KGB"/>
                                     <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="3" id="n17-bH-F8T"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="pv4-H7-qEy"/>
                                 </constraints>
