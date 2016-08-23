@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nlr-VK-F1a">
-                                <rect key="frame" x="64" y="20" width="472" height="560"/>
+                                <rect key="frame" x="79" y="20" width="450" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="y8c-Pe-niS">
@@ -30,7 +30,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="testing_animations" customModuleProvider="target">
-                                        <rect key="frame" x="86" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="75" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -69,7 +69,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
-                                <rect key="frame" x="6" y="530" width="50" height="50"/>
+                                <rect key="frame" x="27" y="530" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="AWz-Pw-OOn"/>
                                     <constraint firstAttribute="height" constant="50" id="jgn-3e-tqa"/>
@@ -86,12 +86,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="3us-9G-Ujm"/>
-                            <constraint firstItem="nlr-VK-F1a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="44" id="ITm-1H-7mV"/>
+                            <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="4" id="Axu-fT-Izh"/>
+                            <constraint firstItem="nlr-VK-F1a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="59" id="ITm-1H-7mV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="20" id="LPw-6C-yp4"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="14" id="aSB-QC-dsU"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="-7" id="aSB-QC-dsU"/>
                             <constraint firstAttribute="bottom" secondItem="nlr-VK-F1a" secondAttribute="bottom" constant="20" symbolic="YES" id="ki7-g3-iA2"/>
-                            <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wfR-s7-05h"/>
-                            <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xxD-LX-TSZ"/>
+                            <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="4" id="wfR-s7-05h"/>
+                            <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="4" id="xxD-LX-TSZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="UICollectionView" id="9u9-J1-u5E"/>
@@ -160,15 +161,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="448" id="ay9-6q-CUS"/>
                                         </constraints>
-                                        <mutableString key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
+                                        <string key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
  3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one.
- 4. If you've used up both passes, you must let the time run out.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </mutableString>
+ 4. If you've used up both passes, you must let the time run out.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-5V-XcV" userLabel="ViewFullRulesButton">
-                                        <rect key="frame" x="46" y="494" width="318" height="46"/>
+                                        <rect key="frame" x="46" y="474" width="318" height="46"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                         <state key="normal" title="View full rules"/>
                                         <connections>
@@ -184,8 +185,8 @@
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="tym-T6-dxQ" secondAttribute="leading" constant="1" id="HKW-EE-zpH"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="leading" secondItem="msa-QC-7CI" secondAttribute="leading" constant="1" id="PMJ-A2-gmS"/>
                                     <constraint firstItem="CmT-5V-XcV" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="V5V-0l-xgQ"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="494" id="YUd-D4-XO6"/>
-                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="60" id="hRG-m0-KGB"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="474" id="YUd-D4-XO6"/>
+                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="80" id="hRG-m0-KGB"/>
                                     <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="3" id="n17-bH-F8T"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="pv4-H7-qEy"/>
                                 </constraints>
