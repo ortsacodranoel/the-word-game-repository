@@ -11,6 +11,7 @@
 		B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B37609051D675AA900A678A1 /* LaunchScreen.storyboard */; };
 		B392F42C1D66112F00F3748A /* RulesTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */; };
 		B392F42E1D66146100F3748A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42D1D66146100F3748A /* RulesViewController.swift */; };
+		B3B7AF6A1D6E13C000F60930 /* ButtonTapped.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B3B7AF691D6E13C000F60930 /* ButtonTapped.m4a */; };
 		B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */; };
 		B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B413DBDD1D2DF1900006FB9D /* Game.swift */; };
 		B4752B421D28849500A042E0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4752B411D28849500A042E0 /* GameViewController.swift */; };
@@ -48,6 +49,7 @@
 		B37609051D675AA900A678A1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesTransitionManager.swift; sourceTree = "<group>"; };
 		B392F42D1D66146100F3748A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		B3B7AF691D6E13C000F60930 /* ButtonTapped.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ButtonTapped.m4a; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
 		B413DBDD1D2DF1900006FB9D /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		B4752B411D28849500A042E0 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		D67774C51D1C392B0051C634 = {
 			isa = PBXGroup;
 			children = (
+				B3B7AF691D6E13C000F60930 /* ButtonTapped.m4a */,
 				D67774D01D1C392B0051C634 /* testing-animations */,
 				D67774E81D1C392B0051C634 /* testing-animationsTests */,
 				D67774F31D1C392B0051C634 /* testing-animationsUITests */,
@@ -278,6 +281,7 @@
 			files = (
 				B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */,
 				D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */,
+				B3B7AF6A1D6E13C000F60930 /* ButtonTapped.m4a in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
