@@ -164,7 +164,7 @@
                                             <action selector="rulesButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="xKz-33-sNW"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
                                         <rect key="frame" x="0.0" y="38" width="410" height="448"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="448" id="ay9-6q-CUS"/>

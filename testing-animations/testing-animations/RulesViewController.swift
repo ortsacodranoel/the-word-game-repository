@@ -48,13 +48,9 @@ class RulesViewController: UIViewController {
     // MARK: - Swipe Gesture Recognizer Properties
     let swipeRecognizer = UISwipeGestureRecognizer()
     
-    
-    
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
     }
     
     
@@ -63,7 +59,9 @@ class RulesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    /**
+     
+    */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -72,14 +70,10 @@ class RulesViewController: UIViewController {
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeRight)
         
-        // Team 1 - Score view
         UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
-            self.rulesLabel.alpha = 1
-
-            }, completion: nil)
+           // self.rulesLabel.alpha = 1
         
-
+            }, completion: nil)
     }
     
 
