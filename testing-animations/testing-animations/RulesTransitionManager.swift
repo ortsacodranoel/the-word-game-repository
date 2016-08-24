@@ -29,7 +29,7 @@ class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
         
         if (self.presenting) {
-            categoriesView.transform = offScreenRight
+            rulesView.transform = offScreenRight
         }
         else {
             rulesView.transform = offScreenLeft
@@ -54,7 +54,7 @@ class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
                 categoriesView.transform = offScreenRight
             }
             
-            rulesView.transform = CGAffineTransformIdentity
+                rulesView.transform = CGAffineTransformIdentity
             
             }, completion: { finished in
                 

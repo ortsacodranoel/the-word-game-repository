@@ -79,7 +79,7 @@
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="o0C-mE-Sf2" kind="showDetail" identifier="segueToRules" id="0MA-PL-k0W"/>
+                                    <segue destination="o0C-mE-Sf2" kind="show" identifier="segueToRules" action="showDetailViewController:sender:" id="0MA-PL-k0W"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -107,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-457" y="1751"/>
+            <point key="canvasLocation" x="-1521" y="563"/>
         </scene>
         <!--Rules View Controller-->
         <scene sceneID="HXC-YQ-azn">
@@ -153,19 +153,7 @@
                                             <constraint firstAttribute="height" constant="27" id="YH5-lU-nNs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
-                                        <rect key="frame" x="0.0" y="38" width="410" height="448"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="448" id="ay9-6q-CUS"/>
-                                        </constraints>
-                                        <string key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
- 3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one.
- 4. If you've used up both passes, you must let the time run out.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-5V-XcV" userLabel="ViewFullRulesButton">
@@ -176,6 +164,18 @@
                                             <action selector="rulesButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="xKz-33-sNW"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
+                                        <rect key="frame" x="0.0" y="38" width="410" height="448"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="448" id="ay9-6q-CUS"/>
+                                        </constraints>
+                                        <string key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
+ 3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one.
+ 4. If you've used up both passes, you must let the time run out.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Zcz-gl-UqU" secondAttribute="trailing" id="1Tb-5F-BuC"/>
@@ -204,6 +204,7 @@
                     </view>
                     <connections>
                         <outlet property="ruleOne" destination="msa-QC-7CI" id="KOb-kc-Vzj"/>
+                        <outlet property="rulesLabel" destination="msa-QC-7CI" id="KOw-q6-YPR"/>
                         <outlet property="rulesTitle" destination="Zcz-gl-UqU" id="JNf-xt-FiT"/>
                         <segue destination="AcR-VF-W4M" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="Rnd-jW-WEs"/>
                     </connections>
@@ -211,7 +212,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="277" y="837"/>
+            <point key="canvasLocation" x="-263" y="563"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -335,7 +336,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="230" y="1774"/>
+            <point key="canvasLocation" x="-1171" y="2015"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="IdY-Nk-VWO">
@@ -635,7 +636,7 @@ Cgo
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="LJF-0V-4cl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="906" y="1751"/>
+            <point key="canvasLocation" x="446" y="1995"/>
         </scene>
     </scenes>
     <resources>

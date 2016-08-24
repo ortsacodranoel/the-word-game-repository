@@ -55,7 +55,7 @@ class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
                 fromView.transform = offScreenRight
             }
             
-            toView.transform = CGAffineTransformIdentity
+                toView.transform = CGAffineTransformIdentity
             
             }, completion: { finished in
                 
