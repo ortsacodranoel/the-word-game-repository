@@ -23,6 +23,7 @@ class RulesViewController: UIViewController {
     @IBOutlet weak var ruleFive: UILabel!
     @IBOutlet weak var ruleSix: UILabel!
     
+    @IBOutlet weak var rulesLabel: UILabel!
 
     // MARK:- Initialization
     @IBAction func menuButtonTapped(sender: AnyObject) {
@@ -47,8 +48,6 @@ class RulesViewController: UIViewController {
     // MARK: - Swipe Gesture Recognizer Properties
     let swipeRecognizer = UISwipeGestureRecognizer()
     
-    
-    
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +59,9 @@ class RulesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    /**
+     
+    */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -68,7 +69,11 @@ class RulesViewController: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeRight)
-
+        
+        UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+           // self.rulesLabel.alpha = 1
+        
+            }, completion: nil)
     }
     
 

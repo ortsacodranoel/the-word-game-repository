@@ -47,7 +47,6 @@ class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
         
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: [], animations: {
             
-            
             if (self.presenting){
                 fromView.transform = offScreenLeft
             }
