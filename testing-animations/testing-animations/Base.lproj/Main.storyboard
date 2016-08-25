@@ -269,6 +269,7 @@
                                         <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
                                         <state key="normal" title="Select"/>
                                         <connections>
+                                            <action selector="selectButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="8bD-Vh-gPP"/>
                                             <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="hjj-Gg-oFL"/>
                                         </connections>
                                     </button>

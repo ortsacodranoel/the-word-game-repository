@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DetailViewController: UIViewController {
 
@@ -18,6 +19,9 @@ class DetailViewController: UIViewController {
     var categoryTapped = Int()
     var backgroundColor = UIColor()
     
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTouched", ofType: "mp3")!)
+    var audioPlayer = AVAudioPlayer()
     
     // MARK: - Buttons.
     @IBOutlet weak var selectButton: UIButton!
@@ -36,12 +40,19 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     
-    // MARK: - Actions.
+    // MARK: - Button Actions.
     @IBAction func backButtonTapped(sender: AnyObject)  {
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
 
     
+    @IBAction func selectButtonTapped(sender: AnyObject) {
+        if (sender.touchInside != nil) {
+            audioPlayer.play()
+        }
+    }
+    
+
     // MARK: - Data.
     let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
@@ -92,6 +103,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load sound.
+        self.loadSoundFile()
+        
         // Configure the Select button.
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
@@ -110,6 +124,18 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         startAnimations()
+    }
+    
+    
+    
+    // MARK: - Audio methods
+    func loadSoundFile() {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "mp3")
+            audioPlayer.prepareToPlay()
+        } catch {
+            print("Something happened")
+        }
     }
     
 

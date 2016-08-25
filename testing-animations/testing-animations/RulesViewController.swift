@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class RulesViewController: UIViewController {
     
@@ -25,13 +26,18 @@ class RulesViewController: UIViewController {
     
     @IBOutlet weak var rulesLabel: UILabel!
 
-    // MARK:- Initialization
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTouched", ofType: "mp3")!)
+    var audioPlayer = AVAudioPlayer()
+    
+    
+    // MARK:- Button Actions
     @IBAction func menuButtonTapped(sender: AnyObject) {
+        self.loadSoundFile()
+        self.audioPlayer.play()
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
-    
-    // MARK: - Button Actions.
     
     /**
         Used to link to the official rules page.
@@ -74,6 +80,16 @@ class RulesViewController: UIViewController {
            // self.rulesLabel.alpha = 1
         
             }, completion: nil)
+    }
+    
+    // MARK: - Audio Methods
+    func loadSoundFile() {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "mp3")
+            audioPlayer.prepareToPlay()
+        } catch {
+            print("Something happened")
+        }
     }
     
 

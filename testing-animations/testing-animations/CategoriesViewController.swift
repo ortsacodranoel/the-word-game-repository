@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
@@ -21,6 +22,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var rulesButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTouched", ofType: "mp3")!)
+    var audioPlayer = AVAudioPlayer()
+    
     
     // MARK: - Data
     
@@ -46,10 +51,26 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Used to set the button titles.
     let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
+
     
     // MARK - Button Actions
+    
+    
+    /**
+        
+    */
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
+    
+    
+    func loadSoundFile() {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "mp3")
+            audioPlayer.prepareToPlay()
+        } catch {
+            print("Something happened")
+        }
+    }
 
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
@@ -59,6 +80,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.loadSoundFile()
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,13 +122,14 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueToRules" {
-            
+         
+            self.audioPlayer.play()
             let rulesViewController = segue.destinationViewController as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
       
+
         } else if segue.identifier == "segueToDetails" {
-            
-        
+                   
             // Fade rules if visible. 
             self.rulesButton.alpha = 0
 
@@ -124,7 +148,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     
-    @IBAction func unwindToCategories(segue: UIStoryboardSegue){}
+    @IBAction func unwindToCategories(segue: UIStoryboardSegue){
+        self.audioPlayer.play()
+    }
 
     
     
