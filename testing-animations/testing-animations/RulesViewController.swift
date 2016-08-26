@@ -12,7 +12,6 @@ import AVFoundation
 class RulesViewController: UIViewController {
     
     // MARK: - Game Properties
-
     @IBOutlet weak var rulesScrollView: UIScrollView!
     
     // MARK: - Labels
@@ -26,15 +25,12 @@ class RulesViewController: UIViewController {
     
     @IBOutlet weak var rulesLabel: UILabel!
 
-    // MARK: - Audio
-    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTouched", ofType: "mp3")!)
-    var audioPlayer = AVAudioPlayer()
-    
+
     
     // MARK:- Button Actions
     @IBAction func menuButtonTapped(sender: AnyObject) {
         self.loadSoundFile()
-        self.audioPlayer.play()
+        self.tapAudioPlayer.play()
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
@@ -53,6 +49,22 @@ class RulesViewController: UIViewController {
     
     // MARK: - Swipe Gesture Recognizer Properties
     let swipeRecognizer = UISwipeGestureRecognizer()
+    
+    
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    
+    var tapAudioPlayer = AVAudioPlayer()
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -80,16 +92,6 @@ class RulesViewController: UIViewController {
            // self.rulesLabel.alpha = 1
         
             }, completion: nil)
-    }
-    
-    // MARK: - Audio Methods
-    func loadSoundFile() {
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "mp3")
-            audioPlayer.prepareToPlay()
-        } catch {
-            print("Something happened")
-        }
     }
     
 
