@@ -19,10 +19,6 @@ class DetailViewController: UIViewController {
     var categoryTapped = Int()
     var backgroundColor = UIColor()
     
-    // MARK: - Audio
-    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTouched", ofType: "mp3")!)
-    var audioPlayer = AVAudioPlayer()
-    
     // MARK: - Buttons.
     @IBOutlet weak var selectButton: UIButton!
 
@@ -48,7 +44,7 @@ class DetailViewController: UIViewController {
     
     @IBAction func selectButtonTapped(sender: AnyObject) {
         if (sender.touchInside != nil) {
-            audioPlayer.play()
+            self.tapAudioPlayer.play()
         }
     }
     
@@ -90,7 +86,20 @@ class DetailViewController: UIViewController {
                       "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.",
                       "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words."]
     
-
+    
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var tapAudioPlayer = AVAudioPlayer()
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
     
     // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
@@ -98,14 +107,14 @@ class DetailViewController: UIViewController {
 
     
     
-    // MARK: - View Methods
+    // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Load sound.
         self.loadSoundFile()
-        
+
         // Configure the Select button.
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
@@ -127,17 +136,7 @@ class DetailViewController: UIViewController {
     }
     
     
-    
-    // MARK: - Audio methods
-    func loadSoundFile() {
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "mp3")
-            audioPlayer.prepareToPlay()
-        } catch {
-            print("Something happened")
-        }
-    }
-    
+
 
     // ******************************************** MARK: Additional Methods ********************************************* //
     

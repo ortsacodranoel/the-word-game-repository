@@ -17,15 +17,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     private var lastContentOffset: CGFloat = 0
     
+    
     // MARK: Button Outlets
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
 
-    // MARK: - Audio
-    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTouched", ofType: "mp3")!)
-    var audioPlayer = AVAudioPlayer()
-    
     
     // MARK: - Data
     
@@ -51,26 +48,25 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Used to set the button titles.
     let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
-
     
     // MARK - Button Actions
-    
-    
-    /**
-        
-    */
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
     
     
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var tapAudioPlayer = AVAudioPlayer()
+    
     func loadSoundFile() {
         do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "mp3")
-            audioPlayer.prepareToPlay()
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
         } catch {
-            print("Something happened")
+            print("Unable to load sound files.")
         }
     }
+    
 
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
@@ -84,6 +80,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.loadSoundFile()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -106,6 +103,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
 
+    
     /**
         Used to animate rules menu fade-in.
     */
@@ -117,13 +115,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    
     // MARK: - Segue Methods
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueToRules" {
          
-            self.audioPlayer.play()
+            // Button tapped sound.
+            self.tapAudioPlayer.play()
+            
             let rulesViewController = segue.destinationViewController as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
       
@@ -149,26 +150,22 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     @IBAction func unwindToCategories(segue: UIStoryboardSegue){
-        self.audioPlayer.play()
+        self.tapAudioPlayer.play()
     }
-
     
     
     // MARK: - Animations
+    
     func animateMenuFadeIn() {
-        
         UIView.animateWithDuration(0.5,animations: {
-            
             self.rulesButton.alpha = 1
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func animateMenuFadeOut() {
-        
         UIView.animateWithDuration(0.5, animations: {
-            
             self.rulesButton.alpha = 0
-            }, completion: nil)
+        }, completion: nil)
     }
 
 }
