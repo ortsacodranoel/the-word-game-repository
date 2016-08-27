@@ -119,10 +119,7 @@ class GameViewController: UIViewController {
      to start counting down from 59.
      */
     @IBAction func startButtonTapped(sender: AnyObject) {
-        // TODO:
-        
-        self.countdownAudioPlayer.play()
-        
+
         // Reset right swipe count.
         self.timesSwipedRight = 0
         self.roundInProgress = true
@@ -130,10 +127,6 @@ class GameViewController: UIViewController {
         // Animate offscreen: startButtonView and menuView
         self.animateTitleOffScreen()
         self.tapAudioPlayer.play()
-        
-        
-        
-
     }
 
 
@@ -145,17 +138,23 @@ class GameViewController: UIViewController {
             performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
-    // MARK: - Audio
+    
+    // MARK: - Audio Setup
     let buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
     let swipeSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Swipe", ofType: "wav")!)
     let winSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("winner", ofType: "mp3")!)
     let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Alert", ofType: "mp3")!)
-    let countdownSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdownTimer", ofType: "mp3")!)
+    let countdownSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "mp3")!)
     
     var tapAudioPlayer = AVAudioPlayer()
     var swipeAudioPlayer = AVAudioPlayer()
     var winnerAudioPlayer = AVAudioPlayer()
     var timerAudioPlayer = AVAudioPlayer()
+    
+    /*
+        Used to generate the sounds which alert that the time for the current round
+        is coming to an end.
+    */
     var countdownAudioPlayer = AVAudioPlayer()
 
     
@@ -292,7 +291,7 @@ class GameViewController: UIViewController {
         self.animateGameTimer()
         self.updateTeamNameDisplayed()
         self.updateTeamScoreDisplayed()
-        self.endRound(40)
+        self.endRound(50)
     }
     
     
@@ -373,10 +372,21 @@ class GameViewController: UIViewController {
     
     
     /**
+        Used to run all methods that prepare the next round of the game. 
+        When the time reaches 3 seconds left, the method runs the alert 
+        sound.
+     
+        Parameters time: Int - used to indicate at what time the timer should stop.
     */
     func endRound(time: Int) {
+       
+        if self.seconds == 53 {
+            self.countdownAudioPlayer.play()
+        }
+        
         if self.seconds == time {
-            self.timerAudioPlayer.play()
+            
+            // self.timerAudioPlayer.play()
             self.game.updateTeamTurn()
             self.updateTeamNameDisplayed()
             self.animateTimeRunningOutFadeIn()
