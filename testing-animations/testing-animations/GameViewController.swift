@@ -109,7 +109,70 @@ class GameViewController: UIViewController {
     var timesSwipedRight = 0
 
     
-    // MARK: - Button Actions
+    // MARK: - Audio Properties & Methods
+    
+    /**
+     Used as a tap sound for Menu, Start, Select, and Rules button.
+     */
+    let soundEffectButtonTap = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    /**
+     Path to swipe sound effect.
+     */
+    let soundEffectSwipe = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Swipe", ofType: "wav")!)
+    /**
+     Path to winner sound effect.
+     */
+    let soundEffectWinner = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("winner", ofType: "mp3")!)
+    /**
+     Path to start countdown effect.
+     */
+    let soundEffectStartRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("initialCountdown", ofType: "mp3")!)
+    /**
+     Path to audio file.
+     */
+    let soundEffectEndRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "mp3")!)
+    
+    
+    /**
+     Used for menu interactions sounds.
+     */
+    var audioPlayerButtonTap = AVAudioPlayer()
+    /**
+     Used for sound effect when a word is swiped during the game.
+     */
+    var audioPlayerSwipe = AVAudioPlayer()
+    /**
+     Used to play the sound effect when a team wins.
+     */
+    var audioPlayerWinner = AVAudioPlayer()
+    /**
+     Used to play sound effects before a game round begins.
+     */
+    var audioPlayerStartRound = AVAudioPlayer()
+    /*
+     Used to play sound effects when the game timer is coming to an end.
+     */
+    var audioPlayerEndRound = AVAudioPlayer()
+    
+    
+    /**
+     Configures the AVAudioPlayers with their respective sounds.
+     */
+    func loadSoundFile() {
+        do {
+            self.audioPlayerButtonTap = try AVAudioPlayer(contentsOfURL: self.soundEffectButtonTap, fileTypeHint: "wav")
+            self.audioPlayerWinner = try AVAudioPlayer(contentsOfURL: self.soundEffectWinner,fileTypeHint: "mp3")
+            self.audioPlayerSwipe = try AVAudioPlayer(contentsOfURL: self.soundEffectSwipe, fileTypeHint: "wav")
+            self.audioPlayerStartRound = try AVAudioPlayer(contentsOfURL: self.soundEffectStartRound, fileTypeHint: "mp3")
+            self.audioPlayerEndRound = try AVAudioPlayer(contentsOfURL: self.soundEffectEndRound, fileTypeHint: "mp3")
+        } catch {
+            print("Error: unable to find sound files.")
+        }
+    }
+    
+    
+    
+    // MARK: - Button Methods
     
     /**
      Tapping the Start button calls the methods to remove the Start Button,
@@ -119,16 +182,18 @@ class GameViewController: UIViewController {
      */
     @IBAction func startButtonTapped(sender: AnyObject) {
 
-        // play sound
+        // Sound effects.
+        self.audioPlayerButtonTap.play()
         self.audioPlayerStartRound.play()
         
         // Reset right swipe count.
         self.timesSwipedRight = 0
+        
+        // Notify round started.
         self.roundInProgress = true
       
         // Animate offscreen: startButtonView and menuView
         self.animateTitleOffScreen()
-        self.audioPlayerButtonTap.play()
     }
 
 
@@ -140,66 +205,6 @@ class GameViewController: UIViewController {
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
-    // MARK: - Audio Properties
-    
-    /**
-        Used as a tap sound for Menu, Start, Select, and Rules button.
-    */
-    let soundEffectButtonTap = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
-    /**
-        Path to swipe sound effect.
-     */
-    let soundEffectSwipe = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Swipe", ofType: "wav")!)
-    /**
-        Path to winner sound effect.
-     */
-    let soundEffectWinner = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("winner", ofType: "mp3")!)
-    /**
-        Path to start countdown effect.
-     */
-    let soundEffectStartRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("initialCountdown7", ofType: "mp3")!)
-    /**
-        Path to audio file.
-     */
-    let soundEffectEndRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "mp3")!)
-    
-    
-    /**
-        Used for menu interactions sounds.
-    */
-    var audioPlayerButtonTap = AVAudioPlayer()
-    /**
-        Used for sound effect when a word is swiped during the game.
-    */
-    var audioPlayerSwipe = AVAudioPlayer()
-    /**
-        Used to play the sound effect when a team wins.
-    */
-    var audioPlayerWinner = AVAudioPlayer()
-    /**
-        Used to play sound effects before a game round begins.
-    */
-    var audioPlayerStartRound = AVAudioPlayer()
-    /*
-        Used to play sound effects when the game timer is coming to an end.
-    */
-    var audioPlayerEndRound = AVAudioPlayer()
-
-    
-    /**
-        Configures the AVAudioPlayers with their respective sounds.
-    */
-    func loadSoundFile() {
-        do {
-            self.audioPlayerButtonTap = try AVAudioPlayer(contentsOfURL: self.soundEffectButtonTap, fileTypeHint: "wav")
-            self.audioPlayerWinner = try AVAudioPlayer(contentsOfURL: self.soundEffectWinner,fileTypeHint: "mp3")
-            self.audioPlayerSwipe = try AVAudioPlayer(contentsOfURL: self.soundEffectSwipe, fileTypeHint: "wav")
-            self.audioPlayerStartRound = try AVAudioPlayer(contentsOfURL: self.soundEffectStartRound, fileTypeHint: "mp3")
-            self.audioPlayerEndRound = try AVAudioPlayer(contentsOfURL: self.soundEffectEndRound, fileTypeHint: "mp3")
-        } catch {
-            print("Unable to load sound files.")
-        }
-    }
     
 
     // MARK:- Initialization
@@ -286,7 +291,7 @@ class GameViewController: UIViewController {
     
     func runGameTimer() {
         if !self.gameTimer.valid {
-            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameViewController.currentRound), userInfo:nil, repeats: true)
+            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.currentRound), userInfo:nil, repeats: true)
         }
     }
     
@@ -499,7 +504,7 @@ class GameViewController: UIViewController {
     }
 
     
-    // MARK: - Initial Animations
+    // MARK: - Animations
     
     /**
         Used to animate all views when the GameViewController first loads. The animations
