@@ -376,6 +376,7 @@ class GameViewController: UIViewController {
     
     
     /**
+     
     */
     func updateTeamScoreDisplayed() {
         self.teamOneScoreLabel.text = String(game.getTeamOneScore())
