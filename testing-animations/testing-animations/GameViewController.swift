@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController {
     
@@ -18,7 +19,7 @@ class GameViewController: UIViewController {
     var wordOnScreen = false
     var wordReset = true
     var wordRemoved = false
-
+    
     /**
      Used to determine if a round is currently in progress.
      */
@@ -109,12 +110,90 @@ class GameViewController: UIViewController {
     var timesSwipedRight = 0
 
     
+    // MARK: - Button Actions
+    
+    /**
+     Tapping the Start button calls the methods to remove the Start Button,
+     the Categories Menu, and the current Team Title from the screen. It also
+     sets the initial value of the Timer laber to 59, and calls the timer method
+     to start counting down from 59.
+     */
+    @IBAction func startButtonTapped(sender: AnyObject) {
+
+        // Reset right swipe count.
+        self.timesSwipedRight = 0
+        self.roundInProgress = true
+      
+        // Animate offscreen: startButtonView and menuView
+        self.animateTitleOffScreen()
+        self.tapAudioPlayer.play()
+    }
+
+
+    /**
+     When the Menu Button is tapped it calls the segue to unwind
+     back to the initial categories screen.
+     */
+    @IBAction func menuButtonTapped(sender: AnyObject) {
+            performSegueWithIdentifier("unwindToCategories", sender: self)
+    }
+    
+    
+    // MARK: - Audio Setup
+    let buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    let swipeSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Swipe", ofType: "wav")!)
+    let winSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("winner", ofType: "mp3")!)
+    let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Alert", ofType: "mp3")!)
+    let countdownSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "mp3")!)
+    
+    var tapAudioPlayer = AVAudioPlayer()
+    var swipeAudioPlayer = AVAudioPlayer()
+    var winnerAudioPlayer = AVAudioPlayer()
+    var timerAudioPlayer = AVAudioPlayer()
+    
+    /*
+        Used to generate the sounds which alert that the time for the current round
+        is coming to an end.
+    */
+    var countdownAudioPlayer = AVAudioPlayer()
+
+    
+    /**
+        Used to configure the audioPlayers.
+    */
+    func loadSoundFile() {
+        do {
+            
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+            
+            self.winnerAudioPlayer = try AVAudioPlayer(contentsOfURL: self.winSound,fileTypeHint: "mp3")
+            self.winnerAudioPlayer.prepareToPlay()
+            
+            self.swipeAudioPlayer = try AVAudioPlayer(contentsOfURL: self.swipeSound, fileTypeHint: "wav")
+            self.swipeAudioPlayer.prepareToPlay()
+            
+            self.timerAudioPlayer = try AVAudioPlayer(contentsOfURL: self.alertSound, fileTypeHint: "mp3")
+            self.timerAudioPlayer.prepareToPlay()
+            
+            self.countdownAudioPlayer = try AVAudioPlayer(contentsOfURL: self.countdownSound, fileTypeHint: "mp3")
+            self.countdownAudioPlayer.prepareToPlay()
+            
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
+    
+
     // MARK:- Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        // Load sound files.
+        self.loadSoundFile()
+        
         
         // Configure the Start button.
         self.startButton.layer.cornerRadius = 7
@@ -179,16 +258,40 @@ class GameViewController: UIViewController {
         animationsStart()
     }
     
+    
+
+    // MARK: - Game Timers
+    
+    /**
+        Used for the initial countdown before the game starts.
+     */
+    func runPregameTimer() {
+        // Execute the countdownTimer.
+        if !self.countdownTimer.valid {
+            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameViewController.animateCountdownTimer), userInfo:nil, repeats: true)
+        }
+    }
+    
+    func runGameTimer() {
+        if !self.gameTimer.valid {
+            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameViewController.currentRound), userInfo:nil, repeats: true)
+        }
+    }
+    
+    
+    
+    // MARK: - Other configurations
+    
+    
     /**
      
      */
     func currentRound() {
-
         self.startTimer()
         self.animateGameTimer()
         self.updateTeamNameDisplayed()
         self.updateTeamScoreDisplayed()
-        self.endRound(40)
+        self.endRound(50)
     }
     
     
@@ -197,23 +300,19 @@ class GameViewController: UIViewController {
      */
     func changeBackgroundColor() {
         UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-          
             self.gameTimer.invalidate()
             self.view.backgroundColor = UIColor.greenColor()
             self.view.layoutIfNeeded()
-            
-            }, completion: { (bool) in
+        }, completion: { (bool) in
                 self.resetRound()
         })
-        
     }
     
     
     
     func resetRound() {
-        
         UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            
+
             self.view.backgroundColor = self.colors[self.categoryTapped]
 
             }, completion: { (bool) in
@@ -227,10 +326,7 @@ class GameViewController: UIViewController {
 
                 self.removeWord()
                 self.animateTitleOnScreen()
-                
-                
         })
-
     }
     
     
@@ -276,9 +372,21 @@ class GameViewController: UIViewController {
     
     
     /**
+        Used to run all methods that prepare the next round of the game. 
+        When the time reaches 3 seconds left, the method runs the alert 
+        sound.
+     
+        Parameters time: Int - used to indicate at what time the timer should stop.
     */
     func endRound(time: Int) {
+       
+        if self.seconds == 53 {
+            self.countdownAudioPlayer.play()
+        }
+        
         if self.seconds == time {
+            
+            // self.timerAudioPlayer.play()
             self.game.updateTeamTurn()
             self.updateTeamNameDisplayed()
             self.animateTimeRunningOutFadeIn()
@@ -289,10 +397,7 @@ class GameViewController: UIViewController {
     }
 
 
-    
-    
-    
-    
+
     // MARK: - Gesture Recognizers
     
     /**
@@ -305,6 +410,9 @@ class GameViewController: UIViewController {
                 case UISwipeGestureRecognizerDirection.Right: // RIGHT SWIPE
                     if roundInProgress == true {
                     
+                        self.swipeAudioPlayer.play()
+
+                        
                         // Animate word to the right offscreen and create a new word.
                         if wordOnScreen && timesSwipedRight < 2 {
                           
@@ -323,7 +431,10 @@ class GameViewController: UIViewController {
                 
                     // Check if round has started.
                     if self.roundInProgress == true {
-                    
+
+                        self.swipeAudioPlayer.play()
+
+                        
                         // Check if team one is active and that time is still valid.
                         if game.teamOneIsActive && timeIsUp == false {
                             
@@ -353,52 +464,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    
-    // MARK: - Button Actions
-    
-    /**
-     Tapping the Start button calls the methods to remove the Start Button,
-     the Categories Menu, and the current Team Title from the screen. It also 
-     sets the initial value of the Timer laber to 59, and calls the timer method 
-     to start counting down from 59.
-    */
-    @IBAction func startButtonTapped(sender: AnyObject) {
-        // Reset right swipe count.
-        self.timesSwipedRight = 0
-        self.roundInProgress = true
-        // Animate offscreen: startButtonView and menuView
-        self.animateTitleOffScreen()
-    }
-    
-    
-    
-    /**
-        Run countdown timer.
-    */
-    func runCountdownTimer() {
-        // Execute the countdownTimer.
-        if !self.countdownTimer.valid {
-            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameViewController.animateCountdownTimer), userInfo:nil, repeats: true)
-        }
-    }
-    
-    
-    /**
-        Run game timer.
-    */
-    func runGameTimer() {
-        if !self.gameTimer.valid {
-        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.currentRound), userInfo:nil, repeats: true)
-        }
-    }
-    
-    /**
-     When the Menu Button is tapped it calls the segue to unwind
-     back to the initial categories screen.
-     */
-    @IBAction func menuButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("unwindToCategories", sender: self)
-    }
     
     
     /**
@@ -555,6 +620,7 @@ class GameViewController: UIViewController {
                 
                 if self.game.won {
                     
+                    self.winnerAudioPlayer.play()
                     print(self.game.winnerTitle)
                     self.wordLabel.text = "\(self.game.winnerTitle) wins!"
                     self.changeBackgroundColor()
@@ -656,7 +722,7 @@ class GameViewController: UIViewController {
 
             }, completion: {(bool) in
                 self.startCountdownMsgView()
-                self.runCountdownTimer()
+                self.runPregameTimer()
         })
     }
     
@@ -667,6 +733,7 @@ class GameViewController: UIViewController {
      Animates TimeUpView on-screen.
     */
     func animateTimeIsUpMessageOnScreen() {
+        
             UIView.animateWithDuration(0.2, delay:0.2,
                                        usingSpringWithDamping: 0.8,
                                        initialSpringVelocity: 0.9,
@@ -733,12 +800,16 @@ class GameViewController: UIViewController {
 
     
     /**
-     This method is called by the
+        Used to count down from 3 t0 1 and display "Go!"
     */
     func animateCountdownTimer() {
+
+        
         if self.countdownNumber  > 1 {
+
             self.countdownNumber -= 1
             self.countdownMsgLabel.text = "\(self.countdownNumber)"
+            
         } else {
             self.countdownMsgLabel.text = "Go!"
             self.countdownTimer.invalidate()
@@ -756,6 +827,7 @@ class GameViewController: UIViewController {
         '3','2','1','Go!' with sufficient time.
      */
     func startCountdownMsgView() {
+
         UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:{
             self.centerAlignMsgView.constant -= self.view.bounds.width
             self.countdownMsgView.alpha = 1
@@ -765,11 +837,10 @@ class GameViewController: UIViewController {
         })
     }
     
+    
     /**
      Countdown Method
-     
- 
-     */
+    */
     func removeCountdownMsgView() {
         UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignMsgView.constant -= self.view.bounds.width
@@ -791,20 +862,3 @@ class GameViewController: UIViewController {
     
     
 }
-
-
-
-
-
-//                // MARK: Check if there is a winner.
-//
-//                if self.game.won {
-//                    if self.game.teamOneScore == 5 {
-//                        self.wordLabel.text = "TEAM ONE WINS!"
-//                        self.changeBackgroundColor()
-//                    } else if self.game.teamTwoScore == 5 {
-//                        self.wordLabel.text = "TEAM TWO WINS"
-//                        self.changeBackgroundColor()
-//                    }
-//                } else {
-

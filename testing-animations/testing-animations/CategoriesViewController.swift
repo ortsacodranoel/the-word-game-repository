@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
@@ -15,6 +16,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var game = Game()
     
     private var lastContentOffset: CGFloat = 0
+    
     
     // MARK: Button Outlets
     @IBOutlet weak var menuButton: UIButton!
@@ -50,6 +52,21 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK - Button Actions
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
+    
+    
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var tapAudioPlayer = AVAudioPlayer()
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
 
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
@@ -59,8 +76,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.loadSoundFile()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -83,6 +103,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
 
+    
     /**
         Used to animate rules menu fade-in.
     */
@@ -94,18 +115,22 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    
     // MARK: - Segue Methods
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueToRules" {
+         
+            // Button tapped sound.
+            self.tapAudioPlayer.play()
             
             let rulesViewController = segue.destinationViewController as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
       
+
         } else if segue.identifier == "segueToDetails" {
-            
-        
+                   
             // Fade rules if visible. 
             self.rulesButton.alpha = 0
 
@@ -124,25 +149,23 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     
-    @IBAction func unwindToCategories(segue: UIStoryboardSegue){}
-
+    @IBAction func unwindToCategories(segue: UIStoryboardSegue){
+        self.tapAudioPlayer.play()
+    }
     
     
     // MARK: - Animations
+    
     func animateMenuFadeIn() {
-        
         UIView.animateWithDuration(0.5,animations: {
-            
             self.rulesButton.alpha = 1
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func animateMenuFadeOut() {
-        
         UIView.animateWithDuration(0.5, animations: {
-            
             self.rulesButton.alpha = 0
-            }, completion: nil)
+        }, completion: nil)
     }
 
 }

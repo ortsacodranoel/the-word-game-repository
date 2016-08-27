@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CollectionViewCell: UICollectionViewCell {
     
@@ -14,10 +15,27 @@ class CollectionViewCell: UICollectionViewCell {
     var category : String = ""
     var cellTag : Int = -1
     
+    // MARK: - Buttons
     @IBOutlet weak var categoryButton: UIButton!
-   
+
     
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var tapAudioPlayer = AVAudioPlayer()
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+                        
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
+   
     @IBAction func buttonTouched(sender: AnyObject) {
-        
+        self.loadSoundFile()
+        self.tapAudioPlayer.play()
     }
 }

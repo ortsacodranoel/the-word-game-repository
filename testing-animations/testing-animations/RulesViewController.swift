@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
 class RulesViewController: UIViewController {
     
     // MARK: - Game Properties
-
     @IBOutlet weak var rulesScrollView: UIScrollView!
     
     // MARK: - Labels
@@ -23,14 +23,17 @@ class RulesViewController: UIViewController {
     @IBOutlet weak var ruleFive: UILabel!
     @IBOutlet weak var ruleSix: UILabel!
     
+    @IBOutlet weak var rulesLabel: UILabel!
 
-    // MARK:- Initialization
+
+    
+    // MARK:- Button Actions
     @IBAction func menuButtonTapped(sender: AnyObject) {
+        self.loadSoundFile()
+        self.tapAudioPlayer.play()
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
     
-    
-    // MARK: - Button Actions.
     
     /**
         Used to link to the official rules page.
@@ -48,6 +51,20 @@ class RulesViewController: UIViewController {
     let swipeRecognizer = UISwipeGestureRecognizer()
     
     
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    
+    var tapAudioPlayer = AVAudioPlayer()
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -60,7 +77,9 @@ class RulesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    /**
+     
+    */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -68,7 +87,11 @@ class RulesViewController: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeRight)
-
+        
+        UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+           // self.rulesLabel.alpha = 1
+        
+            }, completion: nil)
     }
     
 

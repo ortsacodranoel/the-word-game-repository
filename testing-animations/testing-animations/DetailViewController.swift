@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DetailViewController: UIViewController {
 
@@ -17,7 +18,6 @@ class DetailViewController: UIViewController {
     // MARK: - Variables.
     var categoryTapped = Int()
     var backgroundColor = UIColor()
-    
     
     // MARK: - Buttons.
     @IBOutlet weak var selectButton: UIButton!
@@ -36,12 +36,19 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     
-    // MARK: - Actions.
+    // MARK: - Button Actions.
     @IBAction func backButtonTapped(sender: AnyObject)  {
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
 
     
+    @IBAction func selectButtonTapped(sender: AnyObject) {
+        if (sender.touchInside != nil) {
+            self.tapAudioPlayer.play()
+        }
+    }
+    
+
     // MARK: - Data.
     let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
@@ -79,7 +86,20 @@ class DetailViewController: UIViewController {
                       "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.",
                       "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words."]
     
-
+    
+    // MARK: - Audio
+    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var tapAudioPlayer = AVAudioPlayer()
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
     
     // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
@@ -87,11 +107,14 @@ class DetailViewController: UIViewController {
 
     
     
-    // MARK: - View Methods
+    // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load sound.
+        self.loadSoundFile()
+
         // Configure the Select button.
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
@@ -112,6 +135,8 @@ class DetailViewController: UIViewController {
         startAnimations()
     }
     
+    
+
 
     // ******************************************** MARK: Additional Methods ********************************************* //
     
