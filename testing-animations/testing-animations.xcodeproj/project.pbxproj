@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
+		B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */; };
 		B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3634F441D6FD9E10060D517 /* ButtonTapped.wav */; };
 		B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F481D6FE2AE0060D517 /* winner.mp3 */; };
 		B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F4A1D6FED580060D517 /* Alert.mp3 */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
 		B3634F441D6FD9E10060D517 /* ButtonTapped.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTapped.wav; sourceTree = "<group>"; };
 		B3634F481D6FE2AE0060D517 /* winner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winner.mp3; sourceTree = "<group>"; };
 		B3634F4A1D6FED580060D517 /* Alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alert.mp3; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		B35659051D6F9D87003E7DCD /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */,
 				D6A39C101D7141D200FD65E6 /* countdown.mp3 */,
 				B3634F4A1D6FED580060D517 /* Alert.mp3 */,
 				B3BC8A031D70B47F00866886 /* Swipe.wav */,
@@ -299,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */,
 				B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */,
 				B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */,
 				B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */,
