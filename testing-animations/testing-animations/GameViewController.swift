@@ -13,11 +13,8 @@ class GameViewController: UIViewController {
     
     // MARK: - Game Properties
     var game = Game()
-    var answer = true
     var categoryTapped = Int()
-    var teamTwoTurn = false
     var wordOnScreen = false
-    var wordReset = true
     var wordRemoved = false
     
     /**
@@ -429,13 +426,13 @@ class GameViewController: UIViewController {
             switch swipeGesture.direction {
                 case UISwipeGestureRecognizerDirection.Right: // RIGHT SWIPE
                     if roundInProgress == true {
-                    
-                        self.audioPlayerSwipe.play()
 
                         
                         // Animate word to the right offscreen and create a new word.
                         if wordOnScreen && timesSwipedRight < 2 {
                           
+                            self.audioPlayerSwipe.play()
+                            
                             // Increase times swiped right.
                             timesSwipedRight += 1
                             
@@ -449,33 +446,39 @@ class GameViewController: UIViewController {
                 // LEFT swipe.
                 case UISwipeGestureRecognizerDirection.Left:
                 
-                    // Check if round has started.
-                    if self.roundInProgress == true {
-
-                        self.audioPlayerSwipe.play()
-
+                    if wordOnScreen == true {
                         
-                        // Check if team one is active and that time is still valid.
-                        if game.teamOneIsActive && timeIsUp == false {
+                        self.audioPlayerSwipe.play()
+                        
+                        // Check if round has started.
+                        if self.roundInProgress == true {
+
+
                             
-                            // Increment Team 1 score.
-                            game.teamOneScore += 1
-                            // Update Team 1 score text.
-                            teamOneScoreLabel.text = String(game.getTeamOneScore())
-                            
-                            // Create new word.
-                            animateNewWordLeftSwipe()
-                            
-                        } else if timeIsUp == false {
-                            // Increment Team 2 score.
-                            game.teamTwoScore += 1
-                            // Update score label.
-                            teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-                            // Create new word.
-                            animateNewWordLeftSwipe()
-                        }
+                            // Check if team one is active and that time is still valid.
+                            if game.teamOneIsActive && timeIsUp == false {
+                                
+                                // Increment Team 1 score.
+                                game.teamOneScore += 1
+                                // Update Team 1 score text.
+                                teamOneScoreLabel.text = String(game.getTeamOneScore())
+                                
+                                // Create new word.
+                                animateNewWordLeftSwipe()
+                                
+                            } else if timeIsUp == false {
+                                // Increment Team 2 score.
+                                game.teamTwoScore += 1
+                                // Update score label.
+                                teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+                                // Create new word.
+                                animateNewWordLeftSwipe()
+                            }
                     }
-                default:
+                    
+                }
+                
+            default:
                     break
                 }
         }
