@@ -75,6 +75,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var timeUpView: UIView!
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var countdownMsgView: UIView!
+    @IBOutlet weak var backgroundView: UIView!
     
     
     // MARK: - Animation Properties
@@ -101,87 +102,63 @@ class GameViewController: UIViewController {
     @IBOutlet weak var centerAlignMsgView: NSLayoutConstraint!
     
     // MARK: - Swipe Gesture Recognizer Properties
-  //  let swipeRecognizer = UISwipeGestureRecognizer()
     var swipedRight = false
     var timesSwipedRight = 0
 
     
     // MARK: - Audio Properties & Methods
     
-    /**
-     Used as a tap sound for Menu, Start, Select, and Rules button.
-     */
+    // Paths to sound effects.
     let soundEffectButtonTap = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
-    /**
-     Path to swipe sound effect.
-     */
     let soundEffectSwipe = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Swipe", ofType: "wav")!)
-    /**
-     Path to winner sound effect.
-     */
     let soundEffectWinner = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("winner", ofType: "mp3")!)
-    /**
-     Path to start countdown effect.
-     */
     let soundEffectStartRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("initialCountdown", ofType: "mp3")!)
-    /**
-     Path to audio file.
-     */
     let soundEffectEndRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "mp3")!)
     
-    
-    /**
-     Used for menu interactions sounds.
-     */
-    var audioPlayerButtonTap = AVAudioPlayer()
-    /**
-     Used for sound effect when a word is swiped during the game.
-     */
-    var audioPlayerSwipe = AVAudioPlayer()
-    /**
-     Used to play the sound effect when a team wins.
-     */
-    var audioPlayerWinner = AVAudioPlayer()
-    /**
-     Used to play sound effects before a game round begins.
-     */
-    var audioPlayerStartRound = AVAudioPlayer()
-    /*
-     Used to play sound effects when the game timer is coming to an end.
-     */
-    var audioPlayerEndRound = AVAudioPlayer()
+    /// Used for menu interactions sounds.
+    var audioPlayerButtonTapSound = AVAudioPlayer()
+    /// Used for sound effect when a word is swiped during the game.
+    var audioPlayerSwipeSound = AVAudioPlayer()
+    /// Used to play the sound effect when a team wins.
+    var audioPlayerWinSound = AVAudioPlayer()
+    /// Used to play sound effects before a game round begins.
+    var audioPlayerStartRoundSound = AVAudioPlayer()
+    /// Used to play sound effects when the game timer is coming to an end.
+    var audioPlayerEndRoundSound = AVAudioPlayer()
     
     
-    /**
-     Configures the AVAudioPlayers with their respective sounds.
-     */
-    func loadSoundFile() {
+    /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
+    func loadSounds() {
         do {
-            self.audioPlayerButtonTap = try AVAudioPlayer(contentsOfURL: self.soundEffectButtonTap, fileTypeHint: "wav")
-            self.audioPlayerWinner = try AVAudioPlayer(contentsOfURL: self.soundEffectWinner,fileTypeHint: "mp3")
-            self.audioPlayerSwipe = try AVAudioPlayer(contentsOfURL: self.soundEffectSwipe, fileTypeHint: "wav")
-            self.audioPlayerStartRound = try AVAudioPlayer(contentsOfURL: self.soundEffectStartRound, fileTypeHint: "mp3")
-            self.audioPlayerEndRound = try AVAudioPlayer(contentsOfURL: self.soundEffectEndRound, fileTypeHint: "mp3")
+            self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOfURL: self.soundEffectButtonTap, fileTypeHint: "wav")
+            self.audioPlayerWinSound = try AVAudioPlayer(contentsOfURL: self.soundEffectWinner,fileTypeHint: "mp3")
+            self.audioPlayerSwipeSound = try AVAudioPlayer(contentsOfURL: self.soundEffectSwipe, fileTypeHint: "wav")
+            self.audioPlayerStartRoundSound = try AVAudioPlayer(contentsOfURL: self.soundEffectStartRound, fileTypeHint: "mp3")
+            self.audioPlayerEndRoundSound = try AVAudioPlayer(contentsOfURL: self.soundEffectEndRound, fileTypeHint: "mp3")
+            self.audioPlayerButtonTapSound.prepareToPlay()
+            self.audioPlayerWinSound.prepareToPlay()
+            self.audioPlayerSwipeSound.prepareToPlay()
+            self.audioPlayerStartRoundSound.prepareToPlay()
+            self.audioPlayerEndRoundSound.prepareToPlay()
         } catch {
             print("Error: unable to find sound files.")
         }
     }
     
     
-    
-    // MARK: - Button Methods
+    // MARK: - BUTTON METHODS
     
     /**
-     Tapping the Start button calls the methods to remove the Start Button,
-     the Categories Menu, and the current Team Title from the screen. It also
-     sets the initial value of the Timer laber to 59, and calls the timer method
-     to start counting down from 59.
+         Tapping the Start button calls the methods to remove the Start Button,
+         the Categories Menu, and the current Team Title from the screen. It also
+         sets the initial value of the Timer laber to 59, and calls the timer method
+         to start counting down from 59.
      */
     @IBAction func startButtonTapped(sender: AnyObject) {
 
         // Sound effects.
-        self.audioPlayerButtonTap.play()
-        self.audioPlayerStartRound.play()
+        self.audioPlayerButtonTapSound.play()
+        self.audioPlayerStartRoundSound.play()
         
         // Reset right swipe count.
         self.timesSwipedRight = 0
@@ -208,9 +185,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Load sound files.
-        self.loadSoundFile()
+        self.loadSounds()
         
         // Configure the Start button.
         self.startButton.layer.cornerRadius = 7
@@ -391,11 +366,6 @@ class GameViewController: UIViewController {
         })
     }
     
-
-    
-    
-    
-    
     
     /**
      
@@ -455,13 +425,23 @@ class GameViewController: UIViewController {
         Parameters time: Int - used to indicate at what time the timer should stop.
     */
     func endRound(time: Int) {
+        
+        // 3 seconds before the game ends:
         if self.seconds == 53 {
-            self.audioPlayerEndRound.play()
+            
+            self.animateTimeRunningOutFadeIn()
+            
+            if self.game.won == false {
+                self.audioPlayerEndRoundSound.play()
+            } else if self.game.won == true {
+                self.audioPlayerEndRoundSound.stop()
+            }
         }
+        // The game should end:
         if self.seconds == time {
             self.game.updateTeamTurn()
             self.updateTeamNameDisplayed()
-            self.animateTimeRunningOutFadeIn()
+
             self.animateTimeIsUpMessageOnScreen()
             self.resetTimer()
             self.removeWord()
@@ -483,7 +463,7 @@ class GameViewController: UIViewController {
                 case UISwipeGestureRecognizerDirection.Right: // RIGHT SWIPE
                     if self.roundInProgress == true {
                         
-                        self.audioPlayerSwipe.prepareToPlay()
+                        self.audioPlayerSwipeSound.prepareToPlay()
                         
                         if wordOnScreen && timesSwipedRight < 2 {
                 
@@ -503,7 +483,7 @@ class GameViewController: UIViewController {
                     if wordOnScreen == true {
                         // Check if round has started.
                         if self.roundInProgress == true {
-                            self.audioPlayerSwipe.prepareToPlay()
+                            self.audioPlayerSwipeSound.prepareToPlay()
                             
                             // Check if team one is active and that time is still valid.
                             if game.teamOneIsActive && timeIsUp == false {
@@ -605,34 +585,27 @@ class GameViewController: UIViewController {
      that is animated onto the screen.
      */
     func animateNewWordLeftSwipe() {
-
-        self.audioPlayerSwipe.play()
         
-        // Animates wordViewContainer to the left off-screen.
+        self.audioPlayerSwipeSound.play()
+        
+        // Animate `wordContainerView` left off-screen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
+    
         UIView.animateWithDuration(0.0, delay:0.3, options: [], animations: {
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
             self.game.checkForWinner()
         }, completion: {(bool) in
-            if self.game.won {
-                self.audioPlayerWinner.play()
-                self.wordLabel.text = "\(self.game.winnerTitle) wins!"
-                self.changeBackgroundColor()
-            } else {
-                self.wordLabel.text = self.game.getWord(self.categoryTapped)
-            }
+            self.animateGameWin()
         })
         
-        
-        /**
-            Animates wordViewController to the middle of the screen.
-        */
+        // Animate `wordContainerView` to the center.
         UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -641,13 +614,29 @@ class GameViewController: UIViewController {
     }
 
 
+    
+    func animateGameWin() {
+        if self.game.won {
+            self.audioPlayerEndRoundSound.stop()
+            self.audioPlayerWinSound.play()
+            self.wordLabel.text = "\(self.game.winnerTitle) Wins!"
+            self.changeBackgroundColor()
+        } else {
+            self.wordLabel.text = self.game.getWord(self.categoryTapped)
+        }
+    }
+    
+    
+    
+    
+    
     /**
      The initial word animation moves the wordContainerView into view from the left side
      of the screen.
      */
     func animateNewWordRightSwipe() {
         
-        self.audioPlayerSwipe.play()
+        self.audioPlayerSwipeSound.play()
   
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignWordContainer.constant += self.view.bounds.width
@@ -729,23 +718,19 @@ class GameViewController: UIViewController {
 
     // MARK: - Animations (Time)
     
-    /**
-     Animates TimeUpView on-screen.
-    */
+
+    /// Animates TimeUpView on-screen.
     func animateTimeIsUpMessageOnScreen() {
         
-            UIView.animateWithDuration(0.2, delay:0.2,
-                                       usingSpringWithDamping: 0.8,
-                                       initialSpringVelocity: 0.9,
-                                       options: [], animations: {
-                                        
-                                        self.timeUpView.alpha = 1
-                                        self.timeUpView.center.y += self.view.bounds.height
-
-                }, completion: { (bool) in
-                    
-                    self.animateTimeIsUpMessageOffScreen()
+        // If nobody won:
+        if self.game.won == false {
+            UIView.animateWithDuration(0.2, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                    self.timeUpView.alpha = 1
+                    self.timeUpView.center.y += self.view.bounds.height
+            }, completion: { (bool) in
+                self.animateTimeIsUpMessageOffScreen()
             })
+        }
     }
     
     
@@ -767,21 +752,22 @@ class GameViewController: UIViewController {
      color back to its original state.
      */
     func animateTimeRunningOutFadeIn() {
-        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.view.backgroundColor = UIColor.redColor()
+        if self.game.won == false {
+            UIView.animateWithDuration(4.0, animations: {
+                self.backgroundView.alpha = 1
             }, completion: { (bool) in
+                // Fade out
                 // Set original background color.
                 self.animateTimeRunningOutFade()
             })
+        }
     }
-
     
-    /**
-     Changes the color from red to the original background color.
-    */
+    
+    /// Changes the color from red to the original background color.
     func animateTimeRunningOutFade() {
-        UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Set original background color.
+        UIView.animateWithDuration(1.0, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.backgroundView.alpha = 0
             self.setColor(self.categoryTapped)
             }, completion: nil)
     }
@@ -804,7 +790,6 @@ class GameViewController: UIViewController {
         round start.
     */
     func animateCountdownTimer() {
-
         if self.countdownNumber  > 1 {
             self.countdownNumber -= 1
             self.countdownMsgLabel.text = "\(self.countdownNumber)"
@@ -813,8 +798,6 @@ class GameViewController: UIViewController {
             self.countdownTimer.invalidate()
             self.countdownNumber = 4
         
-            /// Enable user interaction. 
-            // Disable gesture recognizer until game starts.
             self.view.userInteractionEnabled = true
             
         }
