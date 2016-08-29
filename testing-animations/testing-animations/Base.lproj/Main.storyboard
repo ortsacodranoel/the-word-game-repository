@@ -266,7 +266,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wf-r9-ZNq" userLabel="SelectButtonView">
                                 <rect key="frame" x="188" y="392" width="225" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z36-w8-L3G" userLabel="SelectButton">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z36-w8-L3G" userLabel="SelectButton">
                                         <rect key="frame" x="0.0" y="0.0" width="225" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
@@ -287,8 +287,11 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-nJ-zhp" userLabel="ButtonView">
                                 <rect key="frame" x="0.0" y="240" width="40" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="BackButton">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="BackButton">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="120"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
                                         <state key="normal" image="Back Chevron"/>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="3Q2-Zv-7vH"/>
@@ -522,7 +525,7 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMM-dS-Xrm" userLabel="StartButtonView">
                                 <rect key="frame" x="188" y="315" width="225" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-Ej-eue" userLabel="startButton">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-Ej-eue" userLabel="startButton">
                                         <rect key="frame" x="0.0" y="0.0" width="225" height="50"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <state key="normal" title="Start"/>
@@ -536,10 +539,10 @@
                                     <constraint firstAttribute="width" constant="225" id="F2l-GN-jFK"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
+                            <view opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <state key="normal" image="Menu"/>
                                         <connections>
@@ -548,6 +551,9 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" playsSound="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Dna-kO-7F8"/>
                                     <constraint firstAttribute="width" constant="70" id="u78-5x-B1a"/>
