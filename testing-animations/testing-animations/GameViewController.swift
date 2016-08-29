@@ -272,10 +272,8 @@ class GameViewController: UIViewController {
 
         animationsStart()
     }
-    
-    /**
-     Updates the team title displayed based on whose turn it is.
-     */
+
+    /// Updates the team name displayed for each turn.
     func updateTeamNameDisplayed() {
         if game.teamOneIsActive {
             teamLabel.text = "Team One"
@@ -286,9 +284,9 @@ class GameViewController: UIViewController {
     
     
     /**
-     Sets the color of the background based on the category selected.
+        Sets the color of the background based on the category selected.
      
-     - Parameter category: Int
+        - Parameter category: Int
      */
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
@@ -325,6 +323,9 @@ class GameViewController: UIViewController {
     
     
     /**
+        This method is used to initialize the timer display to start the game. 
+        It changes `01:00` to `00:59`, and notifies that the game round has started
+        by setting timeIsUp to `false`.
      */
     func startTimer() {
         timeIsUp = false
@@ -371,15 +372,19 @@ class GameViewController: UIViewController {
     
     
     /**
-     Animates word onto the screen from the left side.
+        Sets a new word to display based on the selected category. Animates that word onto 
+        the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
     func animateInitialWord() {
         UIView.animateWithDuration(0.5, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+          
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
+            
             self.wordOnScreen = true
+            
             }, completion: {(bool) in
                 self.repositionCountdownMsgView()
                 self.runGameTimer()
@@ -465,7 +470,7 @@ class GameViewController: UIViewController {
 
 
 
-    // MARK: - Gesture Recognizers
+    // MARK: - Swipe Gesture Recognizers
     
     
     /**
@@ -473,15 +478,13 @@ class GameViewController: UIViewController {
      word by swiping right. Each team is limited to 2 passes per round.
     */
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
                 case UISwipeGestureRecognizerDirection.Right: // RIGHT SWIPE
-                    
                     if self.roundInProgress == true {
-                    
-                        self.audioPlayerSwipe.play()
-
+                        
+                        self.audioPlayerSwipe.prepareToPlay()
+                        
                         if wordOnScreen && timesSwipedRight < 2 {
                 
                         // Increase times swiped right.
@@ -491,7 +494,6 @@ class GameViewController: UIViewController {
                         animateNewWordRightSwipe()
                     
                     } else {
-                        self.audioPlayerSwipe.pause()
                         animatePassMessage()
                     }
                 }
@@ -501,11 +503,10 @@ class GameViewController: UIViewController {
                     if wordOnScreen == true {
                         // Check if round has started.
                         if self.roundInProgress == true {
-
+                            self.audioPlayerSwipe.prepareToPlay()
+                            
                             // Check if team one is active and that time is still valid.
                             if game.teamOneIsActive && timeIsUp == false {
-                                
-                                self.audioPlayerSwipe.play()
                                 
                                 // Increment Team 1 score.
                                 game.teamOneScore += 1
@@ -513,7 +514,7 @@ class GameViewController: UIViewController {
                                 teamOneScoreLabel.text = String(game.getTeamOneScore())
                                 
                                 // Create new word.
-                                animateNewWordLeftSwipe()
+                                self.animateNewWordLeftSwipe()
                                 
                             } else if timeIsUp == false {
                                 // Increment Team 2 score.
@@ -605,6 +606,8 @@ class GameViewController: UIViewController {
      */
     func animateNewWordLeftSwipe() {
 
+        self.audioPlayerSwipe.play()
+        
         // Animates wordViewContainer to the left off-screen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
@@ -643,6 +646,9 @@ class GameViewController: UIViewController {
      of the screen.
      */
     func animateNewWordRightSwipe() {
+        
+        self.audioPlayerSwipe.play()
+  
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
