@@ -498,11 +498,11 @@
                                 </constraints>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="u3y-YN-CRe" userLabel="TimerView">
-                                <rect key="frame" x="490" y="3" width="90" height="40"/>
+                                <rect key="frame" x="490" y="18" width="90" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNe-I9-jHn" userLabel="TimerLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNe-I9-jHn" userLabel="TimerLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -596,7 +596,7 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
-                                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                <rect key="frame" x="0.0" y="3" width="70" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -650,7 +650,7 @@ Cgo
                             <constraint firstItem="99C-Fk-cpx" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="0pV-vg-Ocz"/>
                             <constraint firstItem="Wa9-Jv-BNt" firstAttribute="centerY" secondItem="yRW-TZ-RsK" secondAttribute="centerY" id="6IA-S2-nKS"/>
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="top" secondItem="uJh-bx-0FK" secondAttribute="bottom" id="7nT-NK-rhn"/>
-                            <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="3" id="8cO-60-skb"/>
+                            <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="18" id="8cO-60-skb"/>
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="92v-3Z-1Rk"/>
                             <constraint firstItem="fjx-Zy-kzK" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="Gqc-UV-9Vw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u3y-YN-CRe" secondAttribute="trailing" id="HP2-0m-zr7"/>
@@ -662,7 +662,7 @@ Cgo
                             <constraint firstItem="yRW-TZ-RsK" firstAttribute="leading" secondItem="QDg-XT-9rl" secondAttribute="leadingMargin" constant="130" id="S7b-Mh-Fvt"/>
                             <constraint firstItem="oXD-nv-iJF" firstAttribute="top" secondItem="yRW-TZ-RsK" secondAttribute="bottom" constant="9" id="TVL-FD-1ZS"/>
                             <constraint firstItem="LBu-6s-8UJ" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="Tph-fy-fax"/>
-                            <constraint firstItem="i50-N2-Dkt" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" id="VBo-M7-2AL"/>
+                            <constraint firstItem="i50-N2-Dkt" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="3" id="VBo-M7-2AL"/>
                             <constraint firstItem="uJh-bx-0FK" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="VM0-8r-bZk"/>
                             <constraint firstItem="YAC-GX-TCY" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="Vwu-Y8-hxS"/>
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="top" secondItem="uJh-bx-0FK" secondAttribute="bottom" id="XjY-79-QMG"/>
