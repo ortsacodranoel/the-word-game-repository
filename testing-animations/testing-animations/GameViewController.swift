@@ -275,13 +275,13 @@ class GameViewController: UIViewController {
         self.view.userInteractionEnabled = false
 
         if !self.countdownTimer.valid {
-            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameViewController.runCountdown), userInfo:nil, repeats: true)
+            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
         }
     }
     
     func runGameTimer() {
         if !self.gameTimer.valid {
-            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.currentRound), userInfo:nil, repeats: true)
+            self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
     }
     
@@ -320,17 +320,17 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK: - Gameplay Methods
+    // MARK: - GAMEPLAY
     
     /**
      
      */
-    func currentRound() {
+    func startRound() {
         self.startTimer()
         self.animateGameTimer()
         self.updateTeamNameDisplayed()
         self.updateTeamScoreDisplayed()
-        self.endRound(50)
+        self.endRound(40)
     }
     
     
@@ -341,7 +341,6 @@ class GameViewController: UIViewController {
      */
     func animateInitialWord() {
         UIView.animateWithDuration(0.5, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-          
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
@@ -352,18 +351,6 @@ class GameViewController: UIViewController {
             }, completion: {(bool) in
                 self.repositionCountdownMsgView()
                 self.runGameTimer()
-        })
-    }
-    
-    
-    /// Changes the color of the main view to green to indicate a win.
-    func animateWinBackgroundColorChange() {
-        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-            self.gameTimer.invalidate()
-            self.view.backgroundColor = UIColor.greenColor()
-            self.view.layoutIfNeeded()
-        }, completion: { (bool) in
-                self.resetRound()
         })
     }
     
@@ -405,9 +392,7 @@ class GameViewController: UIViewController {
         Parameters time: Int - used to indicate at what time the timer should stop.
     */
     func endRound(time: Int) {
-        
-        // 3 seconds before the game ends:
-        if self.seconds == 53 {
+        if self.seconds == 43 {
             self.animateBackgroundColorFadeIn()
             self.audioPlayerRoundIsEndingSound.play()
         } else if self.seconds == time {
@@ -426,8 +411,8 @@ class GameViewController: UIViewController {
     
     
     /**
-     When the team know the answer they will swipe left. When they do not, they can pass on the 
-     word by swiping right. Each team is limited to 2 passes per round.
+         When the team know the answer they will swipe left. When they do not, they can pass on the
+         word by swiping right. Each team is limited to 2 passes per round.
     */
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -480,7 +465,7 @@ class GameViewController: UIViewController {
                     
                 }
                 
-            default:
+                default:
                     break
                 }
         }
@@ -541,7 +526,7 @@ class GameViewController: UIViewController {
     
     
     /**
-     Fade-out animation for...
+        Fade-out animation for...
     */
     func animatePassMessageFadeOut(){
         UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -551,10 +536,10 @@ class GameViewController: UIViewController {
     
     
     /**
-     Animates the wordViewContainer left off-screen, followed by an animation of the container
-     back to its original position to the right off-screen, finalizing by animating a new word
-     to the middle of the screen. It also calls the .getWord() method to create the new word
-     that is animated onto the screen.
+         Animates the wordViewContainer left off-screen, followed by an animation of the container
+         back to its original position to the right off-screen, finalizing by animating a new word
+         to the middle of the screen. It also calls the .getWord() method to create the new word
+         that is animated onto the screen.
      */
     func animateNewWordLeftSwipe() {
         
@@ -591,20 +576,27 @@ class GameViewController: UIViewController {
     */
     func animateGameWin() {
         if self.game.won {
-            self.backgroundView.alpha = 0
-            self.audioPlayerRoundIsStartingSound.stop()
-            
-            self.animateWinBackgroundColorChange()
-            self.audioPlayerWinSound.play()
-            self.wordLabel.text = "\(self.game.winnerTitle) Wins!"
 
+            self.backgroundView.alpha = 0
+            self.audioPlayerRoundIsEndingSound.stop()
+
+            self.audioPlayerWinSound.play()
+
+            UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
+              
+                self.gameTimer.invalidate()
+                self.view.backgroundColor = UIColor.greenColor()
+                self.view.layoutIfNeeded()
+                }, completion: { (bool) in
+                    self.resetRound()
+            })
+
+            self.wordLabel.text = "\(self.game.winnerTitle) Wins!"
+        
         } else {
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
         }
     }
-    
-    
-    
     
     
     /**
@@ -656,7 +648,7 @@ class GameViewController: UIViewController {
         UIView.animateWithDuration(0.5, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                         self.menuView.userInteractionEnabled = true
                         self.menuView.alpha = 1
-            }, completion: nil)
+        }, completion: nil)
 
         UIView.animateWithDuration(0.5, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.startButton.userInteractionEnabled = true
@@ -709,7 +701,7 @@ class GameViewController: UIViewController {
         so that it can be used in new round. Prior to exiting the method all 
         user interactions a re-enabled.
     */
-    func runCountdown() {
+    func startCountdown() {
         if self.countdown  > 1 {
             self.countdown -= 1
             self.countdownMsgLabel.text = "\(self.countdown)"

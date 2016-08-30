@@ -498,7 +498,7 @@
                                 </constraints>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="u3y-YN-CRe" userLabel="TimerView">
-                                <rect key="frame" x="490" y="18" width="90" height="40"/>
+                                <rect key="frame" x="490" y="3" width="90" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNe-I9-jHn" userLabel="TimerLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="40"/>
@@ -596,10 +596,10 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="i50-N2-Dkt" userLabel="MenuView">
-                                <rect key="frame" x="0.0" y="3" width="70" height="70"/>
+                                <rect key="frame" x="0.0" y="3" width="70" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-nn-RN0" userLabel="MenuButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="40"/>
                                         <state key="normal" image="Menu"/>
                                         <connections>
                                             <action selector="menuButtonTapped:" destination="Sav-rh-bmW" eventType="touchUpInside" id="qeK-HK-2yq"/>
@@ -612,7 +612,7 @@
                                 </accessibility>
                                 <constraints>
                                     <constraint firstItem="3Gv-nn-RN0" firstAttribute="top" secondItem="i50-N2-Dkt" secondAttribute="top" id="2gL-vL-Jzm"/>
-                                    <constraint firstAttribute="height" constant="70" id="Dna-kO-7F8"/>
+                                    <constraint firstAttribute="height" constant="40" id="Dna-kO-7F8"/>
                                     <constraint firstAttribute="trailing" secondItem="3Gv-nn-RN0" secondAttribute="trailing" id="dw2-dJ-gvG"/>
                                     <constraint firstItem="3Gv-nn-RN0" firstAttribute="leading" secondItem="i50-N2-Dkt" secondAttribute="leading" id="kjZ-RV-btn"/>
                                     <constraint firstAttribute="width" constant="70" id="u78-5x-B1a"/>
@@ -650,7 +650,7 @@ Cgo
                             <constraint firstItem="99C-Fk-cpx" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="0pV-vg-Ocz"/>
                             <constraint firstItem="Wa9-Jv-BNt" firstAttribute="centerY" secondItem="yRW-TZ-RsK" secondAttribute="centerY" id="6IA-S2-nKS"/>
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="top" secondItem="uJh-bx-0FK" secondAttribute="bottom" id="7nT-NK-rhn"/>
-                            <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="18" id="8cO-60-skb"/>
+                            <constraint firstItem="u3y-YN-CRe" firstAttribute="top" secondItem="GbM-Bx-36X" secondAttribute="bottom" constant="3" id="8cO-60-skb"/>
                             <constraint firstItem="SMM-dS-Xrm" firstAttribute="centerX" secondItem="QDg-XT-9rl" secondAttribute="centerX" id="92v-3Z-1Rk"/>
                             <constraint firstItem="fjx-Zy-kzK" firstAttribute="centerY" secondItem="QDg-XT-9rl" secondAttribute="centerY" id="Gqc-UV-9Vw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u3y-YN-CRe" secondAttribute="trailing" id="HP2-0m-zr7"/>
