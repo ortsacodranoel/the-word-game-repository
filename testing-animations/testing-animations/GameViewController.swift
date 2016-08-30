@@ -311,7 +311,7 @@ class GameViewController: UIViewController {
         self.prepareGameTimer()
         self.animateGameTimer()
         self.updateScore()
-        self.endRound(40)
+        self.endRound(53)
     }
     
     
@@ -331,15 +331,15 @@ class GameViewController: UIViewController {
         })
     }
     
-
+    /// Changes the score labels content depending on the current score.
     func updateScore() {
         self.teamOneScoreLabel.text = String(game.getTeamOneScore())
         self.teamTwoScoreLabel.text = String(game.getTeamTwoScore())
     }
     
     
-    func resetRound() {
-        UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+    func resetRound(time: Double ) {
+        UIView.animateWithDuration(0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
             self.view.backgroundColor = self.colors[self.categoryTapped]
         }, completion: { (bool) in
             self.game.won = false
@@ -362,7 +362,7 @@ class GameViewController: UIViewController {
         Parameters time: Int - used to indicate at what time the timer should stop.
     */
     func endRound(time: Int) {
-        if self.seconds == 43 {
+        if self.seconds < 43 {
             self.animateBackgroundColorFadeIn()
             self.audioPlayerRoundIsEndingSound.play()
         } else if self.seconds == time {
@@ -472,9 +472,7 @@ class GameViewController: UIViewController {
     }
     
     
-    /**
-        Fade-out animation for...
-    */
+
     func animatePassMessageFadeOut(){
         UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.passesLabel.alpha = 0
@@ -518,15 +516,16 @@ class GameViewController: UIViewController {
     */
     func animateGameWin() {
         if self.game.won {
-            self.backgroundView.alpha = 0
+            self.setColor(self.categoryTapped)
+            self.gameTimer.invalidate()
             self.audioPlayerRoundIsEndingSound.stop()
+
             self.audioPlayerWinSound.play()
-            UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-                self.gameTimer.invalidate()
+            UIView.animateWithDuration(0.5, animations: {
                 self.view.backgroundColor = UIColor.greenColor()
                 self.view.layoutIfNeeded()
                 }, completion: { (bool) in
-                    self.resetRound()
+                    self.resetRound(2.0)
             })
             self.wordLabel.text = "\(self.game.winnerTitle) Wins!"
         } else {

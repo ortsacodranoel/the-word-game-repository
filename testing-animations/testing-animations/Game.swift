@@ -58,9 +58,7 @@ class Game {
         self.roundInProgress = true
     }
     
-    /**
-        Used to reset team scores to 0.
-    */
+    /// Resets team scores back to 0.
     func resetGame() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
