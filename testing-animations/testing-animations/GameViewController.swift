@@ -159,7 +159,6 @@ class GameViewController: UIViewController {
          to start counting down from 59.
      */
     @IBAction func startButtonTapped(sender: AnyObject) {
-        self.roundInProgress = true
         self.audioPlayerButtonTapSound.play()
         self.audioPlayerRoundIsStartingSound.play()
         self.timesSwipedRight = 0
@@ -238,7 +237,7 @@ class GameViewController: UIViewController {
 
     
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // MARK: - Timer Methods
+    // MARK: - TIMER METHODS
     
     ///
     func runCountdownTimer() {
@@ -251,6 +250,9 @@ class GameViewController: UIViewController {
     
     ///
     func runGameTimer() {
+        
+        self.repositionCountdownMsgView()
+        
         if !self.gameTimer.valid {
             self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
@@ -275,6 +277,16 @@ class GameViewController: UIViewController {
         self.countdown = 4
     }
     
+    
+    
+    /// Animates main game timer.
+    func animateGameTimer() {
+        self.seconds -= 1
+        self.minutes = 0
+        let strMinutes = String(format: "%1d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+    }
     
     /**
      */
@@ -308,15 +320,14 @@ class GameViewController: UIViewController {
         the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
     func animateInitialWord() {
-        UIView.animateWithDuration(0.5, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
-            self.wordOnScreen = true
         }, completion: {(bool) in
-            self.repositionCountdownMsgView()
-            self.runGameTimer()
+             self.runGameTimer()
+
         })
     }
     
@@ -335,11 +346,10 @@ class GameViewController: UIViewController {
             self.resetTimer()
             self.game.resetGame()
             self.game.updateTeamTurn()
-                self.setTeamTurn()
-                self.updateScore()
-
-                self.removeWord()
-                self.animateTitleOnScreen()
+            self.setTeamTurn()
+            self.updateScore()
+            self.removeWord()
+            self.animateTitleOnScreen()
         })
     }
     
@@ -358,7 +368,6 @@ class GameViewController: UIViewController {
         } else if self.seconds == time {
             self.game.updateTeamTurn()
             self.setTeamTurn()
-
             self.animateTimeIsUpMessageOnScreen()
             self.resetTimer()
             self.removeWord()
@@ -378,8 +387,9 @@ class GameViewController: UIViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
                 switch swipeGesture.direction {
                         case UISwipeGestureRecognizerDirection.Right:
-                            if self.roundInProgress == true {
-                                if self.wordOnScreen && self.timesSwipedRight < 2 {
+                            
+                            if self.roundInProgress {
+                                if  self.wordOnScreen && self.timesSwipedRight < 2 {
                                     self.audioPlayerSwipeSound.play()
                                     self.timesSwipedRight += 1
                                     self.animateNewWordRightSwipe()
@@ -388,30 +398,29 @@ class GameViewController: UIViewController {
                             }
                         }
                         case UISwipeGestureRecognizerDirection.Left:
-                            if self.wordOnScreen {
-                                if self.roundInProgress == true {
+                            
+                            if self.roundInProgress {
+                                if game.teamOneIsActive {
                                     self.audioPlayerSwipeSound.play()
-                                    if game.teamOneIsActive && timeIsUp == false {
-                                        game.teamOneScore += 1
-                                        teamOneScoreLabel.text = String(game.getTeamOneScore())
-                                        self.animateNewWordLeftSwipe()
-                                    } else if timeIsUp == false {
-                                        game.teamTwoScore += 1
-                                        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-                                        animateNewWordLeftSwipe()
-                                    }
-                            }
-                        
-                    }
-                    default:
-                        break
-                    }
+                                    game.teamOneScore += 1
+                                    teamOneScoreLabel.text = String(game.getTeamOneScore())
+                                    self.animateNewWordLeftSwipe()
+                                } else {
+                                    self.audioPlayerSwipeSound.play()
+                                    game.teamTwoScore += 1
+                                    teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+                                    animateNewWordLeftSwipe()
+                                }
+                            
+                        }
+                        default:
+                            break
+                        }
         }
     }
 
     
-
-    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - Animations
     
     /**
@@ -448,7 +457,7 @@ class GameViewController: UIViewController {
     }
     
 
-    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - Swipe Based Animations
     
     /**
@@ -480,16 +489,12 @@ class GameViewController: UIViewController {
          that is animated onto the screen.
      */
     func animateNewWordLeftSwipe() {
-
-        
-        // Animate `wordContainerView` left off-screen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-    
         UIView.animateWithDuration(0.0, delay:0.3, options: [], animations: {
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -554,17 +559,7 @@ class GameViewController: UIViewController {
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - Animations (Fade-Out/off-screen)
     
-    /**
-     Remove the wordContainerView from the screen.
-    */
-    func removeWord() {
-        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-            self.centerAlignWordContainer.constant += self.view.bounds.width
-            self.wordContainerView.alpha = 1
-            self.view.layoutIfNeeded()
-            }, completion: nil)
-    }
-    
+
     
     /**
      Animates menuView, startButton, and teamLabel to their initial positions on-screen.
@@ -609,16 +604,19 @@ class GameViewController: UIViewController {
         })
     }
     
-    
-    /// Animates main game timer.
-    func animateGameTimer() {
-        self.seconds -= 1
-        self.minutes = 0
-        let strMinutes = String(format: "%1d", minutes)
-        let strSeconds = String(format: "%02d", seconds)
-        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+    /**
+     Remove the wordContainerView from the screen.
+     */
+    func removeWord() {
+        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
+            self.centerAlignWordContainer.constant += self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            self.view.layoutIfNeeded()
+            }, completion: nil)
     }
     
+    
+
 
     
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -636,10 +634,12 @@ class GameViewController: UIViewController {
             self.countdown -= 1
             self.countdownMsgLabel.text = "\(self.countdown)"
         } else {
+            self.view.userInteractionEnabled = true
+            self.wordOnScreen = true
+            self.roundInProgress = true
             self.countdownMsgLabel.text = "Go!"
             self.countdownTimer.invalidate()
             self.countdown = 4
-                    self.view.userInteractionEnabled = true
         }
     }
     
@@ -676,11 +676,8 @@ class GameViewController: UIViewController {
         Moves the countDownMsgView back to it's original position.
      */
     func repositionCountdownMsgView() {
-        UIView.animateWithDuration(0.0, animations:  {
             self.countdownMsgLabel.text = ""
             self.centerAlignMsgView.constant += self.view.bounds.width + self.view.bounds.width
-            self.view.layoutIfNeeded()
-            }, completion: nil)
     }
     
     
@@ -689,8 +686,6 @@ class GameViewController: UIViewController {
     
     /// Animates 'timeUpView'from the top of the screen with the message `Time's Up!`.
     func animateTimeIsUpMessageOnScreen() {
-        
-        // If nobody won:
         if self.game.won == false {
             UIView.animateWithDuration(0.2, delay:0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.timeUpView.alpha = 1
