@@ -495,7 +495,7 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-        UIView.animateWithDuration(0.0, delay:0.3, options: [], animations: {
+        UIView.animateWithDuration(0.0, delay:0.4, options: [], animations: {
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
