@@ -87,9 +87,9 @@ class GameViewController: UIViewController {
     var gameTimer = NSTimer()
     var countdownTimer = NSTimer()
     var seconds = 00
+    var minutes = 1
     var time : String = ""
     var timeIsUp = false
-    var minutes = 1
 
     /**
         Used to store the values of the initial countdown and 'Go!' message when a player starts
@@ -106,11 +106,11 @@ class GameViewController: UIViewController {
     var timesSwipedRight = 0
 
     
-    // MARK: - Audio Properties & Methods
+    // MARK: - Audio Properties
     
     // Paths to sound effects.
     let soundEffectButtonTap = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
-    let soundEffectSwipe = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Swipe", ofType: "wav")!)
+    let soundEffectSwipe = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("swipeSoundEffect", ofType: "mp3")!)
     let soundEffectWinner = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("winner", ofType: "mp3")!)
     let soundEffectStartRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("initialCountdown", ofType: "mp3")!)
     let soundEffectEndRound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "mp3")!)
@@ -126,6 +126,9 @@ class GameViewController: UIViewController {
     /// Used to play sound effects when the game timer is coming to an end.
     var audioPlayerRoundIsEndingSound = AVAudioPlayer()
     
+    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // MARK: - AUDIO METHODS
     
     /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
     func loadSounds() {
@@ -146,6 +149,7 @@ class GameViewController: UIViewController {
     }
     
     
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - BUTTON METHODS
     
     /**
@@ -155,19 +159,11 @@ class GameViewController: UIViewController {
          to start counting down from 59.
      */
     @IBAction func startButtonTapped(sender: AnyObject) {
-
-        // Sound effects.
         self.audioPlayerButtonTapSound.play()
         self.audioPlayerRoundIsStartingSound.play()
-        
-        // Reset right swipe count.
         self.timesSwipedRight = 0
-        
-        // Notify round started.
         self.roundInProgress = true
-      
-        // Animate offscreen: startButtonView and menuView
-        self.animateTitleOffScreen()
+        self.animateMenusOffScreen()
     }
 
 
@@ -178,70 +174,51 @@ class GameViewController: UIViewController {
     @IBAction func menuButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("unwindToCategories", sender: self)
     }
-    
-    
 
-    // MARK:- Initialization
+    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // MARK:- INITIALIZATION
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.loadSounds()
-        
-        self.startButton.layer.cornerRadius = 7
-        self.startButton.layer.borderColor = UIColor.whiteColor().CGColor
-        self.startButton.layer.borderWidth = 3
-        self.updateTeamNameDisplayed()
-        
-        setColor(categoryTapped)
-        
-        teamOneScoreLabel.text = String(game.getTeamOneScore())
-        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+            let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+            swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+            self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+            
+            let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+            swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
+            self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()}
     
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+            self.resetTimer()
         
-        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
-        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
-        
-        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
-        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
-        
-        // Timer configuration.
-        seconds = 00
-        minutes = 1
-        let strMinutes = String(format: "%1d", minutes)
-        let strSeconds = String(format: "%02d", seconds)
-        self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
+            self.startButton.layer.cornerRadius = 7
+            self.startButton.layer.borderColor = UIColor.whiteColor().CGColor
+            self.startButton.layer.borderWidth = 3
+            
+            self.loadSounds()
+            self.setColor(categoryTapped)
+            self.setTeamTurn()
+            
+            self.passesLabel.alpha = 0
+            
+            self.centerAlignWordContainer.constant += view.bounds.width
+            self.timeUpView.alpha = 0
+            self.centerAlignMsgView.constant += view.bounds.width
 
-        // Setup team labels.
-        team1Label.text = "Team 1"
+            self.teamOneScoreLabel.text = String(game.getTeamOneScore())
+            self.teamTwoScoreLabel.text = String(game.getTeamTwoScore())
         
-        self.passesLabel.alpha = 0
-        
-        // Move the wordContainerView just out of view.
-        self.centerAlignWordContainer.constant += view.bounds.width
-        //self.countdownMsgView.alpha = 0
-        
-        self.timeUpView.alpha = 0
-        self.timeUpView.userInteractionEnabled = false
-
-        // Move countdownMsgView out of view.
-        self.centerAlignMsgView.constant += view.bounds.width
-
-        animationsStart()
+            self.animationsStart()
     }
 
     /// Updates the team name displayed for each turn.
-    func updateTeamNameDisplayed() {
+    func setTeamTurn() {
         if game.teamOneIsActive {
             teamLabel.text = "Team One"
         } else {
@@ -260,25 +237,19 @@ class GameViewController: UIViewController {
     }
 
     
-    
-    
-    
-    
-    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - Timer Methods
-
-    /**
-        Disables all user interactions with the view and runs the 'countdownTimer'.
-     
-     */
+    
+    ///
     func runCountdownTimer() {
         self.view.userInteractionEnabled = false
-
         if !self.countdownTimer.valid {
             self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
         }
     }
     
+    
+    ///
     func runGameTimer() {
         if !self.gameTimer.valid {
             self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
@@ -291,16 +262,16 @@ class GameViewController: UIViewController {
         It changes `01:00` to `00:59`, and notifies that the game round has started
         by setting timeIsUp to `false`.
      */
-    func startTimer() {
+    func prepareGameTimer() {
         timeIsUp = false
         if self.seconds == 0 {
-            self.seconds = 59
+            self.seconds = 60
             self.minutes = 0
             let strMinutes = String(format: "%1d", self.minutes)
             let strSeconds = String(format: "%02d", self.seconds)
             self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
         }
-        // Reset the value of the countdown number for the next time the countdown method runs.
+
         self.countdown = 4
     }
     
@@ -319,20 +290,16 @@ class GameViewController: UIViewController {
     }
     
     
-    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - GAMEPLAY
     
-    /**
-     
-     */
     func startRound() {
-        self.startTimer()
+        self.setTeamTurn()
+        self.prepareGameTimer()
         self.animateGameTimer()
-        self.updateTeamNameDisplayed()
-        self.updateTeamScoreDisplayed()
+        self.updateScore()
         self.endRound(40)
     }
-    
     
     
     /**
@@ -345,17 +312,15 @@ class GameViewController: UIViewController {
             self.wordContainerView.alpha = 1
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
-            
             self.wordOnScreen = true
-            
-            }, completion: {(bool) in
-                self.repositionCountdownMsgView()
-                self.runGameTimer()
+        }, completion: {(bool) in
+            self.repositionCountdownMsgView()
+            self.runGameTimer()
         })
     }
     
 
-    func updateTeamScoreDisplayed() {
+    func updateScore() {
         self.teamOneScoreLabel.text = String(game.getTeamOneScore())
         self.teamTwoScoreLabel.text = String(game.getTeamTwoScore())
     }
@@ -363,26 +328,20 @@ class GameViewController: UIViewController {
     
     func resetRound() {
         UIView.animateWithDuration(0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-
             self.view.backgroundColor = self.colors[self.categoryTapped]
-
-            }, completion: { (bool) in
-                self.game.won = false
-                self.resetTimer()
-                self.game.resetGame()
-
-                self.game.updateTeamTurn()
-                self.updateTeamNameDisplayed()
-                self.updateTeamScoreDisplayed()
+        }, completion: { (bool) in
+            self.game.won = false
+            self.resetTimer()
+            self.game.resetGame()
+            self.game.updateTeamTurn()
+                self.setTeamTurn()
+                self.updateScore()
 
                 self.removeWord()
                 self.animateTitleOnScreen()
         })
     }
     
-
-    
- 
     
     /**
         Used to run all methods that prepare the next round of the game. 
@@ -397,7 +356,7 @@ class GameViewController: UIViewController {
             self.audioPlayerRoundIsEndingSound.play()
         } else if self.seconds == time {
             self.game.updateTeamTurn()
-            self.updateTeamNameDisplayed()
+            self.setTeamTurn()
 
             self.animateTimeIsUpMessageOnScreen()
             self.resetTimer()
@@ -406,8 +365,8 @@ class GameViewController: UIViewController {
     }
 
 
-
-    // MARK: - Swipe Gesture Recognizers
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // MARK: - SWIPE GESTURE
     
     
     /**
@@ -416,58 +375,57 @@ class GameViewController: UIViewController {
     */
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-                case UISwipeGestureRecognizerDirection.Right: // RIGHT SWIPE
-                    if self.roundInProgress == true {
-                        
-                        self.audioPlayerSwipeSound.prepareToPlay()
-                        
-                        if wordOnScreen && timesSwipedRight < 2 {
-                
-                        // Increase times swiped right.
-                        timesSwipedRight += 1
-                        
-                        // Create and display new word.
-                        animateNewWordRightSwipe()
+                switch swipeGesture.direction {
                     
-                    } else {
-                        animatePassMessage()
-                    }
-                }
-
-                // LEFT swipe.
-                case UISwipeGestureRecognizerDirection.Left:
-                    if wordOnScreen == true {
-                        // Check if round has started.
-                        if self.roundInProgress == true {
-                            self.audioPlayerSwipeSound.prepareToPlay()
+                        case UISwipeGestureRecognizerDirection.Right:
                             
-                            // Check if team one is active and that time is still valid.
-                            if game.teamOneIsActive && timeIsUp == false {
-                                
-                                // Increment Team 1 score.
-                                game.teamOneScore += 1
-                                // Update Team 1 score text.
-                                teamOneScoreLabel.text = String(game.getTeamOneScore())
-                                
-                                // Create new word.
-                                self.animateNewWordLeftSwipe()
-                                
-                            } else if timeIsUp == false {
-                                // Increment Team 2 score.
-                                game.teamTwoScore += 1
-                                // Update score label.
-                                teamTwoScoreLabel.text = String(game.getTeamTwoScore())
-                                // Create new word.
-                                animateNewWordLeftSwipe()
+                            if self.roundInProgress == true {
+                                if self.wordOnScreen && self.timesSwipedRight < 2 {
+                                    
+                                    self.audioPlayerSwipeSound.play()
+                                    self.timesSwipedRight += 1
+                                    self.animateNewWordRightSwipe()
+                            } else {
+                                animatePassMessage()
                             }
+                        }
+                        case UISwipeGestureRecognizerDirection.Left:
+                            
+                            if self.wordOnScreen {
+                                if self.roundInProgress == true {
+                                    
+                                    
+                                    self.audioPlayerSwipeSound.play()
+                                    // Check if team one is active and that time is still valid.
+                                    if game.teamOneIsActive && timeIsUp == false {
+                                        
+                                        // Increment Team 1 score.
+                                        game.teamOneScore += 1
+                                        
+                                        // Update Team 1 score text.
+                                        teamOneScoreLabel.text = String(game.getTeamOneScore())
+                                        
+                                        // Create new word.
+                                        self.animateNewWordLeftSwipe()
+                                
+                                    } else if timeIsUp == false {
+                                        
+
+                                    
+                                        game.teamTwoScore += 1
+                                        teamTwoScoreLabel.text = String(game.getTeamTwoScore())
+                        
+                                        
+                                        animateNewWordLeftSwipe()
+                                    }
+                            }
+                        
                     }
                     
-                }
-                
-                default:
-                    break
-                }
+                    default:
+                        break
+                    }
+            
         }
     }
 
@@ -542,8 +500,7 @@ class GameViewController: UIViewController {
          that is animated onto the screen.
      */
     func animateNewWordLeftSwipe() {
-        
-        self.audioPlayerSwipeSound.play()
+
         
         // Animate `wordContainerView` left off-screen.
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -576,23 +533,17 @@ class GameViewController: UIViewController {
     */
     func animateGameWin() {
         if self.game.won {
-
             self.backgroundView.alpha = 0
             self.audioPlayerRoundIsEndingSound.stop()
-
             self.audioPlayerWinSound.play()
-
             UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-              
                 self.gameTimer.invalidate()
                 self.view.backgroundColor = UIColor.greenColor()
                 self.view.layoutIfNeeded()
                 }, completion: { (bool) in
                     self.resetRound()
             })
-
             self.wordLabel.text = "\(self.game.winnerTitle) Wins!"
-        
         } else {
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
         }
@@ -604,9 +555,6 @@ class GameViewController: UIViewController {
      of the screen.
      */
     func animateNewWordRightSwipe() {
-        
-        self.audioPlayerSwipeSound.play()
-  
         UIView.animateWithDuration(0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.centerAlignWordContainer.constant += self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -616,17 +564,14 @@ class GameViewController: UIViewController {
         })
         
         UIView.animateWithDuration(0.4, delay:0.2, options: [], animations: {
-            
             self.centerAlignWordContainer.constant -= self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
             
             }, completion: nil)
     }
-    
 
-    
-
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - Animations (Fade-Out/off-screen)
     
     /**
@@ -665,7 +610,7 @@ class GameViewController: UIViewController {
      Animates Start, Team, and Menu off-screen.
      - Upon completion the animateCountdownFadeIn() method is executed.
      */
-    func animateTitleOffScreen() {
+    func animateMenusOffScreen() {
         UIView.animateWithDuration(0.5, delay:0.0,usingSpringWithDamping: 0.9,initialSpringVelocity: 0.6,options: [], animations: {
             
                 self.startButton.userInteractionEnabled = false
@@ -694,13 +639,18 @@ class GameViewController: UIViewController {
         self.timeLeftLabel.text = "\(strMinutes):\(strSeconds)"
     }
     
+
+    
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // MARK: - COUNTDOWN ANIMATIONS
+    
     /**
-        Used to create the message "3,2,1...Go!" that informs players that
-        a round will begin shortly. Once the countdown animations have concluded, 
-        the method invalidates its timer and resets the 'countdown' variable
-        so that it can be used in new round. Prior to exiting the method all 
-        user interactions a re-enabled.
-    */
+     Used to create the message "3,2,1...Go!" that informs players that
+     a round will begin shortly. Once the countdown animations have concluded,
+     the method invalidates its timer and resets the 'countdown' variable
+     so that it can be used in new round. Prior to exiting the method all
+     user interactions a re-enabled.
+     */
     func startCountdown() {
         if self.countdown  > 1 {
             self.countdown -= 1
@@ -709,18 +659,15 @@ class GameViewController: UIViewController {
             self.countdownMsgLabel.text = "Go!"
             self.countdownTimer.invalidate()
             self.countdown = 4
+                    self.view.userInteractionEnabled = true
         }
-        self.view.userInteractionEnabled = true
     }
     
     
-    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // MARK: - COUNTDOWN ANIMATIONS
-    
     /**
-     Fade-in and centering of the countdownMsgView onto the screen.
-     A 4.0 seconds allows the label text within the view to display
-     '3','2','1','Go!' with sufficient time.
+         Fade-in and centering of the countdownMsgView onto the screen.
+         A 4.0 seconds allows the label text within the view to display
+         '3','2','1','Go!' with sufficient time.
      */
     func presentCountdownView() {
         UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations:{
@@ -734,8 +681,8 @@ class GameViewController: UIViewController {
     
     
     /**
-     Used to remove the view for the countdown animations that take place prior
-     to the game starting.
+         Used to remove the view for the countdown animations that take place prior
+         to the game starting.
      */
     func removeCountdownMsgView() {
         UIView.animateWithDuration(0.2, delay:2.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -746,7 +693,7 @@ class GameViewController: UIViewController {
     
     
     /**
-     Moves the countDownMsgView back to it's original position.
+        Moves the countDownMsgView back to it's original position.
      */
     func repositionCountdownMsgView() {
         UIView.animateWithDuration(0.0, animations:  {
@@ -755,6 +702,7 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
+    
     
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - TIME UP ANIMATIONS
