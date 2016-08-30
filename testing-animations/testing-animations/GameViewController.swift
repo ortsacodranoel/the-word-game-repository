@@ -311,7 +311,7 @@ class GameViewController: UIViewController {
         self.prepareGameTimer()
         self.animateGameTimer()
         self.updateScore()
-        self.endRound(53)
+        self.endRound(50)
     }
     
     
@@ -327,7 +327,6 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: {(bool) in
              self.runGameTimer()
-
         })
     }
     
@@ -362,7 +361,7 @@ class GameViewController: UIViewController {
         Parameters time: Int - used to indicate at what time the timer should stop.
     */
     func endRound(time: Int) {
-        if self.seconds < 43 {
+        if self.seconds == 53 {
             self.animateBackgroundColorFadeIn()
             self.audioPlayerRoundIsEndingSound.play()
         } else if self.seconds == time {
