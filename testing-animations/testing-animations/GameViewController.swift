@@ -341,7 +341,9 @@ class GameViewController: UIViewController {
         UIView.animateWithDuration(0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
             self.view.backgroundColor = self.colors[self.categoryTapped]
         }, completion: { (bool) in
+            self.backgroundView.backgroundColor = UIColor.redColor()
             self.game.won = false
+            self.audioPlayerRoundIsEndingSound.prepareToPlay()
             self.resetTimer()
             self.game.resetGame()
             self.game.updateTeamTurn()
@@ -362,8 +364,8 @@ class GameViewController: UIViewController {
     */
     func endRound(time: Int) {
         if self.seconds == 53 {
-            self.animateBackgroundColorFadeIn()
             self.audioPlayerRoundIsEndingSound.play()
+            self.animateBackgroundColorFadeIn()
         } else if self.seconds == time {
             self.game.updateTeamTurn()
             self.setTeamTurn()
@@ -515,11 +517,11 @@ class GameViewController: UIViewController {
     */
     func animateGameWin() {
         if self.game.won {
-            self.setColor(self.categoryTapped)
             self.gameTimer.invalidate()
             self.audioPlayerRoundIsEndingSound.stop()
-
+            self.backgroundView.backgroundColor = UIColor.greenColor()
             self.audioPlayerWinSound.play()
+            
             UIView.animateWithDuration(0.5, animations: {
                 self.view.backgroundColor = UIColor.greenColor()
                 self.view.layoutIfNeeded()
@@ -606,16 +608,32 @@ class GameViewController: UIViewController {
      Remove the wordContainerView from the screen.
      */
     func removeWord() {
-        UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
-            self.centerAlignWordContainer.constant += self.view.bounds.width
-            self.wordContainerView.alpha = 1
-            self.view.layoutIfNeeded()
-            }, completion: nil)
+        if self.game.won {
+            UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
+                self.centerAlignWordContainer.constant += self.view.bounds.width
+                self.wordContainerView.alpha = 1
+                self.view.layoutIfNeeded()
+            },  completion: { (bool) in
+                    self.resetRound(0)
+            })
+            } else {
+           
+            UIView.animateWithDuration(0.4, animations: {
+                
+                self.centerAlignWordContainer.constant += self.view.bounds.width
+                self.wordContainerView.alpha = 1
+                self.view.layoutIfNeeded()
+                
+                }, completion: nil)
+        }
     }
     
     
-
-
+    func removeWinMessage() {
+        self.centerAlignWordContainer.constant += self.view.bounds.width
+        self.wordContainerView.alpha = 1
+    }
+    
     
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // MARK: - COUNTDOWN ANIMATIONS
