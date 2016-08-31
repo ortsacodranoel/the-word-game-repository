@@ -294,7 +294,6 @@ class GameViewController: UIViewController {
         self.roundInProgress = false
         self.timeIsUp = true
         self.gameTimer.invalidate()
-        
         self.seconds = 00
         self.minutes = 1
         let strMinutes = String(format: "%1d", self.minutes)
@@ -364,9 +363,10 @@ class GameViewController: UIViewController {
     */
     func endRound(time: Int) {
         if self.seconds == 53 {
+            self.audioPlayerRoundIsEndingSound.prepareToPlay()
             self.audioPlayerRoundIsEndingSound.play()
             self.animateBackgroundColorFadeIn()
-        } else if self.seconds == time {
+        } else if self.seconds == time && self.game.won == false { // If time is up  and nobody won the game.
             self.game.updateTeamTurn()
             self.setTeamTurn()
             self.animateTimeIsUpMessageOnScreen()
@@ -388,7 +388,6 @@ class GameViewController: UIViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
                 switch swipeGesture.direction {
                         case UISwipeGestureRecognizerDirection.Right:
-                            
                             if self.roundInProgress {
                                 if  self.wordOnScreen && self.timesSwipedRight < 2 {
                                     self.audioPlayerSwipeSound.play()
@@ -399,7 +398,6 @@ class GameViewController: UIViewController {
                             }
                         }
                         case UISwipeGestureRecognizerDirection.Left:
-                            
                             if self.roundInProgress {
                                 if game.teamOneIsActive {
                                     self.audioPlayerSwipeSound.play()
@@ -412,7 +410,6 @@ class GameViewController: UIViewController {
                                     teamTwoScoreLabel.text = String(game.getTeamTwoScore())
                                     animateNewWordLeftSwipe()
                                 }
-                            
                         }
                         default:
                             break
@@ -498,7 +495,11 @@ class GameViewController: UIViewController {
             self.centerAlignWordContainer.constant += self.view.bounds.width + self.view.bounds.width
             self.wordContainerView.alpha = 1
             self.view.layoutIfNeeded()
+            
+            // FIXME:
             self.game.checkForWinner()
+            
+            
         }, completion: {(bool) in
             self.animateGameWin()
         })
@@ -516,10 +517,13 @@ class GameViewController: UIViewController {
         When a team wins the game this method...
     */
     func animateGameWin() {
+       
         if self.game.won {
+            
             self.gameTimer.invalidate()
-            self.audioPlayerRoundIsEndingSound.stop()
-            self.backgroundView.backgroundColor = UIColor.greenColor()
+            self.audioPlayerRoundIsEndingSound.pause()
+            self.audioPlayerRoundIsEndingSound.prepareToPlay()
+            self.backgroundView.alpha = 0
             self.audioPlayerWinSound.play()
             
             UIView.animateWithDuration(0.5, animations: {
@@ -528,8 +532,12 @@ class GameViewController: UIViewController {
                 }, completion: { (bool) in
                     self.resetRound(2.0)
             })
+            
             self.wordLabel.text = "\(self.game.winnerTitle) Wins!"
+        
         } else {
+           
+            // Since there isn't a winner, get a new word.
             self.wordLabel.text = self.game.getWord(self.categoryTapped)
         }
     }
@@ -604,10 +612,12 @@ class GameViewController: UIViewController {
         })
     }
     
+    // TODO: -
     /**
-     Remove the wordContainerView from the screen.
+        Used to remove the current word off the screen to the right.
      */
     func removeWord() {
+        
         if self.game.won {
             UIView.animateWithDuration(0.4, delay:0.0, options: [], animations: {
                 self.centerAlignWordContainer.constant += self.view.bounds.width
