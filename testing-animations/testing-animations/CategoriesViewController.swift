@@ -22,7 +22,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-
+    
+    
+    
+    
+    
+    
     
     // MARK: - Data
     
@@ -108,6 +113,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         Used to animate rules menu fade-in.
     */
     func scrollViewDidScroll(scrollView: UIScrollView) {
+       
+
+        
+        if scrollView.contentOffset.y > 30 {
+        
+            self.rulesButton.setTitleColor(self.buttonBackgroundColor[1], forState: .Normal)
+        
+        }
+        
         if scrollView.contentOffset.y > 30 {
             self.animateMenuFadeIn()
         } else if scrollView.contentOffset.y < 30 {

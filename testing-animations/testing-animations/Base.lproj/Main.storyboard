@@ -165,21 +165,32 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" lineBreakMode="wordWrap" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msa-QC-7CI" userLabel="Rules">
-                                        <rect key="frame" x="15" y="60" width="449" height="387"/>
+                                        <rect key="frame" x="15" y="60" width="449" height="372"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="387" id="ay9-6q-CUS"/>
+                                            <constraint firstAttribute="height" constant="372" id="ay9-6q-CUS"/>
                                         </constraints>
-                                        <string key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). Don't say the word(s) or any form of the word(s) in the answer.
- 3. If you accidentally do #3 and someone from the opposite team sees, you must pass that answer for a new one.
- 4. If you've used up both passes, you must let the time run out.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </string>
+                                        <mutableString key="text">1. Swipe left when your team guesses correctly (each left swipe is one point).  2. Swipe right to pass ( you  only get 2 passess per minute). 
+
+3. Don't say the word(s) or any form of the word(s) in the answer.
+ 4. If you accidentally do #3 and someone from the opposite team catches it, you must pass that answer for a new one.  5. A clue-giver cannot go again until all other members of the team have had a turn.  6. The first team to get 25 points, wins.  </mutableString>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nia-zw-KRO" userLabel="rulesLine">
+                                        <rect key="frame" x="144" y="485" width="190" height="3"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="190" id="0tN-4W-GZq"/>
+                                            <constraint firstAttribute="height" constant="3" id="cZy-Lg-Tqb"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-5V-XcV" userLabel="ViewFullRulesButton">
-                                        <rect key="frame" x="80" y="449" width="318" height="46"/>
+                                        <rect key="frame" x="80" y="440" width="318" height="46"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
-                                        <state key="normal" title="View full rules"/>
+                                        <state key="normal" title="View Full Rules">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="rulesButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="xKz-33-sNW"/>
                                         </connections>
@@ -197,12 +208,14 @@
                                     <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="8" id="QBm-I6-62e"/>
                                     <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="8" id="S9d-RU-gLH"/>
                                     <constraint firstItem="CmT-5V-XcV" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" id="V5V-0l-xgQ"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="449" id="YUd-D4-XO6"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="440" id="YUd-D4-XO6"/>
+                                    <constraint firstItem="Nia-zw-KRO" firstAttribute="centerX" secondItem="CmT-5V-XcV" secondAttribute="centerX" id="b9I-w6-a89"/>
                                     <constraint firstItem="HCx-wd-qvy" firstAttribute="leading" secondItem="Zcz-gl-UqU" secondAttribute="leading" id="gDo-kC-Fmm"/>
-                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="105" id="hRG-m0-KGB"/>
+                                    <constraint firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="114" id="hRG-m0-KGB"/>
+                                    <constraint firstItem="Nia-zw-KRO" firstAttribute="bottom" secondItem="CmT-5V-XcV" secondAttribute="bottom" constant="2" id="j8f-px-w0e"/>
                                     <constraint firstItem="Zcz-gl-UqU" firstAttribute="centerX" secondItem="tym-T6-dxQ" secondAttribute="centerX" constant="-34.5" id="pv4-H7-qEy"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="msa-QC-7CI" secondAttribute="bottom" constant="2" id="ric-gI-kdo"/>
-                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="397" id="sZI-a3-RRR"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="msa-QC-7CI" secondAttribute="bottom" constant="8" id="ric-gI-kdo"/>
+                                    <constraint firstItem="CmT-5V-XcV" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="388" id="sZI-a3-RRR"/>
                                     <constraint firstItem="msa-QC-7CI" firstAttribute="top" secondItem="Zcz-gl-UqU" secondAttribute="bottom" constant="8" id="t6x-cN-oYN"/>
                                     <constraint firstItem="HCx-wd-qvy" firstAttribute="top" secondItem="tym-T6-dxQ" secondAttribute="top" constant="50" id="zIi-VW-E3a"/>
                                 </constraints>
