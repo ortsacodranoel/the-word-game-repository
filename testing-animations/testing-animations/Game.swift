@@ -10,9 +10,6 @@ import Foundation
 
 class Game {
     
-    // Used to verify that a new game has been initiated.
-    var isActive = false
-    
     // Used to determine if a team is still playing its turn.
     var roundInProgress : Bool
     
@@ -52,7 +49,6 @@ class Game {
     init() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
-        self.isActive = true
         self.roundInProgress = true
         self.teamOneIsActive = true
         self.roundInProgress = true
