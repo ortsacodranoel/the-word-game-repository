@@ -470,7 +470,6 @@ class GameViewController: UIViewController {
     }
     
     
-
     func animatePassMessageFadeOut(){
         UIView.animateWithDuration(0.5, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.passesLabel.alpha = 0
