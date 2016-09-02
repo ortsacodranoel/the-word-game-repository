@@ -27,13 +27,8 @@ class Game {
     /// Used to temporarily store winner title.
     var winnerTitle = String()
     
-    /**
-     Initializes a new game and sets the current turn to Team 1.
- 
-     Parameters:
- 
-     Returns:
-    **/
+
+    
     init() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
@@ -48,9 +43,8 @@ class Game {
         self.teamTwoScore = 0
     }
     
-    /**
-        Used to get the String value of the team that has won the current game.
-    */
+
+    /// Used to get the String value of the team that has won the game.
     func checkForWinner() {
         if self.teamOneScore == 5 {
             self.won = true
@@ -118,23 +112,15 @@ class Game {
         word = selectedArray[randomIndex]
 
         if arrayOfUsedWords.contains(word) {
-           
             // Run the method again.
             self.getWord(categorySelected)
         } else {
-        
             self.arrayOfUsedWords.append(word)
         }
-
         return word
     }
-    
-    
-    /**
      
-     - Updates each team's turn.
-     
-     **/
+    /// Updates each team's turn.
     func updateTeamTurn() {
         if self.teamOneIsActive {
             self.teamOneIsActive = false
