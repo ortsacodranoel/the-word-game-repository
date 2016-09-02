@@ -16,9 +16,6 @@ class Game {
     // Used to determine if Team 1 is playing.
     var teamOneIsActive = false
     
-    // Used to determine if Team 2 is playing.
-    var teamTwoIsActive = false
-    
     // Keeps the score of the first team.
     var teamOneScore : Int
     
