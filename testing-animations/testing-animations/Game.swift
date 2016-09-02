@@ -12,28 +12,19 @@ class Game {
     
     // Used to determine if a team is still playing its turn.
     var roundInProgress : Bool
-    
     // Used to determine if Team 1 is playing.
     var teamOneIsActive = false
-    
     // Keeps the score of the first team.
     var teamOneScore : Int
-    
     // Keeps the score of the second team.
     var teamTwoScore : Int
-
-    // Keep track of the words used.
+    // Keeps track of the words used.
     var arrayOfUsedWords = [String]()
-    
-    // Variable to temporarily store a word.
+    /// Variable to temporarily store a word.
     var word = String()
-    
-    /** 
-        Used to determine if a team has one the game.
-    */
+    /// Used to determine if a team has won the game.
     var won = false
-    
-    // Used to temporarily store winner title.
+    /// Used to temporarily store winner title.
     var winnerTitle = String()
     
     /**
