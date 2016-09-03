@@ -15,6 +15,29 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Used to keep track of the current game.
     var game = Game()
     
+    var jesus = Category()
+    var people = Category()
+    var places = Category()
+    var sundaySchool = Category()
+    var concordance = Category()
+    var famousChristians = Category()
+    var worship = Category()
+    var booksAndMovies = Category()
+    var feasts = Category()
+    var relicsAndSaints = Category()
+    var revelation = Category()
+    var angels = Category()
+    var doctrine = Category()
+    var sins = Category()
+    var commands = Category()
+    
+ 
+    var categories = [Category]()
+    
+    
+    
+    
+    
     private var lastContentOffset: CGFloat = 0
     
     
@@ -58,7 +81,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func categoryButtonTapped(sender: AnyObject) {}
     
     
-    
     // MARK: - Audio
     var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
@@ -81,7 +103,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.selectCategories()
+        self.loadCategories()
         self.loadSoundFile()
     }
 
@@ -92,17 +115,45 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+   /**
+   */
+    func selectCategories() {
+        self.jesus.selectCategory("Jesus")
+        self.people.selectCategory("People")
+        self.places.selectCategory("Places")
+        self.sundaySchool.selectCategory("Sunday School")
+        self.concordance.selectCategory("Concordance")
+        self.famousChristians.selectCategory("Famous Christians")
+        self.worship.selectCategory("Worship")
+        self.booksAndMovies.selectCategory("Books and Movies")
+        self.feasts.selectCategory("Feasts")
+        self.relicsAndSaints.selectCategory("Relics and Saints")
+        self.revelation.selectCategory("Revelation")
+        self.angels.selectCategory("Angels")
+        self.doctrine.selectCategory("Doctrine")
+        self.sins.selectCategory("Sins")
+        self.commands.selectCategory("Commands")
+    }
+    
+    /**
+    */
+    func loadCategories() {
+        self.categories = [self.jesus, self.people, self.places, self.sundaySchool, self.concordance, self.famousChristians, self.worship, self.booksAndMovies, self.feasts, self.relicsAndSaints, self.revelation, self.relicsAndSaints, self.doctrine, self.sins, self.commands]
+    }
+    
+    
+    
+    // MARK: - Collection View Methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.buttonBackgroundColor.count
     }
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = buttonBackgroundColor[indexPath.row]
-        cell.categoryButton.setTitle(self.titles[indexPath.row], forState: UIControlState.Normal)
+        cell.categoryButton.setTitle(self.categories[indexPath.row].title, forState: UIControlState.Normal)
         cell.tag = indexPath.row
         
         return cell
@@ -113,13 +164,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         Used to animate rules menu fade-in.
     */
     func scrollViewDidScroll(scrollView: UIScrollView) {
-       
 
-        
         if scrollView.contentOffset.y > 30 {
-        
             self.rulesButton.setTitleColor(self.buttonBackgroundColor[1], forState: .Normal)
-        
         }
         
         if scrollView.contentOffset.y > 30 {
