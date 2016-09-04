@@ -27,6 +27,9 @@ class Game {
     /// Used to temporarily store winner title.
     var winnerTitle = String()
     
+    
+    
+    
 
     init() {
         self.teamOneScore = 0
@@ -35,6 +38,17 @@ class Game {
         self.teamOneIsActive = true
         self.roundInProgress = true
     }
+    
+    
+    func loadCategories() {
+    
+    }
+    
+    
+    
+    
+    
+    
     
     /// Resets team scores back to 0.
     func resetGame() {

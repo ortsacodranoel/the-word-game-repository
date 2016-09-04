@@ -152,7 +152,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         cell.categoryButton.layer.cornerRadius = 7
-        cell.categoryButton.backgroundColor = buttonBackgroundColor[indexPath.row]
+        cell.categoryButton.backgroundColor = self.categories[indexPath.row].color
         cell.categoryButton.setTitle(self.categories[indexPath.row].title, forState: UIControlState.Normal)
         cell.tag = indexPath.row
         
