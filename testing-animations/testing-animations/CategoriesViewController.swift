@@ -66,7 +66,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /**
     */
     func loadCategories() {
-        self.categories = [self.game.jesus, self.game.people, self.game.places, self.game.sunday, self.game.concordance, self.game.famous, self.game.worship, self.game.books, self.game.feasts, self.game.relics, self.game.revelation, self.game.relics, self.game.doctrine, self.game.sins, self.game.commands]
+        self.categories = [self.game.jesus, self.game.people, self.game.places, self.game.sunday, self.game.concordance, self.game.famous, self.game.worship, self.game.books, self.game.feasts, self.game.relics, self.game.revelation, self.game.doctrine, self.game.sins, self.game.commands]
     }
     
     
@@ -78,10 +78,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+      
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
+        
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = self.categories[indexPath.row].color
         cell.categoryButton.setTitle(self.categories[indexPath.row].title, forState: UIControlState.Normal)
+        
         cell.tag = indexPath.row
         
         return cell

@@ -47,15 +47,29 @@ class Game {
     
 
     init() {
+        
         self.teamOneScore = 0
         self.teamTwoScore = 0
         self.roundInProgress = true
         self.teamOneIsActive = true
         self.roundInProgress = true
-        self.jesus.loadContent()
+        
+        self.jesus.loadContent("Jesus")
+        self.people.loadContent("People")
+        self.places.loadContent("Places")
+        self.sunday.loadContent("Sunday")
+        self.concordance.loadContent("Concordance")
+        self.famous.loadContent("Famous")
+        self.worship.loadContent("Worship")
+        self.books.loadContent("Books")
+        self.feasts.loadContent("Feasts")
+        self.relics.loadContent("Relics")
+        self.revelation.loadContent("Revelation")
+        self.angels.loadContent("Angels")
+        self.doctrine.loadContent("Doctrine")
+        self.sins.loadContent("Sins")
+        self.commands.loadContent("Commands")
     }
-    
-    
     
     
     /// Resets team scores back to 0.
