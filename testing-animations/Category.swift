@@ -11,8 +11,6 @@
  
 */
 
-
-
 import Foundation
 import UIKit
 
@@ -21,110 +19,85 @@ class Category: NSObject {
     /// Category title.
     var title:String!
     /// Word content for the category.
-    var words:NSArray!
+    var words = [String]()
     /// Color related to category. 
     var color:UIColor!
     /// Used to determine if category was purchased.
     var purchased:Bool!
 
-    
-    let jesus = Category()
-    let people = Category()
-    let places = Category()
-    let sunday = Category()
-    let concordance = Category()
-    let famous = Category()
-    let worship = Category()
-    let books = Category()
-    let feasts = Category()
-    let relics = Category()
-    let revelation = Category()
-    let angels = Category()
-    let doctrine = Category()
-    let sins = Category()
-    let commands = Category()
-
-    
-    func setupCategories() {
+    func loadContent() {
         
-        self.jesus.title = "Jesus"
-        self.jesus.words = jesusWord
-        self.jesus.color = UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1)
-        self.jesus.purchased = true
-    
-        self.people.title = "People"
-        self.people.words = peopleWord
-        self.people.color = UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1)
-        self.people.purchased = true
+        let title = self.title
         
-        self.places.title = "Places"
-        self.places.words = placesWord
-        self.places.color = UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1)
-        self.places.purchased = true
-        
-        self.sunday.title = "Sunday School"
-        self.sunday.words = sundaySchoolWord
-        self.sunday.color = UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1)
-        self.sunday.purchased = true
-        
-        self.concordance.title = "Concordance"
-        self.concordance.words = concordanceWord
-        self.concordance.color = UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1)
-        self.concordance.purchased = true
-        
-        self.famous.title = "Famous Christians"
-        self.famous.words = famousChristiansWord
-        self.famous.color = UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1)
-        self.famous.purchased = false
-        
-        self.worship.title = "Worship"
-        self.worship.words = worshipWord
-        self.worship.color = UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1)
-        self.worship.purchased = false
-        
-        self.books.title = "Books"
-        self.books.words = booksAndMoviesWord
-        self.color = UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1)
-        self.books.purchased = false
-        
-        self.feasts.title = "Feasts"
-        self.feasts.color =  UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1)
-        self.feasts.words = feastsWord
-        self.feasts.purchased = false
-        
-        self.relics.title = "Relics and Saints"
-        self.relics.words = relicsAndSaintsWord
-        self.relics.color = UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1)
-        self.relics.purchased = false
-        
-        self.revelation.title = "Revelation"
-        self.revelation.words = revelationWord
-        self.revelation.color = UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1)
-        self.revelation.purchased = false
-        
-        self.angels.title = "Angels"
-        self.angels.words = angelsWord
-        self.angels.color = UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1)
-        
-        self.doctrine.title = "Doctrine"
-        self.doctrine.words = doctrineWord
-        self.doctrine.color = UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1)
-        self.doctrine.purchased = false
-        
-        self.sins.title = "Sins"
-        self.sins.words = sinsWord
-        self.sins.color = UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1)
-        self.sins.purchased = false
-        
-        self.commands.title = "Commands"
-        self.commands.words = commandsWord
-        self.commands.color = UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)
-        self.commands.purchased = false
+        switch title {
+            case "Jesus":
+                self.words = contentJesus
+                self.color = UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1)
+                self.purchased = true
+            case "People":
+                self.title = "People"
+                self.color = UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1)
+                self.purchased = true
+            case "Places":
+                self.words = placesWord
+                self.color = UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1)
+                self.purchased = true
+            case "Sunday School":
+                self.words = sundaySchoolWord
+                self.color = UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1)
+                self.purchased = true
+            case "Concordance":
+                self.words = concordanceWord
+                self.color = UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1)
+                self.purchased = true
+            case "Famous Christians":
+                self.words = famousChristiansWord
+                self.color = UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1)
+                self.purchased = false
+            case "Worship":
+                self.words = worshipWord
+                self.color = UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1)
+                self.purchased = false
+            case "Books":
+                self.words = booksAndMoviesWord
+                self.color = UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1)
+                self.purchased = false
+            case "Feasts":
+                self.color =  UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1)
+                self.words = feastsWord
+                self.purchased = false
+            case "Relics and Saints":
+                self.words = relicsAndSaintsWord
+                self.color = UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1)
+                self.purchased = false
+            case "Revelation":
+                self.words = revelationWord
+                self.color = UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1)
+                self.purchased = false
+            case "Angels":
+                self.words = angelsWord
+                self.color = UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1)
+                self.purchased = false
+            case "Doctrine":
+                self.words = doctrineWord
+                self.color = UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1)
+                self.purchased = false
+            case "Sins":
+                self.words = sinsWord
+                self.color = UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1)
+                self.purchased = false
+            case "Commands":
+                self.words = commandsWord
+                self.color = UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)
+                self.purchased = false
+            default:break
+        }
     }
-
     
+    
+
     // MARK: - Categories
-    let jesusWord = ["God","Perfect","Holy Righteous","Loving","Kind","Friendly","Helpful","Protective","Caring","Sharing","Powerful","Mighty","Compassionate","Forgiving","Empowering","Discerning","Overwhelming","Consuming","Cleansing","Healer","Deliverer","Restorer","Moving","Creator","Destroyer","Friend","Fulfilling","Distinctive","Comforter","Provider","Teacher","Trainer","Purifying","Freeing","Liberator","Preserving","Consigning","Reproving","Addressing","Confiding","Courageous","Victorious","Credited","Historical","Proven","Incorruptible","Unfailable","Infallible","Trustworthy","Protected ","Immune","Responsive","Privileged","Honorable","Honored","Legitimate","Reliable","Good","Reputable","Celebrated","Praised","Glorified","Famous","Renowned","Loved","Served","Worshipped","Sought","Needed","Required","Requested","Beautiful","Living","Breathing","Alive","Active","Amazing","Inspiring","Productive","Producing","Creative","Abundant","Rich","Adequate","Decent","Modest","Pure","Real","Moral","Wholesome","Safe","Beneficial","Exellent","Eminent","Prominent","Remarkable","Extraordinary","Supernatural","Miraculous","Astounding","Advocate","Almighty","Alpha and Omega","Amen","Apostle of our Profession","Author of Life","Perfector of our Faith","Author of our Faith","Author of Salvation","Beginning and End","Blessed Only Ruler","Bread of God","Bread of Life","Capstone","Chief Cornerstone","Chief Shepherd","Christ","Creator","Deliverer","Eternal Life","Everlasting Father","Gate","Faithful and True","Faithful Witness","First and Last","Firstborn","Good Shepherd","Great Shepherd","Great High Priest","Head of the Church","Heir of all Things","Holy and True","Holy One","Hope","Horn of Salvation","I Am","Image of God","King Eternal","King of Israel","King of the Jews","King of Kings","King of Ages","Lamb","Lamb of God","Lamb without Blemish","Last Adam","Life","Light of the World","Lion of Judah","Living One","Living Stone","Lord of All","Lord of Glory","Lord of Lords","Our Righteousness","Man from Heaven","Mediator","Mighty God","Morning Star","Offspring of David","Only Begotten Son","Our Holiness","Our Husband","Our Protection","Our Redemption","Our Righteousness","Passover Lamb","Power of God","Precious Cornerstone","Prince of Peace","Prophet","Resurrection and Life","Righteous Branch","Righeous One","Rock","Root of David","Ruler of God's Creation","Savior","Son of David","Son of God","Son of Man","Son of Most High God","Stone the Builders Rejected","True Bread","True Light","True Vine","The Truth","The Way","Wisdom of God","Wonderful Counselor","Word","Word of God","Beard","Robe","Crown","Cross","Blood","Parables","Immanuel","Bridegroom","Heart","Stripes","Forgiveness","Gospel","Lily of the Valley","Rose of Sharon"]
+    let contentJesus = ["God","Perfect","Holy Righteous","Loving","Kind","Friendly","Helpful","Protective","Caring","Sharing","Powerful","Mighty","Compassionate","Forgiving","Empowering","Discerning","Overwhelming","Consuming","Cleansing","Healer","Deliverer","Restorer","Moving","Creator","Destroyer","Friend","Fulfilling","Distinctive","Comforter","Provider","Teacher","Trainer","Purifying","Freeing","Liberator","Preserving","Consigning","Reproving","Addressing","Confiding","Courageous","Victorious","Credited","Historical","Proven","Incorruptible","Unfailable","Infallible","Trustworthy","Protected ","Immune","Responsive","Privileged","Honorable","Honored","Legitimate","Reliable","Good","Reputable","Celebrated","Praised","Glorified","Famous","Renowned","Loved","Served","Worshipped","Sought","Needed","Required","Requested","Beautiful","Living","Breathing","Alive","Active","Amazing","Inspiring","Productive","Producing","Creative","Abundant","Rich","Adequate","Decent","Modest","Pure","Real","Moral","Wholesome","Safe","Beneficial","Exellent","Eminent","Prominent","Remarkable","Extraordinary","Supernatural","Miraculous","Astounding","Advocate","Almighty","Alpha and Omega","Amen","Apostle of our Profession","Author of Life","Perfector of our Faith","Author of our Faith","Author of Salvation","Beginning and End","Blessed Only Ruler","Bread of God","Bread of Life","Capstone","Chief Cornerstone","Chief Shepherd","Christ","Creator","Deliverer","Eternal Life","Everlasting Father","Gate","Faithful and True","Faithful Witness","First and Last","Firstborn","Good Shepherd","Great Shepherd","Great High Priest","Head of the Church","Heir of all Things","Holy and True","Holy One","Hope","Horn of Salvation","I Am","Image of God","King Eternal","King of Israel","King of the Jews","King of Kings","King of Ages","Lamb","Lamb of God","Lamb without Blemish","Last Adam","Life","Light of the World","Lion of Judah","Living One","Living Stone","Lord of All","Lord of Glory","Lord of Lords","Our Righteousness","Man from Heaven","Mediator","Mighty God","Morning Star","Offspring of David","Only Begotten Son","Our Holiness","Our Husband","Our Protection","Our Redemption","Our Righteousness","Passover Lamb","Power of God","Precious Cornerstone","Prince of Peace","Prophet","Resurrection and Life","Righteous Branch","Righeous One","Rock","Root of David","Ruler of God's Creation","Savior","Son of David","Son of God","Son of Man","Son of Most High God","Stone the Builders Rejected","True Bread","True Light","True Vine","The Truth","The Way","Wisdom of God","Wonderful Counselor","Word","Word of God","Beard","Robe","Crown","Cross","Blood","Parables","Immanuel","Bridegroom","Heart","Stripes","Forgiveness","Gospel","Lily of the Valley","Rose of Sharon"]
     
     let peopleWord = ["Agrippa","Alexander","Ammon","Amos","Andrew","Andronicus","Arad","Arod","Asher","Balaam","Balak","Barabbas","Barnabas","Bartholomew","Belshazzar","Delilah","Ben-Hur","Dorcas","Benjamin","Boaz","Elisabeth","Ceasar","Caiaphas","Cain","Caleb","Claudius","Cornelius","Eve","Cush","Hadassah","Hagar","Cyrus","Dan","Darius","David","Demetrius","Eli","Elijah","Enoch","Enos","Ephron","Ephraim","Erastus","Esau","Ethan","Ezekiel","Ezra","Felix","Jemima","Festus","Jezebel","Gad","Gaius","Gideon","Goliath","Judith","Gomer","Gog","Gilead","Habakkuk","Leah","Lydia","Haggai","Ham","Martha","Mary Magdalene","Mary","Haman","Herod","Herod Agrippa","Hosea","Miriam","Hezekiah","Ibsam","Naomi","Ichabod","Isaac","Isaiah","Issachar","Phoebe","Pricilla","Rachel","Rahab","Rebecca","Ishmael","Israel","Ruth","Sapphira","Sarah","Sheerah","Jacob","James","Japheth","Susanna","Tabitha","Jason","Jedidiah","Jeremiah","Jesse","Jesus","Jethro","Vashti","Zebudah","Joab","Job","Joel","John","John the Baptist","Zipporah","Jonah","Jonathan","Joram","Josaphat","Joseph","Joshua","Josiah","Jubal","Judas","Judah","Jude","Julius","Lazarus","Levi","Lot","Lucifer","Luke","Malachi","Mark","Matthias","Matthew","Menasheh","Meshach","Methuselah","Micah","Michael","Moab","Mordecai","Moses","Nahum","Naboth","Naphtali","Narcissus","Nathan","Nathanael","Nebuchadnezzar","Nehemiah","Nicodemus","Nicolas","Nimrod","Noah","Obadiah","Paul","Peter","Pharaoh","Philemon","Philip","Pontius Pilate","Phinehas","Potiphar","Reuben","Rufus","Samson","Samuel","Saul","Seth","Shadrach","Sheba","Shem","Silas","Simeon","Simon","Solomon","Sosthenes","Stephen","Thaddaeus","Thomas","Tiberius","Timothy","Timon","Titus","Tyrannus","Uriah","Yam","Zaccheaus","Zacharias","Zebadiah","Zebedee","Zebulun","Zephaniah"]
     
