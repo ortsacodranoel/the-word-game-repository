@@ -1,8 +1,8 @@
 //
-//  TransitionManager.swift
-//  TheWordGame
+//  Game.swift
+//  testing-animations
 //
-//  Created by Leo on 7/24/16.
+//  Created by Leo on 7/6/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -28,6 +28,9 @@ class Game {
     /// Used to temporarily store winner title.
     var winnerTitle = String()
     
+    var categoriesArray = [Category]()
+    
+    
     // MARK: - Categories
     var jesus = Category()
     var people = Category()
@@ -45,7 +48,7 @@ class Game {
     var sins = Category()
     var commands = Category()
     
-
+    
     init() {
         
         self.teamOneScore = 0
@@ -53,7 +56,12 @@ class Game {
         self.roundInProgress = true
         self.teamOneIsActive = true
         self.roundInProgress = true
-        
+        self.setupCategories()
+        self.setupCategoriesArray()
+    }
+    
+    
+    func setupCategories() {
         self.jesus.loadContent("Jesus")
         self.people.loadContent("People")
         self.places.loadContent("Places")
@@ -71,6 +79,9 @@ class Game {
         self.commands.loadContent("Commands")
     }
     
+    func setupCategoriesArray() {
+        self.categoriesArray = [self.jesus,self.people,self.places,self.sunday,self.concordance,self.famous,self.worship,self.books,self.feasts,self.relics,self.revelation,self.angels,self.doctrine,self.sins,self.commands]
+    }
     
     /// Resets team scores back to 0.
     func resetGame() {
@@ -78,7 +89,7 @@ class Game {
         self.teamTwoScore = 0
     }
     
-
+    
     /// Used to get the String value of the team that has won the game.
     func checkForWinner() {
         if self.teamOneScore == 5 {
@@ -93,16 +104,16 @@ class Game {
     
     /**
      
-        Generates a random word from the desired word category. 
+     Generates a random word from the desired word category.
      
-        - Parameter str: The string to repeat.
-
+     - Parameter str: The string to repeat.
      
-        - Returns: A random word from the selected category.
+     
+     - Returns: A random word from the selected category.
      
      **/
     func getWord(categorySelected: Int) -> String {
-    
+        
         // Used to store a copy of the category array selected.
         var selectedArray = [String()]
         
@@ -145,7 +156,7 @@ class Game {
         
         // Set the word variable to a random word from the selected category array.
         word = selectedArray[randomIndex]
-
+        
         if arrayOfUsedWords.contains(word) {
             // Run the method again.
             self.getWord(categorySelected)
@@ -154,7 +165,7 @@ class Game {
         }
         return word
     }
-     
+    
     /// Updates each team's turn.
     func updateTeamTurn() {
         if self.teamOneIsActive {
@@ -165,7 +176,7 @@ class Game {
     }
     
     
-    // Returns the current score for Team One. 
+    // Returns the current score for Team One.
     func getTeamOneScore() -> Int {
         return teamOneScore
     }
@@ -175,5 +186,5 @@ class Game {
     func getTeamTwoScore() -> Int {
         return teamTwoScore
     }
-
+    
 }

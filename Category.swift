@@ -1,15 +1,15 @@
 //
-//  TransitionManager.swift
-//  TheWordGame
+//  Category.swift
+//  testing-animations
 //
-//  Created by Leo on 7/24/16.
+//  Created by Leo on 9/2/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
 /*
-    A Category ...
+ A Category ...
  
-*/
+ */
 
 import Foundation
 import UIKit
@@ -20,94 +20,111 @@ class Category: NSObject {
     var title:String!
     /// Word content for the category.
     var words = [String]()
-    /// Color related to category. 
+    /// Category description.
+    var summary:String!
+    /// Color related to category.
     var color:UIColor!
     /// Used to determine if category was purchased.
     var purchased:Bool!
-
+    
     func loadContent(title: String) {
         switch title {
-            case "Jesus":
-                self.title = "Jesus"
-                self.words = contentJesus
-                self.color = UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1)
-                self.purchased = true
-            case "People":
-                self.title = "People"
-                self.words = self.contentPeople
-                self.color = UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1)
-                self.purchased = true
-            case "Places":
-                self.title = "Places"
-                self.words = self.contentPlaces
-                self.color = UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1)
-                self.purchased = true
-            case "Sunday":
-                self.title = "Sunday School"
-                self.words = self.contentSunday
-                self.color = UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1)
-                self.purchased = true
-            case "Concordance":
-                self.title = "Concordance"
-                self.words = self.contentConcordance
-                self.color = UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1)
-                self.purchased = true
-            case "Famous":
-                self.title = "Famous Christians"
-                self.words = contentFamousChristians
-                self.color = UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1)
-                self.purchased = false
-            case "Worship":
-                self.title = "Worship"
-                self.words = self.contentWorship
-                self.color = UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1)
-                self.purchased = false
-            case "Books":
-                self.title = "Books and Movies"
-                self.words = self.contentBooks
-                self.color = UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1)
-                self.purchased = false
-            case "Feasts":
-                self.title = "Feasts"
-                self.words = self.contentFeasts
-                self.color =  UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1)
-                self.purchased = false
-            case "Relics":
-                self.title = "Relics and Saints"
-                self.words = self.contentRelics
-                self.color = UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1)
-                self.purchased = false
-            case "Revelation":
-                self.title = "Revelation"
-                self.words = self.contentRevelation
-                self.color = UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1)
-                self.purchased = false
-            case "Angels":
-                self.title = "Angels"
-                self.words = self.contentAngels
-                self.color = UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1)
-                self.purchased = false
-            case "Doctrine":
-                self.title = "Doctrine"
-                self.words = self.contentDoctrine
-                self.color = UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1)
-                self.purchased = false
-            case "Sins":
-                self.title = "Sins"
-                self.words = self.contentSins
-                self.color = UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1)
-                self.purchased = false
-            case "Commands":
-                self.title = "Commands"
-                self.words = self.contentCommands
-                self.color = UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)
-                self.purchased = false
-            default:break
+        case "Jesus":
+            self.title = "Jesus"
+            self.summary = "His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ."
+            self.words = contentJesus
+            self.color = UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1)
+            self.purchased = true
+        case "People":
+            self.title = "People"
+            self.summary = "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty."
+            self.words = self.contentPeople
+            self.color = UIColor(red: 62/255, green: 166/255, blue: 182/225, alpha: 1)
+            self.purchased = true
+        case "Places":
+            self.title = "Places"
+            self.summary = "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times."
+            self.words = self.contentPlaces
+            self.color = UIColor(red: 202/255, green: 115/255, blue: 99/225, alpha: 1)
+            self.purchased = true
+        case "Sunday":
+            self.title = "Sunday School"
+            self.summary = "Stories from the Bible as well as Jesus’ parables.  *teams need not guess the exact answer, but must clearly guess the correct story or parable."
+            self.words = self.contentSunday
+            self.color = UIColor(red: 215/255, green: 184/255, blue: 136/225, alpha: 1)
+            self.purchased = true
+        case "Concordance":
+            self.title = "Concordance"
+            self.summary = "Words found in the concordance of a Bible, excluding names and places."
+            self.words = self.contentConcordance
+            self.color = UIColor(red: 55/255, green: 98/255, blue: 160/225, alpha: 1)
+            self.purchased = true
+        case "Famous":
+            self.title = "Famous Christians"
+            self.summary = "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ."
+            self.words = contentFamousChristians
+            self.color = UIColor(red: 163/255, green: 56/255, blue: 120/225, alpha: 1)
+            self.purchased = false
+        case "Worship":
+            self.title = "Worship"
+            self.summary = "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words."
+            self.words = self.contentWorship
+            self.color = UIColor(red: 199/255, green: 176/255, blue: 87/225, alpha: 1)
+            self.purchased = false
+        case "Books":
+            self.title = "Books and Movies"
+            self.summary = "Christian and Christian-friendly books and movies, as well as the books of the Bible."
+            self.words = self.contentBooks
+            self.color = UIColor(red: 159/255, green: 200/255, blue: 223/225, alpha: 1)
+            self.purchased = false
+        case "Feasts":
+            self.title = "Feasts"
+            self.summary = "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible."
+            self.words = self.contentFeasts
+            self.color =  UIColor(red: 48/255, green: 142/255, blue: 145/225, alpha: 1)
+            self.purchased = false
+        case "Relics":
+            self.title = "Relics and Saints"
+            self.summary = "Religious artifacts throughout history and the names of Catholic Saints."
+            self.words = self.contentRelics
+            self.color = UIColor(red: 178/255, green: 215/255, blue: 255/225, alpha: 1)
+            self.purchased = false
+        case "Revelation":
+            self.title = "Revelation"
+            self.summary = "Words and phrases of the prophetic last book of the Bible."
+            self.words = self.contentRevelation
+            self.color = UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1)
+            self.purchased = false
+        case "Angels":
+            self.title = "Angels"
+            self.summary = "The names of the Angels from the Bible and from Christian-Judeo mythology."
+            self.words = self.contentAngels
+            self.color = UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1)
+            self.purchased = false
+        case "Doctrine":
+            self.title = "Doctrine"
+            self.summary = "Christian denominations, beliefs and practices within different denominations, words associated with different denominations."
+            self.words = self.contentDoctrine
+            self.color = UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1)
+            self.purchased = false
+        case "Sins":
+            self.title = "Sins"
+            self.summary = "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words."
+            self.words = self.contentSins
+            self.color = UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1)
+            self.purchased = false
+        case "Commands":
+            self.title = "Commands"
+            self.summary = "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words."
+            self.words = self.contentCommands
+            self.color = UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)
+            self.purchased = false
+        default:break
         }
     }
     
     
-
+    
     // MARK: - Categories
     let contentJesus = ["God","Perfect","Holy Righteous","Loving","Kind","Friendly","Helpful","Protective","Caring","Sharing","Powerful","Mighty","Compassionate","Forgiving","Empowering","Discerning","Overwhelming","Consuming","Cleansing","Healer","Deliverer","Restorer","Moving","Creator","Destroyer","Friend","Fulfilling","Distinctive","Comforter","Provider","Teacher","Trainer","Purifying","Freeing","Liberator","Preserving","Consigning","Reproving","Addressing","Confiding","Courageous","Victorious","Credited","Historical","Proven","Incorruptible","Unfailable","Infallible","Trustworthy","Protected ","Immune","Responsive","Privileged","Honorable","Honored","Legitimate","Reliable","Good","Reputable","Celebrated","Praised","Glorified","Famous","Renowned","Loved","Served","Worshipped","Sought","Needed","Required","Requested","Beautiful","Living","Breathing","Alive","Active","Amazing","Inspiring","Productive","Producing","Creative","Abundant","Rich","Adequate","Decent","Modest","Pure","Real","Moral","Wholesome","Safe","Beneficial","Exellent","Eminent","Prominent","Remarkable","Extraordinary","Supernatural","Miraculous","Astounding","Advocate","Almighty","Alpha and Omega","Amen","Apostle of our Profession","Author of Life","Perfector of our Faith","Author of our Faith","Author of Salvation","Beginning and End","Blessed Only Ruler","Bread of God","Bread of Life","Capstone","Chief Cornerstone","Chief Shepherd","Christ","Creator","Deliverer","Eternal Life","Everlasting Father","Gate","Faithful and True","Faithful Witness","First and Last","Firstborn","Good Shepherd","Great Shepherd","Great High Priest","Head of the Church","Heir of all Things","Holy and True","Holy One","Hope","Horn of Salvation","I Am","Image of God","King Eternal","King of Israel","King of the Jews","King of Kings","King of Ages","Lamb","Lamb of God","Lamb without Blemish","Last Adam","Life","Light of the World","Lion of Judah","Living One","Living Stone","Lord of All","Lord of Glory","Lord of Lords","Our Righteousness","Man from Heaven","Mediator","Mighty God","Morning Star","Offspring of David","Only Begotten Son","Our Holiness","Our Husband","Our Protection","Our Redemption","Our Righteousness","Passover Lamb","Power of God","Precious Cornerstone","Prince of Peace","Prophet","Resurrection and Life","Righteous Branch","Righeous One","Rock","Root of David","Ruler of God's Creation","Savior","Son of David","Son of God","Son of Man","Son of Most High God","Stone the Builders Rejected","True Bread","True Light","True Vine","The Truth","The Way","Wisdom of God","Wonderful Counselor","Word","Word of God","Beard","Robe","Crown","Cross","Blood","Parables","Immanuel","Bridegroom","Heart","Stripes","Forgiveness","Gospel","Lily of the Valley","Rose of Sharon"]
     
@@ -128,7 +145,7 @@ class Category: NSObject {
     let contentWorship = ["Skillet","Switchfoot","Red","Thousand Foot Krutch","Casting Crowns","Newsboys","Flyleaf","Third Day","Disciple","MercyMe","Tobymac","P.O.D","Kutless","Fireflight","Sanctus Real","Anberlin","Relient K","Lifehouse","Pillar","Hawk Nelson","Demon Hunter","Audio Adrenaline","We as Human","Jeremy Camp","Jars of Clay","dc Talk","12 Stones","Tenth Avenue North","David Crowder Band","Stryper","Decyfer Down","Petra","Creed","Building 429","Evanescence","Ashes Remain","Michael W. Smith","Family Force 5","Seventh Day Slumber","Falling Up","BarlowGirl","Britt Nicole","Superchick","Hillsong","Sixpense None the Richer","Michael Sweet","Nine Lashes","FM Static","DeGarmo & Key","Jesus Culture","Bride","White Heart","Whitecross","Sonicflood","Amazing Grace","How Great Thou Art","Holy, Holy, Holy","Great is Thy Faithfulness","Battle Hymn of the Republic","Day by Day","His Eye is on the Sparrow","I'll Fly Away","In the Sweet By and By","Jesus Loves Me","Old Time Religion","Leaning on the Everlasting Arms","Nearer My God, To Thee","Rock of Ages","The Old Rugged Cross","There is Power in the Blood","Victory in Jesus","Shout to the Lord","Oceans","Open the Eyes of My Heart","Refiner's Fire","Cry of my Heart","Change My Heart, Oh God","For Those Tears I Died","Father Abraham","This Little Light of Mine","This Train is Bound for Glory","He's Got the Whole World in His Hands","Give Me Oil in My Lamp","I'm in the Lord's Army","Zacchaeus","Kum Ba Yah","Jesus Loves the Little Children","Rise and Shine!","This is the Day that the Lord Has Made","When the Saints Go Marching In","Go Tell it On The Mountain","Amy Grant","Phil Wickham","Mandisa","Jamie Grace","For King and Country","Matt Maher","Carmen","Steven Curtis Chapman","Lecrae","Carrie Underwood","Lyre","Lute","Shofar","Trumpet","Flute","Reed Pipe","Drum","Cymbals","Bells","Guitar","Piano","Shakers","Base Guitar","Vocals","Backup Vocals","Clapping","Joyful Noise","Lyrics","Harp","Sing","Shout","Praise","Hallelujah!","Glory Be!","Praise the Lord!","Praise God!","Dance","Lift Up","Tambourine"]
     
     let contentBooks = ["Mere Christianity","Knowing God","Hinds Feet on High Places","The Problem of Pain","Orthodoxy","The Screwtape Letters","The God Who is There","The Lord of the Rings","Redeeming Love","The Lion, The Witch, and The Wardrobe","Holy Bible","This Present Darkness","The Pilgrim's Progress","The Shack","Left Behind","Prayer","Velvet Elvis","The Case for Christ","The Bondage of the Will","Song of Redemption","A Voice in the Wind","The Red Tent","Love Wins","Piercing the Darkness","The Last Sin Eater","The Scarlet Thread","Prince Caspian","The Voyage of the Dawn Treader","The Silver Chair","The Horse and His Boy","The Magician's Nephew","The Last Battle","Thr3e","Candle in the Darkness","VeggieTales","The Ten Commandments","Ben-Hur","The Passion of the Christ","Fireproof","Brother Sun, Sister Moon","King of Kings","Barabbas","The Robe","Shadowlands","The Mission","The Gospel of John","Jesus of Nazareth","The Greatest Story Ever Told","Amazing Grace","One Night With the King","The Prince of Egypt","The Miracle Maker","Joseph King of Dreams","The Chritmas Lamb","The Lion of Judah","Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Songs","Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zachariah","Malachi","Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation","The Sign of the Cross","The Omega Code","The Book of Ruth","Son of God","Exodus: Gods and Kings","The Nativity Story"]
-
+    
     let contentRevelation = ["Seven Churches in Asia","Pergamum","Thyatira","Sardis","Philadelphia","Smyrna","Ephesus","Laodicea","Island of Patmos","Testimony","Prophecy","Clouds","Alpha and Omega","John","Seven Golden Lampstands","Double-edged Sword","Burnished Bronze","Golden Sash","Blazing Fire","Seven Stars","The First and the Last","Keys of Death","Keys of Hades","Synagogue of Satan","Nicolaitans","Jezebel","Twenty-Four Thrones","Twenty-Four Elders","Sea of Glass","Covered with Eyes","Four Living Creatures","Lion","Ox","Flying Eagle","Six Winged Creatures","Seven Seals","Scroll","Lamb with 7 horns and 7 eyes","White Horse","Firery Red Horse","Black Horse","Pale Horse","Death and Hades","Great Earthquake","Sun turns black","Moon turns blood red","Stars and Skies Fall","Four Corners of the Earth","Four Winds","Half hour silence","Seven Angels","Seven Trumpets","Golden Censer","Golden Altar","Hail and Fire","A Third Burnt","Wormwood","Bitter Water","Abyss","Scorpion Locusts","Plague of Fire","Plague of Smoke","Plague of Sulfer","Two Witnesses","Beast from the Abyss","Crown of Twelve Stars","Seven-headed Dragon","Seven-headed Beast","Beast out of the Sea","Beast out of the Earth","Fatal Wound","Mark of the Beast","666","Blameless","Eternal Gospel","Fear God","Hour of Judgement","Sickle","Reap","God's Wrath","Seashore","Seven Plagues","Tabernacle of Testimony","Golden Bowls","Sores","Sea to Blood","Rivers to Blood","Scorching Sun","Darkness","Euphrates Dries","Armageddon","Three Evil Spirits","Frogs","False Prophet","Demons","Miraculous Signs","Lightning","Thunder","Huge Hailstones","The Great Prostitute","Scarlet Beast","Blasphemous","Blasphemous Names","Gold","Precious Stones","Pearls","Golden Cup","Abominable things","Mystery","Babylon the Great","The Mother of Prostitutes","Abominations of the Earth","Seven Hills","Kings","Faithful Followers","Multitudes","Nations","Languages","Splendor","Mourning","Famine","Faithful and True","Testimony of Jesus","Spirit of Prophecy","Armies of Heaven","Sharp Sword","Iron Sceptor","Winepress","King of Kings","Lord of Lords","Fiery Lake","Sulfer","Birds","Great Chain","Ancient Serpent","The Devil","First Resurrection","Second Death","Thousand-Year Reign","Gog","Magog","Four Corners","Breadth","Great White Throne","Satan","Book of Life","New Heaven","New Earth","New Jeruselem","Holy City","Old Order","Passed Away","It is done","Water of Life","Bride","Jasper","Crystal","Twelve Gates","Twelve Foundations","Measuring Rod","Pure Gold","Sapphire","Topaz","Emerald","Jacinth","Amethyst","Pearled Gates","Golden Streets","River of Life","Tree of Life","Twelve Crops","Forehead","Right Hand","Morning Star","Root of David","Amen","Tribulation","Rapture","Antichrist"]
     
     let contentAngels = ["Abaddon","Adriel","Abriel","Archangel","Ariel","Azazel","Azrael","Barachiel","Bene Elohim","Cassiel","Cherub","Cherubim","Camael","Daniel","Dominions","Dumah","Eremiel","Gabriel","Gadreel","Watcher","Hadraniel","Hahasiah","Haniel","Hashmal","Hesediel","Imamiah","Jegudiel","Jehoel","Jequn","Jerahmeel","Jophiel","Leliel","Lucifer","Mebahiah","Metatron","Michael","Muriel","Nanael","Netzach","Nithael","Pahaliah","Penemue","Powers","Principalities","Poyel","Puriel","Raguel","Raphael","Raziel","Remiel","Schiel","Samael","Sandalphon","Sariel","Selephiel","Seraphim","Seraphiel","Simiel","Shamsiel","Thrones","Tzaphqiel","Temeluchus","Uriel","Uzziel","Virtues","Vehuel","Wormwood","Zachariel","Zadkiel","Zaphkiel","Zophiel"]
