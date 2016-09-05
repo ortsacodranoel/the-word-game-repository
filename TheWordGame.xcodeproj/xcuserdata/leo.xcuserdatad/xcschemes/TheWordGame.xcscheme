@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-               BuildableName = "testing-animations.app"
-               BlueprintName = "testing-animations"
-               ReferencedContainer = "container:testing-animations.xcodeproj">
+               BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+               BlueprintName = "TheWordGame"
+               ReferencedContainer = "container:TheWordGame.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D67774E41D1C392B0051C634"
-               BuildableName = "testing-animationsTests.xctest"
-               BlueprintName = "testing-animationsTests"
-               ReferencedContainer = "container:testing-animations.xcodeproj">
+               BuildableName = "TheWordGame.temp_caseinsensitive_rename.xctest"
+               BlueprintName = "TheWordGameTests"
+               ReferencedContainer = "container:TheWordGame.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D67774EF1D1C392B0051C634"
-               BuildableName = "testing-animationsUITests.xctest"
-               BlueprintName = "testing-animationsUITests"
-               ReferencedContainer = "container:testing-animations.xcodeproj">
+               BuildableName = "TheWordGame.temp_caseinsensitive_rename.xctest"
+               BlueprintName = "TheWordGameUITests"
+               ReferencedContainer = "container:TheWordGame.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-            BuildableName = "testing-animations.app"
-            BlueprintName = "testing-animations"
-            ReferencedContainer = "container:testing-animations.xcodeproj">
+            BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+            BlueprintName = "TheWordGame"
+            ReferencedContainer = "container:TheWordGame.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-            BuildableName = "testing-animations.app"
-            BlueprintName = "testing-animations"
-            ReferencedContainer = "container:testing-animations.xcodeproj">
+            BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+            BlueprintName = "TheWordGame"
+            ReferencedContainer = "container:TheWordGame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-            BuildableName = "testing-animations.app"
-            BlueprintName = "testing-animations"
-            ReferencedContainer = "container:testing-animations.xcodeproj">
+            BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+            BlueprintName = "TheWordGame"
+            ReferencedContainer = "container:TheWordGame.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

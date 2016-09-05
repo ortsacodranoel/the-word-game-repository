@@ -13,9 +13,12 @@
 		B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F481D6FE2AE0060D517 /* winner.mp3 */; };
 		B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F4A1D6FED580060D517 /* Alert.mp3 */; };
 		B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B37609051D675AA900A678A1 /* LaunchScreen.storyboard */; };
+		B381D5BE1D7E0DDF00E40B45 /* TheWordGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381D5BD1D7E0DDF00E40B45 /* TheWordGameUITests.swift */; };
+		B381D5C31D7E0E3900E40B45 /* thewordgame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */; };
 		B392F42C1D66112F00F3748A /* RulesTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */; };
 		B392F42E1D66146100F3748A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42D1D66146100F3748A /* RulesViewController.swift */; };
 		B39C3D071D7A4B2800636B85 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C3D061D7A4B2800636B85 /* Category.swift */; };
+		B39E2A031D7E05CC00F59C4F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */; };
 		B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */; };
 		B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */; };
 		B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B413DBDD1D2DF1900006FB9D /* Game.swift */; };
@@ -25,10 +28,8 @@
 		D67774D21D1C392B0051C634 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774D11D1C392B0051C634 /* AppDelegate.swift */; };
 		D67774D41D1C392B0051C634 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774D31D1C392B0051C634 /* CategoriesViewController.swift */; };
 		D67774D71D1C392B0051C634 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D67774D51D1C392B0051C634 /* Main.storyboard */; };
-		D67774DA1D1C392B0051C634 /* testing_animations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D67774D81D1C392B0051C634 /* testing_animations.xcdatamodeld */; };
 		D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D67774DB1D1C392B0051C634 /* Assets.xcassets */; };
-		D67774EA1D1C392B0051C634 /* testing_animationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774E91D1C392B0051C634 /* testing_animationsTests.swift */; };
-		D67774F51D1C392B0051C634 /* testing_animationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774F41D1C392B0051C634 /* testing_animationsUITests.swift */; };
+		D67774EA1D1C392B0051C634 /* TheWordGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774E91D1C392B0051C634 /* TheWordGameTests.swift */; };
 		D67775031D1C4FDC0051C634 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */; };
 		D6A39C111D7141D200FD65E6 /* countdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6A39C101D7141D200FD65E6 /* countdown.mp3 */; };
 /* End PBXBuildFile section */
@@ -57,27 +58,28 @@
 		B3634F481D6FE2AE0060D517 /* winner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winner.mp3; sourceTree = "<group>"; };
 		B3634F4A1D6FED580060D517 /* Alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alert.mp3; sourceTree = "<group>"; };
 		B37609051D675AA900A678A1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B381D5BD1D7E0DDF00E40B45 /* TheWordGameUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheWordGameUITests.swift; sourceTree = "<group>"; };
+		B381D5C21D7E0E3900E40B45 /* testing_animations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = testing_animations.xcdatamodel; sourceTree = "<group>"; };
 		B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesTransitionManager.swift; sourceTree = "<group>"; };
 		B392F42D1D66146100F3748A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		B39C3D061D7A4B2800636B85 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
+		B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipeSoundEffect.mp3; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
 		B413DBDD1D2DF1900006FB9D /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		B4752B411D28849500A042E0 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D604D47F1D21839B00FBCC2B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D62296C11D5832E600B131D7 /* CategoriesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTransitionManager.swift; sourceTree = "<group>"; };
-		D67774CE1D1C392B0051C634 /* testing-animations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "testing-animations.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67774CE1D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWordGame.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774D11D1C392B0051C634 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D67774D31D1C392B0051C634 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		D67774D61D1C392B0051C634 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D67774D91D1C392B0051C634 /* testing_animations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = testing_animations.xcdatamodel; sourceTree = "<group>"; };
 		D67774DB1D1C392B0051C634 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D67774E01D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D67774E51D1C392B0051C634 /* testing-animationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testing-animationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D67774E91D1C392B0051C634 /* testing_animationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testing_animationsTests.swift; sourceTree = "<group>"; };
+		D67774E51D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67774E91D1C392B0051C634 /* TheWordGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheWordGameTests.swift; sourceTree = "<group>"; };
 		D67774EB1D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D67774F01D1C392B0051C634 /* testing-animationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testing-animationsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D67774F41D1C392B0051C634 /* testing_animationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testing_animationsUITests.swift; sourceTree = "<group>"; };
+		D67774F01D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774F61D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = ../CollectionViewCell.swift; sourceTree = "<group>"; };
 		D6A39C101D7141D200FD65E6 /* countdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = countdown.mp3; sourceTree = "<group>"; };
@@ -147,9 +149,10 @@
 		D67774C51D1C392B0051C634 = {
 			isa = PBXGroup;
 			children = (
-				D67774D01D1C392B0051C634 /* testing-animations */,
-				D67774E81D1C392B0051C634 /* testing-animationsTests */,
-				D67774F31D1C392B0051C634 /* testing-animationsUITests */,
+				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
+				D67774D01D1C392B0051C634 /* TheWordGame */,
+				D67774E81D1C392B0051C634 /* TheWordGameTests */,
+				D67774F31D1C392B0051C634 /* TheWordGameUITests */,
 				D67774CF1D1C392B0051C634 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,14 +160,15 @@
 		D67774CF1D1C392B0051C634 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D67774CE1D1C392B0051C634 /* testing-animations.app */,
-				D67774E51D1C392B0051C634 /* testing-animationsTests.xctest */,
-				D67774F01D1C392B0051C634 /* testing-animationsUITests.xctest */,
+				D67774CE1D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.app */,
+				D67774E51D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */,
+				D67774F01D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */,
 			);
 			name = Products;
+			path = TheWordGame;
 			sourceTree = "<group>";
 		};
-		D67774D01D1C392B0051C634 /* testing-animations */ = {
+		D67774D01D1C392B0051C634 /* TheWordGame */ = {
 			isa = PBXGroup;
 			children = (
 				B35659051D6F9D87003E7DCD /* Sound Effects */,
@@ -176,36 +180,36 @@
 				B37786021D494B1E00639A8B /* Transition Managers */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
+				B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */,
 				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
-				D67774D81D1C392B0051C634 /* testing_animations.xcdatamodeld */,
 			);
-			path = "testing-animations";
+			path = TheWordGame;
 			sourceTree = "<group>";
 		};
-		D67774E81D1C392B0051C634 /* testing-animationsTests */ = {
+		D67774E81D1C392B0051C634 /* TheWordGameTests */ = {
 			isa = PBXGroup;
 			children = (
-				D67774E91D1C392B0051C634 /* testing_animationsTests.swift */,
+				D67774E91D1C392B0051C634 /* TheWordGameTests.swift */,
 				D67774EB1D1C392B0051C634 /* Info.plist */,
 			);
-			path = "testing-animationsTests";
+			path = TheWordGameTests;
 			sourceTree = "<group>";
 		};
-		D67774F31D1C392B0051C634 /* testing-animationsUITests */ = {
+		D67774F31D1C392B0051C634 /* TheWordGameUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D67774F41D1C392B0051C634 /* testing_animationsUITests.swift */,
+				B381D5BD1D7E0DDF00E40B45 /* TheWordGameUITests.swift */,
 				D67774F61D1C392B0051C634 /* Info.plist */,
 			);
-			path = "testing-animationsUITests";
+			path = TheWordGameUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D67774CD1D1C392B0051C634 /* testing-animations */ = {
+		D67774CD1D1C392B0051C634 /* TheWordGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D67774F91D1C392B0051C634 /* Build configuration list for PBXNativeTarget "testing-animations" */;
+			buildConfigurationList = D67774F91D1C392B0051C634 /* Build configuration list for PBXNativeTarget "TheWordGame" */;
 			buildPhases = (
 				D67774CA1D1C392B0051C634 /* Sources */,
 				D67774CB1D1C392B0051C634 /* Frameworks */,
@@ -215,14 +219,14 @@
 			);
 			dependencies = (
 			);
-			name = "testing-animations";
+			name = TheWordGame;
 			productName = "testing-animations";
-			productReference = D67774CE1D1C392B0051C634 /* testing-animations.app */;
+			productReference = D67774CE1D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D67774E41D1C392B0051C634 /* testing-animationsTests */ = {
+		D67774E41D1C392B0051C634 /* TheWordGameTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D67774FC1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "testing-animationsTests" */;
+			buildConfigurationList = D67774FC1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "TheWordGameTests" */;
 			buildPhases = (
 				D67774E11D1C392B0051C634 /* Sources */,
 				D67774E21D1C392B0051C634 /* Frameworks */,
@@ -233,14 +237,14 @@
 			dependencies = (
 				D67774E71D1C392B0051C634 /* PBXTargetDependency */,
 			);
-			name = "testing-animationsTests";
+			name = TheWordGameTests;
 			productName = "testing-animationsTests";
-			productReference = D67774E51D1C392B0051C634 /* testing-animationsTests.xctest */;
+			productReference = D67774E51D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D67774EF1D1C392B0051C634 /* testing-animationsUITests */ = {
+		D67774EF1D1C392B0051C634 /* TheWordGameUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D67774FF1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "testing-animationsUITests" */;
+			buildConfigurationList = D67774FF1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "TheWordGameUITests" */;
 			buildPhases = (
 				D67774EC1D1C392B0051C634 /* Sources */,
 				D67774ED1D1C392B0051C634 /* Frameworks */,
@@ -251,9 +255,9 @@
 			dependencies = (
 				D67774F21D1C392B0051C634 /* PBXTargetDependency */,
 			);
-			name = "testing-animationsUITests";
+			name = TheWordGameUITests;
 			productName = "testing-animationsUITests";
-			productReference = D67774F01D1C392B0051C634 /* testing-animationsUITests.xctest */;
+			productReference = D67774F01D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -280,7 +284,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D67774C91D1C392B0051C634 /* Build configuration list for PBXProject "testing-animations" */;
+			buildConfigurationList = D67774C91D1C392B0051C634 /* Build configuration list for PBXProject "TheWordGame" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -293,9 +297,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D67774CD1D1C392B0051C634 /* testing-animations */,
-				D67774E41D1C392B0051C634 /* testing-animationsTests */,
-				D67774EF1D1C392B0051C634 /* testing-animationsUITests */,
+				D67774CD1D1C392B0051C634 /* TheWordGame */,
+				D67774E41D1C392B0051C634 /* TheWordGameTests */,
+				D67774EF1D1C392B0051C634 /* TheWordGameUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,6 +312,7 @@
 				B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */,
 				B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */,
 				B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */,
+				B39E2A031D7E05CC00F59C4F /* Default-568h@2x.png in Resources */,
 				B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */,
 				D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */,
 				D6A39C111D7141D200FD65E6 /* countdown.mp3 in Resources */,
@@ -339,9 +344,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62296C21D5832E600B131D7 /* CategoriesTransitionManager.swift in Sources */,
-				D67774DA1D1C392B0051C634 /* testing_animations.xcdatamodeld in Sources */,
 				D67774D41D1C392B0051C634 /* CategoriesViewController.swift in Sources */,
 				B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */,
+				B381D5C31D7E0E3900E40B45 /* thewordgame.xcdatamodeld in Sources */,
 				B392F42C1D66112F00F3748A /* RulesTransitionManager.swift in Sources */,
 				D604D4801D21839B00FBCC2B /* DetailViewController.swift in Sources */,
 				D67775031D1C4FDC0051C634 /* CollectionViewCell.swift in Sources */,
@@ -358,7 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D67774EA1D1C392B0051C634 /* testing_animationsTests.swift in Sources */,
+				D67774EA1D1C392B0051C634 /* TheWordGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D67774F51D1C392B0051C634 /* testing_animationsUITests.swift in Sources */,
+				B381D5BE1D7E0DDF00E40B45 /* TheWordGameUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,12 +380,12 @@
 /* Begin PBXTargetDependency section */
 		D67774E71D1C392B0051C634 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D67774CD1D1C392B0051C634 /* testing-animations */;
+			target = D67774CD1D1C392B0051C634 /* TheWordGame */;
 			targetProxy = D67774E61D1C392B0051C634 /* PBXContainerItemProxy */;
 		};
 		D67774F21D1C392B0051C634 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D67774CD1D1C392B0051C634 /* testing-animations */;
+			target = D67774CD1D1C392B0051C634 /* TheWordGame */;
 			targetProxy = D67774F11D1C392B0051C634 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -486,10 +491,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "testing-animations/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.danielcastro.testing-animations";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
+				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -500,10 +505,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "testing-animations/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.danielcastro.testing-animations";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
+				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -512,11 +517,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "testing-animationsTests/Info.plist";
+				INFOPLIST_FILE = TheWordGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.danielcastro.testing-animationsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testing-animations.app/testing-animations";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.TheWordGameTests;
+				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWordGame.temp_caseinsensitive_rename.app/TheWordGame.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -524,42 +529,45 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "testing-animationsTests/Info.plist";
+				INFOPLIST_FILE = TheWordGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.danielcastro.testing-animationsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testing-animations.app/testing-animations";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.TheWordGameTests;
+				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWordGame.temp_caseinsensitive_rename.app/TheWordGame.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
 		D67775001D1C392B0051C634 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "testing-animationsUITests/Info.plist";
+				INFOPLIST_FILE = TheWordGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.danielcastro.testing-animationsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "testing-animations";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
+				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_TARGET_NAME = TheWordGame;
 			};
 			name = Debug;
 		};
 		D67775011D1C392B0051C634 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "testing-animationsUITests/Info.plist";
+				INFOPLIST_FILE = TheWordGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.danielcastro.testing-animationsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "testing-animations";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
+				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				TEST_TARGET_NAME = TheWordGame;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D67774C91D1C392B0051C634 /* Build configuration list for PBXProject "testing-animations" */ = {
+		D67774C91D1C392B0051C634 /* Build configuration list for PBXProject "TheWordGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D67774F71D1C392B0051C634 /* Debug */,
@@ -568,7 +576,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D67774F91D1C392B0051C634 /* Build configuration list for PBXNativeTarget "testing-animations" */ = {
+		D67774F91D1C392B0051C634 /* Build configuration list for PBXNativeTarget "TheWordGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D67774FA1D1C392B0051C634 /* Debug */,
@@ -577,7 +585,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D67774FC1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "testing-animationsTests" */ = {
+		D67774FC1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "TheWordGameTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D67774FD1D1C392B0051C634 /* Debug */,
@@ -586,7 +594,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D67774FF1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "testing-animationsUITests" */ = {
+		D67774FF1D1C392B0051C634 /* Build configuration list for PBXNativeTarget "TheWordGameUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D67775001D1C392B0051C634 /* Debug */,
@@ -598,13 +606,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D67774D81D1C392B0051C634 /* testing_animations.xcdatamodeld */ = {
+		B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D67774D91D1C392B0051C634 /* testing_animations.xcdatamodel */,
+				B381D5C21D7E0E3900E40B45 /* testing_animations.xcdatamodel */,
 			);
-			currentVersion = D67774D91D1C392B0051C634 /* testing_animations.xcdatamodel */;
-			path = testing_animations.xcdatamodeld;
+			currentVersion = B381D5C21D7E0E3900E40B45 /* testing_animations.xcdatamodel */;
+			path = thewordgame.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

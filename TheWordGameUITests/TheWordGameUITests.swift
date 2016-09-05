@@ -8,7 +8,7 @@
 
 import XCTest
 
-class testing_animationsUITests: XCTestCase {
+class TheWordGameUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

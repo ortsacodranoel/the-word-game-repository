@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
-//  testing-animations
+//  TransitionManager.swift
+//  TheWordGame
 //
-//  Created by Daniel Castro on 6/23/16.
+//  Created by Leo on 7/24/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 

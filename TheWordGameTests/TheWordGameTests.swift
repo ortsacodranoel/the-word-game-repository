@@ -1,15 +1,8 @@
-//
-//  testing_animationsTests.swift
-//  testing-animationsTests
-//
-//  Created by Daniel Castro on 6/23/16.
-//  Copyright © 2016 Daniel Castro. All rights reserved.
-//
 
 import XCTest
-@testable import testing_animations
+@testable import thewordgame
 
-class testing_animationsTests: XCTestCase {
+class TheWordGameTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

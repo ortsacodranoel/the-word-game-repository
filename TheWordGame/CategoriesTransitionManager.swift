@@ -1,14 +1,14 @@
 //
-//  GameScreenTransitionManager.swift
-//  testing-animations
+//  TransitionManager.swift
+//  TheWordGame
 //
-//  Created by Leo on 7/25/16.
+//  Created by Leo on 7/24/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
 import UIKit
 
-class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
+class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
     
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
     private var presenting = true
@@ -47,6 +47,7 @@ class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
         
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: [], animations: {
             
+            
             if (self.presenting){
                 fromView.transform = offScreenLeft
             }
@@ -54,7 +55,7 @@ class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
                 fromView.transform = offScreenRight
             }
             
-            toView.transform = CGAffineTransformIdentity
+                toView.transform = CGAffineTransformIdentity
             
             }, completion: { finished in
                 
