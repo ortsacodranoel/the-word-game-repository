@@ -9,7 +9,7 @@
         <!--UICollectionView-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="CategoriesViewController" id="BYZ-38-t0r" customClass="CategoriesViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoriesViewController" id="BYZ-38-t0r" customClass="CategoriesViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,7 +29,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="testing_animations" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target">
                                         <rect key="frame" x="75" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -116,7 +116,7 @@
         <!--Rules View Controller-->
         <scene sceneID="HXC-YQ-azn">
             <objects>
-                <viewController id="o0C-mE-Sf2" customClass="RulesViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="o0C-mE-Sf2" customClass="RulesViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r6D-Fp-Tj5"/>
                         <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
@@ -246,7 +246,7 @@
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
             <objects>
-                <viewController storyboardIdentifier="detailViewController" title="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Fc-eW-5Eo" customClass="DetailViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailViewController" title="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Fc-eW-5Eo" customClass="DetailViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kKD-HC-37C"/>
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
@@ -374,7 +374,7 @@
         <!--Game View Controller-->
         <scene sceneID="IdY-Nk-VWO">
             <objects>
-                <viewController id="Sav-rh-bmW" customClass="GameViewController" customModule="testing_animations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sav-rh-bmW" customClass="GameViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GbM-Bx-36X"/>
                         <viewControllerLayoutGuide type="bottom" id="oXD-nv-iJF"/>

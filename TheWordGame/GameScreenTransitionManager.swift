@@ -1,14 +1,13 @@
 //
 //  TransitionManager.swift
-//  testing-animations
+//  TheWordGame
 //
 //  Created by Leo on 7/24/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
-
 import UIKit
 
-class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
+class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
     
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
     private var presenting = true
@@ -19,26 +18,27 @@ class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
     // Animate transition between View Controllers.
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
+        
         // Get reference to fromView, toView, and containerView.
         let container = transitionContext.containerView()
-        let categoriesView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
-        let rulesView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
+        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
         
         // Setup 2D transformations.
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
         
         if (self.presenting) {
-            rulesView.transform = offScreenRight
+            toView.transform = offScreenRight
         }
         else {
-            rulesView.transform = offScreenLeft
+            toView.transform = offScreenLeft
         }
         
         
         // add the both views to our view controller
-        container!.addSubview(rulesView)
-        container!.addSubview(categoriesView)
+        container!.addSubview(toView)
+        container!.addSubview(fromView)
         
         
         let duration = self.transitionDuration(transitionContext)
@@ -46,15 +46,14 @@ class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
         
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: [], animations: {
             
-            
             if (self.presenting){
-                categoriesView.transform = offScreenLeft
+                fromView.transform = offScreenLeft
             }
             else {
-                categoriesView.transform = offScreenRight
+                fromView.transform = offScreenRight
             }
             
-                rulesView.transform = CGAffineTransformIdentity
+            toView.transform = CGAffineTransformIdentity
             
             }, completion: { finished in
                 

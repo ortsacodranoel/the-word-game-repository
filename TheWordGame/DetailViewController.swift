@@ -1,11 +1,10 @@
 //
-//  DetalViewController.swift
-//  testing-animations
+//  TransitionManager.swift
+//  TheWordGame
 //
-//  Created by Daniel Castro on 6/27/16.
+//  Created by Leo on 7/24/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
-
 import UIKit
 import AVFoundation
 
