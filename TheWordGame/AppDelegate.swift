@@ -8,14 +8,23 @@
 
 import UIKit
 import CoreData
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var canPurchase:Bool = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if SKPaymentQueue.canMakePayments(){
+            IAPManager.sharedInstance.setupInAppPurchases()
+        
+            canPurchase = true
+        }
+        
         return true
     }
 
