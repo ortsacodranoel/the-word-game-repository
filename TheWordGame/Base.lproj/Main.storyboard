@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Z97-k5-l5n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -111,7 +111,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1521" y="563"/>
+            <point key="canvasLocation" x="-587" y="761"/>
+        </scene>
+        <!--Spash Screen View Controller-->
+        <scene sceneID="xr4-vU-SJu">
+            <objects>
+                <viewController id="Z97-k5-l5n" customClass="spashScreenViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uG3-Op-ciE"/>
+                        <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iob-2N-vam">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="showMainViewController" id="FAM-VJ-vEF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yOF-wN-00Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1327" y="761"/>
         </scene>
         <!--Rules View Controller-->
         <scene sceneID="HXC-YQ-azn">
@@ -241,7 +262,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="563"/>
+            <point key="canvasLocation" x="988" y="679"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -369,7 +390,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1171" y="2015"/>
+            <point key="canvasLocation" x="269" y="1675"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="IdY-Nk-VWO">
@@ -743,7 +764,7 @@ Cgo
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="LJF-0V-4cl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-538" y="2015"/>
+            <point key="canvasLocation" x="1178" y="1675"/>
         </scene>
     </scenes>
     <resources>
