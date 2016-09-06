@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>com.thewordgame.angels</string>
+	<string>com.thewordgame.books</string>
+	<string>com.thewordgame.commands</string>
+	<string>com.thewordgame.denominations</string>
+	<string>com.thewordgame.famouschristians</string>
+	<string>com.thewordgame.feasts</string>
+	<string>com.thewordgame.relicsandsaints</string>
+	<string>com.thewordgame.revelation</string>
+	<string>com.thewordgame.sins</string>
+	<string>com.thewordgame.worship</string>
+</array>
+</plist>

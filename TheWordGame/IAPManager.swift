@@ -27,7 +27,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate {
         var identifiers = NSArray()
         
         // This will give us an array of product identifiers.
-        if let url = NSBundle.mainBundle().URLForResource("iap_products", withExtension: "plist") {
+        if let url = NSBundle.mainBundle().URLForResource("iap_product_ids", withExtension: "plist") {
             identifiers = NSArray(contentsOfURL: url)!
         }
         
@@ -43,6 +43,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate {
         let productRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
         
         self.request = productRequest
+        productRequest.delegate = self
         productRequest.start()
     }
     
