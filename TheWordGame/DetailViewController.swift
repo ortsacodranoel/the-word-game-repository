@@ -69,21 +69,7 @@ class DetailViewController: UIViewController {
             UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1)              // Commands
     ]
     
-    let descriptions = ["His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ. ",
-                      "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.",
-                      "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times. ",
-                      "Stories from the Bible as well as Jesus’ parables.  * teams need not guess the exact answer, but must clearly guess the correct story or parable.",
-                      "Words found in the concordance of a Bible, excluding names and places.",
-                      "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.",
-                      "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.",
-                      "Christian and Christian-friendly books and movies, as well as the books of the Bible.",
-                      "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.",
-                      "Religious artifacts throughout history and the names of Catholic Saints.",
-                      "Words and phrases of the prophetic last book of the Bible.",
-                      "The names of the Angels from the Bible and from Christian-Judeo mythology.",
-                      "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.",
-                      "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.",
-                      "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words."]
+
     
     
     // MARK: - Audio
@@ -122,6 +108,64 @@ class DetailViewController: UIViewController {
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
+    
+        self.checkPurchase()
+        
+        
+
+    
+    }
+    
+    func checkPurchase() {
+        
+        let title = self.titleLabel.text! as String
+    
+        switch title {
+        case "Jesus":
+            self.selectButton.enabled = true
+        case "People":
+            self.selectButton.enabled = true
+        case "Places":
+            self.selectButton.enabled = true
+        case "Sunday School":
+            self.selectButton.enabled = true
+        case "Concordance":
+            self.selectButton.enabled = true
+        case "Angels":
+            self.checkUserDefaults("com.thewordgame.angels")
+        case "Books":
+            self.checkUserDefaults("com.thewordgame.books")
+        case "Commands":
+            self.checkUserDefaults("com.thewordgame.commands")
+        case "Denominations":
+            self.checkUserDefaults("com.thewordgame.denominations")
+        case "Famous Christians":
+            self.checkUserDefaults("com.thewordgame.famouschristians")
+        case "Feasts":
+            self.checkUserDefaults("com.thewordgame.feasts")
+        case "Relics and Saints":
+            self.checkUserDefaults("com.thewordgame.relics")
+        case "Revelation":
+            self.checkUserDefaults("com.thewordgame.revelation")
+        case "Sins":
+            self.checkUserDefaults("com.thewordgame.sins")
+        case "Worship":
+            self.checkUserDefaults("com.thewordgame.worship")
+        default:
+            break
+        }
+    
+    }
+    
+    func checkUserDefaults(productCode: String) {
+        
+        // TODO: - Purchase check.
+        if NSUserDefaults.standardUserDefaults().boolForKey(productCode) {
+            self.selectButton.enabled = true
+        } else {
+            self.selectButton.enabled = false
+            print("Category wasn't purchased")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -140,32 +184,39 @@ class DetailViewController: UIViewController {
     // ******************************************** MARK: Additional Methods ********************************************* //
     
     func setCategory(category: Int) {
-        titleLabel.text = titles[category]
+       // titleLabel.text = titles[category]
+        titleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
+
     }
     
     func setColor(category: Int) {
         self.view.backgroundColor = colors[category]
+
     }
     
     func setDescription(category: Int) {
-        self.descriptionViewLabel.text = descriptions[category]
+        self.descriptionViewLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
+        
     }
     
     
     // MARK: - Segue Methods
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+        
         
         if segue.identifier == "segueToGame" {
            
             let toViewController = segue.destinationViewController as! GameViewController
-            
-            // Pass it the game object. 
-            toViewController.game = self.game
+        
             
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
         }
+    
+    
+    
     }
     
     

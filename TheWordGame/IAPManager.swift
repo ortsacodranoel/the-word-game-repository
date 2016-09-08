@@ -50,7 +50,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate {
     
     func productsRequest(request:SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
         self.products = response.products
-        print(self.products)
+      //  print(self.products)
     }
     
 }
