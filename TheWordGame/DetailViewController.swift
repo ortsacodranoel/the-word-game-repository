@@ -7,12 +7,9 @@
 //
 import UIKit
 import AVFoundation
+import StoreKit
 
 class DetailViewController: UIViewController {
-
-    // Used to keep track of the current game.
-    var game = Game()
-    
     
     // MARK: - Variables.
     var categoryTapped = Int()
@@ -34,22 +31,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var descriptionViewLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
-    
-    // MARK: - Button Actions.
-    @IBAction func backButtonTapped(sender: AnyObject)  {
-        performSegueWithIdentifier("unwindToCategories", sender: self)
-    }
-
-    
-    @IBAction func selectButtonTapped(sender: AnyObject) {
-        if (sender.touchInside != nil) {
-            self.tapAudioPlayer.play()
-        }
-    }
-    
-
-    // MARK: - Data.
-    let titles = ["Jesus","People","Places","Sunday School","Concordance","Famous Christians","Worship","Books and Movies","Feasts","Relics and Saints","Revelation","Angels","Doctrine","Sins","Commands"]
     
        let colors = [
             UIColor(red: 147/255, green: 126/255, blue: 211/225, alpha: 1),             // Jesus
@@ -90,6 +71,27 @@ class DetailViewController: UIViewController {
     let gameScreenTransitionManager = GameScreenTransitionManager()
     let categoryScreenTransitionManager = CategoriesTransitionManager()
 
+
+    // MARK: - Button Actions.
+    @IBAction func backButtonTapped(sender: AnyObject)  {
+        performSegueWithIdentifier("unwindToCategories", sender: self)
+    }
+    
+    
+    @IBAction func selectButtonTapped(sender: AnyObject) {
+        if (sender.touchInside != nil) {
+            self.tapAudioPlayer.play()
+        }
+        
+        print("Select tapped")
+//        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.angels") {
+//            self.selectButton.enabled = true
+//        } else {
+//            IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(0) as! SKProduct)
+//        }
+//        
+    }
+    
     
     
     // MARK: - viewDidLoad
@@ -104,69 +106,72 @@ class DetailViewController: UIViewController {
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.selectButton.layer.borderWidth = 3
-        
+
         setCategory(categoryTapped)
         setColor(categoryTapped)
         setDescription(categoryTapped)
-    
-        self.checkPurchase()
-        
         
 
-    
     }
     
-    func checkPurchase() {
-        
-        let title = self.titleLabel.text! as String
     
-        switch title {
-        case "Jesus":
-            self.selectButton.enabled = true
-        case "People":
-            self.selectButton.enabled = true
-        case "Places":
-            self.selectButton.enabled = true
-        case "Sunday School":
-            self.selectButton.enabled = true
-        case "Concordance":
-            self.selectButton.enabled = true
-        case "Angels":
-            self.checkUserDefaults("com.thewordgame.angels")
-        case "Books":
-            self.checkUserDefaults("com.thewordgame.books")
-        case "Commands":
-            self.checkUserDefaults("com.thewordgame.commands")
-        case "Denominations":
-            self.checkUserDefaults("com.thewordgame.denominations")
-        case "Famous Christians":
-            self.checkUserDefaults("com.thewordgame.famouschristians")
-        case "Feasts":
-            self.checkUserDefaults("com.thewordgame.feasts")
-        case "Relics and Saints":
-            self.checkUserDefaults("com.thewordgame.relics")
-        case "Revelation":
-            self.checkUserDefaults("com.thewordgame.revelation")
-        case "Sins":
-            self.checkUserDefaults("com.thewordgame.sins")
-        case "Worship":
-            self.checkUserDefaults("com.thewordgame.worship")
-        default:
-            break
-        }
     
-    }
+    /**
     
-    func checkUserDefaults(productCode: String) {
-        
-        // TODO: - Purchase check.
-        if NSUserDefaults.standardUserDefaults().boolForKey(productCode) {
-            self.selectButton.enabled = true
-        } else {
-            self.selectButton.enabled = false
-            print("Category wasn't purchased")
-        }
-    }
+    */
+    
+//
+//    func checkPurchase() {
+//        
+//        let title = self.titleLabel.text! as String
+//    
+//        switch title {
+//        case "Jesus":
+//            self.selectButton.enabled = true
+//        case "People":
+//            self.selectButton.enabled = true
+//        case "Places":
+//            self.selectButton.enabled = true
+//        case "Sunday School":
+//            self.selectButton.enabled = true
+//        case "Concordance":
+//            self.selectButton.enabled = true
+//        case "Angels":
+//            self.checkUserDefaults("com.thewordgame.angels")
+//        case "Books":
+//            self.checkUserDefaults("com.thewordgame.books")
+//        case "Commands":
+//            self.checkUserDefaults("com.thewordgame.commands")
+//        case "Denominations":
+//            self.checkUserDefaults("com.thewordgame.denominations")
+//        case "Famous Christians":
+//            self.checkUserDefaults("com.thewordgame.famouschristians")
+//        case "Feasts":
+//            self.checkUserDefaults("com.thewordgame.feasts")
+//        case "Relics and Saints":
+//            self.checkUserDefaults("com.thewordgame.relics")
+//        case "Revelation":
+//            self.checkUserDefaults("com.thewordgame.revelation")
+//        case "Sins":
+//            self.checkUserDefaults("com.thewordgame.sins")
+//        case "Worship":
+//            self.checkUserDefaults("com.thewordgame.worship")
+//        default:
+//            break
+//        }
+//    
+//    }
+//    
+//    func checkUserDefaults(productCode: String) {
+//        // TODO: - Purchase check.
+//        if NSUserDefaults.standardUserDefaults().boolForKey(productCode) {
+//            self.selectButton.enabled = true
+//        } else {
+//            self.selectButton.enabled = false
+//            
+//            print("Category wasn't purchased")
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -178,15 +183,11 @@ class DetailViewController: UIViewController {
         startAnimations()
     }
     
-    
 
-
-    // ******************************************** MARK: Additional Methods ********************************************* //
+     //MARK: Additional Methods
     
     func setCategory(category: Int) {
-       // titleLabel.text = titles[category]
         titleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
-
     }
     
     func setColor(category: Int) {
@@ -196,29 +197,18 @@ class DetailViewController: UIViewController {
     
     func setDescription(category: Int) {
         self.descriptionViewLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
-        
     }
     
     
     // MARK: - Segue Methods
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
-        
-        
-        if segue.identifier == "segueToGame" {
-           
-            let toViewController = segue.destinationViewController as! GameViewController
-        
-            
-            toViewController.categoryTapped = self.categoryTapped
-            toViewController.transitioningDelegate = self.gameScreenTransitionManager
-        }
-    
-    
-    
+            if segue.identifier == "segueToGame" {
+                let toViewController = segue.destinationViewController as! GameViewController
+                toViewController.categoryTapped = self.categoryTapped
+                toViewController.transitioningDelegate = self.gameScreenTransitionManager
+            }
     }
-    
     
     // MARK: - Animations
 

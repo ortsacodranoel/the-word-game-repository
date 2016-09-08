@@ -118,11 +118,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueToRules" {
             self.tapAudioPlayer.play()
-            
             let rulesViewController = segue.destinationViewController as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
-            
-            
         } else if segue.identifier == "segueToDetails" {
             
             // Fade rules if visible.
@@ -134,9 +131,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let cell = view.superview! as! CollectionViewCell
             let indexPath = collectionView.indexPathForCell(cell)
             
+            /**
+             If the category has been purchased enable the select button.
+             */
+            
+            
             // Prepare destinationVC.
             let toViewController = segue.destinationViewController as! DetailViewController
-            //  toViewController.game = self.game
+            
+            toViewController.selectButton.enabled = false
+            
             toViewController.categoryTapped = (indexPath!.row)
             toViewController.transitioningDelegate = self.transitionManager
         }

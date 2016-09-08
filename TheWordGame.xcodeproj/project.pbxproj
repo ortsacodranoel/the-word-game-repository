@@ -144,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				B36733731D7F3CD100BA177B /* spashScreenViewController.swift */,
-				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
 				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
 				B4752B411D28849500A042E0 /* GameViewController.swift */,
@@ -184,6 +183,7 @@
 				D67774D11D1C392B0051C634 /* AppDelegate.swift */,
 				B39C3D061D7A4B2800636B85 /* Category.swift */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
+				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				B3F39C6C1D4672D80049F8FB /* View Controllers */,
 				D67774D51D1C392B0051C634 /* Main.storyboard */,
 				B37786021D494B1E00639A8B /* Transition Managers */,
