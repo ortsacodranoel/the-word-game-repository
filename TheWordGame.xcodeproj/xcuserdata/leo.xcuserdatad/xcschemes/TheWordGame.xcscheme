@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-               BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+               BuildableName = "TheWordGame.app"
                BlueprintName = "TheWordGame"
                ReferencedContainer = "container:TheWordGame.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D67774E41D1C392B0051C634"
-               BuildableName = "TheWordGame.temp_caseinsensitive_rename.xctest"
+               BuildableName = "TheWordGame.xctest"
                BlueprintName = "TheWordGameTests"
                ReferencedContainer = "container:TheWordGame.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D67774EF1D1C392B0051C634"
-               BuildableName = "TheWordGame.temp_caseinsensitive_rename.xctest"
+               BuildableName = "TheWordGame.xctest"
                BlueprintName = "TheWordGameUITests"
                ReferencedContainer = "container:TheWordGame.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-            BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+            BuildableName = "TheWordGame.app"
             BlueprintName = "TheWordGame"
             ReferencedContainer = "container:TheWordGame.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-            BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+            BuildableName = "TheWordGame.app"
             BlueprintName = "TheWordGame"
             ReferencedContainer = "container:TheWordGame.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D67774CD1D1C392B0051C634"
-            BuildableName = "TheWordGame.temp_caseinsensitive_rename.app"
+            BuildableName = "TheWordGame.app"
             BlueprintName = "TheWordGame"
             ReferencedContainer = "container:TheWordGame.xcodeproj">
          </BuildableReference>

@@ -1,6 +1,6 @@
 
 import XCTest
-@testable import thewordgame
+@testable import TheWordGame
 
 class TheWordGameTests: XCTestCase {
     

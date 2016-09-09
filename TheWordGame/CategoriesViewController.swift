@@ -131,16 +131,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let cell = view.superview! as! CollectionViewCell
             let indexPath = collectionView.indexPathForCell(cell)
             
-            /**
-             If the category has been purchased enable the select button.
-             */
-            
-            
             // Prepare destinationVC.
             let toViewController = segue.destinationViewController as! DetailViewController
-            
-            toViewController.selectButton.enabled = false
-            
             toViewController.categoryTapped = (indexPath!.row)
             toViewController.transitioningDelegate = self.transitionManager
         }

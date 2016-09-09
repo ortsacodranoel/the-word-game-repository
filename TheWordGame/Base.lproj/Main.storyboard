@@ -320,7 +320,6 @@
                                         <state key="normal" title="Select"/>
                                         <connections>
                                             <action selector="selectButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="8bD-Vh-gPP"/>
-                                            <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="hjj-Gg-oFL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -380,6 +379,7 @@
                         <outlet property="selectButton" destination="z36-w8-L3G" id="A75-YL-I2n"/>
                         <outlet property="selectButtonView" destination="8wf-r9-ZNq" id="Pg9-8w-F7R"/>
                         <outlet property="titleLabel" destination="pOC-zj-eJK" id="aKR-pg-Iqd"/>
+                        <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="kD4-Dq-hIT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSv-aA-bF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
