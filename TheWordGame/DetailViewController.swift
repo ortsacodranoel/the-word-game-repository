@@ -97,11 +97,18 @@ class DetailViewController: UIViewController {
                 performSegueWithIdentifier("segueToGame", sender: self)
             case "Angels":
                 if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.angels") {
+                    print("Category has been bought")
                     performSegueWithIdentifier("segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(0) as! SKProduct)
-
-            }
+                }
+            case "Books":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.books") {
+                    print("Category has been bought")
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(0) as! SKProduct)
+                }
         default:
             break
         }

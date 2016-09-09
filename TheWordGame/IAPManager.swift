@@ -80,7 +80,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                 print("Failed")
                 UIApplication.sharedApplication().networkActivityIndicatorVisible =  false
                 print(transaction.error?.localizedDescription)
-
             case .Purchased:
                 print("Purchased")
             case .Restored:
@@ -101,6 +100,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     func verifyReceipt(transaction:SKPaymentTransaction?){
         let receiptURL = NSBundle.mainBundle().appStoreReceiptURL!
         if let receipt = NSData(contentsOfURL: receiptURL){
+            
             //Receipt exists
             let requestContents = ["receipt-data" : receipt.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))]
             
