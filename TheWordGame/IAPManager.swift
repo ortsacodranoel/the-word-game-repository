@@ -19,6 +19,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     func setupInAppPurchases() {
         self.validateProductIdentifiers(self.getProductIdentifiersFromMainBundle())
+        
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
     }
     
@@ -44,9 +45,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         let productRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
         
         self.request = productRequest
-        
         productRequest.delegate = self
-        
         productRequest.start()
     }
     
@@ -80,10 +79,9 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
             case .Failed:
                 print("Failed")
                 UIApplication.sharedApplication().networkActivityIndicatorVisible =  false
-              //  print(transaction.error?.localizedDescription)
+                print(transaction.error?.localizedDescription)
             case .Purchased:
                 print("Purchased")
-                self.verifyReceipt(transaction)
             case .Restored:
                 print("Restored")
             }
@@ -91,8 +89,8 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     }
     
     func validatePurchaseArray(purchases:NSArray){
+        
         for purchase in purchases as! [NSDictionary]{
-            print("Validating\("product_id")")
             self.unlockPurchasedFunctionalityforProductIdentifier(purchase["product_id"] as! String)
         }
     }
@@ -111,7 +109,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                 let requestData = try NSJSONSerialization.dataWithJSONObject(requestContents, options: NSJSONWritingOptions(rawValue: 0))
                 
                 //Build URL Request
-                let storeURL = NSURL(string: "https://sandbox.itunes.apple.com/verifyReceipt")
+                let storeURL = NSURL(string: "https:/sandbox.itunes.apple.com/verifyReceipt")
                 let request = NSMutableURLRequest(URL: storeURL!)
                 request.HTTPMethod = "Post"
                 request.HTTPBody = requestData
@@ -123,7 +121,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                     do {
                         let json = try NSJSONSerialization.JSONObjectWithData(responseData!, options: .MutableLeaves) as! NSDictionary
                         
-                      //  print(json)
+                        print(json)
                         
                         if (json.objectForKey("status") as! NSNumber) == 0 {
                             //

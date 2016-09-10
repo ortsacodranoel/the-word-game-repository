@@ -12,9 +12,7 @@ import StoreKit
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
-    // Used to keep track of the current game.
-    // var game = Game()
-    
+
     private var lastContentOffset: CGFloat = 0
     
     // MARK: Button Outlets
