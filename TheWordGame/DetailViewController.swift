@@ -104,11 +104,67 @@ class DetailViewController: UIViewController {
                 }
             case "Books":
                 if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.books") {
-                    print("Category has been bought")
+
                     performSegueWithIdentifier("segueToGame", sender: self)
                 } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(0) as! SKProduct)
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(1) as! SKProduct)
                 }
+            case "Commands":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.commands") {
+                
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(2) as! SKProduct)
+                }
+            case "Denominations":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.denominations") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(3) as! SKProduct)
+            }
+            case "Famous Christians":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.famouschristians") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(4) as! SKProduct)
+            }
+            case "Feasts":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.feasts") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(5) as! SKProduct)
+            }
+            case "Relics and Saints":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandstaints") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(6) as! SKProduct)
+            }
+            case "Revelation":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.revelation") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(7) as! SKProduct)
+            }
+            case "Sins":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.sins") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(8) as! SKProduct)
+            }
+            case "Worship":
+                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.worship") {
+                    
+                    performSegueWithIdentifier("segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(9) as! SKProduct)
+            }
         default:
             break
         }
