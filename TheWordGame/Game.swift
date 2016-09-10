@@ -61,28 +61,16 @@ class Game {
         self.places = Category(title: "Places", summary: "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times.")
         self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  *teams need not guess the exact answer, but must clearly guess the correct story or parable.")
         self.concordance = Category(title: "Concordance", summary:"Words found in the concordance of a Bible, excluding names and places.")
-        
-        let productAngel = IAPManager.sharedInstance.products.objectAtIndex(0) as! SKProduct
-        let productBooks = IAPManager.sharedInstance.products.objectAtIndex(1) as! SKProduct
-        let productCommands = IAPManager.sharedInstance.products.objectAtIndex(2) as! SKProduct
-        let productDenominations = IAPManager.sharedInstance.products.objectAtIndex(3) as! SKProduct
-        let productFamousChristians = IAPManager.sharedInstance.products.objectAtIndex(4) as! SKProduct
-        let productFeasts = IAPManager.sharedInstance.products.objectAtIndex(5) as! SKProduct
-        let productRelicsAndSaints = IAPManager.sharedInstance.products.objectAtIndex(6) as! SKProduct
-        let productRevelation = IAPManager.sharedInstance.products.objectAtIndex(7) as! SKProduct
-        let productSins = IAPManager.sharedInstance.products.objectAtIndex(8) as! SKProduct
-        let productWorship = IAPManager.sharedInstance.products.objectAtIndex(9) as! SKProduct
-        
-        self.angels = Category(title:productAngel.localizedTitle,summary: productAngel.localizedDescription)
-        self.books = Category(title:productBooks.localizedTitle,summary: productBooks.localizedDescription)
-        self.commands = Category(title:productCommands.localizedTitle,summary: productCommands.localizedDescription)
-        self.denominations = Category(title:productDenominations.localizedTitle,summary: productDenominations.localizedDescription)
-        self.famous = Category(title:productFamousChristians.localizedTitle,summary: productFamousChristians.localizedDescription)
-        self.feasts = Category(title:productFeasts.localizedTitle,summary: productFeasts.localizedDescription)
-        self.relics = Category(title:productRelicsAndSaints.localizedTitle,summary: productRelicsAndSaints.localizedDescription)
-        self.revelation = Category(title:productRevelation.localizedTitle,summary: productRevelation.localizedDescription)
-        self.sins = Category(title:productSins.localizedTitle,summary: productSins.localizedDescription)
-        self.worship = Category(title:productWorship.localizedTitle,summary: productWorship.localizedDescription)
+        self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
+        self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
+        self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words.")
+        self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
+        self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
+        self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
+        self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
+        self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
+        self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
+        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
         
         self.categoriesArray = [self.jesus,self.people,self.places,self.sunday,self.concordance,self.angels,self.books,self.commands,self.denominations,self.famous, self.feasts,self.relics,self.revelation,self.sins,self.worship]
     }
@@ -130,25 +118,25 @@ class Game {
         case 4:
             selectedArray = self.concordance.wordsInCategory
         case 5:
-            selectedArray = self.famous.wordsInCategory
-        case 6:
-            selectedArray = self.worship.wordsInCategory
-        case 7:
-            selectedArray = self.books.wordsInCategory
-        case 8:
-            selectedArray = self.feasts.wordsInCategory
-        case 9:
-            selectedArray = self.relics.wordsInCategory
-        case 10:
-            selectedArray = self.revelation.wordsInCategory
-        case 11:
             selectedArray = self.angels.wordsInCategory
-        case 12:
+        case 6:
+            selectedArray = self.books.wordsInCategory
+        case 7:
+            selectedArray = self.commands.wordsInCategory
+        case 8:
             selectedArray = self.denominations.wordsInCategory
+        case 9:
+            selectedArray = self.famous.wordsInCategory
+        case 10:
+            selectedArray = self.feasts.wordsInCategory
+        case 11:
+            selectedArray = self.relics.wordsInCategory
+        case 12:
+            selectedArray = self.revelation.wordsInCategory
         case 13:
             selectedArray = self.sins.wordsInCategory
         case 14:
-            selectedArray = self.commands.wordsInCategory
+            selectedArray = self.worship.wordsInCategory
         default: break
         }
         

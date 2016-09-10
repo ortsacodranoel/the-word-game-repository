@@ -125,7 +125,6 @@ class DetailViewController: UIViewController {
             }
             case "Famous Christians":
                 if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.famouschristians") {
-                    
                     performSegueWithIdentifier("segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(4) as! SKProduct)

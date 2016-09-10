@@ -28,7 +28,6 @@ class Category {
         self.title = title
         self.summary = summary
         self.setWordsInCategory(title)
-        // print("Created \(self.title) category.")
     }
     
     func setWordsInCategory(title:String) {
