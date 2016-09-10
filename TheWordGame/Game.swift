@@ -33,7 +33,6 @@ class Game {
     /// Categories array.
     var categoriesArray = [Category]()
     
-    
     // MARK: - Free categories
     var jesus:Category!
     var people:Category!
@@ -52,7 +51,6 @@ class Game {
     var revelation:Category!
     var sins:Category!
     var worship:Category!
-    
     
     init() {
         
@@ -163,7 +161,6 @@ class Game {
             teamOneIsActive = true
         }
     }
-    
     
     // Returns the current score for Team One.
     func getTeamOneScore() -> Int {

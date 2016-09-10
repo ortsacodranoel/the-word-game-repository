@@ -349,6 +349,19 @@
                                     <constraint firstAttribute="width" constant="40" id="N3Y-pM-q6q"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRq-Te-Rez" userLabel="Lock">
+                                <rect key="frame" x="375" y="424" width="25" height="32"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Lock" translatesAutoresizingMaskIntoConstraints="NO" id="LUP-g6-lDC">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="2pl-CH-OJB"/>
+                                    <constraint firstAttribute="height" constant="32" id="mfD-st-VRs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.50196078431372548" green="0.38823529411764707" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -358,9 +371,11 @@
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" id="A3u-Zd-33p"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="8wf-r9-ZNq" secondAttribute="trailing" constant="-325" id="A8i-dh-RGg"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="mDN-Ix-uGz" secondAttribute="trailing" constant="-350" id="ITk-Pb-NSE"/>
+                            <constraint firstItem="aRq-Te-Rez" firstAttribute="leading" secondItem="qg2-86-sEz" secondAttribute="trailing" constant="-138" id="JdJ-Wj-IGV"/>
                             <constraint firstItem="Wpg-nJ-zhp" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="Y8b-Dm-pdD"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Wpg-nJ-zhp" secondAttribute="leading" constant="20" id="eOv-6Q-STA"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="mDN-Ix-uGz" secondAttribute="bottom" constant="-1" id="nRm-oM-MMY"/>
+                            <constraint firstItem="aRq-Te-Rez" firstAttribute="top" secondItem="qg2-86-sEz" secondAttribute="bottom" constant="59" id="y9f-uE-WbT"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="S0e-5v-Ozr" appends="YES" id="1iY-uV-uKH"/>
@@ -764,11 +779,12 @@ Cgo
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTT-my-fUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="LJF-0V-4cl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1178" y="1675"/>
+            <point key="canvasLocation" x="914" y="1675"/>
         </scene>
     </scenes>
     <resources>
         <image name="Back Chevron" width="13" height="21"/>
+        <image name="Lock" width="25" height="32"/>
         <image name="Menu" width="26" height="21"/>
         <image name="scoreContainer" width="45" height="41"/>
         <image name="teamBackground" width="115" height="42"/>
