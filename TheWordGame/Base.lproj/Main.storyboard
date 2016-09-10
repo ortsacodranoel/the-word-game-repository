@@ -9,7 +9,7 @@
         <!--UICollectionView-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="CategoriesViewController" id="BYZ-38-t0r" customClass="CategoriesViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoriesViewController" id="BYZ-38-t0r" customClass="CategoriesViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,7 +29,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
                                         <rect key="frame" x="75" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -116,7 +116,7 @@
         <!--Spash Screen View Controller-->
         <scene sceneID="xr4-vU-SJu">
             <objects>
-                <viewController id="Z97-k5-l5n" customClass="spashScreenViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Z97-k5-l5n" customClass="spashScreenViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uG3-Op-ciE"/>
                         <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
@@ -137,7 +137,7 @@
         <!--Rules View Controller-->
         <scene sceneID="HXC-YQ-azn">
             <objects>
-                <viewController id="o0C-mE-Sf2" customClass="RulesViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="o0C-mE-Sf2" customClass="RulesViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r6D-Fp-Tj5"/>
                         <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
@@ -267,7 +267,7 @@
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
             <objects>
-                <viewController storyboardIdentifier="detailViewController" title="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Fc-eW-5Eo" customClass="DetailViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailViewController" title="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Fc-eW-5Eo" customClass="DetailViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kKD-HC-37C"/>
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
@@ -320,7 +320,6 @@
                                         <state key="normal" title="Select"/>
                                         <connections>
                                             <action selector="selectButtonTapped:" destination="4Fc-eW-5Eo" eventType="touchUpInside" id="8bD-Vh-gPP"/>
-                                            <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="hjj-Gg-oFL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -380,6 +379,7 @@
                         <outlet property="selectButton" destination="z36-w8-L3G" id="A75-YL-I2n"/>
                         <outlet property="selectButtonView" destination="8wf-r9-ZNq" id="Pg9-8w-F7R"/>
                         <outlet property="titleLabel" destination="pOC-zj-eJK" id="aKR-pg-Iqd"/>
+                        <segue destination="Sav-rh-bmW" kind="show" identifier="segueToGame" id="kD4-Dq-hIT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSv-aA-bF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -395,7 +395,7 @@
         <!--Game View Controller-->
         <scene sceneID="IdY-Nk-VWO">
             <objects>
-                <viewController id="Sav-rh-bmW" customClass="GameViewController" customModule="TheWordGame_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sav-rh-bmW" customClass="GameViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GbM-Bx-36X"/>
                         <viewControllerLayoutGuide type="bottom" id="oXD-nv-iJF"/>

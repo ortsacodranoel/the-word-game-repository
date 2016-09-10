@@ -21,9 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if SKPaymentQueue.canMakePayments(){
             IAPManager.sharedInstance.setupInAppPurchases()
-        
+            
             canPurchase = true
         }
+        
+        Game.sharedGameInstance
         
         return true
     }

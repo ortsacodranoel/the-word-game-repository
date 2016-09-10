@@ -60,7 +60,7 @@
 		B3634F441D6FD9E10060D517 /* ButtonTapped.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTapped.wav; sourceTree = "<group>"; };
 		B3634F481D6FE2AE0060D517 /* winner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winner.mp3; sourceTree = "<group>"; };
 		B3634F4A1D6FED580060D517 /* Alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alert.mp3; sourceTree = "<group>"; };
-		B36733711D7F086000BA177B /* iap_product_ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iap_product_ids.plist; sourceTree = "<group>"; };
+		B36733711D7F086000BA177B /* iap_product_ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = iap_product_ids.plist; path = ../iap_product_ids.plist; sourceTree = "<group>"; };
 		B36733731D7F3CD100BA177B /* spashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spashScreenViewController.swift; sourceTree = "<group>"; };
 		B37609051D675AA900A678A1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B381D5BD1D7E0DDF00E40B45 /* TheWordGameUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheWordGameUITests.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesTransitionManager.swift; sourceTree = "<group>"; };
 		B392F42D1D66146100F3748A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		B39C3D061D7A4B2800636B85 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
-		B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipeSoundEffect.mp3; sourceTree = "<group>"; };
 		B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
@@ -76,16 +76,16 @@
 		B4752B411D28849500A042E0 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D604D47F1D21839B00FBCC2B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D62296C11D5832E600B131D7 /* CategoriesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTransitionManager.swift; sourceTree = "<group>"; };
-		D67774CE1D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWordGame.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67774CE1D1C392B0051C634 /* TheWordGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWordGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774D11D1C392B0051C634 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D67774D31D1C392B0051C634 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		D67774D61D1C392B0051C634 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D67774DB1D1C392B0051C634 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D67774E01D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D67774E51D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67774E51D1C392B0051C634 /* TheWordGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774E91D1C392B0051C634 /* TheWordGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheWordGameTests.swift; sourceTree = "<group>"; };
 		D67774EB1D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D67774F01D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67774F01D1C392B0051C634 /* TheWordGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774F61D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = ../CollectionViewCell.swift; sourceTree = "<group>"; };
 		D6A39C101D7141D200FD65E6 /* countdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = countdown.mp3; sourceTree = "<group>"; };
@@ -144,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				B36733731D7F3CD100BA177B /* spashScreenViewController.swift */,
-				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
 				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
 				B4752B411D28849500A042E0 /* GameViewController.swift */,
@@ -156,8 +155,6 @@
 		D67774C51D1C392B0051C634 = {
 			isa = PBXGroup;
 			children = (
-				B36733711D7F086000BA177B /* iap_product_ids.plist */,
-				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
 				D67774D01D1C392B0051C634 /* thewordgame */,
 				D67774E81D1C392B0051C634 /* TheWordGameTests */,
 				D67774F31D1C392B0051C634 /* TheWordGameUITests */,
@@ -168,9 +165,9 @@
 		D67774CF1D1C392B0051C634 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D67774CE1D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.app */,
-				D67774E51D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */,
-				D67774F01D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */,
+				D67774CE1D1C392B0051C634 /* TheWordGame.app */,
+				D67774E51D1C392B0051C634 /* TheWordGame.xctest */,
+				D67774F01D1C392B0051C634 /* TheWordGame.xctest */,
 			);
 			name = Products;
 			path = TheWordGame;
@@ -179,11 +176,14 @@
 		D67774D01D1C392B0051C634 /* thewordgame */ = {
 			isa = PBXGroup;
 			children = (
+				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
+				B36733711D7F086000BA177B /* iap_product_ids.plist */,
 				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
 				B35659051D6F9D87003E7DCD /* Sound Effects */,
 				D67774D11D1C392B0051C634 /* AppDelegate.swift */,
 				B39C3D061D7A4B2800636B85 /* Category.swift */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
+				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				B3F39C6C1D4672D80049F8FB /* View Controllers */,
 				D67774D51D1C392B0051C634 /* Main.storyboard */,
 				B37786021D494B1E00639A8B /* Transition Managers */,
@@ -231,7 +231,7 @@
 			);
 			name = TheWordGame;
 			productName = "testing-animations";
-			productReference = D67774CE1D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.app */;
+			productReference = D67774CE1D1C392B0051C634 /* TheWordGame.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D67774E41D1C392B0051C634 /* TheWordGameTests */ = {
@@ -249,7 +249,7 @@
 			);
 			name = TheWordGameTests;
 			productName = "testing-animationsTests";
-			productReference = D67774E51D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */;
+			productReference = D67774E51D1C392B0051C634 /* TheWordGame.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D67774EF1D1C392B0051C634 /* TheWordGameUITests */ = {
@@ -267,7 +267,7 @@
 			);
 			name = TheWordGameUITests;
 			productName = "testing-animationsUITests";
-			productReference = D67774F01D1C392B0051C634 /* TheWordGame.temp_caseinsensitive_rename.xctest */;
+			productReference = D67774F01D1C392B0051C634 /* TheWordGame.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -507,7 +507,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
-				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				PRODUCT_NAME = TheWordGame;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -521,7 +521,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
-				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				PRODUCT_NAME = TheWordGame;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -533,8 +533,8 @@
 				INFOPLIST_FILE = TheWordGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.TheWordGameTests;
-				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWordGame.temp_caseinsensitive_rename.app/TheWordGame.temp_caseinsensitive_rename";
+				PRODUCT_NAME = TheWordGame;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWordGame.app/TheWordGame";
 			};
 			name = Debug;
 		};
@@ -545,8 +545,8 @@
 				INFOPLIST_FILE = TheWordGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.TheWordGameTests;
-				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWordGame.temp_caseinsensitive_rename.app/TheWordGame.temp_caseinsensitive_rename";
+				PRODUCT_NAME = TheWordGame;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWordGame.app/TheWordGame";
 			};
 			name = Release;
 		};
@@ -558,7 +558,7 @@
 				INFOPLIST_FILE = TheWordGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
-				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				PRODUCT_NAME = TheWordGame;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = TheWordGame;
 			};
@@ -572,7 +572,7 @@
 				INFOPLIST_FILE = TheWordGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
-				PRODUCT_NAME = TheWordGame.temp_caseinsensitive_rename;
+				PRODUCT_NAME = TheWordGame;
 				TEST_TARGET_NAME = TheWordGame;
 			};
 			name = Release;
