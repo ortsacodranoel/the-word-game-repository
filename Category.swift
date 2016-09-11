@@ -24,6 +24,8 @@ class Category {
     /// Category description.
     var summary:String!
     
+    var purchased:Bool!
+    
     init(title: String, summary: String) {
         self.title = title
         self.summary = summary

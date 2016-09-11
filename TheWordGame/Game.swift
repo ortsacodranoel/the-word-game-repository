@@ -55,22 +55,129 @@ class Game {
     init() {
         
         self.jesus = Category(title: "Jesus",summary: "His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ.")
-        self.people = Category(title: "People", summary: "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.")
-        self.places = Category(title: "Places", summary: "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times.")
-        self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  *teams need not guess the exact answer, but must clearly guess the correct story or parable.")
-        self.concordance = Category(title: "Concordance", summary:"Words found in the concordance of a Bible, excluding names and places.")
-        self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
-        self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
-        self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words.")
-        self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
-        self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
-        self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
-        self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
-        self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
-        self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
-        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
+        self.jesus.purchased = true
         
-        self.categoriesArray = [self.jesus,self.people,self.places,self.sunday,self.concordance,self.angels,self.books,self.commands,self.denominations,self.famous, self.feasts,self.relics,self.revelation,self.sins,self.worship]
+        self.people = Category(title: "People", summary: "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.")
+        self.people.purchased = true
+        
+        self.places = Category(title: "Places", summary: "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times.")
+        self.places.purchased = true
+        
+        self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  *teams need not guess the exact answer, but must clearly guess the correct story or parable.")
+        self.sunday.purchased = true
+        
+        self.concordance = Category(title: "Concordance", summary:"Words found in the concordance of a Bible, excluding names and places.")
+        self.concordance.purchased = true
+        
+        
+        // Angels
+        self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
+        
+        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.angels") {
+                self.angels.purchased = true
+        } else {
+            self.angels.purchased = false
+        }
+        
+        
+        // Books
+        self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
+        
+        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.books") {
+                self.books.purchased = true
+            } else {
+                self.books.purchased = false
+            }
+            
+        
+        // Commands
+        self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.commands") {
+                self.commands.purchased = true
+            } else {
+                self.commands.purchased = false
+            }
+        
+        
+        // Denominations
+        self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.denominations") {
+                self.denominations.purchased = true
+            } else {
+                self.denominations.purchased = false
+            }
+        
+        
+        // Famous
+        self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.famouschristians") {
+                self.famous.purchased = true
+            } else {
+                self.famous.purchased = false
+            }
+        
+        
+        // Feasts
+        self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.feasts") {
+                self.feasts.purchased = true
+            } else {
+                self.feasts.purchased = false
+            }
+        
+        
+        // Relics
+        self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+                self.relics.purchased = true
+            } else {
+                self.relics.purchased = false
+            }
+        
+        // Revelation
+        self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+                self.revelation.purchased = true
+            } else {
+                self.revelation.purchased = false
+            }
+        
+        
+        // Sins
+        self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+                self.sins.purchased = true
+            } else {
+                self.sins.purchased = false
+            }
+        
+        
+        // Worship
+        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+                self.worship.purchased = true
+            } else {
+                self.worship.purchased = false
+            }
+        
+        
+        
+        self.categoriesArray = [self.jesus,
+                                self.people,
+                                self.places,
+                                self.sunday,
+                                self.concordance,
+                                self.angels,
+                                self.books,
+                                self.commands,
+                                self.denominations,
+                                self.famous,
+                                self.feasts,
+                                self.relics,
+                                self.revelation,
+                                self.sins,
+                                self.worship]
+
     }
     
     
@@ -172,5 +279,41 @@ class Game {
     func getTeamTwoScore() -> Int {
         return teamTwoScore
     }
+    
+    func getCategoryForProductKey(productIdentifier: String) -> Category {
+        
+        switch productIdentifier{
+        case "com.thewordgame.angels":
+            return self.categoriesArray[5]
+        case "com.thewordgame.booksandmovies":
+            return self.categoriesArray[6]
+        case "com.thewordgame.commands":
+            return self.categoriesArray[7]
+        case "com.thewordgame.denominations":
+            return self.categoriesArray[8]
+        case "com.thewordgame.famouschristians":
+            return self.categoriesArray[9]
+        case "com.thewordgame.feasts":
+            return self.categoriesArray[10]
+        case "com.thewordgame.relicsandsaints":
+            return self.categoriesArray[11]
+        case "com.thewordgame.revelation":
+            return self.categoriesArray[12]
+        case "com.thewordgame.sins":
+            return self.categoriesArray[13]
+        case "com.thewordgame.worship":
+            return self.categoriesArray[14]
+        default:
+            break
+        }
+        
+        let temp = Category(title: "No category exists",summary: "No summary exists for this category")
+        
+        return temp
+    }
+    
+    
+    
+    
     
 }

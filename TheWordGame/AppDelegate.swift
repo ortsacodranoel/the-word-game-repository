@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         if SKPaymentQueue.canMakePayments(){
-            IAPManager.sharedInstance.setupInAppPurchases()
             
             canPurchase = true
+            IAPManager.sharedInstance.setupInAppPurchases()
         }
         
-        Game.sharedGameInstance
+        IAPManager.sharedInstance.restorePurchases()
         
         return true
     }
