@@ -77,19 +77,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Collection View Methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return Game.sharedGameInstance.categoriesArray.count
     }
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
-        
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = self.colors[indexPath.row]
         cell.tag = indexPath.row
-        
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[indexPath.row].title, forState: UIControlState.Normal)
-        
         
         return cell
     }
@@ -114,12 +111,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - Segue Methods
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       
         if segue.identifier == "segueToRules" {
             self.tapAudioPlayer.play()
             let rulesViewController = segue.destinationViewController as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
+       
         } else if segue.identifier == "segueToDetails" {
-            
             // Fade rules if visible.
             self.rulesButton.alpha = 0
             
@@ -131,9 +129,14 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             
             // Prepare destinationVC.
             let toViewController = segue.destinationViewController as! DetailViewController
+            
             toViewController.categoryTapped = (indexPath!.row)
+
+            
+            
             toViewController.transitioningDelegate = self.transitionManager
         }
+    
     }
     
     

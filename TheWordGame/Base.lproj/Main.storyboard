@@ -349,7 +349,7 @@
                                     <constraint firstAttribute="width" constant="40" id="N3Y-pM-q6q"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRq-Te-Rez" userLabel="Lock">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRq-Te-Rez" userLabel="Lock">
                                 <rect key="frame" x="375" y="424" width="25" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Lock" translatesAutoresizingMaskIntoConstraints="NO" id="LUP-g6-lDC">
@@ -390,6 +390,7 @@
                         <outlet property="backButtonView" destination="Wpg-nJ-zhp" id="GhZ-ku-auJ"/>
                         <outlet property="descriptionView" destination="qg2-86-sEz" id="f4b-Id-ohW"/>
                         <outlet property="descriptionViewLabel" destination="NMu-6I-1qy" id="jqO-v6-cc2"/>
+                        <outlet property="lock" destination="aRq-Te-Rez" id="tit-k2-QTh"/>
                         <outlet property="mainView" destination="Hu0-ky-z89" id="Nsd-Dj-uzc"/>
                         <outlet property="selectButton" destination="z36-w8-L3G" id="A75-YL-I2n"/>
                         <outlet property="selectButtonView" destination="8wf-r9-ZNq" id="Pg9-8w-F7R"/>
