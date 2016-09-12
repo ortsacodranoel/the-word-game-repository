@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             canPurchase = true
             IAPManager.sharedInstance.setupInAppPurchases()
         }
-        
+    
         IAPManager.sharedInstance.restorePurchases()
         
         return true
