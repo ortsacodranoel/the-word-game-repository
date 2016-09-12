@@ -82,8 +82,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     
     @IBAction func selectButtonTapped(sender: AnyObject) {
-        // Tap sound.
-        
         if (sender.touchInside != nil) {
             self.tapAudioPlayer.play()
         }
@@ -294,6 +292,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Animations
+    
+    /// Used to animate all objects when detailVC first loads.
     func startAnimations() {
         UIView.animateWithDuration(0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.TitleView.center.x -= self.view.bounds.width
@@ -308,6 +308,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
            self.backButtonView.alpha = 1.0
         }, completion: nil)
     }
+    
     
     /// MARK: - Lock animations.
     func lockCategory() {
