@@ -44,6 +44,8 @@ class Game {
     var angels:Category!
     var books:Category!
     var commands:Category!
+    var christiannation:Category!
+    var christmastime:Category!
     var denominations:Category!
     var famous:Category!
     var feasts:Category!
@@ -69,12 +71,11 @@ class Game {
         self.concordance = Category(title: "Concordance", summary:"Words found in the concordance of a Bible, excluding names and places.")
         self.concordance.purchased = true
         
-        
         // Angels
         self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
         
         if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.angels") {
-                self.angels.purchased = true
+            self.angels.purchased = true
         } else {
             self.angels.purchased = false
         }
@@ -84,20 +85,38 @@ class Game {
         self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
         
         if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.books") {
-                self.books.purchased = true
-            } else {
-                self.books.purchased = false
-            }
+            self.books.purchased = true
+        } else {
+            self.books.purchased = false
+        }
             
+
+        // Christian Nation
+        self.christiannation = Category(title:"Christian Nation",summary: "Early American colonies, the American Revolution, US Government, major Founding Fathers, all US President, and all US States.")
+        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.christiannation") {
+            self.christiannation.purchased = true
+        } else {
+            self.christiannation.purchased = false
+        }
+        
+        
+        // Christmas Time
+        self.christmastime = Category(title:"Christmas Time",summary:"Titles of songs and carols, food, characters, and other words associated with celebrating the Birth of Jesus Christ.")
+        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.christmastime") {
+            self.christmastime.purchased = true
+        } else {
+            self.christmastime.purchased = false
+        }
+        
         
         // Commands
         self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.commands") {
-                self.commands.purchased = true
-            } else {
-                self.commands.purchased = false
-            }
-        
+        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.commands") {
+            self.commands.purchased = true
+        } else {
+            self.commands.purchased = false
+        }
+
         
         // Denominations
         self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
@@ -136,25 +155,21 @@ class Game {
         
         // Revelation
         self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.revelation") {
                 self.revelation.purchased = true
             } else {
                 self.revelation.purchased = false
             }
-        
-        
         // Sins
         self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.sins") {
                 self.sins.purchased = true
             } else {
                 self.sins.purchased = false
             }
-        
-        
         // Worship
         self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.worship") {
                 self.worship.purchased = true
             } else {
                 self.worship.purchased = false
@@ -169,6 +184,8 @@ class Game {
                                 self.concordance,
                                 self.angels,
                                 self.books,
+                                self.christiannation,
+                                self.christmastime,
                                 self.commands,
                                 self.denominations,
                                 self.famous,
@@ -227,22 +244,27 @@ class Game {
         case 6:
             selectedArray = self.books.wordsInCategory
         case 7:
-            selectedArray = self.commands.wordsInCategory
+            selectedArray = self.christiannation.wordsInCategory
         case 8:
-            selectedArray = self.denominations.wordsInCategory
+            selectedArray = self.christmastime.wordsInCategory
         case 9:
-            selectedArray = self.famous.wordsInCategory
+            selectedArray = self.commands.wordsInCategory
         case 10:
-            selectedArray = self.feasts.wordsInCategory
+            selectedArray = self.denominations.wordsInCategory
         case 11:
-            selectedArray = self.relics.wordsInCategory
+            selectedArray = self.famous.wordsInCategory
         case 12:
-            selectedArray = self.revelation.wordsInCategory
+            selectedArray = self.feasts.wordsInCategory
         case 13:
-            selectedArray = self.sins.wordsInCategory
+            selectedArray = self.relics.wordsInCategory
         case 14:
+            selectedArray = self.revelation.wordsInCategory
+        case 15:
+            selectedArray = self.sins.wordsInCategory
+        case 16:
             selectedArray = self.worship.wordsInCategory
-        default: break
+        default:
+            break
         }
         
         // Generate a random number within the range of the count of items in the selected array.
@@ -285,24 +307,28 @@ class Game {
         switch productIdentifier{
         case "com.thewordgame.angels":
             return self.categoriesArray[5]
-        case "com.thewordgame.booksandmovies":
+        case "com.thewordgame.books":
             return self.categoriesArray[6]
-        case "com.thewordgame.commands":
+        case "com.thewordgame.christiannation":
             return self.categoriesArray[7]
-        case "com.thewordgame.denominations":
+        case "com.thewordgame.christmastime":
             return self.categoriesArray[8]
-        case "com.thewordgame.famouschristians":
+        case "com.thewordgame.commands":
             return self.categoriesArray[9]
-        case "com.thewordgame.feasts":
+        case "com.thewordgame.denominations":
             return self.categoriesArray[10]
-        case "com.thewordgame.relicsandsaints":
+        case "com.thewordgame.famouschristians":
             return self.categoriesArray[11]
-        case "com.thewordgame.revelation":
+        case "com.thewordgame.feasts":
             return self.categoriesArray[12]
-        case "com.thewordgame.sins":
+        case "com.thewordgame.relicsandsaints":
             return self.categoriesArray[13]
-        case "com.thewordgame.worship":
+        case "com.thewordgame.revelation":
             return self.categoriesArray[14]
+        case "com.thewordgame.sins":
+            return self.categoriesArray[15]
+        case "com.thewordgame.worship":
+            return self.categoriesArray[16]
         default:
             break
         }
