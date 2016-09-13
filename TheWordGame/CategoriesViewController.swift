@@ -70,7 +70,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLoad()
         self.loadSoundFile()
         
-       print(IAPManager.sharedInstance.products.count)
+      // print(IAPManager.sharedInstance.products.count)
     }
     
     

@@ -256,7 +256,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
             self.selectButton.setTitle(("Select"), forState: .Normal)
-            print("Active")
+            //print("Active")
         } else {
             self.setPrices()
             self.lockCategory()

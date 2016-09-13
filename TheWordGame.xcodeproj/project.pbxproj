@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
 		B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */; };
+		B35703A61D88808E0044FECF /* wordSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35703A41D88808E0044FECF /* wordSummaryViewController.swift */; };
 		B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3634F441D6FD9E10060D517 /* ButtonTapped.wav */; };
 		B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F481D6FE2AE0060D517 /* winner.mp3 */; };
 		B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F4A1D6FED580060D517 /* Alert.mp3 */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
+		B35703A41D88808E0044FECF /* wordSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = wordSummaryViewController.swift; path = ../wordSummaryViewController.swift; sourceTree = "<group>"; };
 		B3634F441D6FD9E10060D517 /* ButtonTapped.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTapped.wav; sourceTree = "<group>"; };
 		B3634F481D6FE2AE0060D517 /* winner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winner.mp3; sourceTree = "<group>"; };
 		B3634F4A1D6FED580060D517 /* Alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alert.mp3; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		B3F39C6C1D4672D80049F8FB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B35703A41D88808E0044FECF /* wordSummaryViewController.swift */,
 				B36733731D7F3CD100BA177B /* spashScreenViewController.swift */,
 				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
 				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
@@ -357,6 +360,7 @@
 				B3C3835D1D7E0FFA0020C9DB /* IAPManager.swift in Sources */,
 				D62296C21D5832E600B131D7 /* CategoriesTransitionManager.swift in Sources */,
 				B36733741D7F3CD100BA177B /* spashScreenViewController.swift in Sources */,
+				B35703A61D88808E0044FECF /* wordSummaryViewController.swift in Sources */,
 				D67774D41D1C392B0051C634 /* CategoriesViewController.swift in Sources */,
 				B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */,
 				B381D5C31D7E0E3900E40B45 /* thewordgame.xcdatamodeld in Sources */,

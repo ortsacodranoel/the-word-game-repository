@@ -30,8 +30,17 @@ class Game {
     var won = false
     /// Used to temporarily store winner title.
     var winnerTitle = String()
+    
+    // MARK: - Array properties
+    
     /// Categories array.
     var categoriesArray = [Category]()
+    /// Used to store missed words.
+    var missedWordsArray = [String]()
+    /// Used to store correct words.
+    var correctWordsArray = [String]()
+    
+    
     
     // MARK: - Free categories
     var jesus:Category!
@@ -338,8 +347,27 @@ class Game {
         return temp
     }
     
+    // MARK: - Array Methods
     
+    /// Clears all information in correct/missedWordsArray.
+    func clearArrays() {
+        self.correctWordsArray = []
+        self.missedWordsArray = []
+    }
     
+    /// Prints the data in correct/missedWordsArray.
+    func printCorrectMissedArray() {
+      
+        print("Missed words:")
+        for word in missedWordsArray {
+            print("   " + word)
+        }
+        
+        print("\n" + "Words guessed:")
+        for word in correctWordsArray {
+            print("   " + word)
+        }
     
+    }
     
 }
