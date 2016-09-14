@@ -30,8 +30,41 @@ class Game {
     var won = false
     /// Used to temporarily store winner title.
     var winnerTitle = String()
+    
+    // MARK: - Array properties
+    
     /// Categories array.
     var categoriesArray = [Category]()
+    /// Used to store missed words.
+    var missedWordsArray = [String]()
+    /// Used to store correct words.
+    var correctWordsArray = [String]()
+    
+    
+    // MARK: - Colors for screens and categories.
+    let colors = [
+        UIColor(red: 91/255, green: 123/255, blue: 200/225, alpha: 1),  // Row 1
+        UIColor(red: 196/255, green: 93/255, blue: 79/225, alpha: 1),   // Row 2
+        UIColor(red: 196/255, green: 185/255, blue: 79/225, alpha: 1),  // Row 3
+        UIColor(red: 212/255, green: 152/255, blue: 125/225, alpha: 1), // Row 4
+        UIColor(red: 214/255, green: 133/255, blue: 157/225, alpha: 1), // Row 5
+        UIColor(red: 150/255, green: 144/255, blue: 218/225, alpha: 1), // Row 6
+        UIColor(red: 179/255, green: 193/255, blue: 230/225, alpha: 1), // Row 7
+        UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1), // Row 8
+        UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1), // Row 9
+        UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1), // Row 10
+        
+        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),   // Row 11
+        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1), // Row 12
+        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1), // Row 13
+        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1), // Row 14
+        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 15
+        UIColor(red: 190/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 16
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1)    // Row 17
+    ]
+    
+    
+    
     
     // MARK: - Free categories
     var jesus:Category!
@@ -74,7 +107,7 @@ class Game {
         // Angels
         self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
         
-        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.angels") {
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
             self.angels.purchased = true
         } else {
             self.angels.purchased = false
@@ -84,7 +117,7 @@ class Game {
         // Books
         self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
         
-        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.books") {
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
             self.books.purchased = true
         } else {
             self.books.purchased = false
@@ -93,7 +126,7 @@ class Game {
 
         // Christian Nation
         self.christiannation = Category(title:"Christian Nation",summary: "Early American colonies, the American Revolution, US Government, major Founding Fathers, all US President, and all US States.")
-        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.christiannation") {
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
             self.christiannation.purchased = true
         } else {
             self.christiannation.purchased = false
@@ -102,7 +135,7 @@ class Game {
         
         // Christmas Time
         self.christmastime = Category(title:"Christmas Time",summary:"Titles of songs and carols, food, characters, and other words associated with celebrating the Birth of Jesus Christ.")
-        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.christmastime") {
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
             self.christmastime.purchased = true
         } else {
             self.christmastime.purchased = false
@@ -111,7 +144,7 @@ class Game {
         
         // Commands
         self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words.")
-        if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.commands") {
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
             self.commands.purchased = true
         } else {
             self.commands.purchased = false
@@ -120,7 +153,7 @@ class Game {
         
         // Denominations
         self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.denominations") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
                 self.denominations.purchased = true
             } else {
                 self.denominations.purchased = false
@@ -129,7 +162,7 @@ class Game {
         
         // Famous
         self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.famouschristians") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
                 self.famous.purchased = true
             } else {
                 self.famous.purchased = false
@@ -138,7 +171,7 @@ class Game {
         
         // Feasts
         self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.feasts") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
                 self.feasts.purchased = true
             } else {
                 self.feasts.purchased = false
@@ -147,7 +180,7 @@ class Game {
         
         // Relics
         self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
                 self.relics.purchased = true
             } else {
                 self.relics.purchased = false
@@ -155,21 +188,21 @@ class Game {
         
         // Revelation
         self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.revelation") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
                 self.revelation.purchased = true
             } else {
                 self.revelation.purchased = false
             }
         // Sins
         self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.sins") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
                 self.sins.purchased = true
             } else {
                 self.sins.purchased = false
             }
         // Worship
         self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.worship") {
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
                 self.worship.purchased = true
             } else {
                 self.worship.purchased = false
@@ -224,7 +257,7 @@ class Game {
     }
     
     
-    func getWord(categorySelected: Int) -> String {
+    func getWord(_ categorySelected: Int) -> String {
         // Used to store a copy of the category array selected.
         var selectedArray = [String()]
         
@@ -302,7 +335,7 @@ class Game {
         return teamTwoScore
     }
     
-    func getCategoryForProductKey(productIdentifier: String) -> Category {
+    func getCategoryForProductKey(_ productIdentifier: String) -> Category {
         
         switch productIdentifier{
         case "com.thewordgame.angels":
@@ -338,8 +371,27 @@ class Game {
         return temp
     }
     
+    // MARK: - Array Methods
     
+    /// Clears all information in correct/missedWordsArray.
+    func clearArrays() {
+        self.correctWordsArray = []
+        self.missedWordsArray = []
+    }
     
+    /// Prints the data in correct/missedWordsArray.
+    func printCorrectMissedArray() {
+      
+        print("Missed words:")
+        for word in missedWordsArray {
+            print("   " + word)
+        }
+        
+        print("\n" + "Words guessed:")
+        for word in correctWordsArray {
+            print("   " + word)
+        }
     
+    }
     
 }

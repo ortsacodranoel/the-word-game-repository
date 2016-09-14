@@ -11,23 +11,23 @@ import UIKit
 class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
     
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
-    private var presenting = true
+    fileprivate var presenting = true
     
     // MARK: Information passed.
     var CategoryTapped = Int()
     
     // Animate transition between View Controllers.
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         
         // Get reference to fromView, toView, and containerView.
-        let container = transitionContext.containerView()
-        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
-        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+        let container = transitionContext.containerView
+        let fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
+        let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         
         // Setup 2D transformations.
-        let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
-        let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
+        let offScreenRight = CGAffineTransform(translationX: container.frame.width, y: 0)
+        let offScreenLeft = CGAffineTransform(translationX: -container.frame.width, y: 0)
         
         if (self.presenting) {
             toView.transform = offScreenRight
@@ -38,14 +38,14 @@ class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
         
         
         // add the both views to our view controller
-        container!.addSubview(toView)
-        container!.addSubview(fromView)
+        container.addSubview(toView)
+        container.addSubview(fromView)
         
         
-        let duration = self.transitionDuration(transitionContext)
+        let duration = self.transitionDuration(using: transitionContext)
         
         
-        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: [], animations: {
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: [], animations: {
             
             
             if (self.presenting){
@@ -55,7 +55,7 @@ class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
                 fromView.transform = offScreenRight
             }
             
-                toView.transform = CGAffineTransformIdentity
+                toView.transform = CGAffineTransform.identity
             
             }, completion: { finished in
                 
@@ -68,7 +68,7 @@ class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
     
     
     // return how many seconds the transiton animation will take
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
     
@@ -76,14 +76,14 @@ class CategoriesTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
     
     // return the animataor when presenting a viewcontroller
     // remmeber that an animator (or animation controller) is any object that aheres to the UIViewControllerAnimatedTransitioning protocol
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         self.presenting = true
         return self
     }
     
     // return the animator used when dismissing from a viewcontroller
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.presenting = false
         return self
     }
