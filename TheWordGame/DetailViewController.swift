@@ -57,12 +57,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Audio
-    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
     func loadSoundFile() {
         do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
             self.tapAudioPlayer.prepareToPlay()
         } catch {
             print("Unable to load sound files.")
@@ -76,13 +76,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
 
 
     // MARK: - Button Actions.
-    @IBAction func backButtonTapped(sender: AnyObject)  {
-        performSegueWithIdentifier("unwindToCategories", sender: self)
+    @IBAction func backButtonTapped(_ sender: AnyObject)  {
+        performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
     
-    @IBAction func selectButtonTapped(sender: AnyObject) {
-        if (sender.touchInside != nil) {
+    @IBAction func selectButtonTapped(_ sender: AnyObject) {
+        if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
         
@@ -90,88 +90,88 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         
         switch title {
         case "Jesus":
-            performSegueWithIdentifier("segueToGame", sender: self)
+            performSegue(withIdentifier: "segueToGame", sender: self)
         case "People":
-            performSegueWithIdentifier("segueToGame", sender: self)
+            performSegue(withIdentifier: "segueToGame", sender: self)
         case "Places":
-            performSegueWithIdentifier("segueToGame", sender: self)
+            performSegue(withIdentifier: "segueToGame", sender: self)
         case "Sunday School":
-            performSegueWithIdentifier("segueToGame", sender: self)
+            performSegue(withIdentifier: "segueToGame", sender: self)
         case "Concordance":
-            performSegueWithIdentifier("segueToGame", sender: self)
+            performSegue(withIdentifier: "segueToGame", sender: self)
         case "Angels":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.angels") {
-                self.selectButton.setTitle("Select", forState: .Normal)
-                performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(0) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
             }
         case "Books and Movies":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.books") {
-                performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
+                performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(1) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct)
             }
         case "Christian Nation":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.christiannation") {
-                performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
+                performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(2) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct)
             }
         case "Christmas Time":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.christmastime") {
-                performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
+                performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(3) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3) as! SKProduct)
             }
         case "Commands":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.commands") {
-                performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
+                performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(4) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4) as! SKProduct)
             }
         case "Denominations":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.denominations") {
-                    performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(5) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5) as! SKProduct)
             }
         case "Famous Christians":
-                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.famouschristians") {
-                    performSegueWithIdentifier("segueToGame", sender: self)
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(6) as! SKProduct)
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6) as! SKProduct)
             }
         case "Feasts":
-                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.feasts") {
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
                     
-                    performSegueWithIdentifier("segueToGame", sender: self)
+                    performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(7) as! SKProduct)
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7) as! SKProduct)
             }
         case "Relics and Saints":
-                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.relicsandsaints") {
-                    performSegueWithIdentifier("segueToGame", sender: self)
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(8) as! SKProduct)
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8) as! SKProduct)
             }
         case "Revelation":
-                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.revelation") {
-                    performSegueWithIdentifier("segueToGame", sender: self)
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(9) as! SKProduct)
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9) as! SKProduct)
             }
         case "Sins":
-                if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.sins") {
-                    performSegueWithIdentifier("segueToGame", sender: self)
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(10) as! SKProduct)
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10) as! SKProduct)
             }
         case "Worship":
-            if NSUserDefaults.standardUserDefaults().boolForKey("com.thewordgame.worship") {
-                performSegueWithIdentifier("segueToGame", sender: self)
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
+                performSegue(withIdentifier: "segueToGame", sender: self)
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.objectAtIndex(11) as! SKProduct)
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11) as! SKProduct)
             }
         default:
             break
@@ -184,40 +184,40 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         switch title {
         case "Angels":
             let product = IAPManager.sharedInstance.products[0] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Books and Movies":
             let product = IAPManager.sharedInstance.products[1] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Christian Nation":
             let product = IAPManager.sharedInstance.products[2] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Christmas Time":
             let product = IAPManager.sharedInstance.products[3] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Commands":
             let product = IAPManager.sharedInstance.products[4] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Denominations":
             let product = IAPManager.sharedInstance.products[5] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Famous Christians":
             let product = IAPManager.sharedInstance.products[6] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Feasts":
             let product = IAPManager.sharedInstance.products[7] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Relics and Saints":
             let product = IAPManager.sharedInstance.products[8] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Revelation":
             let product = IAPManager.sharedInstance.products[9] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Sins":
             let product = IAPManager.sharedInstance.products[10] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Worship":
             let product = IAPManager.sharedInstance.products[11] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), forState: .Normal)
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         default:
             break
         }
@@ -241,12 +241,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Configure the Select button appearance.
         self.selectButton.layer.cornerRadius = 7
-        self.selectButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.selectButton.layer.borderColor = UIColor.white.cgColor
         self.selectButton.layer.borderWidth = 3
         
         setCategory(categoryTapped)
@@ -255,7 +255,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
 
         // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
-            self.selectButton.setTitle(("Select"), forState: .Normal)
+            self.selectButton.setTitle(("Select"), for: UIControlState())
             //print("Active")
         } else {
             self.setPrices()
@@ -267,21 +267,21 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
 
      //MARK: Additional Methods
-    func setCategory(category: Int) {
+    func setCategory(_ category: Int) {
         titleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
     }
     
-    func setColor(category: Int) {
+    func setColor(_ category: Int) {
         self.view.backgroundColor = colors[category]
     }
     
-    func setDescription(category: Int) {
+    func setDescription(_ category: Int) {
         self.descriptionViewLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToGame" {
-            let toViewController = segue.destinationViewController as! GameViewController
+            let toViewController = segue.destination as! GameViewController
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
         }
@@ -295,16 +295,16 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     /// Used to animate all objects when detailVC first loads.
     func startAnimations() {
-        UIView.animateWithDuration(0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.TitleView.center.x -= self.view.bounds.width
         }, completion: nil)
-        UIView.animateWithDuration(0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.descriptionView.center.x -= self.view.bounds.width
         }, completion: nil)
-        UIView.animateWithDuration(0.2, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.selectButton.center.y -= self.view.bounds.width
         }, completion: nil)
-        UIView.animateWithDuration(0.5, delay: 0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
            self.backButtonView.alpha = 1.0
         }, completion: nil)
     }
@@ -312,14 +312,14 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     /// MARK: - Lock animations.
     func lockCategory() {
-            UIView.animateWithDuration(0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.lock.alpha = 1
                 
                 }, completion: nil)
     }
     
     func unlockCategory() {
-        UIView.animateWithDuration(0.8, delay:0.8
+        UIView.animate(withDuration: 0.8, delay:0.8
             ,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.lock.alpha = 0
                 self.setColor(self.categoryTapped)
@@ -327,8 +327,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     }
     
     func setLockedColor() {
-        UIView.animateWithDuration(1.0, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.view.backgroundColor = UIColor.darkGrayColor()
+        UIView.animate(withDuration: 1.0, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.view.backgroundColor = UIColor.darkGray
             }, completion: nil)
     }
     
@@ -339,7 +339,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         
         print("Purchase has been restored")
         self.unlockCategory()
-        self.selectButton.setTitle(("Select"), forState: .Normal)
+        self.selectButton.setTitle(("Select"), for: UIControlState())
         Game.sharedGameInstance.categoriesArray[categoryTapped].purchased = true
         
     }

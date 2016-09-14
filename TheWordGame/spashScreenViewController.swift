@@ -15,14 +15,14 @@ class spashScreenViewController: UIViewController {
         super.viewDidLoad()
         // Do view setup here.
         
-        performSelector(#selector(spashScreenViewController.showMainController), withObject: nil, afterDelay: 3.0)
+        perform(#selector(spashScreenViewController.showMainController), with: nil, afterDelay: 3.0)
         
     }
     
     
     func showMainController()
     {
-        performSegueWithIdentifier("showMainViewController", sender: self)
+        performSegue(withIdentifier: "showMainViewController", sender: self)
     }
     
     

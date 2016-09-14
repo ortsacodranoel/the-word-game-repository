@@ -27,14 +27,14 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     /// Loads product identifiers for store usage.
     func setupInAppPurchases() {
         self.validateProductIdentifiers(self.getProductIdentifiersFromMainBundle())
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.default().add(self)
     }
     
     /// Get product identifiers.
     func getProductIdentifiersFromMainBundle() ->NSArray {
         var identifiers = NSArray()
-        if let url = NSBundle.mainBundle().URLForResource("iap_product_ids", withExtension: "plist") {
-            identifiers = NSArray(contentsOfURL: url)!
+        if let url = Bundle.main.url(forResource: "iap_product_ids", withExtension: "plist") {
+            identifiers = NSArray(contentsOf: url)!
         }
         
         return identifiers
@@ -42,7 +42,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     }
     
     /// Retrieve product information.
-    func validateProductIdentifiers(identifiers:NSArray) {
+    func validateProductIdentifiers(_ identifiers:NSArray) {
         let productIdentifiers = NSSet(array: identifiers as [AnyObject])
         let productRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
         self.request = productRequest
@@ -52,43 +52,43 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     
     /// Create payment request for product.
-    func createPaymentRequestForProduct(product:SKProduct){
+    func createPaymentRequestForProduct(_ product:SKProduct){
         let payment = SKMutablePayment(product: product)
         payment.quantity = 1
 
-        SKPaymentQueue.defaultQueue().addPayment(payment)
+        SKPaymentQueue.default().add(payment)
     }
     
     
     
-    func productsRequest(request:SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        self.products = response.products
+    func productsRequest(_ request:SKProductsRequest, didReceive response: SKProductsResponse) {
+        self.products = response.products as NSArray!
     }
     
     
     
     //MARK: SKPaymentTransactionObserver Delegate Protocol
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         //
         for transaction in transactions as [SKPaymentTransaction]{
             switch transaction.transactionState{
-            case .Purchasing:
+            case .purchasing:
                 print("Purchasing")
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 
-            case .Deferred:
+            case .deferred:
                 print("Deferrred")
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            case .Failed:
-                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            case .failed:
+                SKPaymentQueue.default().finishTransaction(transaction)
                 print("Failed")
                 print(transaction.error?.localizedDescription)
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            case.Purchased:
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            case.purchased:
                 print("Purchased")
                 
                 self.verifyReceipt(transaction)
-            case .Restored:
+            case .restored:
                 print("Restored")
                 
             }
@@ -96,7 +96,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     }
     
     
-    func validatePurchaseArray(purchases:NSArray){
+    func validatePurchaseArray(_ purchases:NSArray){
             for purchase in purchases as! [NSDictionary]{
             self.unlockPurchasedFunctionalityforProductIdentifier(purchase["product_id"] as! String)
         }
@@ -104,45 +104,54 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     
     
-    func verifyReceipt(transaction:SKPaymentTransaction?){
+    func verifyReceipt(_ transaction:SKPaymentTransaction?){
         
         // Find the receipt.
-        let receiptURL = NSBundle.mainBundle().appStoreReceiptURL!
+        let receiptURL = Bundle.main.appStoreReceiptURL!
         
         // Check if NSData object can be created.
-        if let receipt = NSData(contentsOfURL: receiptURL){
+        if let receipt = try? Data(contentsOf: receiptURL){
             
             // If the receipt exists we want to create a JSON object to send to apple for varification.
             
             // The request content will equal the receipt data encoded in a Base64 string.
-            let requestContents = ["receipt-data" : receipt.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)), "password" : "326200e390c84cda8f7fb53750b72e05"]
+            let requestContents = ["receipt-data" : receipt.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)), "password" : "326200e390c84cda8f7fb53750b72e05"]
             
             // Build a request.
             do {
                 
                 // JSON serialize the request content.
-                let requestData = try NSJSONSerialization.dataWithJSONObject(requestContents, options: NSJSONWritingOptions(rawValue: 0))
+                let requestData = try JSONSerialization.data(withJSONObject: requestContents, options: JSONSerialization.WritingOptions(rawValue: 0))
                 
                 // Build URL Mutable Request.
-                let storeURL = NSURL(string: "https://sandbox.itunes.apple.com/verifyReceipt")
-                let request = NSMutableURLRequest(URL: storeURL!)
-                request.HTTPMethod = "Post"
-                request.HTTPBody = requestData
+                let storeURL = URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")
+                
+                // Create and configure the request.
+                let request = NSMutableURLRequest(url: storeURL!)
+                    request.httpMethod = "Post"
+                    request.httpBody = requestData
                 
                 // Create the session.
-                let session = NSURLSession.sharedSession()
+                let session = URLSession.shared
                
                 // Create the data task.
-                let task = session.dataTaskWithRequest(request, completionHandler: { (responseData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-                    
+                //let task = session.dataTask(with: request, completionHandler: { (responseData:Data?, response:URLResponse?, error:NSError?) -> Void in
+                
+                
+                
+                
+                let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                     do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(responseData!, options: .MutableLeaves) as! NSDictionary
+                        
+                        //let json = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary {
+                        
+                        let json = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary
                         
                         // Take a look at the receipt.
                         print(json)
                         
                         // Check if the receipt that we received is valid. The 0 means it's valid and we can further process that receipt.
-                        if (json.objectForKey("status") as! NSNumber) == 0 {
+                        if (json.object(forKey: "status") as! NSNumber) == 0 {
 
                             if let latest_receipt = json["latest_receipt_info"]{
                                 self.validatePurchaseArray(latest_receipt as! NSArray)
@@ -155,16 +164,16 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                             
                             
                             if transaction != nil {
-                                SKPaymentQueue.defaultQueue().finishTransaction(transaction!)
+                                SKPaymentQueue.default().finishTransaction(transaction!)
                             }
                             
-                            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                            DispatchQueue.main.sync(execute: { () -> Void in
                                 self.delegate?.managerDidRestorePurchases()
                             })
                             
                         } else {
                             //Debug the receipt
-                            print(json.objectForKey("status") as! NSNumber)
+                            print(json.object(forKey: "status") as! NSNumber)
                         }
                         
                     } catch {
@@ -186,12 +195,12 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     }
     
     
-    func unlockPurchasedFunctionalityforProductIdentifier(productIdentifier:String){
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: productIdentifier)
+    func unlockPurchasedFunctionalityforProductIdentifier(_ productIdentifier:String){
+        UserDefaults.standard.set(true, forKey: productIdentifier)
         
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         
         let categoryToUnlock = Game.sharedGameInstance.getCategoryForProductKey(productIdentifier)
         categoryToUnlock.purchased = true
@@ -205,7 +214,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         request.start()
     }
     
-    func requestDidFinish(request: SKRequest) {
+    func requestDidFinish(_ request: SKRequest) {
         self.verifyReceipt(nil)
     }
     

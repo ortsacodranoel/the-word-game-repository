@@ -13,7 +13,7 @@ import StoreKit
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
 
-    private var lastContentOffset: CGFloat = 0
+    fileprivate var lastContentOffset: CGFloat = 0
     
     // MARK: Button Outlets
     @IBOutlet weak var menuButton: UIButton!
@@ -22,16 +22,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     // MARK - Button Actions
-    @IBAction func categoryButtonTapped(sender: AnyObject) {}
+    @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
     
     
     // MARK: - Audio
-    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
     func loadSoundFile() {
         do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
             self.tapAudioPlayer.prepareToPlay()
         } catch {
             print("Unable to load sound files.")
@@ -81,17 +81,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     // MARK: - Collection View Methods
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Game.sharedGameInstance.categoriesArray.count
     }
     
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         cell.categoryButton.layer.cornerRadius = 7
-        cell.categoryButton.backgroundColor = self.colors[indexPath.row]
-        cell.tag = indexPath.row
-        cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[indexPath.row].title, forState: UIControlState.Normal)
+        cell.categoryButton.backgroundColor = self.colors[(indexPath as NSIndexPath).row]
+        cell.tag = (indexPath as NSIndexPath).row
+        cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
         
         return cell
     }
@@ -100,7 +100,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /**
      Used to animate rules menu fade-in.
      */
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 30 {
             //self.rulesButton.setTitleColor(self.buttonBackgroundColor[1], forState: .Normal)
         }
@@ -115,11 +115,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Segue Methods
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == "segueToRules" {
             self.tapAudioPlayer.play()
-            let rulesViewController = segue.destinationViewController as! RulesViewController
+            let rulesViewController = segue.destination as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
        
         } else if segue.identifier == "segueToDetails" {
@@ -130,18 +130,18 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let button = sender as! UIButton
             let view = button.superview!
             let cell = view.superview! as! CollectionViewCell
-            let indexPath = collectionView.indexPathForCell(cell)
+            let indexPath = collectionView.indexPath(for: cell)
             
             // Prepare destinationVC.
-            let toViewController = segue.destinationViewController as! DetailViewController
-            toViewController.categoryTapped = (indexPath!.row)
+            let toViewController = segue.destination as! DetailViewController
+            toViewController.categoryTapped = ((indexPath! as NSIndexPath).row)
             toViewController.transitioningDelegate = self.transitionManager
         }
     
     }
     
     
-    @IBAction func unwindToCategories(segue: UIStoryboardSegue){
+    @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.tapAudioPlayer.play()
     }
     
@@ -149,13 +149,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - Animations
     
     func animateMenuFadeIn() {
-        UIView.animateWithDuration(0.5,animations: {
+        UIView.animate(withDuration: 0.5,animations: {
             self.rulesButton.alpha = 1
             }, completion: nil)
     }
     
     func animateMenuFadeOut() {
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.rulesButton.alpha = 0
             }, completion: nil)
     }

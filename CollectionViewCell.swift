@@ -20,12 +20,12 @@ class CollectionViewCell: UICollectionViewCell {
 
     
     // MARK: - Audio
-    var buttonSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ButtonTapped", ofType: "wav")!)
+    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
     func loadSoundFile() {
         do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOfURL: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
             self.tapAudioPlayer.prepareToPlay()
                         
         } catch {
@@ -34,7 +34,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
    
-    @IBAction func buttonTouched(sender: AnyObject) {
+    @IBAction func buttonTouched(_ sender: AnyObject) {
         self.loadSoundFile()
         self.tapAudioPlayer.play()
     }
