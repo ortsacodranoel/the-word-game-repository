@@ -53,7 +53,6 @@ class Game {
         UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1), // Row 8
         UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1), // Row 9
         UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1), // Row 10
-        
         UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),   // Row 11
         UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1), // Row 12
         UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1), // Row 13
