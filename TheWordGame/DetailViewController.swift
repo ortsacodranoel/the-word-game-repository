@@ -14,85 +14,31 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     // MARK: - Variables
     var categoryTapped = Int()
     var backgroundColor = UIColor()
-    
-    // MARK: - Buttons
-    @IBOutlet weak var selectButton: UIButton!
-
-    // MARK: - Views
-    @IBOutlet var mainView: UIView!
-    @IBOutlet weak var TitleView: UIView!
-    @IBOutlet weak var descriptionView: UIView!
-    @IBOutlet weak var selectButtonView: UIView!
-    @IBOutlet weak var backButtonView: UIView!
-    @IBOutlet weak var lock: UIView!
-    
-    // MARK: - Labels
-    @IBOutlet weak var descriptionViewLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-
-    
     var purchasedCategory:Bool!
     
+    // MARK: - View Outlets
+    @IBOutlet weak var categoryTitleView: UIView!
+    @IBOutlet weak var descriptionView: UIView!
+    @IBOutlet weak var selectButtonView: UIView!
+    @IBOutlet weak var lockView: UIView!
+    @IBOutlet var mainView: UIView!
     
+    // MARK: - Button Outlets
+    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
 
-    
+    // MARK: - Labels
+    @IBOutlet weak var categoryTitleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+
     // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
     let categoryScreenTransitionManager = CategoriesTransitionManager()
 
-
-    
-    func setPrices() {
-        let title = self.titleLabel.text! as String
-        switch title {
-        case "Angels":
-            let product = IAPManager.sharedInstance.products[0] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Books and Movies":
-            let product = IAPManager.sharedInstance.products[1] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Christian Nation":
-            let product = IAPManager.sharedInstance.products[2] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Christmas Time":
-            let product = IAPManager.sharedInstance.products[3] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Commands":
-            let product = IAPManager.sharedInstance.products[4] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Denominations":
-            let product = IAPManager.sharedInstance.products[5] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Famous Christians":
-            let product = IAPManager.sharedInstance.products[6] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Feasts":
-            let product = IAPManager.sharedInstance.products[7] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Relics and Saints":
-            let product = IAPManager.sharedInstance.products[8] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Revelation":
-            let product = IAPManager.sharedInstance.products[9] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Sins":
-            let product = IAPManager.sharedInstance.products[10] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Worship":
-            let product = IAPManager.sharedInstance.products[11] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        default:
-            break
-        }
-    }
-
     
 
-    
-    
-    
+
     // MARK: - init() Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
@@ -135,13 +81,14 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
-    
+    /// Touching the select button will segue to the game screen if the categories
+    /// are free; else, it will create a payment request for that category product.
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
         if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
         
-        let title = self.titleLabel.text! as String
+        let title = self.categoryTitleLabel.text! as String
         
         switch title {
         case "Jesus":
@@ -235,6 +182,50 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
 
     
+    func setPrices() {
+        let title = self.categoryTitleLabel.text! as String
+        switch title {
+        case "Angels":
+            let product = IAPManager.sharedInstance.products[0] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Books and Movies":
+            let product = IAPManager.sharedInstance.products[1] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Christian Nation":
+            let product = IAPManager.sharedInstance.products[2] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Christmas Time":
+            let product = IAPManager.sharedInstance.products[3] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Commands":
+            let product = IAPManager.sharedInstance.products[4] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Denominations":
+            let product = IAPManager.sharedInstance.products[5] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Famous Christians":
+            let product = IAPManager.sharedInstance.products[6] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Feasts":
+            let product = IAPManager.sharedInstance.products[7] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Relics and Saints":
+            let product = IAPManager.sharedInstance.products[8] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Revelation":
+            let product = IAPManager.sharedInstance.products[9] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Sins":
+            let product = IAPManager.sharedInstance.products[10] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Worship":
+            let product = IAPManager.sharedInstance.products[11] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        default:
+            break
+        }
+    }
+    
     
     
     
@@ -246,7 +237,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
 
      //MARK: Additional Methods
     func setCategory(_ category: Int) {
-        titleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
+        categoryTitleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
     }
     
     func setColor(_ category: Int) {
@@ -254,7 +245,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     }
     
     func setDescription(_ category: Int) {
-        self.descriptionViewLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
+       self.descriptionLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -266,24 +257,22 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     }
     
     
-    
-    
-    
+
     // MARK: - Animations
     
     /// Used to animate all objects when detailVC first loads.
     func startAnimations() {
         UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            self.TitleView.center.x -= self.view.bounds.width
+            self.categoryTitleView.center.x -= self.view.bounds.width
         }, completion: nil)
         UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.descriptionView.center.x -= self.view.bounds.width
         }, completion: nil)
         UIView.animate(withDuration: 0.2, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            self.selectButton.center.y -= self.view.bounds.width
-        }, completion: nil)
+            self.selectButtonView.center.y -= self.view.bounds.width
+            }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-           self.backButtonView.alpha = 1.0
+           self.backButton.alpha = 1.0
         }, completion: nil)
     }
     
@@ -291,15 +280,14 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     /// MARK: - Lock animations.
     func lockCategory() {
             UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.lock.alpha = 1
-                
+                self.lockView.alpha = 1
                 }, completion: nil)
     }
     
     func unlockCategory() {
         UIView.animate(withDuration: 0.8, delay:0.8
             ,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.lock.alpha = 0
+                self.lockView.alpha = 0
                 self.setColor(self.categoryTapped)
             }, completion: nil)
     }
