@@ -151,8 +151,8 @@
 				B36733731D7F3CD100BA177B /* spashScreenViewController.swift */,
 				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
 				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
-				B35703A41D88808E0044FECF /* wordSummaryViewController.swift */,
 				B3AB51B91D89D90E0003B09F /* GameViewController.swift */,
+				B35703A41D88808E0044FECF /* wordSummaryViewController.swift */,
 				B392F42D1D66146100F3748A /* RulesViewController.swift */,
 			);
 			name = "View Controllers";

@@ -308,6 +308,7 @@ class Game {
         if arrayOfUsedWords.contains(word) {
             // Run the method again.
             self.getWord(categorySelected)
+            
         } else {
             self.arrayOfUsedWords.append(word)
         }
