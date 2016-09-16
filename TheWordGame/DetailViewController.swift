@@ -81,10 +81,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
-    /// Touching the select button will segue to the game screen if the categories
-    /// are free; else, it will create a payment request for that category product.
+    
+    
+    /** Touching the select button will segue to the game screen if the categories
+    are free; else, it will create a payment request for that category product.
+    **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
-        if (sender.isTouchInside != nil) {
+            if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
         
@@ -248,11 +251,14 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
        self.descriptionLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
     }
 
+    /// Segue to game.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToGame" {
             let toViewController = segue.destination as! GameViewController
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
+        
+
         }
     }
     
@@ -263,18 +269,23 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     /// Used to animate all objects when detailVC first loads.
     func startAnimations() {
         UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.categoryTitleView.alpha = 1
             self.categoryTitleView.center.x -= self.view.bounds.width
         }, completion: nil)
         UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            self.descriptionView.center.x -= self.view.bounds.width
+            self.descriptionView.alpha  = 1
+            self.descriptionView.center.x -=  self.view.bounds.width
         }, completion: nil)
         UIView.animate(withDuration: 0.2, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.selectButtonView.alpha = 1
             self.selectButtonView.center.y -= self.view.bounds.width
             }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-           self.backButton.alpha = 1.0
+            self.backButton.alpha = 1
         }, completion: nil)
     }
+    
+
     
     
     /// MARK: - Lock animations.
