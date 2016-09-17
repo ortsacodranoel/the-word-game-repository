@@ -19,8 +19,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     
     
-    
-    
     // MARK: - Audio
     
     // Paths to sound effects.
@@ -41,13 +39,7 @@ class GameViewController: UIViewController {
     /// Used to play sound effects when the game timer is coming to an end.
     var audioPlayerRoundIsEndingSound = AVAudioPlayer()
     
-    
-    
-    
-    // MARK: - Button Actions
-    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
-        performSegue(withIdentifier: "unwindToCategories", sender: self)
-    }
+
     
     // MARK:- Init() Methods
     
@@ -60,7 +52,9 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.setColorForViewBackground()
+        self.configureButtons()
         self.presentMenuItems()
         
         // Start button configuration.
@@ -72,6 +66,37 @@ class GameViewController: UIViewController {
 
 
     }
+    
+    
+    
+    
+    // MARK: - Button Actions
+    
+    /// categoriesMenu unwinds to main screen.
+    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
+        performSegue(withIdentifier: "unwindToCategories", sender: self)
+    }
+    
+    /// Animates menus off-screen and starts game.
+    @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
+        
+        // Menu off-screen.
+        self.animateOffScreen(item:"menu", delay: 0)
+        
+        
+        
+    }
+    
+    // MARK: - Button Configurations
+    func configureButtons(){
+        
+        self.startButton.layer.cornerRadius = 7
+        self.startButton.layer.borderColor = UIColor.white.cgColor
+        self.startButton.layer.borderWidth = 3
+        
+    }
+    
+
     
     /// Set the initial background color of the main view. 
     func setColorForViewBackground() {
@@ -121,6 +146,23 @@ class GameViewController: UIViewController {
     }
 
 
+    /// Animate detailVC items.
+    func animateOffScreen(item: String, delay: TimeInterval){
+        
+        switch item {
+        
+        case "menu":
+            UIView.animate(withDuration:0.5, delay:delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                
+                // Animates the menu up.
+                self.menuButtonView.center.y -= self.view.bounds.height
+                
+                }, completion: nil)
+        default:
+            break
+        }
+    }
+    
 
 
 }

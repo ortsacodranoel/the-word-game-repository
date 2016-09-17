@@ -287,7 +287,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
 
     
-    
     /// MARK: - Lock animations.
     func lockCategory() {
             UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
