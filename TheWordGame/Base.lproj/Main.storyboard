@@ -290,7 +290,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="FaQ-SK-PaH"/>
-                                    <constraint firstAttribute="width" constant="360" id="Yyf-Kr-uXp"/>
+                                    <constraint firstAttribute="width" constant="350" id="Yyf-Kr-uXp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qg2-86-sEz" userLabel="descriptionView">
@@ -385,7 +385,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="498.75" y="110.625"/>
+            <point key="canvasLocation" x="498.09782608695656" y="110.14492753623189"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="vZM-6W-ck9">
