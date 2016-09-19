@@ -614,12 +614,23 @@
                     <view key="view" contentMode="scaleToFill" id="Fjy-vW-emK">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qb1-aG-cbP">
+                                <frame key="frameInset" minX="279" minY="297" width="108" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Return to Game"/>
+                                <connections>
+                                    <segue destination="o1P-LU-axO" kind="unwind" unwindAction="unwindToGame:" id="Ay3-Si-eBf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fa1-Tg-VHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="o1P-LU-axO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2201" y="247"/>
+            <point key="canvasLocation" x="2041" y="-343"/>
         </scene>
     </scenes>
     <resources>

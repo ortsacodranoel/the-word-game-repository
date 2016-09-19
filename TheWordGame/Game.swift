@@ -30,6 +30,8 @@ class Game {
     var won = false
     /// Used to temporarily store winner title.
     var winnerTitle = String()
+    // Used to verify the game has begun.
+    var gameBegan = false 
     
     // MARK: - Array properties
     

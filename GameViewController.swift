@@ -1,3 +1,15 @@
+/*
+    FIX: 
+        - gameBegan variable change to false once game ends.
+        -
+        -
+ 
+*/
+
+
+
+
+
 import UIKit
 import AVFoundation
 
@@ -16,7 +28,7 @@ class GameViewController: UIViewController {
     var wordRemoved = false
     /// Used to determine if round is in progress.
     var roundInProgress = false
-    
+
 
     
     // MARK: - View properties
@@ -35,7 +47,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var startButtonViewCenterX: NSLayoutConstraint!
     
     
-
     // MARK: - Button properties
     @IBOutlet weak var startButton: UIButton!
     
@@ -81,8 +92,14 @@ class GameViewController: UIViewController {
         self.setColorForViewBackground()
         self.configureViewStyles()
         self.configureLabelContent()
-        self.presentMenuItems()
+      
+        // Present only if gameBegan is true.
+        if Game.sharedGameInstance.gameBegan == false {
+            self.initialMenuItemsPresentation()
+            Game.sharedGameInstance.gameBegan = true
+        }
     }
+    
     
     // MARK:- Initializer methods ___________________________________________________________________________________________________________________________________
 
@@ -102,21 +119,19 @@ class GameViewController: UIViewController {
         }
     }
     
-    
     func configureLabelContent() {
         self.teamOneLabel.text = "Team 1"
         self.teamTwoLabel.text = "Team 2"
     }
     
-    
-    
+
     /// Set the initial background color of the main view.
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]
     }
     
     
-    // MARK: - Button methods
+    // MARK: - Button methods _______________________________________________________________________________________________________________________________________
     
     /// categoriesMenu unwinds to main screen.
     @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
@@ -141,6 +156,14 @@ class GameViewController: UIViewController {
         print("Start button tapped")
     }
     
+    
+    /// Used to unwind from summary screen.
+    @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
+        
+        self.animateNewTeamTurn()
+
+    
+    }
 
 
     // MARK: - Timer methods ________________________________________________________________________________________________________________________________________
@@ -221,10 +244,10 @@ class GameViewController: UIViewController {
             // Display word summary.
             self.displayWordSummary()
             
-            // self.animateNewTeamTurn()
             // self.removeWord()
         }
     }
+    
     
     /// Updates the team name displayed for each turn.
     func setTeamTurn() {
@@ -234,6 +257,7 @@ class GameViewController: UIViewController {
             self.teamTurnLabel.text = "Team Two"
         }
     }
+    
     
     /// Changes the score labels content depending on the current score.
     func updateScore() {
@@ -294,7 +318,7 @@ class GameViewController: UIViewController {
     // MARK: - Menu animations ______________________________________________________________________________________________________________________________________
     
     /// Animates teamOneView,teamTwoView,teamOneScoreView,teamTwoScoreView,menuView, and timerView onto the screen.
-    func presentMenuItems() {
+    func initialMenuItemsPresentation() {
         // Bottom-up animations.
         UIView.animate(withDuration: 0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
             self.startButtonView.alpha = 1
@@ -329,7 +353,6 @@ class GameViewController: UIViewController {
     /// Animate view off screen.
     func offScreenAnimate(viewObject: UIView, withDirection: String, delay: TimeInterval) {
         switch withDirection {
-            
             case "UP":
                 UIView.animate(withDuration:0.5, delay:delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                     viewObject.center.y -= self.view.bounds.height
@@ -352,9 +375,7 @@ class GameViewController: UIViewController {
             self.view.backgroundColor = UIColor.white
         })
         
-        performSegue(withIdentifier: "segueToSummaryScreen", sender: self) 
-        
-        
+        performSegue(withIdentifier: "segueToSummaryScreen", sender: self)
     }
     
     
@@ -383,8 +404,6 @@ class GameViewController: UIViewController {
         viewObject.center.y = position
         self.fade(viewObject: viewObject, duration: 1, delay: 1, inOrOut: IN)
     }
-
-    
     
     
     /// Fades views.
@@ -403,7 +422,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    
     
     
     // MARK: - Audio properties _____________________________________________________________________________________________________________________________________

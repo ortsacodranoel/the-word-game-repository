@@ -37,8 +37,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
 
     
 
-    
-
     // MARK: - init() Methods
     override func viewDidLoad() {
         super.viewDidLoad()
