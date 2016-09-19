@@ -23,8 +23,6 @@ class summaryScreenViewController: UIViewController {
             self.view.layoutIfNeeded()
             
             }, completion: nil)
-
-        
     }
     
     

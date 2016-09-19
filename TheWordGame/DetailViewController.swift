@@ -37,6 +37,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
 
     
 
+    
 
     // MARK: - init() Methods
     override func viewDidLoad() {
@@ -257,8 +258,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
             let toViewController = segue.destination as! GameViewController
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
-        
-
         }
     }
     

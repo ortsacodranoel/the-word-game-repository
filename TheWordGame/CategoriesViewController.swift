@@ -106,7 +106,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             toViewController.categoryTapped = ((indexPath! as NSIndexPath).row)
             toViewController.transitioningDelegate = self.transitionManager
         }
-    
     }
     
 
