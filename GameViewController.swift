@@ -44,6 +44,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var teamTwoLabel: UILabel!
     @IBOutlet weak var teamOneScoreLabel: UILabel!
     @IBOutlet weak var teamTwoScoreLabel: UILabel!
+    @IBOutlet weak var teamTurnLabel: UILabel!
     
     
     
@@ -186,10 +187,10 @@ class GameViewController: UIViewController {
     
     /// Updates the team name displayed for each turn.
     func setTeamTurn() {
-        if game.teamOneIsActive {
-            .text = "Team One"
+        if Game.sharedGameInstance.teamOneIsActive {
+            self.teamTurnLabel.text = "Team One"
         } else {
-            teamLabel.text = "Team Two"
+            self.teamTurnLabel.text = "Team Two"
         }
     }
     

@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="75" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="-19" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -118,7 +118,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iob-2N-vam">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -139,7 +139,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4q6-a4-gf1">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-ho-R6a" userLabel="menuView">
@@ -261,7 +261,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Hu0-ky-z89">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="backButton">
@@ -396,7 +396,7 @@
                         <viewControllerLayoutGuide type="bottom" id="q4h-EO-UYy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6RZ-Fk-ZnC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRW-gC-67k" userLabel="teamOneView">
@@ -519,6 +519,22 @@
                                     <constraint firstAttribute="width" constant="200" id="zgL-f9-MpO"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBi-Pc-d7e" userLabel="teamTurnView">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team One" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g0-Sv-M8C" userLabel="teamTurnLabel">
+                                        <frame key="frameInset" width="300" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="S1A-lb-0i2"/>
+                                    <constraint firstAttribute="height" constant="50" id="bjF-Rr-Z1H"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.13068948660680624" blue="0.98833561267154635" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -541,9 +557,11 @@
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="6Cw-LS-R2j" secondAttribute="bottom" constant="8" id="Vgg-ZZ-sKt"/>
                             <constraint firstItem="X4h-Ud-9qu" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="WZG-3L-BYL"/>
                             <constraint firstItem="ESi-v0-8h2" firstAttribute="leading" secondItem="KRW-gC-67k" secondAttribute="trailing" constant="8" id="Wqw-mA-prZ"/>
-                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="90" id="XNa-Yp-jy7"/>
+                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="117" id="XNa-Yp-jy7"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="15t-ah-ixH" secondAttribute="bottom" constant="8" id="hNN-p2-Qhh"/>
+                            <constraint firstItem="TBi-Pc-d7e" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="mbI-yM-ofj"/>
                             <constraint firstAttribute="leadingMargin" secondItem="u2h-JI-sPA" secondAttribute="leading" constant="20" id="wpA-Vn-rH3"/>
+                            <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="21" id="xag-mu-zDF"/>
                             <constraint firstItem="KRW-gC-67k" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leadingMargin" id="z3i-dQ-5m3"/>
                         </constraints>
                     </view>
@@ -555,6 +573,7 @@
                         <outlet property="teamOneScoreLabel" destination="FqY-mP-tJM" id="fdk-Q2-kZv"/>
                         <outlet property="teamOneScoreView" destination="ESi-v0-8h2" id="WKl-If-Pk9"/>
                         <outlet property="teamOneView" destination="KRW-gC-67k" id="uxV-l0-CW5"/>
+                        <outlet property="teamTurnLabel" destination="5g0-Sv-M8C" id="VPj-yN-xTr"/>
                         <outlet property="teamTwoLabel" destination="WLh-3Y-Zzp" id="aIU-cU-QDc"/>
                         <outlet property="teamTwoScoreLabel" destination="VRI-at-YY7" id="jhC-Rm-uV9"/>
                         <outlet property="teamTwoScoreView" destination="6Cw-LS-R2j" id="dYn-FE-1Ob"/>
