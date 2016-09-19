@@ -348,7 +348,12 @@ class GameViewController: UIViewController {
     func displayWordSummary() {
         
         // Fade the View color to white so that we can see the words in red and green.
-        self.view.backgroundColor = UIColor.white
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.backgroundColor = UIColor.white
+        })
+        
+        
+        
     }
     
     
