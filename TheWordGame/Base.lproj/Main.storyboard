@@ -603,10 +603,10 @@
             </objects>
             <point key="canvasLocation" x="1154" y="114"/>
         </scene>
-        <!--View Controller-->
+        <!--Summary View Controller-->
         <scene sceneID="hx6-4K-VOe">
             <objects>
-                <viewController id="ME8-wa-bf2" sceneMemberID="viewController">
+                <viewController id="ME8-wa-bf2" customClass="SummaryViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvf-E5-A0e"/>
                         <viewControllerLayoutGuide type="bottom" id="0QO-yu-kXR"/>
@@ -619,7 +619,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fa1-Tg-VHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1809" y="114"/>
+            <point key="canvasLocation" x="2201" y="247"/>
         </scene>
     </scenes>
     <resources>

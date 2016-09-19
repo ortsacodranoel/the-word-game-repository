@@ -76,7 +76,7 @@
 		B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipeSoundEffect.mp3; sourceTree = "<group>"; };
 		B3AB51B91D89D90E0003B09F /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ../GameViewController.swift; sourceTree = "<group>"; };
 		B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
-		B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryViewController.swift; path = ../SummaryViewController.swift; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
 		B3F48ACF1D89AF460052AA32 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B413DBDD1D2DF1900006FB9D /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -154,6 +154,7 @@
 				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
 				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
 				B3AB51B91D89D90E0003B09F /* GameViewController.swift */,
+				B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */,
 				B35703A41D88808E0044FECF /* wordSummaryViewController.swift */,
 				B392F42D1D66146100F3748A /* RulesViewController.swift */,
 			);
@@ -171,7 +172,6 @@
 		D67774C51D1C392B0051C634 = {
 			isa = PBXGroup;
 			children = (
-				B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */,
 				D67774D01D1C392B0051C634 /* thewordgame */,
 				D67774E81D1C392B0051C634 /* TheWordGameTests */,
 				D67774F31D1C392B0051C634 /* TheWordGameUITests */,

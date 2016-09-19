@@ -352,6 +352,7 @@ class GameViewController: UIViewController {
             self.view.backgroundColor = UIColor.white
         })
         
+        performSegue(withIdentifier: "segueToSummaryScreen", sender: self) 
         
         
     }
