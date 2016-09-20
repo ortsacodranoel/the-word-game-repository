@@ -100,6 +100,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let view = button.superview!
             let cell = view.superview! as! CollectionViewCell
             let indexPath = collectionView.indexPath(for: cell)
+          
+            Game.sharedGameInstance.gameColor = Game.sharedGameInstance.colors[((indexPath! as NSIndexPath).row)]
             
             // Prepare destinationVC.
             let toViewController = segue.destination as! DetailViewController

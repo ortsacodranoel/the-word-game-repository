@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
     var roundInProgress = false
 
 
+
     
     // MARK: - View properties
     @IBOutlet weak var menuButtonView: UIView!
@@ -71,7 +72,7 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK:- View methods __________________________________________________________________________________________________________________________________________
+    // MARK:- View METHODS __________________________________________________________________________________________________________________________________________
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,15 +94,15 @@ class GameViewController: UIViewController {
         self.configureViewStyles()
         self.configureLabelContent()
       
-        // Present only if gameBegan is true.
-        if Game.sharedGameInstance.gameBegan == false {
+        // Check if the segue is coming from the DetailVC.
+        if Game.sharedGameInstance.segueFromDetailVC == true {
             self.initialMenuItemsPresentation()
-            Game.sharedGameInstance.gameBegan = true
         }
+        
     }
     
     
-    // MARK:- Initializer methods ___________________________________________________________________________________________________________________________________
+    // MARK:- Initializer METHODS ___________________________________________________________________________________________________________________________________
 
     func configureViewStyles(){
         
@@ -127,7 +128,7 @@ class GameViewController: UIViewController {
 
     /// Set the initial background color of the main view.
     func setColorForViewBackground() {
-        self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]
+        self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
     
@@ -159,11 +160,10 @@ class GameViewController: UIViewController {
     
     /// Used to unwind from summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
-        
         self.animateNewTeamTurn()
 
-    
     }
+    
 
 
     // MARK: - Timer methods ________________________________________________________________________________________________________________________________________
@@ -219,7 +219,7 @@ class GameViewController: UIViewController {
         self.prepareGameTimer()
         self.animateGameTimer()
         self.updateScore()
-        self.endRound(50)
+        self.endRound(58)
     }
     
     /**
@@ -231,9 +231,9 @@ class GameViewController: UIViewController {
      */
     func endRound(_ time: Int) {
         if self.seconds == 53 {
-            //  self.audioPlayerRoundIsEndingSound.prepareToPlay()
-            //    self.audioPlayerRoundIsEndingSound.play()
-           // self.animateBackgroundColorFadeIn()
+            // self.audioPlayerRoundIsEndingSound.prepareToPlay()
+            // self.audioPlayerRoundIsEndingSound.play()
+            // self.animateBackgroundColorFadeIn()
         } else if self.seconds == time && Game.sharedGameInstance.won == false { // If time is up  and nobody won the game.
             
             Game.sharedGameInstance.updateTeamTurn()
@@ -278,7 +278,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    
     /// Main timer used in the game.
     func runGameTimer() {
       //  self.repositionCountdownMsgView()
@@ -286,7 +285,6 @@ class GameViewController: UIViewController {
             self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
     }
-    
     
     
     // MARK: - Countdown animations _________________________________________________________________________________________________________________________________
@@ -372,17 +370,19 @@ class GameViewController: UIViewController {
         
         // Fade the View color to white so that we can see the words in red and green.
         UIView.animate(withDuration: 0.2, animations: {
-            self.view.backgroundColor = UIColor.white
+            //self.view.backgroundColor = UIColor.white
         })
         
+        Game.sharedGameInstance.segueFromDetailVC = false
         performSegue(withIdentifier: "segueToSummaryScreen", sender: self)
+        
     }
     
     
     
     // Used to bring animations back onto the screen for a new team's turn.
     func animateNewTeamTurn() {
-    UIView.animate(withDuration: 0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+    UIView.animate(withDuration: 0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
         self.startButtonView.alpha = 1
         self.startButtonView.center.y -= self.view.bounds.height
         

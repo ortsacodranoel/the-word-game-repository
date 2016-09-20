@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="75" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="110" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -118,7 +118,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iob-2N-vam">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -139,7 +139,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4q6-a4-gf1">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-ho-R6a" userLabel="menuView">
@@ -261,7 +261,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Hu0-ky-z89">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="backButton">
@@ -390,13 +390,13 @@
         <!--Game View Controller-->
         <scene sceneID="vZM-6W-ck9">
             <objects>
-                <viewController id="6sQ-Hb-dsp" customClass="GameViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="6sQ-Hb-dsp" customClass="GameViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nHJ-BE-Jjg"/>
                         <viewControllerLayoutGuide type="bottom" id="q4h-EO-UYy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6RZ-Fk-ZnC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRW-gC-67k" userLabel="teamOneView">
@@ -564,13 +564,13 @@
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="6Cw-LS-R2j" secondAttribute="bottom" constant="8" id="Vgg-ZZ-sKt"/>
                             <constraint firstItem="X4h-Ud-9qu" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="WZG-3L-BYL"/>
                             <constraint firstItem="ESi-v0-8h2" firstAttribute="leading" secondItem="KRW-gC-67k" secondAttribute="trailing" constant="8" id="Wqw-mA-prZ"/>
-                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="99" id="XNa-Yp-jy7"/>
+                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="119" id="XNa-Yp-jy7"/>
                             <constraint firstItem="oMq-Hf-dTF" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="dOa-0n-fww"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="15t-ah-ixH" secondAttribute="bottom" constant="8" id="hNN-p2-Qhh"/>
                             <constraint firstItem="oMq-Hf-dTF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="kSd-x9-5Bl"/>
                             <constraint firstItem="TBi-Pc-d7e" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="mbI-yM-ofj"/>
                             <constraint firstAttribute="leadingMargin" secondItem="u2h-JI-sPA" secondAttribute="leading" constant="20" id="wpA-Vn-rH3"/>
-                            <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="39" id="xag-mu-zDF"/>
+                            <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="19" id="xag-mu-zDF"/>
                             <constraint firstItem="KRW-gC-67k" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leadingMargin" id="z3i-dQ-5m3"/>
                         </constraints>
                     </view>
@@ -593,44 +593,82 @@
                         <outlet property="timerLabel" destination="2Mq-7s-cd5" id="9Zf-uT-5aV"/>
                         <outlet property="timerView" destination="Jzo-Ve-eBY" id="RYQ-oc-luz"/>
                         <segue destination="NlU-Jd-lDF" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="bca-ZA-OV7"/>
-                        <segue destination="ME8-wa-bf2" kind="popoverPresentation" identifier="segueToSummaryScreen" popoverAnchorView="6RZ-Fk-ZnC" id="ksp-cW-CpI">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
+                        <segue destination="qqO-H1-41t" kind="presentation" identifier="segueToSummaryScreen" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="U9s-d5-XiV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-cI-hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="NlU-Jd-lDF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1154" y="114"/>
+            <point key="canvasLocation" x="1134" y="110"/>
         </scene>
         <!--Summary View Controller-->
-        <scene sceneID="hx6-4K-VOe">
+        <scene sceneID="0Fh-4e-9iv">
             <objects>
-                <viewController id="ME8-wa-bf2" customClass="SummaryViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qqO-H1-41t" customClass="SummaryViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vvf-E5-A0e"/>
-                        <viewControllerLayoutGuide type="bottom" id="0QO-yu-kXR"/>
+                        <viewControllerLayoutGuide type="top" id="zFv-0q-9cH"/>
+                        <viewControllerLayoutGuide type="bottom" id="XlG-o8-AuK"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Fjy-vW-emK">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                    <view key="view" contentMode="scaleToFill" id="M9i-qF-Rti">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qb1-aG-cbP">
-                                <frame key="frameInset" minX="279" minY="297" width="108" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Return to Game"/>
-                                <connections>
-                                    <segue destination="o1P-LU-axO" kind="unwind" unwindAction="unwindToGame:" id="Ay3-Si-eBf"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwe-7R-Q4V" userLabel="backgroundView">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vS2-sk-gBc" userLabel="mainView">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word Summary" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTa-SZ-bYr" userLabel="wordSummaryLabel">
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="26"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-nf-Jmp" userLabel="backButton">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="cw0-pq-vOT"/>
+                                                    <constraint firstAttribute="height" constant="50" id="sg3-cz-Ctq"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <segue destination="FKf-0K-xAz" kind="unwind" unwindAction="unwindToGame:" id="DqS-rp-MeN"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="LuG-nf-Jmp" firstAttribute="centerX" secondItem="vS2-sk-gBc" secondAttribute="centerX" constant="2" id="5QM-mI-5H0"/>
+                                            <constraint firstAttribute="bottom" secondItem="LuG-nf-Jmp" secondAttribute="bottom" constant="1" id="E6g-dr-qpU"/>
+                                            <constraint firstItem="kTa-SZ-bYr" firstAttribute="centerX" secondItem="vS2-sk-gBc" secondAttribute="centerX" constant="2" id="rEH-gB-XwA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="vS2-sk-gBc" firstAttribute="leading" secondItem="Zwe-7R-Q4V" secondAttribute="leading" constant="2" id="1xt-aX-0cU"/>
+                                    <constraint firstAttribute="bottom" secondItem="vS2-sk-gBc" secondAttribute="bottom" constant="2" id="525-e8-67k"/>
+                                    <constraint firstItem="kTa-SZ-bYr" firstAttribute="top" secondItem="Zwe-7R-Q4V" secondAttribute="top" constant="30" id="ZFx-RT-nLw"/>
+                                    <constraint firstAttribute="trailing" secondItem="vS2-sk-gBc" secondAttribute="trailing" constant="2" id="lzV-JH-LWr"/>
+                                    <constraint firstItem="vS2-sk-gBc" firstAttribute="top" secondItem="Zwe-7R-Q4V" secondAttribute="top" constant="2" id="w6g-uh-F9m"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zwe-7R-Q4V" firstAttribute="top" secondItem="zFv-0q-9cH" secondAttribute="bottom" constant="8" symbolic="YES" id="3JT-7T-oWo"/>
+                            <constraint firstItem="Zwe-7R-Q4V" firstAttribute="centerX" secondItem="M9i-qF-Rti" secondAttribute="centerX" id="RJ0-Xa-Daz"/>
+                            <constraint firstItem="XlG-o8-AuK" firstAttribute="top" secondItem="Zwe-7R-Q4V" secondAttribute="bottom" constant="8" symbolic="YES" id="VR5-SA-apZ"/>
+                            <constraint firstItem="Zwe-7R-Q4V" firstAttribute="leading" secondItem="M9i-qF-Rti" secondAttribute="leadingMargin" constant="-12" id="p9V-Tq-WR1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="Zwe-7R-Q4V" id="YaP-g7-hwu"/>
+                        <outlet property="mainView" destination="vS2-sk-gBc" id="594-HL-6cJ"/>
+                        <outlet property="wordSummaryLabel" destination="kTa-SZ-bYr" id="UYo-VC-1ck"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fa1-Tg-VHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="o1P-LU-axO" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDt-e7-KDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FKf-0K-xAz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2041" y="-343"/>
+            <point key="canvasLocation" x="1769.8369565217392" y="115.94202898550725"/>
         </scene>
     </scenes>
     <resources>

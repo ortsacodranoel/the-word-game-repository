@@ -34,7 +34,10 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
     let categoryScreenTransitionManager = CategoriesTransitionManager()
-
+    
+    // Used by GameViewController to determine if a segue occured from this VC.
+    var fromDetailVC:Bool!
+    
     
 
     // MARK: - init() Methods
@@ -86,6 +89,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
+        
+            Game.sharedGameInstance.segueFromDetailVC = true
+
             if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
@@ -243,7 +249,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     }
     
     func setColor(_ category: Int) {
-        self.view.backgroundColor = Game.sharedGameInstance.colors[category]
+        //self.view.backgroundColor = Game.sharedGameInstance.colors[category]
+        self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
     func setDescription(_ category: Int) {
