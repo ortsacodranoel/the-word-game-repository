@@ -54,6 +54,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var startButtonViewCenterX: NSLayoutConstraint!
     @IBOutlet weak var wordContainerViewCenterX: NSLayoutConstraint!
     
+    
+    
+    
     //MARK:- Buttons
     @IBOutlet weak var startButton: UIButton!
     
@@ -180,6 +183,7 @@ class GameViewController: UIViewController {
     
     
     //MARK:- BUTTONS METHODS
+    
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
         
@@ -193,8 +197,6 @@ class GameViewController: UIViewController {
         
         // Run countdowntimer
         self.runCountdownTimer()
-        
-        
     }
     
     
@@ -212,7 +214,7 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK:- INIT METHODS
+    // MARK:- INIT METHODS ---
     func configureViewStyles(){
         
         let views = [self.startButton,
@@ -244,7 +246,8 @@ class GameViewController: UIViewController {
 
     
 
-    // MARK: - Timer methods
+    // MARK: - TIMER METHODS ---
+    
     /**
      Used to runs the countdown that appears before a game round start.
      The method is called when the start button is touched.
@@ -254,7 +257,10 @@ class GameViewController: UIViewController {
         // Display countdownView.
         self.countdownView.alpha = 1
     
+        // Disable interactions.
         self.view.isUserInteractionEnabled = false
+        
+        // Initiate countdown.
         if !self.countdownTimer.isValid {
             self.countdownTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
         }
@@ -337,9 +343,13 @@ class GameViewController: UIViewController {
     func animateInitialWord() {
         
         /// Make sure other animations are not visible
+        self.startButtonView.alpha = 0
+        self.menuButtonView.alpha = 0
+        self.teamTurnView.alpha = 0
         
         UIView.animate(withDuration: 0.8, delay:3.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
          
+
             
             
             self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
@@ -411,12 +421,12 @@ class GameViewController: UIViewController {
             self.countdown -= 1
             self.countdownLabel.text = "\(self.countdown)"
         } else {
+            
             self.countdownLabel.text = "Go!"
             self.countdownTimer.invalidate()
             self.view.isUserInteractionEnabled = true
             self.wordOnScreen = true
             self.roundInProgress = true
-
             self.countdown = 4
             
             // Move "Go!" offscreen.
