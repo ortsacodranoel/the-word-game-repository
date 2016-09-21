@@ -104,10 +104,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()}
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,8 +128,6 @@ class GameViewController: UIViewController {
         
         // Move container offscreen right.
         self.wordContainerViewCenterX.constant += view.bounds.width
-        
-        
     }
     
     
@@ -184,27 +180,20 @@ class GameViewController: UIViewController {
     
     
     //MARK:- BUTTONS METHODS
-    
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
         
-        // Animate menu items offscreen.
+        // REMOVE MENUS + TURN
+        // Animate menu offscreen.
         self.offScreenAnimate(viewObject:self.menuButtonView, withDirection: UP, delay: 0)
-        
         // Animate StartButtonView off screen.
         self.offScreenAnimate(viewObject: self.startButtonView, withDirection: DOWN, delay: 0)
-        
         // Animate teamTurnView offScreen
         self.offScreenAnimate(viewObject: self.teamTurnView, withDirection: UP, delay: 0.2)
-        
-        // Display countdownView.
-        self.countdownView.alpha = 1
         
         // Run countdowntimer
         self.runCountdownTimer()
         
-        // Start game timer.
-        //   self.runGameTimer()
         
     }
     
@@ -212,7 +201,6 @@ class GameViewController: UIViewController {
     /// Used to unwind from summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
         self.animateNewTeamTurn()
-        
     }
     
     
@@ -225,7 +213,6 @@ class GameViewController: UIViewController {
     
     
     // MARK:- INIT METHODS
-
     func configureViewStyles(){
         
         let views = [self.startButton,
@@ -258,12 +245,15 @@ class GameViewController: UIViewController {
     
 
     // MARK: - Timer methods
-    
     /**
      Used to runs the countdown that appears before a game round start.
      The method is called when the start button is touched.
      */
     func runCountdownTimer() {
+    
+        // Display countdownView.
+        self.countdownView.alpha = 1
+    
         self.view.isUserInteractionEnabled = false
         if !self.countdownTimer.isValid {
             self.countdownTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
@@ -345,12 +335,19 @@ class GameViewController: UIViewController {
      the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
     func animateInitialWord() {
+        
+        /// Make sure other animations are not visible
+        
         UIView.animate(withDuration: 0.8, delay:3.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+         
+            
+            
             self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
             self.wordContainerViewCenterX.constant -= self.view.bounds.width
             self.view.layoutIfNeeded()
-            }, completion: nil )
+            
+        }, completion: nil )
     }
     
     
@@ -398,10 +395,7 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    // MARK: - Timer methods
-    
+   
 
     
     // MARK: - Countdown animations
@@ -435,16 +429,7 @@ class GameViewController: UIViewController {
     }
     
     
-    /**
-     Fade-in and centering of the countdownMsgView onto the screen.
-     A 4.0 seconds allows the label text within the view to display
-     '3','2','1','Go!' with sufficient time.
-     */
-    func displayCountdownView() {
-        
-    }
-    
-    
+
     
     // MARK: - Menu animations
     
@@ -518,6 +503,7 @@ class GameViewController: UIViewController {
     // Used to bring animations back onto the screen for a new team's turn.
     func animateNewTeamTurn() {
     UIView.animate(withDuration: 0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+        
             self.startButtonView.alpha = 1
             self.startButtonView.center.y -= self.view.bounds.height
             
@@ -526,6 +512,7 @@ class GameViewController: UIViewController {
             
             self.teamTurnView.alpha = 1
             self.teamTurnView.center.y += self.view.bounds.height
+        
         
         }, completion: nil)
     }
