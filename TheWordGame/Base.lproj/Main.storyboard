@@ -400,6 +400,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yo-P8-eRF" userLabel="wordContainerView">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgD-7U-e6X" userLabel="wordLabel">
+                                        <frame key="frameInset" width="399" height="151"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="399" id="JCK-Jc-Fh0"/>
@@ -470,7 +479,7 @@
                                     <constraint firstAttribute="height" constant="45" id="q55-5o-XPx"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2h-JI-sPA" userLabel="categoriesMenuView">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2h-JI-sPA" userLabel="categoriesMenuView">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-WB-pro" userLabel="categoriesMenuButton">
                                         <frame key="frameInset"/>
@@ -505,7 +514,7 @@
                                     <constraint firstAttribute="width" constant="90" id="tg6-s1-rCo"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBi-Pc-d7e" userLabel="teamTurnView">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBi-Pc-d7e" userLabel="teamTurnView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g0-Sv-M8C" userLabel="teamTurnLabel">
                                         <frame key="frameInset" width="300" height="50"/>
@@ -537,7 +546,7 @@
                                     <constraint firstAttribute="height" constant="60" id="m4d-U7-Q1Q"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4h-Ud-9qu" userLabel="startButtonView">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4h-Ud-9qu" userLabel="startButtonView">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wN-jR-a6h" userLabel="startButton">
                                         <frame key="frameInset" width="200" height="50"/>
@@ -613,6 +622,7 @@
                         <outlet property="timerView" destination="Jzo-Ve-eBY" id="RYQ-oc-luz"/>
                         <outlet property="wordContainerView" destination="8Yo-P8-eRF" id="C4e-7b-sKA"/>
                         <outlet property="wordContainerViewCenterX" destination="46J-qg-pLZ" id="wLm-Zn-l7g"/>
+                        <outlet property="wordLabel" destination="zgD-7U-e6X" id="cGu-iK-ZML"/>
                         <segue destination="NlU-Jd-lDF" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="bca-ZA-OV7"/>
                         <segue destination="qqO-H1-41t" kind="presentation" identifier="segueToSummaryScreen" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="U9s-d5-XiV"/>
                     </connections>

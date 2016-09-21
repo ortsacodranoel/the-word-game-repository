@@ -38,7 +38,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     // Used by GameViewController to determine if a segue occured from this VC.
     var fromDetailVC:Bool!
     
-    
 
     // MARK: - init() Methods
     override func viewDidLoad() {
@@ -85,8 +84,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     
     
-    /** Touching the select button will segue to the game screen if the categories
-    are free; else, it will create a payment request for that category product.
+    /** 
+     Touching the select button will segue to the game screen if the categories
+     are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
         
