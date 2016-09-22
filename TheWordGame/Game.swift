@@ -30,6 +30,18 @@ class Game {
     var won = false
     /// Used to temporarily store winner title.
     var winnerTitle = String()
+    // Used to verify the game has begun.
+    var gameBegan = false
+    
+    
+    
+    /// Used to determine the color of the game being played. 
+    var gameColor:UIColor!
+    
+    
+    // Used to notify GameVC if segue comes from DetailVC.
+    var segueFromDetailVC:Bool!
+    
     
     // MARK: - Array properties
     
@@ -243,6 +255,8 @@ class Game {
         self.teamOneScore = 0
         self.teamTwoScore = 0
     }
+    
+
     
     /// Used to get the String value of the team that has won the game.
     func checkForWinner() {
