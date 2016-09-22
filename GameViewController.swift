@@ -124,13 +124,17 @@ class GameViewController: UIViewController {
         self.configureViewStyles()
         self.configureLabelContent()
       
+        
+        
+        // Word container alpha
+        self.wordContainerView.alpha = 0
+        
+        
         // Check if the segue is coming from the DetailVC.
         if Game.sharedGameInstance.segueFromDetailVC == true {
             self.initialMenuItemsPresentation()
         }
-        
-        // Move container offscreen right.
-        self.wordContainerViewCenterX.constant += view.bounds.width
+
     }
     
     
@@ -194,6 +198,8 @@ class GameViewController: UIViewController {
         self.offScreenAnimate(viewObject: self.startButtonView, withDirection: DOWN, delay: 0)
         // Animate teamTurnView offScreen
         self.offScreenAnimate(viewObject: self.teamTurnView, withDirection: UP, delay: 0.2)
+        
+        self.wordContainerView.center.x += self.view.bounds.width
         
         // Run countdowntimer
         self.runCountdownTimer()
@@ -341,21 +347,12 @@ class GameViewController: UIViewController {
      the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
     func animateInitialWord() {
-        
-        /// Make sure other animations are not visible
-        self.startButtonView.alpha = 0
-        self.menuButtonView.alpha = 0
-        self.teamTurnView.alpha = 0
-        
-        UIView.animate(withDuration: 0.8, delay:3.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-         
 
-            
-            
-            self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
+        
+        UIView.animate(withDuration: 0.4, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.wordContainerView.center.x -= self.view.bounds.width
             self.wordContainerView.alpha = 1
-            self.wordContainerViewCenterX.constant -= self.view.bounds.width
-            self.view.layoutIfNeeded()
+            self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
             
         }, completion: nil )
     }
