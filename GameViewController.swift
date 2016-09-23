@@ -99,12 +99,42 @@ class GameViewController: UIViewController {
     /// Used to play sound effects when the game timer is coming to an end.
     var audioPlayerRoundIsEndingSound = AVAudioPlayer()
 
-
+    
+    
+    // MARK:- INIT METHODS - METHOD()
+    
+    func configureViewStyles(){
+        let views = [self.startButton,
+                     self.teamOneView,
+                     self.teamTwoView,
+                     self.teamOneScoreView,
+                     self.teamTwoScoreView]
+        for element in views {
+            element?.layer.cornerRadius = 7
+            element?.layer.borderColor = UIColor.white.cgColor
+            element?.layer.borderWidth = 3
+        }
+    }
+    
+    // CONFIGURE LABEL CONTENT - METHOD()
+    
+    func configureLabelContent() {
+        self.teamOneLabel.text = "Team 1"
+        self.teamTwoLabel.text = "Team 2"
+    }
+    
+    // SET COLOR FOR VIEW BACKGROUND - METHOD()
+    
+    /// Set the initial background color of the main view.
+    func setColorForViewBackground() {
+        self.view.backgroundColor = Game.sharedGameInstance.gameColor
+    }
+    
 
 
   
-    // MARK:- VIEW METHODS
-
+    // MARK:- VIEW METHODS #########################################################################################################
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -126,8 +156,8 @@ class GameViewController: UIViewController {
         self.configureViewStyles()
         self.configureLabelContent()
         
+        // Move word container to the left(-)
         self.wordContainerViewCenterX.constant += self.view.bounds.width
-        print("In ViewWillAppear \(self.wordContainerView.center.x)")
         
         // Check if the segue is coming from the DetailVC.
         if Game.sharedGameInstance.segueFromDetailVC == true {
@@ -137,9 +167,9 @@ class GameViewController: UIViewController {
     }
     
     
-    // MARK: - Game methods
+    // MARK: - Game methods #######################################################################################################
     
-    
+
     // SET_TEAM_TURN()
     
     /// Updates the team name displayed for each turn.
@@ -187,7 +217,7 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.4, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
-            self.wordContainerViewCenterX.constant -= self.view.bounds.width
+            self.wordContainerViewCenterX.constant += self.view.bounds.width
             self.view.layoutIfNeeded()
         }, completion: nil )
     }
@@ -233,11 +263,12 @@ class GameViewController: UIViewController {
     func removeWord() {
         if Game.sharedGameInstance.won {
             UIView.animate(withDuration: 0.4, animations: {
+           
                 // Move the word container offscreen right (+)
                 self.wordContainerViewCenterX.constant += self.view.bounds.width
                 self.view.layoutIfNeeded()
             },  completion: { (bool) in
-                    // self.resetRound(0)
+                // self.resetRound(0)
             })
         } else {
             UIView.animate(withDuration: 0.4, animations: {
@@ -252,7 +283,7 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK: - Countdown animations
+    // MARK: - Countdown animations ###############################################################################################
     /**
      Used to create the message "3,2,1...Go!" that informs players that
      a round will begin shortly. Once the countdown animations have concluded,
@@ -265,13 +296,17 @@ class GameViewController: UIViewController {
             self.countdown -= 1
             self.countdownLabel.text = "\(self.countdown)"
         } else {
-            // Decrease alpha and remove views.
+            
+
+            // REMOVES: views prior to summary screen appearing.
             self.startButtonView.alpha = 0
             self.teamTurnView.alpha = 0
             self.menuButtonView.alpha = 0
-            self.startButtonViewCenterX.constant -= self.view.bounds.height + self.view.bounds.height
+            
+            self.startButtonViewCenterX.constant += self.view.bounds.height + self.view.bounds.height
             self.teamTurnViewCenterX.constant -= self.view.bounds.height + self.view.bounds.height
             self.categoriesMenuViewCenterAlign.constant -= 300
+            
             
             
             
@@ -282,8 +317,8 @@ class GameViewController: UIViewController {
             self.roundInProgress = true
             self.countdown = 4
             
-            // Move "Go!" offscreen.
-            self.animate(viewObject: self.countdownView, duration: 0.2, delay: 0.5, withDirection: "Right", originalPosition: self.countdownView.center.x)
+            // REMOVE: Go! offScreen.
+            self.animate(viewObject: self.countdownView, duration: 0.2, delay: 0.3, withDirection: "Left", originalPosition: self.countdownView.center.x)
             
             
 
@@ -297,6 +332,7 @@ class GameViewController: UIViewController {
     
     
     // MARK: - SWIPE GESTURES
+    
     /**
      When the team know the answer they will swipe left. When they do not, they can pass on the
      word by swiping right. Each team is limited to 2 passes per round.
@@ -346,7 +382,8 @@ class GameViewController: UIViewController {
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
         
-        // REMOVE MENUS + TURN
+        // REMOVES: buttonMenuView startButtonView,and teamTurnView
+        
         // Animate menu offscreen.
         self.offScreenAnimate(viewObject:self.menuButtonView, withDirection: UP, delay: 0)
         // Animate StartButtonView off screen.
@@ -360,7 +397,7 @@ class GameViewController: UIViewController {
     
     
     /// Used to unwind from summary screen.
-    @IBAction func unwindToGame(_ segue: UIStoryboardSegue){    }
+    @IBAction func unwindToGame(_ segue: UIStoryboardSegue){}
     
     
     /// Unwinds the GameVC to the CategoryVC.
@@ -369,36 +406,7 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    // MARK:- INIT METHODS ---
-    func configureViewStyles(){
-        
-        let views = [self.startButton,
-                     self.teamOneView,
-                     self.teamTwoView,
-                     self.teamOneScoreView,
-                     self.teamTwoScoreView]
-        
-        for element in views {
-        
-            element?.layer.cornerRadius = 7
-            element?.layer.borderColor = UIColor.white.cgColor
-            element?.layer.borderWidth = 3
-        }
-    }
-    
-    func configureLabelContent() {
-        self.teamOneLabel.text = "Team 1"
-        self.teamTwoLabel.text = "Team 2"
-    }
-    
 
-    /// Set the initial background color of the main view.
-    func setColorForViewBackground() {
-        self.view.backgroundColor = Game.sharedGameInstance.gameColor
-    }
-    
     
 
     
@@ -624,7 +632,11 @@ class GameViewController: UIViewController {
     
                 UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                         viewObject.center.x += self.view.bounds.width
-                }, completion: nil)
+                    }, completion: {(Bool) in
+                        // Decrease alpha.
+                        viewObject.alpha = 0
+                        viewObject.center.x = originalPosition
+                })
             
         default:
             break
