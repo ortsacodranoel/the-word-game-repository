@@ -51,16 +51,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var wordLabel: UILabel!
     
     // MARK:- Layout Constraints
-
-    @IBOutlet weak var startBtnViewCenterX: NSLayoutConstraint!
-
-    
-    
-    
-    
-    
-    
-    
     
     //MARK:- Buttons
     @IBOutlet weak var startButton: UIButton!
@@ -155,15 +145,6 @@ class GameViewController: UIViewController {
             // ONSCREEN: startBtn animation
             self.startButtonView.center.y -= self.view.bounds.height
             }, completion: nil)
-        
-
-
-
-    
-        
-    
-    
-    
     }
     
     
@@ -174,16 +155,15 @@ class GameViewController: UIViewController {
             // OFFSCREEN: wordContainerView animate (invisible)
             self.wordContainerView.center.x += self.view.bounds.width
             }, completion: nil )
-        UIView.animate(withDuration: 0.8, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // OFFSCREEN: startBtn animate down (+).
             self.startButtonView.center.y += self.view.bounds.height
             // OFFSCREEN: teamTurnView animate up (-).
             self.teamTurnView.center.y -= self.view.bounds.height
             }, completion: nil )
-        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // OFFSCREEN: menuBtn animate up (-).
             self.menuButtonView.center.y -= self.view.bounds.height
-        
             }, completion: nil )
         
         self.runCountdownTimer()
@@ -211,25 +191,24 @@ class GameViewController: UIViewController {
      the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
     func animateInitialWord() {
-        UIView.animate(withDuration: 0.4, delay: 1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // Get a new random word.
             self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
-            
             self.wordContainerView.alpha = 1
-            
             self.wordContainerView.center.x -= self.view.bounds.width
-            
-            
             }, completion: nil )
     }
     
-    
 
-    
+    // DISPLAY_WORD_SUMMARY_SCREEN()
     // Present missed words.
     func displayWordSummaryScreen() {
-
+            UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                
+                self.countdownView.center.x += self.view.bounds.width
+                self.wordContainerView.alpha = 0
+            }, completion:nil)
+        
         Game.sharedGameInstance.segueFromDetailVC = false
         
         // PERFORM THE SEGUE.
@@ -268,7 +247,7 @@ class GameViewController: UIViewController {
             self.countdown = 4
             
             // REMOVE: Go! offScreen.
-            UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                 // OFFSCREEN:
                 self.countdownView.center.x -= self.view.bounds.width
             })
@@ -413,6 +392,16 @@ class GameViewController: UIViewController {
     
     
     
+    /// Unwinds the GameVC to the CategoryVC.
+    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
+        performSegue(withIdentifier: "unwindToCategories", sender: self)
+    }
+    
+    
+    
+    
+    
+    
     
     
  
@@ -462,35 +451,8 @@ class GameViewController: UIViewController {
         }
     }
     
-    
 
-  
-        
-        
-        // REMOVES: buttonMenuView startButtonView,and teamTurnView
-        
-//        // Animate menu offscreen.
-//        self.offScreenAnimate(viewObject:self.menuButtonView, withDirection: UP, delay: 0)
-//        // Animate StartButtonView off screen.
-//        self.offScreenAnimate(viewObject: self.startButtonView, withDirection: DOWN, delay: 0)
-//        // Animate teamTurnView offScreen
-//        self.offScreenAnimate(viewObject: self.teamTurnView, withDirection: UP, delay: 0.2)
-        
-        // Run countdowntimer
 
-    
-
-    
-    /// Unwinds the GameVC to the CategoryVC.
-    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
-        performSegue(withIdentifier: "unwindToCategories", sender: self)
-    }
-    
-    
-
-    
-
-    
 
     
 
@@ -501,13 +463,10 @@ class GameViewController: UIViewController {
      The method is called when the start button is touched.
      */
     func runCountdownTimer() {
-    
         // Display countdownView.
         self.countdownView.alpha = 1
-    
         // Disable interactions.
         self.view.isUserInteractionEnabled = false
-        
         // Initiate countdown.
         if !self.countdownTimer.isValid {
             self.countdownTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
@@ -568,130 +527,10 @@ class GameViewController: UIViewController {
     
     
     
-    
-    
-
-    
-    // MARK: - Menu animations
-    
-    /// Animates teamOneView,teamTwoView,teamOneScoreView,teamTwoScoreView,menuView, and timerView onto the screen.
-    func initialMenuItemsPresentation() {
-        // Bottom-up animations.
-        UIView.animate(withDuration: 0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.startButtonView.alpha = 1
-            self.startButtonView.center.y -= self.view.bounds.height
-            self.teamOneView.alpha = 1
-            self.teamOneView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.teamOneScoreView.alpha = 1
-            self.teamOneScoreView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.teamTwoView.alpha = 1
-            self.teamTwoView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.teamTwoScoreView.alpha = 1
-            self.teamTwoScoreView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        // Top-down animations.
-        UIView.animate(withDuration: 0.4, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.menuButtonView.alpha = 1
-            self.menuButtonView.center.y += self.view.bounds.height
-        }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.timerView.alpha = 1
-            self.timerView.center.y += self.view.bounds.height
-            }, completion: nil)
-    }
 
 
-    
-    
-    /// Animate view off screen.
-    func offScreenAnimate(viewObject: UIView, withDirection: String, delay: TimeInterval) {
-        switch withDirection {
-            case "UP":
-                UIView.animate(withDuration:0.5, delay:delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.center.y -= self.view.bounds.height
-                    }, completion: nil)
-            case "DOWN":
-                UIView.animate(withDuration:0.5, delay:delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.center.y += self.view.bounds.height
-                    }, completion: nil)
-        default:
-            break
-        }
-    }
 
 
-    
-    
-
-    
-    
-    
-    // Used after move animation to bring the view back to original position.
-    func resetViewPosition(viewObject: UIView, position: CGFloat) {
-        self.fade(viewObject: viewObject, duration: 0, delay: 0, inOrOut: OUT)
-        viewObject.center.y = position
-        self.fade(viewObject: viewObject, duration: 1, delay: 1, inOrOut: IN)
-    }
-    
-    
-    
-    
-    /// Fades views.
-    func fade(viewObject: UIView, duration:TimeInterval, delay:TimeInterval, inOrOut: String ) {
-        switch inOrOut {
-            case "OUT":
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.alpha = 0
-                    }, completion: nil)
-            case "IN":
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.alpha = 1
-                    }, completion: nil)
-        default:
-            break
-        }
-    }
-
-    
-    
-    /*
-        Used to animate a view on or off screen to the left or right and then return 
-        to its original position with an alpha of 0
-    */
-    func animate(viewObject: UIView, duration: TimeInterval, delay: TimeInterval, withDirection: String, originalPosition: CGFloat){
-    
-        switch withDirection {
-            case "Right":
-                
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                        viewObject.center.x += self.view.bounds.width
-                    }, completion: {(bool) in
-                
-                        // Decrease alpha.
-                        viewObject.alpha = 0
-                        viewObject.center.x = originalPosition
-                })
-            
-            case "Left":
-    
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                        viewObject.center.x += self.view.bounds.width
-                    }, completion: {(Bool) in
-                        // Decrease alpha.
-                        viewObject.alpha = 0
-                        viewObject.center.x = originalPosition
-                })
-            
-        default:
-            break
-        }
-    }
 }
 
 
