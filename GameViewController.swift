@@ -211,7 +211,7 @@ class GameViewController: UIViewController {
      the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
     func animateInitialWord() {
-        UIView.animate(withDuration: 0.8, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.4, delay: 1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             
             // Get a new random word.
             self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
@@ -260,7 +260,6 @@ class GameViewController: UIViewController {
             self.countdown -= 1
             self.countdownLabel.text = "\(self.countdown)"
         } else {
-            
             self.countdownLabel.text = "Go!"
             self.countdownTimer.invalidate()
             self.view.isUserInteractionEnabled = true
@@ -269,9 +268,9 @@ class GameViewController: UIViewController {
             self.countdown = 4
             
             // REMOVE: Go! offScreen.
-            UIView.animate(withDuration: 0.2, animations: {
-              //  self.countdownViewCenterX.constant -= self.view.bounds.width
-                self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // OFFSCREEN:
+                self.countdownView.center.x -= self.view.bounds.width
             })
             
             // START THE GAME.
