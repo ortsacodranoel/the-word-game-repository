@@ -483,35 +483,6 @@
                                     <constraint firstAttribute="width" constant="70" id="Amc-jL-iVa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jzo-Ve-eBY" userLabel="timerView">
-                                <frame key="frameInset" minX="646" minY="8" width="90" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mq-7s-cd5" userLabel="timerLabel">
-                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="90" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBi-Pc-d7e" userLabel="teamTurnView">
-                                <frame key="frameInset" minX="184" minY="137" width="300" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g0-Sv-M8C" userLabel="teamTurnLabel">
-                                        <frame key="frameInset" width="300" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oMq-Hf-dTF" userLabel="countdownView">
                                 <frame key="frameInset" minX="304" minY="158" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -563,15 +534,53 @@
                                     <constraint firstAttribute="height" constant="45" id="o67-K1-99Q"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBi-Pc-d7e" userLabel="teamTurnView">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g0-Sv-M8C" userLabel="teamTurnLabel">
+                                        <frame key="frameInset" width="300" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VRw-f4-CYW"/>
+                                    <constraint firstAttribute="width" constant="300" id="fnm-Yb-m7A"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jzo-Ve-eBY" userLabel="timerView">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mq-7s-cd5" userLabel="timerLabel">
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="90" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Nr6-Fv-Tgw"/>
+                                    <constraint firstAttribute="width" constant="90" id="VWC-CR-Va2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.13068948660680624" blue="0.98833561267154635" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8Yo-P8-eRF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="1Mv-dc-30t"/>
+                            <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="23" id="1ts-fW-mHX"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="ESi-v0-8h2" secondAttribute="bottom" constant="8" id="7fd-Y7-Nqb"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="15t-ah-ixH" secondAttribute="bottom" constant="8" id="BVO-ya-SQJ"/>
-                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="82" id="I4k-QL-Xrq"/>
+                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="107" id="I4k-QL-Xrq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Cw-LS-R2j" secondAttribute="trailing" id="Km8-Fn-aNh"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="KRW-gC-67k" secondAttribute="bottom" constant="8" id="O4s-XF-WjK"/>
+                            <constraint firstAttribute="trailing" secondItem="Jzo-Ve-eBY" secondAttribute="trailing" id="RMS-bv-rfP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jzo-Ve-eBY" secondAttribute="trailing" constant="-20" id="X1I-XQ-NTF"/>
+                            <constraint firstItem="Jzo-Ve-eBY" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" constant="8" id="ZtV-y6-OT0"/>
+                            <constraint firstItem="TBi-Pc-d7e" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="bE2-6X-h97"/>
                             <constraint firstAttribute="leadingMargin" secondItem="KRW-gC-67k" secondAttribute="leading" id="bZj-Gn-5q3"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="6Cw-LS-R2j" secondAttribute="bottom" constant="8" id="cex-nl-x3u"/>
                             <constraint firstItem="u2h-JI-sPA" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" constant="8" id="dPv-YP-HZH"/>
@@ -609,7 +618,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-cI-hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="NlU-Jd-lDF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="905" y="-1098"/>
+            <point key="canvasLocation" x="1138" y="109"/>
         </scene>
         <!--Summary View Controller-->
         <scene sceneID="0Fh-4e-9iv">
@@ -678,7 +687,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDt-e7-KDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FKf-0K-xAz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1434" y="279"/>
+            <point key="canvasLocation" x="1776" y="114"/>
         </scene>
     </scenes>
     <resources>

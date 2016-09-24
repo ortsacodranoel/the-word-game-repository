@@ -122,11 +122,13 @@ class GameViewController: UIViewController {
             self.configureViewStyles()
             self.configureLabelContent()
         
-        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // Animate startButton into view from the bottom of the screen.
             self.startButtonView.center.y -= self.view.bounds.height
             // Animate the menuButton into view from the top of the screen.
             self.menuButtonView.center.y += self.view.bounds.height
+            // Animate the teamTurnView into view from the top of the screen.
+            self.teamTurnView.center.y += self.view.bounds.height
             }, completion: nil )
     }
     
@@ -134,15 +136,17 @@ class GameViewController: UIViewController {
     // MARK:- startButtonTouchUpInside()
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
-        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // Prepare the wordContainerView for animation by moving it to the right off-screen.
             self.wordContainerView.center.x += self.view.bounds.width
             }, completion: nil )
-        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.8, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // Animate Start Button to the bottom of the screen (+).
             self.startButtonView.center.y += self.view.bounds.height
+            // Animate teamTurnView to the top of the screen (-).
+            self.teamTurnView.center.y -= self.view.bounds.height
             }, completion: nil )
-        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // Animate the Categories Menu off-screen top (-).
             self.menuButtonView.center.y -= self.view.bounds.height
             }, completion: nil )
@@ -153,10 +157,12 @@ class GameViewController: UIViewController {
     // MARK:- unwindToGame()
     /// Used to execute something when the view returns from the summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
-        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // Animate startButton back in.
             self.startButtonView.center.y -= self.view.bounds.height
             self.menuButtonView.center.y += self.view.bounds.height
+            self.teamTurnView.center.y += self.view.bounds.height
+
             }, completion: nil )
     }
     
