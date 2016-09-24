@@ -122,17 +122,48 @@ class GameViewController: UIViewController {
             self.configureViewStyles()
             self.configureLabelContent()
         
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-    
-            // ONSCREEN: startBtn animation
-            self.startButtonView.center.y -= self.view.bounds.height
+        
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamOneView up (-)
+            self.teamOneView.center.y -= self.view.bounds.height
+            }, completion:nil)
+        UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamOneScore up (-)
+            self.teamOneScoreView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamTwoView up (-)
+            self.teamTwoView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamTwoScore (-)
+            self.teamTwoScoreView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // ONSCREEN: menuBtn animation
             self.menuButtonView.center.y += self.view.bounds.height
-            // ONSCREEN: teamTurn animation
-            self.teamTurnView.center.y += self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.7, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // ONSCREEN: timerView animate down (+)
             self.timerView.center.y += self.view.bounds.height
-            }, completion: nil )
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamTurn animation
+            self.teamTurnView.center.y += self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: startBtn animation
+            self.startButtonView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        
+
+
+
+    
+        
+    
+    
+    
     }
     
     
