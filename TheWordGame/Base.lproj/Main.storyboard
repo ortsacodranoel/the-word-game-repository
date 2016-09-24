@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="-19" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="75" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -117,7 +117,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iob-2N-vam">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -138,7 +138,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4q6-a4-gf1">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-ho-R6a" userLabel="menuView">
@@ -260,7 +260,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Hu0-ky-z89">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="backButton">
@@ -395,7 +395,7 @@
                         <viewControllerLayoutGuide type="bottom" id="q4h-EO-UYy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6RZ-Fk-ZnC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yo-P8-eRF" userLabel="wordContainerView">
@@ -483,9 +483,7 @@
                                     <constraint firstAttribute="width" constant="70" id="Amc-jL-iVa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oMq-Hf-dTF" userLabel="countdownView">
-                                <frame key="frameInset" minX="304" minY="158" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMq-Hf-dTF" userLabel="countdownView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYA-JA-eKw" userLabel="countdownLabel">
                                         <frame key="frameInset"/>
@@ -496,6 +494,10 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="hzT-Kt-GfW"/>
+                                    <constraint firstAttribute="height" constant="60" id="rCh-uB-hW6"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4h-Ud-9qu" userLabel="startButtonView">
                                 <subviews>
@@ -521,7 +523,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Cw-LS-R2j" userLabel="teamTwoScoreView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRI-at-YY7" userLabel="teamTwoScoreLabel">
-                                        <frame key="frameInset" minX="100.00%" minY="0.0%"/>
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="45" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,6 +574,7 @@
                         <constraints>
                             <constraint firstItem="8Yo-P8-eRF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="1Mv-dc-30t"/>
                             <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="23" id="1ts-fW-mHX"/>
+                            <constraint firstItem="oMq-Hf-dTF" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="4xZ-8E-EWE"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="ESi-v0-8h2" secondAttribute="bottom" constant="8" id="7fd-Y7-Nqb"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="15t-ah-ixH" secondAttribute="bottom" constant="8" id="BVO-ya-SQJ"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="107" id="I4k-QL-Xrq"/>
@@ -588,6 +591,7 @@
                             <constraint firstItem="u2h-JI-sPA" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leadingMargin" constant="-20" id="fxC-Mq-tKE"/>
                             <constraint firstItem="ESi-v0-8h2" firstAttribute="leading" secondItem="ef8-cL-Zo5" secondAttribute="trailing" constant="8" id="hFR-Je-asH"/>
                             <constraint firstItem="6Cw-LS-R2j" firstAttribute="leading" secondItem="15t-ah-ixH" secondAttribute="trailing" constant="8" id="sHV-9A-Baw"/>
+                            <constraint firstItem="oMq-Hf-dTF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="tXI-zT-lUK"/>
                             <constraint firstItem="8Yo-P8-eRF" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="vL5-Co-Dqo"/>
                         </constraints>
                     </view>
@@ -629,7 +633,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XlG-o8-AuK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M9i-qF-Rti">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwe-7R-Q4V" userLabel="backgroundView">

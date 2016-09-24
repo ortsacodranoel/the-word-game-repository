@@ -123,12 +123,15 @@ class GameViewController: UIViewController {
             self.configureLabelContent()
         
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Animate startButton into view from the bottom of the screen.
+    
+            // ONSCREEN: startBtn animation
             self.startButtonView.center.y -= self.view.bounds.height
-            // Animate the menuButton into view from the top of the screen.
+            // ONSCREEN: menuBtn animation
             self.menuButtonView.center.y += self.view.bounds.height
-            // Animate the teamTurnView into view from the top of the screen.
+            // ONSCREEN: teamTurn animation
             self.teamTurnView.center.y += self.view.bounds.height
+            // ONSCREEN: timerView animate down (+)
+            self.timerView.center.y += self.view.bounds.height
             }, completion: nil )
     }
     
@@ -137,19 +140,21 @@ class GameViewController: UIViewController {
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Prepare the wordContainerView for animation by moving it to the right off-screen.
+            // OFFSCREEN: wordContainerView animate (invisible)
             self.wordContainerView.center.x += self.view.bounds.width
             }, completion: nil )
         UIView.animate(withDuration: 0.8, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Animate Start Button to the bottom of the screen (+).
+            // OFFSCREEN: startBtn animate down (+).
             self.startButtonView.center.y += self.view.bounds.height
-            // Animate teamTurnView to the top of the screen (-).
+            // OFFSCREEN: teamTurnView animate up (-).
             self.teamTurnView.center.y -= self.view.bounds.height
             }, completion: nil )
         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Animate the Categories Menu off-screen top (-).
+            // OFFSCREEN: menuBtn animate up (-).
             self.menuButtonView.center.y -= self.view.bounds.height
+        
             }, completion: nil )
+        
         self.runCountdownTimer()
     }
     
