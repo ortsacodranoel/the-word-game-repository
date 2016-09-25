@@ -164,8 +164,6 @@ class GameViewController: UIViewController {
             // OFFSCREEN: Time'sUpView move top.
             self.timesUpView.center.y -= self.view.bounds.height
             }, completion: nil)
-        
-        
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // OFFSCREEN: wordContainerView animate (invisible)
             self.wordContainerView.center.x += self.view.bounds.width
@@ -257,12 +255,11 @@ class GameViewController: UIViewController {
                 self.setColorForViewBackground()
                 }, completion: nil)
                 
-                
-            UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // Animate the Timer off-screen prior to summary screen being presented.
+            UIView.animate(withDuration: 0.8, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                     self.timerView.center.y -= self.view.bounds.height
                 }, completion: nil)
 
-            
             // Segue to the summary screen after 2.5 seconds.
             if !self.segueDelayTimer.isValid {
                 self.segueDelayTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameViewController.displayWordSummaryScreen), userInfo:nil, repeats: false)
@@ -286,14 +283,15 @@ class GameViewController: UIViewController {
     // DISPLAY_WORD_SUMMARY_SCREEN()
     // Present missed words.
     func displayWordSummaryScreen() {
-      
 
-        
             UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-               
+             
                 // Move the countdownView back into view for the next team.
                 self.countdownView.center.x += self.view.bounds.width
-                
+              
+                // ANIMATION: Fade out `Time's Up` message off the screen so it's not seen during the game.
+                self.timesUpView.alpha = 0
+              
                 self.wordContainerView.alpha = 0
                 }, completion:nil)
    
