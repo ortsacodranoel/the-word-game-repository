@@ -64,8 +64,6 @@ class GameViewController: UIViewController {
     var countdownTimer = Timer()
     var segueDelayTimer = Timer()
     
-    
-    
     var seconds = 00
     var minutes = 1
     var time = ""
@@ -158,7 +156,6 @@ class GameViewController: UIViewController {
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
         
-        
         // TIME IS UP OFF SCREEN ANIMATE
         UIView.animate(withDuration: 0.4, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             // OFFSCREEN: Time'sUpView move top.
@@ -189,7 +186,8 @@ class GameViewController: UIViewController {
     /// Used to execute something when the view returns from the summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Animate startButton back in.
+            
+            // Animate Start, Menu, and Team back onto the screen.
             self.startButtonView.center.y -= self.view.bounds.height
             self.menuButtonView.center.y += self.view.bounds.height
             self.teamTurnView.center.y += self.view.bounds.height
@@ -205,8 +203,9 @@ class GameViewController: UIViewController {
      Sets a new word to display based on the selected category. Animates that word onto
      the screen from the left side of the view, and sets`wordOnScreen` equal to true.
      */
-    func animateInitialWord() {
+    func animateNewWord() {
         UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
             // Get a new random word.
             self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
             self.wordContainerView.alpha = 1
@@ -218,28 +217,36 @@ class GameViewController: UIViewController {
     
     
     
-    // END_ROUND()
+
     
     /**
-     Used to run all methods that prepare the next round of the game.
-     When the time reaches 3 seconds left, the method runs the alert
-     sound.
+        The method is used to execute actions pertaining to the end of a game round.
      
-     Parameters time: Int - used to indicate at what time the timer should stop.
+        - Alert sounds are played when the `gameTimer` reaches 3s left.
+     
+        - The background color fades to red to indicate time running out.
+     
+        - Updates the team turn.
+     
+        - Sets the team turn label.
+     
+        - Animates `Time's Up' onto the screen.
+     
+        - Executes segue to summary screen.
+
+        - Parameter time: used to indicate at what time the timer should stop.
      */
     func endRound(_ time: Int) {
-        
-        // Alert the player that the round is coming to an end.
         if self.seconds == 53 {
+            // Play sounds alerting round coming to an end.
             // self.audioPlayerRoundIsEndingSound.prepareToPlay()
             // self.audioPlayerRoundIsEndingSound.play()
-            // self.animateBackgroundColorFadeIn()
-            
             UIView.animate(withDuration: 3.0, animations: { () -> Void in
+                // Fade the background color to red to show that time is running out.
                 self.view.backgroundColor = UIColor.red
             })
-            
-        } else if self.seconds == time && Game.sharedGameInstance.won == false { // If time is up  and nobody won the game.
+         // If time is up and nobody won the game.
+        } else if self.seconds == time && Game.sharedGameInstance.won == false {
 
             Game.sharedGameInstance.updateTeamTurn()
             self.setTeamTurn()
@@ -255,35 +262,27 @@ class GameViewController: UIViewController {
                 self.setColorForViewBackground()
                 }, completion: nil)
                 
-            // Animate the Timer off-screen prior to summary screen being presented.
+            // Animate the Timer off screen prior to summary screen being presented.
             UIView.animate(withDuration: 0.8, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                     self.timerView.center.y -= self.view.bounds.height
                 }, completion: nil)
 
-            // Segue to the summary screen after 2.5 seconds.
-            if !self.segueDelayTimer.isValid {
-                self.segueDelayTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameViewController.displayWordSummaryScreen), userInfo:nil, repeats: false)
-            }
-            
-            
-            
-            
-
-            
-            //
+            // Reset to `1:00`.
             self.resetTimer()
             
             // Remove the current word displayed on the screen.
             self.removeWord()
             
-            
+            // Segue to the summary screen after 2.5 seconds.
+            if !self.segueDelayTimer.isValid {
+                self.segueDelayTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameViewController.displayWordSummaryScreen), userInfo:nil, repeats: false)
+            }
         }
     }
 
     // DISPLAY_WORD_SUMMARY_SCREEN()
     // Present missed words.
     func displayWordSummaryScreen() {
-
             UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
              
                 // Move the countdownView back into view for the next team.
@@ -332,7 +331,7 @@ class GameViewController: UIViewController {
             
             // START THE GAME.
             self.runGameTimer()
-            self.animateInitialWord()
+            self.animateNewWord()
         }
     }
 
