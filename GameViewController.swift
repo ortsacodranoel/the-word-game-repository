@@ -13,7 +13,6 @@ import AVFoundation
 class GameViewController: UIViewController {
 
     //MARK:- General properties
-    ///
     var categoryTapped = Int()
     let UP = "UP"
     let DOWN = "DOWN"
@@ -39,6 +38,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var countdownView: UIView!
     @IBOutlet weak var teamTurnView: UIView!
     @IBOutlet weak var wordContainerView: UIView!
+    @IBOutlet weak var timesUpView: UIView!
     
     //MARK:- Labels
     @IBOutlet weak var timerLabel: UILabel!
@@ -62,11 +62,14 @@ class GameViewController: UIViewController {
     //MARK:- Timer Properties
     var gameTimer = Timer()
     var countdownTimer = Timer()
+    var segueDelayTimer = Timer()
+    
+    
+    
     var seconds = 00
     var minutes = 1
     var time = ""
     var timeIsUp = false
-    
     
     //MARK:- Swipe Gesture Recognizer Properties
     var swipedRight = false
@@ -94,7 +97,7 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK:- VIEW METHODS #########################################################################################################
+    // MARK:- VIEW METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -105,13 +108,15 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-            self.resetTimer()
-            self.setTeamTurn()
-            self.updateScore()
-            self.setColorForViewBackground()
-            self.configureViewStyles()
-            self.configureLabelContent()
+        self.resetTimer()
+        self.setTeamTurn()
+        self.updateScore()
+        self.setColorForViewBackground()
+        self.configureViewStyles()
+        self.configureLabelContent()
         
+        // ANIMATION: Fade out `Time's Up` message off the screen so it's not seen during the game.
+        self.timesUpView.alpha = 0
         
         UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // ONSCREEN: teamOneView up (-)
@@ -148,9 +153,19 @@ class GameViewController: UIViewController {
     }
     
     
+    
     // MARK:- startButtonTouchUpInside()
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
+        
+        
+        // TIME IS UP OFF SCREEN ANIMATE
+        UIView.animate(withDuration: 0.4, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // OFFSCREEN: Time'sUpView move top.
+            self.timesUpView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        
+        
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // OFFSCREEN: wordContainerView animate (invisible)
             self.wordContainerView.center.x += self.view.bounds.width
@@ -168,6 +183,8 @@ class GameViewController: UIViewController {
         
         self.runCountdownTimer()
     }
+    
+    
     
     
     // MARK:- unwindToGame()
@@ -199,16 +216,87 @@ class GameViewController: UIViewController {
             }, completion: nil )
     }
     
+    
+    
+    
+    
+    // END_ROUND()
+    
+    /**
+     Used to run all methods that prepare the next round of the game.
+     When the time reaches 3 seconds left, the method runs the alert
+     sound.
+     
+     Parameters time: Int - used to indicate at what time the timer should stop.
+     */
+    func endRound(_ time: Int) {
+        
+        // Alert the player that the round is coming to an end.
+        if self.seconds == 53 {
+            // self.audioPlayerRoundIsEndingSound.prepareToPlay()
+            // self.audioPlayerRoundIsEndingSound.play()
+            // self.animateBackgroundColorFadeIn()
+            
+            UIView.animate(withDuration: 3.0, animations: { () -> Void in
+                self.view.backgroundColor = UIColor.red
+            })
+            
+        } else if self.seconds == time && Game.sharedGameInstance.won == false { // If time is up  and nobody won the game.
+
+            Game.sharedGameInstance.updateTeamTurn()
+            self.setTeamTurn()
+            
+            // Animate the 'Time's Up' back onto the screen.
+            UIView.animate(withDuration: 0.4, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.timesUpView.alpha = 1
+                self.timesUpView.center.y += self.view.bounds.height
+                }, completion: nil)
+        
+            // Change the color of the screen back to original.
+            UIView.animate(withDuration: 1.0, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                self.setColorForViewBackground()
+                }, completion: nil)
+                
+                
+            UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                    self.timerView.center.y -= self.view.bounds.height
+                }, completion: nil)
+
+            
+            // Segue to the summary screen after 2.5 seconds.
+            if !self.segueDelayTimer.isValid {
+                self.segueDelayTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameViewController.displayWordSummaryScreen), userInfo:nil, repeats: false)
+            }
+            
+            
+            
+            
+
+            
+            //
+            self.resetTimer()
+            
+            // Remove the current word displayed on the screen.
+            self.removeWord()
+            
+            
+        }
+    }
 
     // DISPLAY_WORD_SUMMARY_SCREEN()
     // Present missed words.
     func displayWordSummaryScreen() {
-            UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                
-                self.countdownView.center.x += self.view.bounds.width
-                self.wordContainerView.alpha = 0
-            }, completion:nil)
+      
+
         
+            UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+               
+                // Move the countdownView back into view for the next team.
+                self.countdownView.center.x += self.view.bounds.width
+                
+                self.wordContainerView.alpha = 0
+                }, completion:nil)
+   
         Game.sharedGameInstance.segueFromDetailVC = false
         
         // PERFORM THE SEGUE.
@@ -216,15 +304,7 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     // MARK: - Countdown animations ###############################################################################################
     /**
@@ -260,9 +340,6 @@ class GameViewController: UIViewController {
 
     
     
-    
-    
-    
     // MARK:- INIT METHODS - METHOD() ####################################################################################################
     
     func configureViewStyles(){
@@ -285,15 +362,14 @@ class GameViewController: UIViewController {
         self.teamTwoLabel.text = "Team 2"
     }
     
-    // SET COLOR FOR VIEW BACKGROUND - METHOD()
+    // SET_COLOR_FOR_VIEW_BACKGROUND()
     
-    /// Set the initial background color of the main view.
     func setColorForViewBackground() {
+        /// Set the initial background color of the main view.
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
     
-    // MARK: - Game methods ###############################################################################################################
     
 
     // SET_TEAM_TURN()
@@ -329,40 +405,10 @@ class GameViewController: UIViewController {
         self.prepareGameTimer()
         self.startGameTimer()
         self.updateScore()
-        self.endRound(57)
+        self.endRound(50)
     }
     
 
-    
-    // END_ROUND()
-    
-    /**
-     Used to run all methods that prepare the next round of the game.
-     When the time reaches 3 seconds left, the method runs the alert
-     sound.
-     
-     Parameters time: Int - used to indicate at what time the timer should stop.
-     */
-    func endRound(_ time: Int) {
-        if self.seconds == 53 {
-            // self.audioPlayerRoundIsEndingSound.prepareToPlay()
-            // self.audioPlayerRoundIsEndingSound.play()
-            // self.animateBackgroundColorFadeIn()
-        } else if self.seconds == time && Game.sharedGameInstance.won == false { // If time is up  and nobody won the game.
-            Game.sharedGameInstance.updateTeamTurn()
-            self.setTeamTurn()
-            // self.animateTimeIsUpMessageOnScreen()
-            self.resetTimer()
-            
-            
-            // Remove the current word displayed on the screen.
-            self.removeWord()
-         
-            // Display word summary.
-            self.displayWordSummaryScreen()
-            
-        }
-    }
     
     
     // REMOVE_WORD()
@@ -375,17 +421,14 @@ class GameViewController: UIViewController {
     func removeWord() {
         if Game.sharedGameInstance.won {
             UIView.animate(withDuration: 0.4, animations: {
-           
                 // Move the word container offscreen right (+)
-      //          self.wordContainerViewCenterX.constant += self.view.bounds.width
-                self.view.layoutIfNeeded()
+                self.wordContainerView.center.x += self.view.bounds.width
             },  completion: { (bool) in
                 // self.resetRound(0)
             })
         } else {
             UIView.animate(withDuration: 0.4, animations: {
-        //        self.wordContainerViewCenterX.constant += self.view.bounds.width
-                self.view.layoutIfNeeded()
+                self.wordContainerView.center.x += self.view.bounds.width
             }, completion:nil)
         }
     }
@@ -456,7 +499,7 @@ class GameViewController: UIViewController {
 
     
 
-    // MARK: - TIMER METHODS ---
+    // MARK: - TIMER METHODS
     
     /**
      Used to runs the countdown that appears before a game round start.
@@ -524,13 +567,6 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", self.seconds)
         self.timerLabel.text = "\(strMinutes):\(strSeconds)"
     }
-    
-    
-    
-
-
-
-
 }
 
 
