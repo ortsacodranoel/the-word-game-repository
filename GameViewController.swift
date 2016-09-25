@@ -13,7 +13,6 @@ import AVFoundation
 class GameViewController: UIViewController {
 
     //MARK:- General properties
-    ///
     var categoryTapped = Int()
     let UP = "UP"
     let DOWN = "DOWN"
@@ -39,6 +38,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var countdownView: UIView!
     @IBOutlet weak var teamTurnView: UIView!
     @IBOutlet weak var wordContainerView: UIView!
+    @IBOutlet weak var timesUpView: UIView!
     
     //MARK:- Labels
     @IBOutlet weak var timerLabel: UILabel!
@@ -51,13 +51,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var wordLabel: UILabel!
     
     // MARK:- Layout Constraints
-    @IBOutlet weak var startButtonViewCenterX: NSLayoutConstraint!
-    @IBOutlet weak var wordContainerViewCenterX: NSLayoutConstraint!
-    @IBOutlet weak var teamTurnViewCenterX: NSLayoutConstraint!
-    @IBOutlet weak var categoriesMenuViewCenterAlign: NSLayoutConstraint!
-    
-    
-    
     
     //MARK:- Buttons
     @IBOutlet weak var startButton: UIButton!
@@ -69,11 +62,14 @@ class GameViewController: UIViewController {
     //MARK:- Timer Properties
     var gameTimer = Timer()
     var countdownTimer = Timer()
+    var segueDelayTimer = Timer()
+    /// Used to animate Time's Up prior to summary screen.
+    var timesUpTimer = Timer()
+    
     var seconds = 00
     var minutes = 1
     var time = ""
     var timeIsUp = false
-    
     
     //MARK:- Swipe Gesture Recognizer Properties
     var swipedRight = false
@@ -98,26 +94,42 @@ class GameViewController: UIViewController {
     var audioPlayerRoundIsStartingSound = AVAudioPlayer()
     /// Used to play sound effects when the game timer is coming to an end.
     var audioPlayerRoundIsEndingSound = AVAudioPlayer()
-
-
-
-
-  
+    
+    
+    // View centers.
+    var menuButtonCenter:CGPoint!
+    var timerButtonCenter:CGPoint!
+    var startButtonCenter:CGPoint!
+    var teamTurnCenter:CGPoint!
+    var wordContainerCenter:CGPoint!
+    var timesUpCenter:CGPoint!
+    
+    
+    
     // MARK:- VIEW METHODS
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()}
+
     
     
+    /**
+     - Get center of menuButtonView
+     - Get center of
+     */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // CountdownView must not be seen on load.
-        self.countdownView.alpha = 0
+
+        // Get centers of the views.
+        menuButtonCenter = self.menuButtonView.center
+        timerButtonCenter = self.timerView.center
+        startButtonCenter = self.startButtonView.center
+        teamTurnCenter = self.teamTurnView.center
+        wordContainerCenter = self.wordContainerView.center
+        timesUpCenter = self.timesUpView.center
         
         self.resetTimer()
         self.setTeamTurn()
@@ -126,20 +138,300 @@ class GameViewController: UIViewController {
         self.configureViewStyles()
         self.configureLabelContent()
         
-        self.wordContainerViewCenterX.constant += self.view.bounds.width
-        print("In ViewWillAppear \(self.wordContainerView.center.x)")
+        // ANIMATION: Fade out `Time's Up` message off the screen so it's not seen during the game.
+        self.timesUpView.alpha = 0
         
-        // Check if the segue is coming from the DetailVC.
-        if Game.sharedGameInstance.segueFromDetailVC == true {
-            self.initialMenuItemsPresentation()
-        }
-
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamOneView up (-)
+            self.teamOneView.center.y -= self.view.bounds.height
+            }, completion:nil)
+        UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamOneScore up (-)
+            self.teamOneScoreView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamTwoView up (-)
+            self.teamTwoView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamTwoScore (-)
+            self.teamTwoScoreView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: menuBtn animation
+            self.menuButtonView.center.y += self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.7, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: timerView animate down (+)
+            self.timerView.center.y += self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: teamTurn animation
+            self.teamTurnView.center.y += self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // ONSCREEN: startBtn animation
+            self.startButtonView.center.y -= self.view.bounds.height
+            }, completion: nil)
     }
     
     
-    // MARK: - Game methods
     
     
+    // MARK:- startButtonTouchUpInside()
+    /// Animates menus off-screen and starts game.
+    @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
+        UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // OFFSCREEN: wordContainerView animate (invisible)
+            self.wordContainerView.center.x += self.view.bounds.width
+            }, completion: nil )
+        
+        // TIME IS UP OFF SCREEN ANIMATE
+        UIView.animate(withDuration: 0.4, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // OFFSCREEN: Time's Up View off the screen to the top.
+            self.timesUpView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // OFFSCREEN: startBtn animate down (+).
+            self.startButtonView.center.y += self.view.bounds.height
+            // OFFSCREEN: teamTurnView animate up (-).
+            self.teamTurnView.center.y -= self.view.bounds.height
+            }, completion: nil )
+        UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // OFFSCREEN: menuBtn animate up (-).
+            self.menuButtonView.center.y -= self.view.bounds.height
+            }, completion: nil )
+        self.runCountdownTimer()
+    }
+    
+    
+    // MARK:- unwindToGame()
+    /// Used to execute something when the view returns from the summary screen.
+    @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+         
+            UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // OFFSCREEN: wordContainerView animate (invisible)
+                self.wordContainerView.center.x -= self.view.bounds.width
+                }, completion: nil )
+
+            self.startButtonView.center.y -= self.view.bounds.height
+            self.menuButtonView.center.y += self.view.bounds.height
+            self.teamTurnView.center.y += self.view.bounds.height
+        }, completion: nil )
+        
+        // timerView ANIMATION: down to it's original position.
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.timerView.center.y += self.view.bounds.height
+            }, completion: nil )
+
+        
+        
+    }
+    
+    
+    /**
+     Sets a new word to display based on the selected category. Animates that word onto
+     the screen from the left side of the view, and sets`wordOnScreen` equal to true.
+     */
+    func animateNewWord() {
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // Get a new random word.
+            self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
+            self.wordContainerView.alpha = 1
+            self.wordContainerView.center.x -= self.view.bounds.width
+            }, completion: nil )
+    }
+    
+    
+    
+    
+    
+
+    
+    /**
+    The method is used to execute actions pertaining to the end of a game round.
+ 
+    - Alert sounds are played when the `gameTimer` reaches 3s left.
+ 
+    - The background color fades to red to indicate time running out.
+ 
+    - Updates the team turn.
+ 
+    - Sets the team turn label.
+ 
+    - Animates `Time's Up' onto the screen.
+ 
+    - Executes segue to summary screen.
+
+    - Parameter time: used to indicate at what time the timer should stop.
+     */
+    func endRound(_ time: Int) {
+        if self.seconds == 53 {
+            // Play sounds alerting round coming to an end.
+            // self.audioPlayerRoundIsEndingSound.prepareToPlay()
+            // self.audioPlayerRoundIsEndingSound.play()
+            UIView.animate(withDuration: 3.0, animations: { () -> Void in
+                // Fade the background color to red to show that time is running out.
+                self.view.backgroundColor = UIColor.red
+            })
+         // If time is up and nobody won the game.
+        } else if self.seconds == time && Game.sharedGameInstance.won == false {
+
+            Game.sharedGameInstance.updateTeamTurn()
+            self.setTeamTurn()
+            
+            // Animate the 'Time's Up' back onto the screen.
+            UIView.animate(withDuration: 0.4, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                print(self.timesUpView.center.y)
+                print("Animating timesUpView")
+                self.timesUpView.alpha = 1
+                self.timesUpView.center.y += self.view.bounds.height
+                }, completion: nil)
+        
+            // Change the color of the screen back to original.
+            UIView.animate(withDuration: 1.0, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                self.setColorForViewBackground()
+                }, completion: nil)
+                
+            // Move the 'gameTimer' up.
+            UIView.animate(withDuration: 0.2, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                    self.timerView.center.y -= self.view.bounds.height
+                }, completion: nil)
+            
+
+            self.timesUpTimer.fire()
+            
+            // ANIMATION: Time's Up - Move UP.
+            // Segue to the summary screen after 2.5 seconds.
+            if !self.timesUpTimer.isValid {
+                self.timesUpTimer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(GameViewController.animateTimesUpOffScreen), userInfo:nil, repeats: false)
+            }
+            
+
+            // Reset to `1:00`.
+            self.resetTimer()
+            
+            
+            // Remove the current word displayed on the screen.
+            self.removeWord()
+            
+            // Segue to the summary screen after 2.5 seconds.
+            if !self.segueDelayTimer.isValid {
+                self.segueDelayTimer = Timer.scheduledTimer(timeInterval: 1.4, target: self, selector: #selector(GameViewController.displayWordSummaryScreen), userInfo:nil, repeats: false)
+            }
+        }
+    }
+
+
+    
+    // METHOD: displayWordSummaryScreen()
+    
+    // Present missed words.
+    func displayWordSummaryScreen() {
+            UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+             
+                // ANIMATION: Move the countdownView back into view for the next team.
+                self.countdownView.center.x += self.view.bounds.width
+
+                self.wordContainerView.alpha = 0
+                }, completion:nil)
+   
+        Game.sharedGameInstance.segueFromDetailVC = false
+        
+        // PERFORM THE SEGUE.
+        performSegue(withIdentifier: "segueToSummaryScreen", sender: self)
+    }
+    
+    
+    
+    // METHOD: animateTimesUpOffScreen()
+    
+    // (-) means up.
+    func animateTimesUpOffScreen(){
+        print("In AnimateTimesUpOffScreen")
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.timesUpView.center.y -= self.view.bounds.height
+            self.timesUpView.alpha = 0
+            }, completion: {(bool) in
+                UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                    self.timesUpView.center.y += self.view.bounds.height
+                    self.timesUpTimer.invalidate()
+                }, completion: nil)
+        })
+    }
+    
+    
+    
+    
+    
+    
+    // MARK: - Countdown animations ###############################################################################################
+    /**
+     Used to create the message "3,2,1...Go!" that informs players that
+     a round will begin shortly. Once the countdown animations have concluded,
+     the method invalidates its timer and resets the 'countdown' variable
+     so that it can be used in new round. Prior to exiting the method all
+     user interactions a re-enabled.
+     */
+    func startCountdown() {
+        if self.countdown  > 1 {
+            self.countdown -= 1
+            self.countdownLabel.text = "\(self.countdown)"
+        } else {
+            self.countdownLabel.text = "Go!"
+            self.countdownTimer.invalidate()
+            self.view.isUserInteractionEnabled = true
+            self.wordOnScreen = true
+            self.roundInProgress = true
+            self.countdown = 4
+            
+            // REMOVE: Go! offScreen.
+            UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // OFFSCREEN:
+                self.countdownView.center.x -= self.view.bounds.width
+            })
+            
+            // START THE GAME.
+            self.runGameTimer()
+            self.animateNewWord()
+        }
+    }
+
+    
+    
+    // MARK:- INIT METHODS - METHOD() ####################################################################################################
+    
+    func configureViewStyles(){
+        let views = [self.startButton,
+                     self.teamOneView,
+                     self.teamTwoView,
+                     self.teamOneScoreView,
+                     self.teamTwoScoreView]
+        for element in views {
+            element?.layer.cornerRadius = 7
+            element?.layer.borderColor = UIColor.white.cgColor
+            element?.layer.borderWidth = 3
+        }
+    }
+    
+    // CONFIGURE LABEL CONTENT - METHOD()
+    
+    func configureLabelContent() {
+        self.teamOneLabel.text = "Team 1"
+        self.teamTwoLabel.text = "Team 2"
+    }
+    
+    // SET_COLOR_FOR_VIEW_BACKGROUND()
+    
+    func setColorForViewBackground() {
+        /// Set the initial background color of the main view.
+        self.view.backgroundColor = Game.sharedGameInstance.gameColor
+    }
+    
+    
+    
+
     // SET_TEAM_TURN()
     
     /// Updates the team name displayed for each turn.
@@ -173,54 +465,10 @@ class GameViewController: UIViewController {
         self.prepareGameTimer()
         self.startGameTimer()
         self.updateScore()
-        self.endRound(57)
+        self.endRound(50)
     }
     
-    
-    // ANIMATE_INITIAL_WORD()
-    
-    /**
-     Sets a new word to display based on the selected category. Animates that word onto
-     the screen from the left side of the view, and sets`wordOnScreen` equal to true.
-     */
-    func animateInitialWord() {
-        UIView.animate(withDuration: 0.4, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
-            self.wordContainerView.alpha = 1
-            self.wordContainerViewCenterX.constant -= self.view.bounds.width
-            self.view.layoutIfNeeded()
-        }, completion: nil )
-    }
-    
-    
-    // END_ROUND()
-    
-    /**
-     Used to run all methods that prepare the next round of the game.
-     When the time reaches 3 seconds left, the method runs the alert
-     sound.
-     
-     Parameters time: Int - used to indicate at what time the timer should stop.
-     */
-    func endRound(_ time: Int) {
-        if self.seconds == 53 {
-            // self.audioPlayerRoundIsEndingSound.prepareToPlay()
-            // self.audioPlayerRoundIsEndingSound.play()
-            // self.animateBackgroundColorFadeIn()
-        } else if self.seconds == time && Game.sharedGameInstance.won == false { // If time is up  and nobody won the game.
-            Game.sharedGameInstance.updateTeamTurn()
-            self.setTeamTurn()
-            // self.animateTimeIsUpMessageOnScreen()
-            self.resetTimer()
-            
-            
-            // Remove the current word displayed on the screen.
-            self.removeWord()
-            // Display word summary.
-            self.displayWordSummary()
-            
-        }
-    }
+
     
     
     // REMOVE_WORD()
@@ -234,69 +482,35 @@ class GameViewController: UIViewController {
         if Game.sharedGameInstance.won {
             UIView.animate(withDuration: 0.4, animations: {
                 // Move the word container offscreen right (+)
-                self.wordContainerViewCenterX.constant += self.view.bounds.width
-                self.view.layoutIfNeeded()
+                self.wordContainerView.center.x += self.view.bounds.width
             },  completion: { (bool) in
-                    // self.resetRound(0)
+                // self.resetRound(0)
             })
         } else {
             UIView.animate(withDuration: 0.4, animations: {
-                self.wordContainerViewCenterX.constant += self.view.bounds.width
-                self.view.layoutIfNeeded()
+                self.wordContainerView.center.x += self.view.bounds.width
             }, completion:nil)
         }
     }
     
     
     
-    
-    
-    
-    // MARK: - Countdown animations
-    /**
-     Used to create the message "3,2,1...Go!" that informs players that
-     a round will begin shortly. Once the countdown animations have concluded,
-     the method invalidates its timer and resets the 'countdown' variable
-     so that it can be used in new round. Prior to exiting the method all
-     user interactions a re-enabled.
-     */
-    func startCountdown() {
-        if self.countdown  > 1 {
-            self.countdown -= 1
-            self.countdownLabel.text = "\(self.countdown)"
-        } else {
-            // Decrease alpha and remove views.
-            self.startButtonView.alpha = 0
-            self.teamTurnView.alpha = 0
-            self.menuButtonView.alpha = 0
-            self.startButtonViewCenterX.constant -= self.view.bounds.height + self.view.bounds.height
-            self.teamTurnViewCenterX.constant -= self.view.bounds.height + self.view.bounds.height
-            self.categoriesMenuViewCenterAlign.constant -= 300
-            
-            
-            
-            self.countdownLabel.text = "Go!"
-            self.countdownTimer.invalidate()
-            self.view.isUserInteractionEnabled = true
-            self.wordOnScreen = true
-            self.roundInProgress = true
-            self.countdown = 4
-            
-            // Move "Go!" offscreen.
-            self.animate(viewObject: self.countdownView, duration: 0.2, delay: 0.5, withDirection: "Right", originalPosition: self.countdownView.center.x)
-            
-            
-
-            
-            // START THE GAME.
-            self.runGameTimer()
-            self.animateInitialWord()
-        }
+    /// Unwinds the GameVC to the CategoryVC.
+    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
+        performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
-
     
+    
+    
+    
+    
+    
+    
+    
+ 
     
     // MARK: - SWIPE GESTURES
+    
     /**
      When the team know the answer they will swipe left. When they do not, they can pass on the
      word by swiping right. Each team is limited to 2 passes per round.
@@ -340,83 +554,22 @@ class GameViewController: UIViewController {
         }
     }
     
-    
-    //MARK:- BUTTONS METHODS
-    
-    /// Animates menus off-screen and starts game.
-    @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
-        
-        // REMOVE MENUS + TURN
-        // Animate menu offscreen.
-        self.offScreenAnimate(viewObject:self.menuButtonView, withDirection: UP, delay: 0)
-        // Animate StartButtonView off screen.
-        self.offScreenAnimate(viewObject: self.startButtonView, withDirection: DOWN, delay: 0)
-        // Animate teamTurnView offScreen
-        self.offScreenAnimate(viewObject: self.teamTurnView, withDirection: UP, delay: 0.2)
-        
-        // Run countdowntimer
-        self.runCountdownTimer()
-    }
-    
-    
-    /// Used to unwind from summary screen.
-    @IBAction func unwindToGame(_ segue: UIStoryboardSegue){    }
-    
-    
-    /// Unwinds the GameVC to the CategoryVC.
-    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
-        performSegue(withIdentifier: "unwindToCategories", sender: self)
-    }
-    
-    
-    
-    
-    // MARK:- INIT METHODS ---
-    func configureViewStyles(){
-        
-        let views = [self.startButton,
-                     self.teamOneView,
-                     self.teamTwoView,
-                     self.teamOneScoreView,
-                     self.teamTwoScoreView]
-        
-        for element in views {
-        
-            element?.layer.cornerRadius = 7
-            element?.layer.borderColor = UIColor.white.cgColor
-            element?.layer.borderWidth = 3
-        }
-    }
-    
-    func configureLabelContent() {
-        self.teamOneLabel.text = "Team 1"
-        self.teamTwoLabel.text = "Team 2"
-    }
-    
 
-    /// Set the initial background color of the main view.
-    func setColorForViewBackground() {
-        self.view.backgroundColor = Game.sharedGameInstance.gameColor
-    }
-    
-    
+
 
     
 
-    // MARK: - TIMER METHODS ---
+    // MARK: - TIMER METHODS
     
     /**
      Used to runs the countdown that appears before a game round start.
      The method is called when the start button is touched.
      */
     func runCountdownTimer() {
-    
         // Display countdownView.
         self.countdownView.alpha = 1
-    
         // Disable interactions.
         self.view.isUserInteractionEnabled = false
-        
         // Initiate countdown.
         if !self.countdownTimer.isValid {
             self.countdownTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
@@ -473,162 +626,6 @@ class GameViewController: UIViewController {
         let strMinutes = String(format: "%1d", self.minutes)
         let strSeconds = String(format: "%02d", self.seconds)
         self.timerLabel.text = "\(strMinutes):\(strSeconds)"
-    }
-    
-    
-    
-    
-    
-
-    
-    // MARK: - Menu animations
-    
-    /// Animates teamOneView,teamTwoView,teamOneScoreView,teamTwoScoreView,menuView, and timerView onto the screen.
-    func initialMenuItemsPresentation() {
-        // Bottom-up animations.
-        UIView.animate(withDuration: 0.4, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.startButtonView.alpha = 1
-            self.startButtonView.center.y -= self.view.bounds.height
-            self.teamOneView.alpha = 1
-            self.teamOneView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.teamOneScoreView.alpha = 1
-            self.teamOneScoreView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.teamTwoView.alpha = 1
-            self.teamTwoView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.teamTwoScoreView.alpha = 1
-            self.teamTwoScoreView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        // Top-down animations.
-        UIView.animate(withDuration: 0.4, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.menuButtonView.alpha = 1
-            self.menuButtonView.center.y += self.view.bounds.height
-        }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-            self.timerView.alpha = 1
-            self.timerView.center.y += self.view.bounds.height
-            }, completion: nil)
-    }
-
-
-    
-    
-    /// Animate view off screen.
-    func offScreenAnimate(viewObject: UIView, withDirection: String, delay: TimeInterval) {
-        switch withDirection {
-            case "UP":
-                UIView.animate(withDuration:0.5, delay:delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.center.y -= self.view.bounds.height
-                    }, completion: nil)
-            case "DOWN":
-                UIView.animate(withDuration:0.5, delay:delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.center.y += self.view.bounds.height
-                    }, completion: nil)
-        default:
-            break
-        }
-    }
-
-
-    
-    
-    
-    // Present missed words.
-    func displayWordSummary() {
-        // Fade the View color to white so that we can see the words in red and green.
-        UIView.animate(withDuration: 1.0, animations: {
-            
-            
-            // Bring all elements back.
-            self.startButtonViewCenterX.constant = 0
-            self.teamTurnViewCenterX.constant = 0
-            self.categoriesMenuViewCenterAlign.constant = 0
-            
-            self.startButtonView.alpha = 1
-            self.teamTurnView.alpha = 1
-            self.menuButtonView.alpha = 1
-            
-            
-            
-            self.view.layoutIfNeeded()
-            
-        })
-        
-        Game.sharedGameInstance.segueFromDetailVC = false
-        
-        
-        
-        performSegue(withIdentifier: "segueToSummaryScreen", sender: self)
-    }
-    
-    
-    
-    
-    
-
-    
-    
-    
-    // Used after move animation to bring the view back to original position.
-    func resetViewPosition(viewObject: UIView, position: CGFloat) {
-        self.fade(viewObject: viewObject, duration: 0, delay: 0, inOrOut: OUT)
-        viewObject.center.y = position
-        self.fade(viewObject: viewObject, duration: 1, delay: 1, inOrOut: IN)
-    }
-    
-    
-    
-    
-    /// Fades views.
-    func fade(viewObject: UIView, duration:TimeInterval, delay:TimeInterval, inOrOut: String ) {
-        switch inOrOut {
-            case "OUT":
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.alpha = 0
-                    }, completion: nil)
-            case "IN":
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    viewObject.alpha = 1
-                    }, completion: nil)
-        default:
-            break
-        }
-    }
-
-    
-    
-    /*
-        Used to animate a view on or off screen to the left or right and then return 
-        to its original position with an alpha of 0
-    */
-    func animate(viewObject: UIView, duration: TimeInterval, delay: TimeInterval, withDirection: String, originalPosition: CGFloat){
-    
-        switch withDirection {
-            case "Right":
-                
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                        viewObject.center.x += self.view.bounds.width
-                    }, completion: {(bool) in
-                
-                        // Decrease alpha.
-                        viewObject.alpha = 0
-                        viewObject.center.x = originalPosition
-                })
-            
-            case "Left":
-    
-                UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                        viewObject.center.x += self.view.bounds.width
-                }, completion: nil)
-            
-        default:
-            break
-        }
     }
 }
 
