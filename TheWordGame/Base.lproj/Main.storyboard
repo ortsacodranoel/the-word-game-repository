@@ -659,8 +659,8 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vS2-sk-gBc" userLabel="mainView">
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-nf-Jmp" userLabel="backButton">
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-nf-Jmp" userLabel="backButton">
+                                                <state key="normal" image="arrowDown"/>
                                                 <connections>
                                                     <segue destination="FKf-0K-xAz" kind="unwind" unwindAction="unwindToGame:" id="DqS-rp-MeN"/>
                                                 </connections>
@@ -749,6 +749,7 @@
         <image name="Back Chevron" width="13" height="21"/>
         <image name="Lock" width="25" height="32"/>
         <image name="Menu" width="26" height="21"/>
+        <image name="arrowDown" width="22" height="13"/>
     </resources>
     <color key="tintColor" red="1" green="0.31764356668945781" blue="0.16261317787767937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

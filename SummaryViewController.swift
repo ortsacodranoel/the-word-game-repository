@@ -46,12 +46,14 @@ class SummaryViewController: UIViewController {
             missed += "\(missedWord)\n"
         }
         
+        // Show missed words.
         self.missedWordsTextview.text = missed
         
         for correctWord in Game.sharedGameInstance.correctWordsArray {
             correct += "\(correctWord)\n"
         }
         
+        // Show correct words.
         self.correctWordsTextview.text = correct
         
         
