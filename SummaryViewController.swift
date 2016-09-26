@@ -34,7 +34,14 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("In summaryVC")
+        
+        for word in Game.sharedGameInstance.arrayOfUsedWords {
+            print(word)
+        }
+        
+        
+        
+       // print("In summaryVC")
         // Do any additional setup after loading the view.
     }
 

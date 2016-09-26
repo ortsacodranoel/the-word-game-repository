@@ -234,13 +234,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     
 
      //MARK: Additional Methods

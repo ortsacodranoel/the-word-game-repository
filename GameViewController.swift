@@ -123,8 +123,7 @@ class GameViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()}
 
-    
-    
+
     /**
      - Get center of menuButtonView
      - Get center of
@@ -185,7 +184,6 @@ class GameViewController: UIViewController {
             }, completion: nil)
         
         
-        
         self.teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
         self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
         
@@ -198,6 +196,10 @@ class GameViewController: UIViewController {
     // MARK:- startButtonTouchUpInside()
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
+        
+        self.audioPlayerButtonTapSound.play()
+        self.audioPlayerRoundIsStartingSound.play()
+        
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             // OFFSCREEN: wordContainerView animate (invisible)
             self.wordContainerView.center.x += self.view.bounds.width
@@ -220,8 +222,7 @@ class GameViewController: UIViewController {
             }, completion: nil )
         self.runCountdownTimer()
         
-        //self.audioPlayerButtonTapSound.play()
-        //self.audioPlayerRoundIsStartingSound.play()
+
         self.timesSwipedRight = 0
         
     }
@@ -233,6 +234,7 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
          
             UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+              
                 // OFFSCREEN: wordContainerView animate (invisible)
                 self.wordContainerView.center.x -= self.view.bounds.width
                 }, completion: nil )
@@ -247,8 +249,6 @@ class GameViewController: UIViewController {
             self.timerView.center.y += self.view.bounds.height
             }, completion: nil )
 
-        
-        
     }
     
 
@@ -275,14 +275,17 @@ class GameViewController: UIViewController {
      */
     func endRound(_ time: Int) {
         if self.seconds == 53 {
+      
             // Play sounds alerting round coming to an end.
-            // self.audioPlayerRoundIsEndingSound.prepareToPlay()
-            // self.audioPlayerRoundIsEndingSound.play()
-            UIView.animate(withDuration: 3.0, animations: { () -> Void in
-                // Fade the background color to red to show that time is running out.
-                self.view.backgroundColor = UIColor.red
-            })
-         // If time is up and nobody won the game.
+            self.audioPlayerRoundIsEndingSound.prepareToPlay()
+            self.audioPlayerRoundIsEndingSound.play()
+            
+//            UIView.animate(withDuration: 3.0, animations: { () -> Void in
+//                // Fade the background color to red to show that time is running out.
+//                self.view.backgroundColor = UIColor.red
+//            })
+         
+            // If time is up and nobody won the game.
         } else if self.seconds == time && Game.sharedGameInstance.won == false {
 
             Game.sharedGameInstance.updateTeamTurn()
@@ -290,8 +293,8 @@ class GameViewController: UIViewController {
             
             // Animate the 'Time's Up' back onto the screen.
             UIView.animate(withDuration: 0.4, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                print(self.timesUpView.center.y)
-                print("Animating timesUpView")
+             //   print(self.timesUpView.center.y)
+             //   print("Animating timesUpView")
                 self.timesUpView.alpha = 1
                 self.timesUpView.center.y += self.view.bounds.height
                 }, completion: nil)
@@ -302,7 +305,7 @@ class GameViewController: UIViewController {
                 }, completion: nil)
                 
             // Move the 'gameTimer' up.
-            UIView.animate(withDuration: 0.2, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
                     self.timerView.center.y -= self.view.bounds.height
                 }, completion: nil)
             
@@ -330,6 +333,30 @@ class GameViewController: UIViewController {
         }
     }
 
+    
+    func resetRound(_ time: Double ) {
+        UIView.animate(withDuration: 0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+            self.view.backgroundColor = Game.sharedGameInstance.colors[self.categoryTapped]
+            }, completion: { (bool) in
+                
+                // self.mainView.backgroundColor = UIColor.red
+                Game.sharedGameInstance.won = false
+                self.audioPlayerRoundIsEndingSound.prepareToPlay()
+                
+                self.resetTimer()
+                Game.sharedGameInstance.resetGame()
+                Game.sharedGameInstance.updateTeamTurn()
+                self.setTeamTurn()
+                self.updateScore()
+                self.removeWord()
+                // self.animateTitleOnScreen()
+        })
+    }
+    
+    
+    
+    
+    
 
     
     // METHOD: displayWordSummaryScreen()
@@ -356,7 +383,7 @@ class GameViewController: UIViewController {
     
     // (-) means up.
     func animateTimesUpOffScreen(){
-        print("In AnimateTimesUpOffScreen")
+        //print("In AnimateTimesUpOffScreen")
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.timesUpView.center.y -= self.view.bounds.height
             self.timesUpView.alpha = 0
@@ -485,7 +512,7 @@ class GameViewController: UIViewController {
                 // Move the word container offscreen right (+)
                 self.wordContainerView.center.x += self.view.bounds.width
             },  completion: { (bool) in
-                // self.resetRound(0)
+                self.resetRound(0)
             })
         } else {
             UIView.animate(withDuration: 0.4, animations: {
@@ -501,12 +528,7 @@ class GameViewController: UIViewController {
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
-    
-    
-    
-    
-    
-    
+
     
  
     
@@ -521,15 +543,17 @@ class GameViewController: UIViewController {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if self.roundInProgress {
-                    print("Swiped right")
+                   // print("Swiped right")
                     if Game.sharedGameInstance.teamOneIsActive {
                     
-                        //self.audioPlayerSwipeSound.play()
+                        self.audioPlayerSwipeSound.play()
                         Game.sharedGameInstance.teamOneScore += 1
                         teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
     
-                          self.animateNewWordRightSwipe()
+                        self.animateNewWordRightSwipe()
+                    
                     } else {
+                        
                         self.audioPlayerSwipeSound.play()
                         Game.sharedGameInstance.teamTwoScore += 1
                         teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
@@ -539,13 +563,16 @@ class GameViewController: UIViewController {
                 }
             case UISwipeGestureRecognizerDirection.left:
                 if self.roundInProgress {
+                    
                     if  self.wordOnScreen && self.timesSwipedRight < 2 {
                         self.audioPlayerSwipeSound.play()
                         self.timesSwipedRight += 1
-                        print("Swiped left")
-                        //self.animateNewWordLeftSwipe()
+                    
+                      //  print("Swiped left")
+                        self.animateNewWordLeftSwipe()
+                    
                     } else {
-                    //    animatePassMessage()
+                        //    animatePassMessage()
                     }
                 }
             default:
@@ -565,7 +592,6 @@ class GameViewController: UIViewController {
         Game.sharedGameInstance.correctWordsArray.append(currentWord!)
         
         // Animate new word from the right.
-        
         UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
           
             // Increase word container alpha.
@@ -580,12 +606,48 @@ class GameViewController: UIViewController {
         }, completion: {(Bool) in
             if  Game.sharedGameInstance.won {
                 //self.animateGameWin()
-                print("Game won!")
+              //  print("Game won!")
             } else {
                 self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
             }
         })
         
+        UIView.animate(withDuration: 0.4, delay:0.2, options: [], animations: {
+            self.wordContainerView.center.x -= self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            }, completion: nil)
+    }
+    
+    
+    /**
+     Animates the wordViewContainer left off-screen, followed by an animation of the container
+     back to its original position to the right off-screen, finalizing by animating a new word
+     to the middle of the screen. It also calls the .getWord() method to create the new word
+     that is animated onto the screen.
+     */
+    
+    func animateNewWordLeftSwipe() {
+        
+        // Used to store the correct words.
+        let currentWord = self.wordLabel.text
+        Game.sharedGameInstance.missedWordsArray.append(currentWord!)
+        
+        UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // Moves the word that is currently on the screen off-screen left.
+            self.wordContainerView.center.x -= self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            }, completion: nil)
+        
+        
+        UIView.animate(withDuration: 0.0, delay:0.4, options: [], animations: {
+            // Moves the word that was just moved left off-screen all the way back to the right off-screen.
+            self.wordContainerView.center.x += self.view.bounds.width + self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            }, completion: { (Bool) in
+                self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
+        })
+        
+        // Animates the word back from the right off-screen, to the middle.
         UIView.animate(withDuration: 0.4, delay:0.2, options: [], animations: {
             self.wordContainerView.center.x -= self.view.bounds.width
             self.wordContainerView.alpha = 1
@@ -608,12 +670,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-
-    
 
     // MARK: - TIMER METHODS
     
@@ -622,10 +678,13 @@ class GameViewController: UIViewController {
      The method is called when the start button is touched.
      */
     func runCountdownTimer() {
+        
         // Display countdownView.
         self.countdownView.alpha = 1
+      
         // Disable interactions.
         self.view.isUserInteractionEnabled = false
+        
         // Initiate countdown.
         if !self.countdownTimer.isValid {
             self.countdownTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameViewController.startCountdown), userInfo:nil, repeats: true)
@@ -639,6 +698,7 @@ class GameViewController: UIViewController {
      all of the main game functions.
      */
     func runGameTimer() {
+        
         if !self.gameTimer.isValid {
             self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
