@@ -104,11 +104,20 @@ class GameViewController: UIViewController {
     var wordContainerCenter:CGPoint!
     var timesUpCenter:CGPoint!
     
-    
+
     
     // MARK:- VIEW METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+        
+        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
+ 
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,7 +146,8 @@ class GameViewController: UIViewController {
         self.setColorForViewBackground()
         self.configureViewStyles()
         self.configureLabelContent()
-        
+        self.loadSounds()
+
         // ANIMATION: Fade out `Time's Up` message off the screen so it's not seen during the game.
         self.timesUpView.alpha = 0
         
@@ -173,6 +183,13 @@ class GameViewController: UIViewController {
             // ONSCREEN: startBtn animation
             self.startButtonView.center.y -= self.view.bounds.height
             }, completion: nil)
+        
+        
+        
+        self.teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
+        self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
+        
+
     }
     
     
@@ -202,6 +219,11 @@ class GameViewController: UIViewController {
             self.menuButtonView.center.y -= self.view.bounds.height
             }, completion: nil )
         self.runCountdownTimer()
+        
+        //self.audioPlayerButtonTapSound.play()
+        //self.audioPlayerRoundIsStartingSound.play()
+        self.timesSwipedRight = 0
+        
     }
     
     
@@ -229,22 +251,7 @@ class GameViewController: UIViewController {
         
     }
     
-    
-    /**
-     Sets a new word to display based on the selected category. Animates that word onto
-     the screen from the left side of the view, and sets`wordOnScreen` equal to true.
-     */
-    func animateNewWord() {
-        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // Get a new random word.
-            self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
-            self.wordContainerView.alpha = 1
-            self.wordContainerView.center.x -= self.view.bounds.width
-            }, completion: nil )
-    }
-    
-    
-    
+
     
     
 
@@ -415,15 +422,14 @@ class GameViewController: UIViewController {
         }
     }
     
-    // CONFIGURE LABEL CONTENT - METHOD()
-    
+
+    ///
     func configureLabelContent() {
         self.teamOneLabel.text = "Team 1"
         self.teamTwoLabel.text = "Team 2"
     }
     
-    // SET_COLOR_FOR_VIEW_BACKGROUND()
-    
+    ///
     func setColorForViewBackground() {
         /// Set the initial background color of the main view.
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
@@ -453,8 +459,6 @@ class GameViewController: UIViewController {
     }
     
     
-    // START_ROUND()
-    
     /**
      Used by the `runGameTimer()` to execute main game methods during
      a game round.
@@ -469,9 +473,6 @@ class GameViewController: UIViewController {
     }
     
 
-    
-    
-    // REMOVE_WORD()
     
     /**
      Used by the game to remove a word when the game round ends. It removes
@@ -520,20 +521,20 @@ class GameViewController: UIViewController {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if self.roundInProgress {
-                    
+                    print("Swiped right")
                     if Game.sharedGameInstance.teamOneIsActive {
                     
                         //self.audioPlayerSwipeSound.play()
                         Game.sharedGameInstance.teamOneScore += 1
                         teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
-                      
-                        //  self.animateNewWordRightSwipe()
+    
+                          self.animateNewWordRightSwipe()
                     } else {
                         self.audioPlayerSwipeSound.play()
                         Game.sharedGameInstance.teamTwoScore += 1
                         teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
                         
-                        //self.animateNewWordRightSwipe()
+                        self.animateNewWordRightSwipe()
                     }
                 }
             case UISwipeGestureRecognizerDirection.left:
@@ -541,9 +542,8 @@ class GameViewController: UIViewController {
                     if  self.wordOnScreen && self.timesSwipedRight < 2 {
                         self.audioPlayerSwipeSound.play()
                         self.timesSwipedRight += 1
-         
+                        print("Swiped left")
                         //self.animateNewWordLeftSwipe()
-                    
                     } else {
                     //    animatePassMessage()
                     }
@@ -555,7 +555,63 @@ class GameViewController: UIViewController {
     }
     
 
-
+    /**
+     The initial word animation moves the wordContainerView into view from the left side of the screen.
+     */
+    func animateNewWordRightSwipe() {
+        
+        // Used to present words in summary screen.
+        let currentWord = self.wordLabel.text
+        Game.sharedGameInstance.correctWordsArray.append(currentWord!)
+        
+        // Animate new word from the right.
+        
+        UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+          
+            // Increase word container alpha.
+            self.wordContainerView.alpha = 1
+            
+            // Move the word view right (+)
+            self.wordContainerView.center.x += self.view.bounds.width
+            
+            // Check to see if game has been won.
+            Game.sharedGameInstance.checkForWinner()
+            
+        }, completion: {(Bool) in
+            if  Game.sharedGameInstance.won {
+                //self.animateGameWin()
+                print("Game won!")
+            } else {
+                self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
+            }
+        })
+        
+        UIView.animate(withDuration: 0.4, delay:0.2, options: [], animations: {
+            self.wordContainerView.center.x -= self.view.bounds.width
+            self.wordContainerView.alpha = 1
+            }, completion: nil)
+    }
+    
+    
+    
+    /**
+     Sets a new word to display based on the selected category. Animates that word onto
+     the screen from the left side of the view, and sets`wordOnScreen` equal to true.
+     */
+    func animateNewWord() {
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            // Get a new random word.
+            self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
+            self.wordContainerView.alpha = 1
+            self.wordContainerView.center.x -= self.view.bounds.width
+            }, completion: nil )
+    }
+    
+    
+    
+    
+    
+    
 
     
 
@@ -627,6 +683,31 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", self.seconds)
         self.timerLabel.text = "\(strMinutes):\(strSeconds)"
     }
+
+    // MARK: - Audio
+    
+    /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
+    func loadSounds() {
+        do {
+            self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
+            self.audioPlayerWinSound = try AVAudioPlayer(contentsOf: self.soundEffectWinner,fileTypeHint: "mp3")
+            self.audioPlayerSwipeSound = try AVAudioPlayer(contentsOf: self.soundEffectSwipe, fileTypeHint: "wav")
+            self.audioPlayerRoundIsStartingSound = try AVAudioPlayer(contentsOf: self.soundEffectStartRound, fileTypeHint: "mp3")
+            self.audioPlayerRoundIsEndingSound = try AVAudioPlayer(contentsOf: self.soundEffectEndRound, fileTypeHint: "mp3")
+            self.audioPlayerButtonTapSound.prepareToPlay()
+            self.audioPlayerWinSound.prepareToPlay()
+            self.audioPlayerSwipeSound.prepareToPlay()
+            self.audioPlayerRoundIsStartingSound.prepareToPlay()
+            self.audioPlayerRoundIsEndingSound.prepareToPlay()
+        } catch {
+            print("Error: unable to find sound files.")
+        }
+    }
+
+
+
+
+
 }
 
 
