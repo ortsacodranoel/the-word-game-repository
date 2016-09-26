@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="75" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="-67" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -384,7 +384,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="462" y="-337"/>
+            <point key="canvasLocation" x="545" y="-410"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="vZM-6W-ck9">
@@ -674,6 +674,14 @@
                                                     <segue destination="FKf-0K-xAz" kind="unwind" unwindAction="unwindToGame:" id="DqS-rp-MeN"/>
                                                 </connections>
                                             </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9CS-XW-ra4" userLabel="wordsTextView">
+                                                <frame key="frameInset" minX="8" minY="68" width="623" height="228"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -705,12 +713,13 @@
                         <outlet property="backgroundView" destination="Zwe-7R-Q4V" id="YaP-g7-hwu"/>
                         <outlet property="mainView" destination="vS2-sk-gBc" id="594-HL-6cJ"/>
                         <outlet property="wordSummaryLabel" destination="kTa-SZ-bYr" id="UYo-VC-1ck"/>
+                        <outlet property="wordTextview" destination="9CS-XW-ra4" id="xu3-yx-c2Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDt-e7-KDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FKf-0K-xAz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1776" y="114"/>
+            <point key="canvasLocation" x="1775.2623688155923" y="112.8"/>
         </scene>
     </scenes>
     <resources>

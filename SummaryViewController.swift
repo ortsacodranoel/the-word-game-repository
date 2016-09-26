@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SummaryViewController: UIViewController {
 
     // MARK: - General properties
@@ -22,6 +23,7 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var wordSummaryLabel: UILabel!
     
     
+    @IBOutlet weak var wordTextview: UITextView!
     
     
     
@@ -34,11 +36,24 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+
         
-        for word in Game.sharedGameInstance.arrayOfUsedWords {
-            print(word)
+        
+        for word in Game.sharedGameInstance.missedWordsArray {
+//          
+//            var str = String()
+//            
+//            str += "\(word)\n"
+            wordTextview.text = myStrings.joined(separator: ", ")
+
+            wordTextview.text = "\(word)\n"
+            
         }
         
+        for word in Game.sharedGameInstance.correctWordsArray {
+            print(word)
+        }
         
         
        // print("In summaryVC")
@@ -63,7 +78,9 @@ class SummaryViewController: UIViewController {
         
         self.wordSummaryLabel.textColor = Game.sharedGameInstance.gameColor
         
-
+        
+        
+        
     }
     
     
