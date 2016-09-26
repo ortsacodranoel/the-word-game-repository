@@ -257,6 +257,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
             let toViewController = segue.destination as! GameViewController
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
+            
+            self.removeAnimations()
+
         }
     }
     
@@ -283,8 +286,26 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         }, completion: nil)
     }
     
-
     
+    func removeAnimations() {
+        UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.categoryTitleView.center.x -= self.view.bounds.width - self.view.bounds.width
+            }, completion: nil)
+        UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.descriptionView.center.x -= self.view.bounds.width - self.view.bounds.width
+            }, completion: nil)
+        UIView.animate(withDuration: 0.2, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.selectButtonView.center.y -= self.view.bounds.width - self.view.bounds.width
+            }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.backButton.alpha = 0
+            }, completion: nil)
+    }
+    
+    
+    
+    
+
     /// MARK: - Lock animations.
     func lockCategory() {
             UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {

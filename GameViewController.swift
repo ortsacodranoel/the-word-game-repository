@@ -52,6 +52,10 @@ class GameViewController: UIViewController {
     
     // MARK:- Layout Constraints
     
+    
+    let transitionManager = TransitionManager()
+
+    
     //MARK:- Buttons
     @IBOutlet weak var startButton: UIButton!
     
@@ -252,6 +256,18 @@ class GameViewController: UIViewController {
     }
     
 
+
+    @IBAction func menuTapped(_ sender: AnyObject) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
+    
+        
+    
+        self.present(vc!, animated: true, completion: nil)
+    
+    }
+    
+    
+    
     
     
 
@@ -522,13 +538,26 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    /// Unwinds the GameVC to the CategoryVC.
-    @IBAction func categoriesMenuTouchUpInside(_ sender: AnyObject) {
-        performSegue(withIdentifier: "unwindToCategories", sender: self)
-    }
-    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
  
     
