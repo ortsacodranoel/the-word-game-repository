@@ -23,7 +23,10 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var wordSummaryLabel: UILabel!
     
     
-    @IBOutlet weak var wordTextview: UITextView!
+    // MARK: - Textviews
+    
+    @IBOutlet weak var missedWordsTextview: UITextView!
+    @IBOutlet weak var correctWordsTextview: UITextView!
     
     
     
@@ -36,24 +39,20 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-
+        var missed = String()
+        var correct = String()
         
-        
-        for word in Game.sharedGameInstance.missedWordsArray {
-//          
-//            var str = String()
-//            
-//            str += "\(word)\n"
-            wordTextview.text = myStrings.joined(separator: ", ")
-
-            wordTextview.text = "\(word)\n"
-            
+        for missedWord in Game.sharedGameInstance.missedWordsArray {
+            missed += "\(missedWord)\n"
         }
         
-        for word in Game.sharedGameInstance.correctWordsArray {
-            print(word)
+        self.missedWordsTextview.text = missed
+        
+        for correctWord in Game.sharedGameInstance.correctWordsArray {
+            correct += "\(correctWord)\n"
         }
+        
+        self.correctWordsTextview.text = correct
         
         
        // print("In summaryVC")
