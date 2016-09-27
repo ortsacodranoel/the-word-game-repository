@@ -34,9 +34,10 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
     let categoryScreenTransitionManager = CategoriesTransitionManager()
-
     
-
+    // Used by GameViewController to determine if a segue occured from this VC.
+    var fromDetailVC:Bool!
+    
 
     // MARK: - init() Methods
     override func viewDidLoad() {
@@ -83,10 +84,14 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     
     
     
-    /** Touching the select button will segue to the game screen if the categories
-    are free; else, it will create a payment request for that category product.
+    /** 
+     Touching the select button will segue to the game screen if the categories
+     are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
+        
+            Game.sharedGameInstance.segueFromDetailVC = true
+
             if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
@@ -229,13 +234,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     
 
      //MARK: Additional Methods
@@ -244,7 +243,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     }
     
     func setColor(_ category: Int) {
-        self.view.backgroundColor = Game.sharedGameInstance.colors[category]
+        //self.view.backgroundColor = Game.sharedGameInstance.colors[category]
+        self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
     func setDescription(_ category: Int) {
@@ -257,7 +257,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
             let toViewController = segue.destination as! GameViewController
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
-        
+            
+            self.removeAnimations()
 
         }
     }
@@ -285,9 +286,26 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         }, completion: nil)
     }
     
+    
+    func removeAnimations() {
+        UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.categoryTitleView.center.x -= self.view.bounds.width - self.view.bounds.width
+            }, completion: nil)
+        UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.descriptionView.center.x -= self.view.bounds.width - self.view.bounds.width
+            }, completion: nil)
+        UIView.animate(withDuration: 0.2, delay: 0.6,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.selectButtonView.center.y -= self.view.bounds.width - self.view.bounds.width
+            }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            self.backButton.alpha = 0
+            }, completion: nil)
+    }
+    
+    
+    
+    
 
-    
-    
     /// MARK: - Lock animations.
     func lockCategory() {
             UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {

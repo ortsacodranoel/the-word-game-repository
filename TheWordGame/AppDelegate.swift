@@ -19,13 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if SKPaymentQueue.canMakePayments(){
-            
-            canPurchase = true
-            IAPManager.sharedInstance.setupInAppPurchases()
-        }
-    
-        IAPManager.sharedInstance.restorePurchases()
+//        if SKPaymentQueue.canMakePayments(){
+//            
+//            canPurchase = true
+//            IAPManager.sharedInstance.setupInAppPurchases()
+//        }
+//    
+//        IAPManager.sharedInstance.restorePurchases()
         
         return true
     }

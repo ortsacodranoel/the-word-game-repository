@@ -173,24 +173,24 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                             
                         } else {
                             //Debug the receipt
-                            print(json.object(forKey: "status") as! NSNumber)
+                           // print(json.object(forKey: "status") as! NSNumber)
                         }
                         
                     } catch {
                         
-                        print("JSON error:\(error)")
+                        //print("JSON error:\(error)")
                     }
                 })
                 
                 task.resume()
                 
             } catch {
-                print(error)
+              //  print(error)
             }
             
         } else {
             //Receipt does not exist
-            print("No Receipt")
+           // print("No Receipt")
         }
     }
     

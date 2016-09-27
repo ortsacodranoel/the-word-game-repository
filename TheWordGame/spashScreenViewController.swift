@@ -11,15 +11,14 @@ import AVFoundation
 
 class spashScreenViewController: UIViewController {
 
+    // MARK: - Initializer methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
-        perform(#selector(spashScreenViewController.showMainController), with: nil, afterDelay: 3.0)
-        
+        perform(#selector(spashScreenViewController.showMainController), with: nil, afterDelay: 1.5)
     }
     
-    
+
     func showMainController()
     {
         performSegue(withIdentifier: "showMainViewController", sender: self)
