@@ -517,16 +517,10 @@ class GameViewController: UIViewController {
     /// Used by the gameTimer to generate gameplay.
     func startRound() {
         
-        print(Game.sharedGameInstance.teamOneScore)
-        if Game.sharedGameInstance.teamOneScore == 1 {
-        
-            // FIXME:
-            // Check celebration screen segue.
-            if gameWon {
-                print("Game won!")
-                performSegue(withIdentifier: "segueToCelebration", sender: self)
-            }
-        }
+
+
+        performSegue(withIdentifier: "segueToCelebration", sender: self)
+
         self.countdownLabel.text = " "
         self.setTeamTurn()
         self.prepareGameTimer()
