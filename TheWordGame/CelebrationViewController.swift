@@ -12,13 +12,19 @@ import GameplayKit
 
 class CelebrationViewController: UIViewController {
 
+    // Displays winning team.
+    @IBOutlet weak var winningTeamLabel: UILabel!
+    
+    var winningTeamName = String()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         
-        print("Celebration screen")
-      
+        self.winningTeamLabel.text = "Hello"
+        
+        
         // GAME KIT - METHODS
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
