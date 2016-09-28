@@ -255,15 +255,25 @@ class GameViewController: UIViewController {
                 }, completion: nil )
 
             self.startButtonView.center.y -= self.view.bounds.height
-            self.menuButtonView.center.y += self.view.bounds.height
             self.teamTurnView.center.y += self.view.bounds.height
         }, completion: nil )
+        
+
         
         // timerView ANIMATION: down to it's original position.
         UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.timerView.center.y += self.view.bounds.height
             }, completion: nil )
 
+        // Animate the menu back to it's original position.
+        UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.menuButtonView.center.y += self.view.bounds.height
+            },completion:nil)
+        
+        
+        
+        
+        
     }
     
 
@@ -516,11 +526,15 @@ class GameViewController: UIViewController {
 
     /// Used by the gameTimer to generate gameplay.
     func startRound() {
+        if Game.sharedGameInstance.won {
+            
+            // Invalidate the gameTimer.
+            self.gameTimer.invalidate()
+   
+            // Segue to the CelebrationViewController.
+            performSegue(withIdentifier: "segueToCelebration", sender: self)
+        }
         
-
-
-        performSegue(withIdentifier: "segueToCelebration", sender: self)
-
         self.countdownLabel.text = " "
         self.setTeamTurn()
         self.prepareGameTimer()
@@ -552,8 +566,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
- 
     
     // MARK: - SWIPE GESTURES
     

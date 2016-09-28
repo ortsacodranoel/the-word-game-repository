@@ -260,12 +260,12 @@ class Game {
     
     /// Used to get the String value of the team that has won the game.
     func checkForWinner() {
-        if self.teamOneScore == 25 {
+        if self.teamOneScore == 10 {
             self.won = true
-            self.winnerTitle = "Team One"
-        } else if self.teamTwoScore == 25 {
+            self.winnerTitle = "Team One Wins!"
+        } else if self.teamTwoScore == 10 {
             self.won = true
-            self.winnerTitle = "Team Two"
+            self.winnerTitle = "Team Two Wins!"
         }
     }
     

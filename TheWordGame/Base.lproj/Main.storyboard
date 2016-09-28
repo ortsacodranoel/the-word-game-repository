@@ -746,7 +746,7 @@
         <!--Celebration View Controller-->
         <scene sceneID="So2-YL-xAK">
             <objects>
-                <viewController id="hUy-8D-ucS" customClass="CelebrationViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CelebrationViewController" id="hUy-8D-ucS" customClass="CelebrationViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Csp-pb-bcF"/>
                         <viewControllerLayoutGuide type="bottom" id="v44-w5-yxg"/>
@@ -757,7 +757,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team One Wins!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sju-Ie-Lic" userLabel="winningTeamLabel">
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

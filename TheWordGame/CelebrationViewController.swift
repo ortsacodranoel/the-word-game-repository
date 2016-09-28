@@ -22,7 +22,7 @@ class CelebrationViewController: UIViewController {
         super.viewDidLoad()
 
         
-        self.winningTeamLabel.text = "Hello"
+        self.winningTeamLabel.text = Game.sharedGameInstance.winnerTitle
         
         
         // GAME KIT - METHODS
