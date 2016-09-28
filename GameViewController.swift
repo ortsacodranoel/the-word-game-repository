@@ -109,6 +109,17 @@ class GameViewController: UIViewController {
     var timesUpCenter:CGPoint!
     
 
+    // Used to test celebration screen. 
+    var gameWon = false
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     // MARK:- VIEW METHODS
     override func viewDidLoad() {
@@ -502,11 +513,20 @@ class GameViewController: UIViewController {
     }
     
     
-    /**
-     Used by the `runGameTimer()` to execute main game methods during
-     a game round.
-     */
+
+    /// Used by the gameTimer to generate gameplay.
     func startRound() {
+        
+        print(Game.sharedGameInstance.teamOneScore)
+        if Game.sharedGameInstance.teamOneScore == 1 {
+        
+            // FIXME:
+            // Check celebration screen segue.
+            if gameWon {
+                print("Game won!")
+                performSegue(withIdentifier: "segueToCelebration", sender: self)
+            }
+        }
         self.countdownLabel.text = " "
         self.setTeamTurn()
         self.prepareGameTimer()
@@ -536,26 +556,6 @@ class GameViewController: UIViewController {
             }, completion:nil)
         }
     }
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -727,7 +727,6 @@ class GameViewController: UIViewController {
      all of the main game functions.
      */
     func runGameTimer() {
-        
         if !self.gameTimer.isValid {
             self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
         }
