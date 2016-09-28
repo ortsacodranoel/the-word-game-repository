@@ -30,6 +30,18 @@ class Game {
     var won = false
     /// Used to temporarily store winner title.
     var winnerTitle = String()
+    // Used to verify the game has begun.
+    var gameBegan = false
+    
+    
+    
+    /// Used to determine the color of the game being played. 
+    var gameColor:UIColor!
+    
+    
+    // Used to notify GameVC if segue comes from DetailVC.
+    var segueFromDetailVC:Bool!
+    
     
     // MARK: - Array properties
     
@@ -244,14 +256,16 @@ class Game {
         self.teamTwoScore = 0
     }
     
+
+    
     /// Used to get the String value of the team that has won the game.
     func checkForWinner() {
-        if self.teamOneScore == 5 {
+        if self.teamOneScore == 10 {
             self.won = true
-            self.winnerTitle = "Team One"
-        } else if self.teamTwoScore == 5 {
+            self.winnerTitle = "Team One Wins!"
+        } else if self.teamTwoScore == 10 {
             self.won = true
-            self.winnerTitle = "Team Two"
+            self.winnerTitle = "Team Two Wins!"
         }
     }
     
@@ -307,7 +321,7 @@ class Game {
         
         if arrayOfUsedWords.contains(word) {
             // Run the method again.
-            self.getWord(categorySelected)
+           // self.getWord(categorySelected)
             
         } else {
             self.arrayOfUsedWords.append(word)

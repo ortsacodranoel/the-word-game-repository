@@ -44,7 +44,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /// Used to play sound when the button is tapped.
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.tapAudioPlayer.play()
+        
     }
+    
+    
+    
     /// Needed for segue action.
     @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
     
@@ -100,13 +104,14 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let view = button.superview!
             let cell = view.superview! as! CollectionViewCell
             let indexPath = collectionView.indexPath(for: cell)
+          
+            Game.sharedGameInstance.gameColor = Game.sharedGameInstance.colors[((indexPath! as NSIndexPath).row)]
             
             // Prepare destinationVC.
             let toViewController = segue.destination as! DetailViewController
             toViewController.categoryTapped = ((indexPath! as NSIndexPath).row)
             toViewController.transitioningDelegate = self.transitionManager
         }
-    
     }
     
 
