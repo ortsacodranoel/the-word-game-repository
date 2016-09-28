@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B30227B71D9B42DE000694EE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30227B61D9B42DE000694EE /* GameScene.swift */; };
+		B30227BA1D9B4393000694EE /* CelebrationParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = B30227B81D9B4393000694EE /* CelebrationParticleSystem.scnp */; };
+		B30227BB1D9B4393000694EE /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B30227B91D9B4393000694EE /* spark.png */; };
+		B30227BD1D9B45A1000694EE /* ConfettiParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */; };
+		B30227BF1D9B45D1000694EE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227BE1D9B45D1000694EE /* Actions.sks */; };
+		B30227C11D9B45DE000694EE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227C01D9B45DE000694EE /* GameScene.sks */; };
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
 		B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */; };
 		B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3634F441D6FD9E10060D517 /* ButtonTapped.wav */; };
@@ -58,7 +63,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B30227B61D9B42DE000694EE /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		B30227B61D9B42DE000694EE /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = ../GameScene.swift; sourceTree = "<group>"; };
+		B30227B81D9B4393000694EE /* CelebrationParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; name = CelebrationParticleSystem.scnp; path = ../CelebrationParticleSystem.scnp; sourceTree = "<group>"; };
+		B30227B91D9B4393000694EE /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
+		B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ConfettiParticle.sks; sourceTree = "<group>"; };
+		B30227BE1D9B45D1000694EE /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		B30227C01D9B45DE000694EE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
 		B3634F441D6FD9E10060D517 /* ButtonTapped.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTapped.wav; sourceTree = "<group>"; };
@@ -126,6 +136,12 @@
 		B30227B51D9B4289000694EE /* Celebration Files */ = {
 			isa = PBXGroup;
 			children = (
+				B30227BE1D9B45D1000694EE /* Actions.sks */,
+				B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */,
+				B30227B81D9B4393000694EE /* CelebrationParticleSystem.scnp */,
+				B30227C01D9B45DE000694EE /* GameScene.sks */,
+				B30227B91D9B4393000694EE /* spark.png */,
+				B30227B61D9B42DE000694EE /* GameScene.swift */,
 			);
 			name = "Celebration Files";
 			sourceTree = "<group>";
@@ -178,7 +194,6 @@
 		D67774C51D1C392B0051C634 = {
 			isa = PBXGroup;
 			children = (
-				B30227B61D9B42DE000694EE /* GameScene.swift */,
 				D67774D01D1C392B0051C634 /* thewordgame */,
 				D67774E81D1C392B0051C634 /* TheWordGameTests */,
 				D67774F31D1C392B0051C634 /* TheWordGameUITests */,
@@ -203,7 +218,6 @@
 			children = (
 				B35659051D6F9D87003E7DCD /* Sound Effects */,
 				B3F39C6C1D4672D80049F8FB /* View Controllers */,
-				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
 				B30227B51D9B4289000694EE /* Celebration Files */,
 				B36733711D7F086000BA177B /* iap_product_ids.plist */,
 				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
@@ -212,6 +226,7 @@
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				D67774D51D1C392B0051C634 /* Main.storyboard */,
+				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
 				B37786021D494B1E00639A8B /* Transition Managers */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
@@ -354,14 +369,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */,
+				B30227BD1D9B45A1000694EE /* ConfettiParticle.sks in Resources */,
 				B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */,
 				B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */,
+				B30227C11D9B45DE000694EE /* GameScene.sks in Resources */,
+				B30227BF1D9B45D1000694EE /* Actions.sks in Resources */,
 				B39E2A031D7E05CC00F59C4F /* Default-568h@2x.png in Resources */,
 				B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */,
+				B30227BB1D9B4393000694EE /* spark.png in Resources */,
 				D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */,
 				D6A39C111D7141D200FD65E6 /* countdown.mp3 in Resources */,
 				B36733721D7F086000BA177B /* iap_product_ids.plist in Resources */,
 				B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */,
+				B30227BA1D9B4393000694EE /* CelebrationParticleSystem.scnp in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
 				B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */,
 			);
