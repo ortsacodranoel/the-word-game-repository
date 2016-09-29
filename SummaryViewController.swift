@@ -1,4 +1,4 @@
-//
+ //
 //  SummaryViewController.swift
 //  TheWordGame
 //
@@ -36,12 +36,11 @@ class SummaryViewController: UIViewController {
         print("Return tapped")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var missed = String()
-        var correct = String()
+    //    var correct = String()
         
         for missedWord in Game.sharedGameInstance.missedWordsArray {
             missed += "\(missedWord)\n"
@@ -50,12 +49,12 @@ class SummaryViewController: UIViewController {
         // Show missed words.
         self.missedWordsTextview.text = missed
         
-        for correctWord in Game.sharedGameInstance.correctWordsArray {
-            correct += "\(correctWord)\n"
-        }
-        
+//        for correctWord in Game.sharedGameInstance.correctWordsArray {
+//            correct += "\(correctWord)\n"
+//        }
+//        
         // Show correct words.
-        self.correctWordsTextview.text = correct
+      //  self.correctWordsTextview.text = correct
         
         
        // print("In summaryVC")
@@ -79,9 +78,6 @@ class SummaryViewController: UIViewController {
         self.backgroundView.layer.cornerRadius = 7
         
         self.wordSummaryLabel.textColor = Game.sharedGameInstance.gameColor
-        
-        
-        
         
     }
     
