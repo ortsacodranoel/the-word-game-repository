@@ -29,7 +29,6 @@ class SummaryViewController: UIViewController {
 
     
     
-    
     // MARK: - Button Action
     @IBAction func returnToGameTouched(_ sender: AnyObject) {
         print("Return tapped")
@@ -39,28 +38,49 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var missed = NSMutableAttributedString()
-  //      var word = String
+        let words = NSMutableAttributedString()
         
-        //    var correct = String()
+        // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.
+        let cr = NSMutableAttributedString(string: "\n")
         
+        // Retrieve the missed words.
         for missedWord in Game.sharedGameInstance.missedWordsArray {
            
-            let myString = NSMutableAttributedString (string: missedWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 40.0)!])
-                
+            // Used as temp storage for missed words.
+            let myString = NSMutableAttributedString (string: missedWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
+            
+            // Used to color the missed words red.
             myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location:0,length:myString.length))
+            words.append(myString)
             
-            missed.append(myString)
+            // Append carriage return.
+            words.append(cr)
             
-            self.wordSummaryTextview.text = "\(missed)\n"
+            self.wordSummaryTextview.attributedText = words
         }
     
+        // Retrieve correct words. 
+        for correctWord in Game.sharedGameInstance.correctWordsArray {
+
+            // Used as temp storage for missed words.
+            let myString = NSMutableAttributedString (string: correctWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
+            
+            // Used to color the missed words green.
+            myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:0,length:myString.length))
+            words.append(myString)
+
+            // Append carriage return.
+            words.append(cr)
+            
+            self.wordSummaryTextview.attributedText = words
+
+        }
         
-        // Show missed words.
-      //  self.wordSummaryTextview.attributedText = missed
+        self.wordSummaryTextview.textAlignment = .center
+        self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: true)
         
-    
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -91,15 +111,4 @@ class SummaryViewController: UIViewController {
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
