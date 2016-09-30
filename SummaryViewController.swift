@@ -23,11 +23,10 @@ class SummaryViewController: UIViewController {
     // MARK: - Label
     @IBOutlet weak var wordSummaryLabel: UILabel!
     
+    @IBOutlet weak var wordSummaryTextview: UITextView!
     
     // MARK: - Textviews
-    
-    @IBOutlet weak var missedWordsTextview: UITextView!
-    @IBOutlet weak var correctWordsTextview: UITextView!
+
     
     
     
@@ -36,29 +35,31 @@ class SummaryViewController: UIViewController {
         print("Return tapped")
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var missed = String()
-    //    var correct = String()
+        var missed = NSMutableAttributedString()
+  //      var word = String
+        
+        //    var correct = String()
         
         for missedWord in Game.sharedGameInstance.missedWordsArray {
-            missed += "\(missedWord)\n"
+           
+            let myString = NSMutableAttributedString (string: missedWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 40.0)!])
+                
+            myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location:0,length:myString.length))
+            
+            missed.append(myString)
+            
+            self.wordSummaryTextview.text = "\(missed)\n"
         }
+    
         
         // Show missed words.
-        self.missedWordsTextview.text = missed
+      //  self.wordSummaryTextview.attributedText = missed
         
-//        for correctWord in Game.sharedGameInstance.correctWordsArray {
-//            correct += "\(correctWord)\n"
-//        }
-//        
-        // Show correct words.
-      //  self.correctWordsTextview.text = correct
-        
-        
-       // print("In summaryVC")
-        // Do any additional setup after loading the view.
+    
     }
 
     override func didReceiveMemoryWarning() {

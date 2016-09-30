@@ -493,6 +493,7 @@ class GameViewController: UIViewController {
         self.teamTwoLabel.text = "Team 2"
     }
     
+    
     ///
     func setColorForViewBackground() {
         /// Set the initial background color of the main view.
