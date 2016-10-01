@@ -45,7 +45,7 @@ class SummaryViewController: UIViewController {
         
         // Retrieve the missed words.
         for missedWord in Game.sharedGameInstance.missedWordsArray {
-           
+            
             // Used as temp storage for missed words.
             let myString = NSMutableAttributedString (string: missedWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
             
@@ -58,30 +58,32 @@ class SummaryViewController: UIViewController {
             
             self.wordSummaryTextview.attributedText = words
         }
-    
-        // Retrieve correct words. 
+        
+        // Retrieve correct words.
         for correctWord in Game.sharedGameInstance.correctWordsArray {
-
+            
             // Used as temp storage for missed words.
             let myString = NSMutableAttributedString (string: correctWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
             
             // Used to color the missed words green.
             myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:0,length:myString.length))
             words.append(myString)
-
+            
             // Append carriage return.
             words.append(cr)
             
             self.wordSummaryTextview.attributedText = words
-
+            
         }
+
+      self.wordSummaryTextview.scrollRangeToVisible(NSMakeRange(0,0))
         
-        self.wordSummaryTextview.textAlignment = .center
-        self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: true)
         
+      //  self.wordSummaryTextview.setContentOffset(CGPoint(x:0, y:0), animated: true)
+                self.wordSummaryTextview.textAlignment = .center
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -89,6 +91,11 @@ class SummaryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+
+        
+        
+        
         
         // Set the color of the category.
         let categoryColor = Game.sharedGameInstance.gameColor.cgColor
@@ -99,6 +106,15 @@ class SummaryViewController: UIViewController {
         self.backgroundView.layer.cornerRadius = 7
         
         self.wordSummaryLabel.textColor = Game.sharedGameInstance.gameColor
+        
+        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "Words Summary", attributes: underlineAttribute)
+ 
+        self.wordSummaryLabel.attributedText = underlineAttributedString
+        
+        
+        
+
         
     }
     

@@ -246,8 +246,8 @@ class GameViewController: UIViewController {
     // MARK:- unwindToGame()
     /// Used to execute something when the view returns from the summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
+       
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-         
             UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
               
                 // OFFSCREEN: wordContainerView animate (invisible)
@@ -258,8 +258,6 @@ class GameViewController: UIViewController {
             self.teamTurnView.center.y += self.view.bounds.height
         }, completion: nil )
         
-
-        
         // timerView ANIMATION: down to it's original position.
         UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.timerView.center.y += self.view.bounds.height
@@ -269,20 +267,17 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.menuButtonView.center.y += self.view.bounds.height
             },completion:nil)
-        
-        
-        
-        
-        
+
+        // Clear the words from the arrays.
+        Game.sharedGameInstance.correctWordsArray = []
+        Game.sharedGameInstance.missedWordsArray = []
     }
     
 
 
     @IBAction func menuTapped(_ sender: AnyObject) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
-    
         
-    
         self.present(vc!, animated: true, completion: nil)
     
     }
