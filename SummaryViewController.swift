@@ -1,4 +1,4 @@
-//
+ //
 //  SummaryViewController.swift
 //  TheWordGame
 //
@@ -23,12 +23,10 @@ class SummaryViewController: UIViewController {
     // MARK: - Label
     @IBOutlet weak var wordSummaryLabel: UILabel!
     
+    @IBOutlet weak var wordSummaryTextview: UITextView!
     
     // MARK: - Textviews
-    
-    @IBOutlet weak var missedWordsTextview: UITextView!
-    @IBOutlet weak var correctWordsTextview: UITextView!
-    
+
     
     
     // MARK: - Button Action
@@ -40,33 +38,57 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var missed = String()
-        var correct = String()
         
+        // Used to append correct/missed words.
+        let words = NSMutableAttributedString()
+        // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.
+        let cr = NSMutableAttributedString(string: "\n")
+        // Retrieve the missed words.
         for missedWord in Game.sharedGameInstance.missedWordsArray {
-            missed += "\(missedWord)\n"
+            // Used as temp storage for missed words.
+            let myString = NSMutableAttributedString (string: missedWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
+            // Used to color the missed words red.
+            myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location:0,length:myString.length))
+            words.append(myString)
+            // Append carriage return.
+            words.append(cr)
+            self.wordSummaryTextview.attributedText = words
+            
         }
-        
-        // Show missed words.
-        self.missedWordsTextview.text = missed
-        
+        // Retrieve correct words.
         for correctWord in Game.sharedGameInstance.correctWordsArray {
-            correct += "\(correctWord)\n"
+            // Used as temp storage for missed words.
+            let myString = NSMutableAttributedString (string: correctWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
+            // Used to color the missed words green.
+            myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:0,length:myString.length))
+            words.append(myString)
+            // Append carriage return.
+            words.append(cr)
+            self.wordSummaryTextview.attributedText = words
         }
         
-        // Show correct words.
-        self.correctWordsTextview.text = correct
-        
-        
-       // print("In summaryVC")
-        // Do any additional setup after loading the view.
-    }
 
+        self.wordSummaryTextview.textAlignment = .center
+    
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: false)
+    }
+    
+    
+    /// Method:
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    
+    /// Method:
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -77,12 +99,17 @@ class SummaryViewController: UIViewController {
         self.mainView.layer.borderColor = categoryColor
         self.mainView.layer.borderWidth = 3
         self.backgroundView.layer.cornerRadius = 7
-        
         self.wordSummaryLabel.textColor = Game.sharedGameInstance.gameColor
+
+        
+        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "Words Summary", attributes: underlineAttribute)
+        self.wordSummaryLabel.attributedText = underlineAttributedString
+        
+
         
         
-        
-        
+
     }
     
     
@@ -94,15 +121,4 @@ class SummaryViewController: UIViewController {
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
