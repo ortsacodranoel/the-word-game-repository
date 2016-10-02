@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class CelebrationViewController: UIViewController {
 
@@ -18,10 +19,30 @@ class CelebrationViewController: UIViewController {
     var winningTeamName = String()
     
     
+    //MARK:- Audio Properties
+    
+    // Paths to sound effects.
+    let celebrationMusic = URL(fileURLWithPath: Bundle.main.path(forResource: "celebrationMusic", ofType: "mp3")!)
+    
+    /// Used for menu interactions sounds.
+    var celebrationScreenActiveAudio = AVAudioPlayer()
+    
+
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+      
+        do {
+            self.celebrationScreenActiveAudio = try AVAudioPlayer(contentsOf: self.celebrationMusic, fileTypeHint: "mp3")
+         } catch {
+            print("Error: unable to find sound files.")
+        }
+    
+        self.celebrationScreenActiveAudio.prepareToPlay()
+        self.celebrationScreenActiveAudio.play()
         self.winningTeamLabel.text = Game.sharedGameInstance.winnerTitle
         
         

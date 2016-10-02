@@ -308,7 +308,7 @@ class GameViewController: UIViewController {
     - Parameter time: used to indicate at what time the timer should stop.
      */
     func endRound(_ time: Int) {
-        if self.seconds == 53 {
+        if self.seconds == 43 {
       
             // Play sounds alerting round coming to an end.
             self.audioPlayerRoundIsEndingSound.prepareToPlay()
@@ -548,7 +548,7 @@ class GameViewController: UIViewController {
         self.prepareGameTimer()
         self.startGameTimer()
         self.updateScore()
-        self.endRound(50)
+        self.endRound(40)
     }
     
 
