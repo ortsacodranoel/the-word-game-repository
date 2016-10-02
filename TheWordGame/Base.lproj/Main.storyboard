@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -520,7 +520,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yo-P8-eRF" userLabel="wordContainerView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgD-7U-e6X" userLabel="wordLabel">
-                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="430" height="190"/>
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="429.5" height="189"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
@@ -750,17 +750,30 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team One Wins!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sju-Ie-Lic" userLabel="winningTeamLabel">
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
-                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.47445547580718994" green="0.4745410680770874" blue="0.47445005178451538" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJx-uZ-DMe">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="mrh-rf-CpK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="v44-w5-yxg" firstAttribute="top" secondItem="EJx-uZ-DMe" secondAttribute="bottom" constant="108" id="5Su-kp-f0e"/>
+                            <constraint firstItem="EJx-uZ-DMe" firstAttribute="centerX" secondItem="fUg-xj-9aY" secondAttribute="centerX" id="5ow-MH-QWo"/>
+                            <constraint firstItem="EJx-uZ-DMe" firstAttribute="top" secondItem="sju-Ie-Lic" secondAttribute="bottom" constant="27" id="TJt-3E-X1O"/>
                             <constraint firstItem="sju-Ie-Lic" firstAttribute="centerX" secondItem="fUg-xj-9aY" secondAttribute="centerX" id="pnS-hf-gGH"/>
-                            <constraint firstItem="sju-Ie-Lic" firstAttribute="centerY" secondItem="fUg-xj-9aY" secondAttribute="centerY" id="tG7-SV-Twb"/>
+                            <constraint firstItem="sju-Ie-Lic" firstAttribute="centerY" secondItem="fUg-xj-9aY" secondAttribute="centerY" constant="-55" id="tG7-SV-Twb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="newGameButton" destination="EJx-uZ-DMe" id="MoE-Aw-0mP"/>
                         <outlet property="winningTeamLabel" destination="sju-Ie-Lic" id="K12-PR-FLa"/>
                     </connections>
                 </viewController>

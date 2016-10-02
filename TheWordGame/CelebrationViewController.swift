@@ -18,6 +18,7 @@ class CelebrationViewController: UIViewController {
     
     var winningTeamName = String()
     
+    @IBOutlet weak var newGameButton: UIButton!
     
     //MARK:- Audio Properties
     
@@ -35,6 +36,11 @@ class CelebrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        self.newGameButton.layer.cornerRadius = 7
+        self.newGameButton.layer.borderColor = UIColor.darkGray.cgColor
+        self.newGameButton.layer.borderWidth = 3
+        
+        
         do {
             self.celebrationScreenActiveAudio = try AVAudioPlayer(contentsOf: self.celebrationMusic, fileTypeHint: "mp3")
          } catch {
@@ -62,9 +68,6 @@ class CelebrationViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
-
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,8 +76,18 @@ class CelebrationViewController: UIViewController {
     }
     
 
-    
-    
+    override func viewWillAppear(_ animated: Bool) {
+      
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.winningTeamLabel.center.x += self.view.bounds.width
+        }, completion: nil)
+        
+        
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.newGameButton.center.y -= self.view.bounds.height
+        }, completion: nil)
+        
+    }
 
 
 }
