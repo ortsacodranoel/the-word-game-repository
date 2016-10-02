@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
     /// Used to determine if round is in progress.
     var roundInProgress = false
 
-    //MARK:- Views
+    //MARK: - Views
     @IBOutlet weak var menuButtonView: UIView!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var teamOneView: UIView!
@@ -42,6 +42,7 @@ class GameViewController: UIViewController {
     /// Used when timer is running out.
     @IBOutlet weak var redBackgroundView: UIView!
     
+    
     //MARK:- Labels
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var teamOneLabel: UILabel!
@@ -52,9 +53,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
     
-    // MARK:- Layout Constraints
     
-    
+    // MARK: - Transition Managers
     let transitionManager = TransitionManager()
 
     
@@ -113,13 +113,6 @@ class GameViewController: UIViewController {
 
     // Used to test celebration screen. 
     var gameWon = false
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -372,7 +365,9 @@ class GameViewController: UIViewController {
     
     func resetRound(_ time: Double ) {
         UIView.animate(withDuration: 0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+           
             self.view.backgroundColor = Game.sharedGameInstance.colors[self.categoryTapped]
+        
             }, completion: { (bool) in
                 
                 // self.mainView.backgroundColor = UIColor.red

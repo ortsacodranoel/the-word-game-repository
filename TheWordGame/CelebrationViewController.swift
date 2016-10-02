@@ -29,6 +29,14 @@ class CelebrationViewController: UIViewController {
     var celebrationScreenActiveAudio = AVAudioPlayer()
     
 
+    ///
+    @IBAction func newGameTapped(_ sender: AnyObject) {
+        
+        self.celebrationScreenActiveAudio.stop()
+        let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
+        self.present(vc!, animated: true, completion: nil)
+        
+    }
     
     
     
