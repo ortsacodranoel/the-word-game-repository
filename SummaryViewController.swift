@@ -43,24 +43,33 @@ class SummaryViewController: UIViewController {
         let words = NSMutableAttributedString()
         // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.
         let cr = NSMutableAttributedString(string: "\n")
+        
+        
         // Retrieve the missed words.
         for missedWord in Game.sharedGameInstance.missedWordsArray {
-            // Used as temp storage for missed words.
-            let myString = NSMutableAttributedString (string: missedWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
-            // Used to color the missed words red.
+          
+            let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 30)]
+
+            let myString = NSMutableAttributedString(string: missedWord, attributes:attrs)
             myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location:0,length:myString.length))
+            
+            // Add the new word to the string.
             words.append(myString)
             // Append carriage return.
             words.append(cr)
+            // Add word to text view.
             self.wordSummaryTextview.attributedText = words
             
         }
         // Retrieve correct words.
         for correctWord in Game.sharedGameInstance.correctWordsArray {
-            // Used as temp storage for missed words.
-            let myString = NSMutableAttributedString (string: correctWord, attributes: [NSFontAttributeName:UIFont(name: "Helvetica Neue", size: 25.0)!])
-            // Used to color the missed words green.
+            
+            let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 30)]
+            
+            let myString = NSMutableAttributedString(string: correctWord, attributes:attrs)
             myString.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:0,length:myString.length))
+          
+            // Add the new word to the string.
             words.append(myString)
             // Append carriage return.
             words.append(cr)
