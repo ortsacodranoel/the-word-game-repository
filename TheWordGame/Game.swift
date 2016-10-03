@@ -33,18 +33,14 @@ class Game {
     // Used to verify the game has begun.
     var gameBegan = false
     
-    
-    
-    /// Used to determine the color of the game being played. 
+    /// Used to determine the color of the game being played.
     var gameColor:UIColor!
-    
     
     // Used to notify GameVC if segue comes from DetailVC.
     var segueFromDetailVC:Bool!
     
     
     // MARK: - Array properties
-    
     /// Categories array.
     var categoriesArray = [Category]()
     /// Used to store missed words.
@@ -91,8 +87,11 @@ class Game {
     var christiannation:Category!
     var christmastime:Category!
     var denominations:Category!
+    var easter:Category!
     var famous:Category!
     var feasts:Category!
+    var history:Category!
+    var kids:Category!
     var relics:Category!
     var revelation:Category!
     var sins:Category!
@@ -160,26 +159,27 @@ class Game {
         } else {
             self.commands.purchased = false
         }
-
-        
-        // Denominations
-        self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+        // Easter
+        self.easter = Category(title:"Easter",summary: "All words related to the holiday in which we celebrate the Resurrection of Jesus Christ, including the days leading up to it.")
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
                 self.denominations.purchased = true
             } else {
                 self.denominations.purchased = false
             }
-        
-        
-        // Famous
+        // Denominations
+        self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+            self.denominations.purchased = true
+        } else {
+            self.denominations.purchased = false
+        }
+        // Famous Christians
         self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
                 self.famous.purchased = true
             } else {
                 self.famous.purchased = false
             }
-        
-        
         // Feasts
         self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
@@ -187,16 +187,27 @@ class Game {
             } else {
                 self.feasts.purchased = false
             }
-        
-        
-        // Relics
+        // History
+        self.feasts = Category(title:"History",summary: "The movements, councils, people, wars, translations, churches, schools and more that shaped Christianity.")
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
+            self.feasts.purchased = true
+        } else {
+            self.feasts.purchased = false
+        }
+        // Kids
+        self.feasts = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
+            self.feasts.purchased = true
+        } else {
+            self.feasts.purchased = false
+        }
+        // Relics and Saints
         self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
                 self.relics.purchased = true
             } else {
                 self.relics.purchased = false
             }
-        
         // Revelation
         self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
@@ -232,8 +243,11 @@ class Game {
                                 self.christmastime,
                                 self.commands,
                                 self.denominations,
+                                self.easter,
                                 self.famous,
                                 self.feasts,
+                                self.history,
+                                self.kids,
                                 self.relics,
                                 self.revelation,
                                 self.sins,
