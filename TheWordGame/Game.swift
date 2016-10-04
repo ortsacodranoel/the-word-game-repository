@@ -51,25 +51,29 @@ class Game {
     
     // MARK: - Colors for screens and categories.
     let colors = [
-        UIColor(red: 45/255, green: 86/255, blue: 134/225, alpha: 1),  // Row 1
-        UIColor(red: 56/255, green: 34/255, blue: 103/225, alpha: 1),   // Row 2
-        UIColor(red: 96/255, green: 32/255, blue: 95/225, alpha: 1),  // Row 3
-        UIColor(red: 33/255, green: 63/255, blue: 99/225, alpha: 1), // Row 4
-        UIColor(red: 31/255, green: 92/255, blue: 86/225, alpha: 1), // Row 5
-        UIColor(red: 84/255, green: 28/255, blue: 41/225, alpha: 1), // Row 6
-        UIColor(red: 61/255, green: 34/255, blue: 103/225, alpha: 1), // Row 7
-        UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1), // Row 8
-        UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1), // Row 9
-        UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1), // Row 10
-        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),   // Row 11
-        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1), // Row 12
-        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1), // Row 13
-        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1), // Row 14
-        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 15
-        UIColor(red: 190/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 16
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),    // Row 17
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),    // Row 17
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1)    // Row 17
+        UIColor(red: 43/255, green: 100/255, blue: 130/225, alpha: 1),      // Jesus
+        UIColor(red: 207/255, green: 127/255, blue: 110/225, alpha: 1),     // People
+        UIColor(red: 204/255, green: 188/255, blue: 113/225, alpha: 1),     // Places
+        UIColor(red: 209/255, green: 128/255, blue: 172/225, alpha: 1),     // Sunday School
+        UIColor(red: 146/255, green: 166/255, blue: 216/225, alpha: 1),     // Concordance
+        UIColor(red: 144/255, green: 93/255, blue: 198/225, alpha: 1),      // Angels
+        UIColor(red: 61/255, green: 34/255, blue: 103/225, alpha: 1),       // Books and Movies
+        UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1),     // Christian Nation
+        UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1),     // Christmas Time
+        UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1),     // Commands
+        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),       // Denomations
+        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),     // Easter
+        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),     // Famous Christians
+        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1),     // Row 14
+        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1),       // Row 15
+        UIColor(red: 190/255, green: 68/255, blue: 93/225, alpha: 1),       // Row 16
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 17
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 17
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 17
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 18
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1)        // Row 119
+
+
 
 
     ]
