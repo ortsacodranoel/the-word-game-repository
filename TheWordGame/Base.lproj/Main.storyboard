@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="-18.5" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="-19" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -556,7 +556,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time's Up!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73E-ag-KJF" userLabel="timesUpLabel">
                                         <frame key="frameInset" width="400" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -649,7 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-cI-hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="-948"/>
+            <point key="canvasLocation" x="645" y="-904"/>
         </scene>
         <!--Summary View Controller-->
         <scene sceneID="0Fh-4e-9iv">
