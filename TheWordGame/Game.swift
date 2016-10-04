@@ -51,13 +51,13 @@ class Game {
     
     // MARK: - Colors for screens and categories.
     let colors = [
-        UIColor(red: 91/255, green: 123/255, blue: 200/225, alpha: 1),  // Row 1
-        UIColor(red: 196/255, green: 93/255, blue: 79/225, alpha: 1),   // Row 2
-        UIColor(red: 196/255, green: 185/255, blue: 79/225, alpha: 1),  // Row 3
-        UIColor(red: 212/255, green: 152/255, blue: 125/225, alpha: 1), // Row 4
-        UIColor(red: 214/255, green: 133/255, blue: 157/225, alpha: 1), // Row 5
-        UIColor(red: 150/255, green: 144/255, blue: 218/225, alpha: 1), // Row 6
-        UIColor(red: 179/255, green: 193/255, blue: 230/225, alpha: 1), // Row 7
+        UIColor(red: 45/255, green: 86/255, blue: 134/225, alpha: 1),  // Row 1
+        UIColor(red: 56/255, green: 34/255, blue: 103/225, alpha: 1),   // Row 2
+        UIColor(red: 96/255, green: 32/255, blue: 95/225, alpha: 1),  // Row 3
+        UIColor(red: 33/255, green: 63/255, blue: 99/225, alpha: 1), // Row 4
+        UIColor(red: 31/255, green: 92/255, blue: 86/225, alpha: 1), // Row 5
+        UIColor(red: 84/255, green: 28/255, blue: 41/225, alpha: 1), // Row 6
+        UIColor(red: 61/255, green: 34/255, blue: 103/225, alpha: 1), // Row 7
         UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1), // Row 8
         UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1), // Row 9
         UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1), // Row 10
@@ -67,7 +67,11 @@ class Game {
         UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1), // Row 14
         UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 15
         UIColor(red: 190/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 16
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),    // Row 17
+        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),    // Row 17
         UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1)    // Row 17
+
+
     ]
     
     
@@ -162,9 +166,9 @@ class Game {
         // Easter
         self.easter = Category(title:"Easter",summary: "All words related to the holiday in which we celebrate the Resurrection of Jesus Christ, including the days leading up to it.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
-                self.denominations.purchased = true
+                self.easter.purchased = true
             } else {
-                self.denominations.purchased = false
+                self.easter.purchased = false
             }
         // Denominations
         self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
@@ -188,18 +192,18 @@ class Game {
                 self.feasts.purchased = false
             }
         // History
-        self.feasts = Category(title:"History",summary: "The movements, councils, people, wars, translations, churches, schools and more that shaped Christianity.")
+        self.history = Category(title:"History",summary: "The movements, councils, people, wars, translations, churches, schools and more that shaped Christianity.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
-            self.feasts.purchased = true
+            self.history.purchased = true
         } else {
-            self.feasts.purchased = false
+            self.history.purchased = false
         }
         // Kids
-        self.feasts = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
+        self.kids = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
-            self.feasts.purchased = true
+            self.kids.purchased = true
         } else {
-            self.feasts.purchased = false
+            self.kids.purchased = false
         }
         // Relics and Saints
         self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
@@ -312,16 +316,22 @@ class Game {
         case 10:
             selectedArray = self.denominations.wordsInCategory
         case 11:
-            selectedArray = self.famous.wordsInCategory
+            selectedArray = self.easter.wordsInCategory
         case 12:
-            selectedArray = self.feasts.wordsInCategory
+            selectedArray = self.famous.wordsInCategory
         case 13:
-            selectedArray = self.relics.wordsInCategory
+            selectedArray = self.feasts.wordsInCategory
         case 14:
-            selectedArray = self.revelation.wordsInCategory
+            selectedArray = self.history.wordsInCategory
         case 15:
-            selectedArray = self.sins.wordsInCategory
+            selectedArray = self.kids.wordsInCategory
         case 16:
+            selectedArray = self.relics.wordsInCategory
+        case 17:
+            selectedArray = self.revelation.wordsInCategory
+        case 19:
+            selectedArray = self.sins.wordsInCategory
+        case 20:
             selectedArray = self.worship.wordsInCategory
         default:
             break
@@ -335,7 +345,8 @@ class Game {
         
         if arrayOfUsedWords.contains(word) {
             // Run the method again.
-           // self.getWord(categorySelected)
+            self.getWord(categorySelected)
+            
             
         } else {
             self.arrayOfUsedWords.append(word)
@@ -378,18 +389,24 @@ class Game {
             return self.categoriesArray[9]
         case "com.thewordgame.denominations":
             return self.categoriesArray[10]
-        case "com.thewordgame.famouschristians":
+        case "com.thewordgame.easter":
             return self.categoriesArray[11]
-        case "com.thewordgame.feasts":
+        case "com.thewordgame.famouschristians":
             return self.categoriesArray[12]
-        case "com.thewordgame.relicsandsaints":
+        case "com.thewordgame.feasts":
             return self.categoriesArray[13]
-        case "com.thewordgame.revelation":
+        case "com.thewordgame.history":
             return self.categoriesArray[14]
-        case "com.thewordgame.sins":
+        case "com.thewordgame.kids":
             return self.categoriesArray[15]
-        case "com.thewordgame.worship":
+        case "com.thewordgame.relicsandsaints":
             return self.categoriesArray[16]
+        case "com.thewordgame.revelation":
+            return self.categoriesArray[17]
+        case "com.thewordgame.sins":
+            return self.categoriesArray[18]
+        case "com.thewordgame.worship":
+            return self.categoriesArray[19]
         default:
             break
         }
