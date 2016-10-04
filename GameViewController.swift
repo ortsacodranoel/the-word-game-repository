@@ -43,6 +43,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var redBackgroundView: UIView!
     
     
+    
+    
     //MARK:- Labels
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var teamOneLabel: UILabel!
@@ -52,6 +54,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var teamTurnLabel: UILabel!
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
+    
+    
     
     
     // MARK: - Transition Managers
@@ -77,6 +81,7 @@ class GameViewController: UIViewController {
     var time = ""
     var timeIsUp = false
     
+    
     //MARK:- Swipe Gesture Recognizer Properties
     var swipedRight = false
     var timesSwipedRight = 0
@@ -89,6 +94,9 @@ class GameViewController: UIViewController {
     let soundEffectWinner = URL(fileURLWithPath: Bundle.main.path(forResource: "winner", ofType: "mp3")!)
     let soundEffectStartRound = URL(fileURLWithPath: Bundle.main.path(forResource: "initialCountdown", ofType: "mp3")!)
     let soundEffectEndRound = URL(fileURLWithPath: Bundle.main.path(forResource: "countdown", ofType: "mp3")!)
+    let soundEffectCorrectSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "correctSwipe", ofType: "mp3")!)
+
+    
     
     /// Used for menu interactions sounds.
     var audioPlayerButtonTapSound = AVAudioPlayer()
@@ -100,6 +108,9 @@ class GameViewController: UIViewController {
     var audioPlayerRoundIsStartingSound = AVAudioPlayer()
     /// Used to play sound effects when the game timer is coming to an end.
     var audioPlayerRoundIsEndingSound = AVAudioPlayer()
+    /// Used to play the correct swipe.
+    var audioPlayerCorrectSwipe = AVAudioPlayer()
+
     
     
     // View centers.
@@ -200,6 +211,36 @@ class GameViewController: UIViewController {
 
     }
     
+    
+    
+    // MARK: - Audio
+    
+    /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
+    func loadSounds() {
+        do {
+            // Configure Audioplayers.
+            self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
+            self.audioPlayerWinSound = try AVAudioPlayer(contentsOf: self.soundEffectWinner,fileTypeHint: "mp3")
+            self.audioPlayerSwipeSound = try AVAudioPlayer(contentsOf: self.soundEffectSwipe, fileTypeHint: "wav")
+            self.audioPlayerRoundIsStartingSound = try AVAudioPlayer(contentsOf: self.soundEffectStartRound, fileTypeHint: "mp3")
+            self.audioPlayerRoundIsEndingSound = try AVAudioPlayer(contentsOf: self.soundEffectEndRound, fileTypeHint: "mp3")
+            self.audioPlayerCorrectSwipe = try AVAudioPlayer(contentsOf: self.soundEffectCorrectSwipe, fileTypeHint: "mp3")
+            
+            // Prepare to play.
+            self.audioPlayerButtonTapSound.prepareToPlay()
+            self.audioPlayerWinSound.prepareToPlay()
+            self.audioPlayerSwipeSound.prepareToPlay()
+            self.audioPlayerRoundIsStartingSound.prepareToPlay()
+            self.audioPlayerRoundIsEndingSound.prepareToPlay()
+            self.audioPlayerCorrectSwipe.prepareToPlay()
+        
+        } catch {
+            print("Error: unable to find sound files.")
+        }
+    }
+    
+    
+
     
     
     
@@ -780,28 +821,6 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", self.seconds)
         self.timerLabel.text = "\(strMinutes):\(strSeconds)"
     }
-
-    // MARK: - Audio
-    
-    /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
-    func loadSounds() {
-        do {
-            self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
-            self.audioPlayerWinSound = try AVAudioPlayer(contentsOf: self.soundEffectWinner,fileTypeHint: "mp3")
-            self.audioPlayerSwipeSound = try AVAudioPlayer(contentsOf: self.soundEffectSwipe, fileTypeHint: "wav")
-            self.audioPlayerRoundIsStartingSound = try AVAudioPlayer(contentsOf: self.soundEffectStartRound, fileTypeHint: "mp3")
-            self.audioPlayerRoundIsEndingSound = try AVAudioPlayer(contentsOf: self.soundEffectEndRound, fileTypeHint: "mp3")
-            self.audioPlayerButtonTapSound.prepareToPlay()
-            self.audioPlayerWinSound.prepareToPlay()
-            self.audioPlayerSwipeSound.prepareToPlay()
-            self.audioPlayerRoundIsStartingSound.prepareToPlay()
-            self.audioPlayerRoundIsEndingSound.prepareToPlay()
-        } catch {
-            print("Error: unable to find sound files.")
-        }
-    }
-
-
 
 
 
