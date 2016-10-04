@@ -33,18 +33,14 @@ class Game {
     // Used to verify the game has begun.
     var gameBegan = false
     
-    
-    
-    /// Used to determine the color of the game being played. 
+    /// Used to determine the color of the game being played.
     var gameColor:UIColor!
-    
     
     // Used to notify GameVC if segue comes from DetailVC.
     var segueFromDetailVC:Bool!
     
     
     // MARK: - Array properties
-    
     /// Categories array.
     var categoriesArray = [Category]()
     /// Used to store missed words.
@@ -55,23 +51,27 @@ class Game {
     
     // MARK: - Colors for screens and categories.
     let colors = [
-        UIColor(red: 91/255, green: 123/255, blue: 200/225, alpha: 1),  // Row 1
-        UIColor(red: 196/255, green: 93/255, blue: 79/225, alpha: 1),   // Row 2
-        UIColor(red: 196/255, green: 185/255, blue: 79/225, alpha: 1),  // Row 3
-        UIColor(red: 212/255, green: 152/255, blue: 125/225, alpha: 1), // Row 4
-        UIColor(red: 214/255, green: 133/255, blue: 157/225, alpha: 1), // Row 5
-        UIColor(red: 150/255, green: 144/255, blue: 218/225, alpha: 1), // Row 6
-        UIColor(red: 179/255, green: 193/255, blue: 230/225, alpha: 1), // Row 7
-        UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1), // Row 8
-        UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1), // Row 9
-        UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1), // Row 10
-        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),   // Row 11
-        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1), // Row 12
-        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1), // Row 13
-        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1), // Row 14
-        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 15
-        UIColor(red: 190/255, green: 68/255, blue: 93/225, alpha: 1),   // Row 16
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1)    // Row 17
+        UIColor(red: 43/255, green: 100/255, blue: 130/225, alpha: 1),          // Jesus
+        UIColor(red: 207/255, green: 127/255, blue: 110/225, alpha: 1),         // People
+        UIColor(red: 204/255, green: 188/255, blue: 113/225, alpha: 1),         // Places
+        UIColor(red: 209/255, green: 128/255, blue: 172/225, alpha: 1),         // Sunday School
+        UIColor(red: 46/255, green: 127/255, blue: 133/225, alpha: 1),          // Concordance
+        UIColor(red: 179/255, green: 67/255, blue: 61/225, alpha: 1),           // Angels
+        UIColor(red: 202/255, green: 154/255, blue: 53/225, alpha: 1),          // Books and Movies
+        UIColor(red: 193/255, green: 204/255, blue: 107/225, alpha: 1),         // Christian Nation
+        UIColor(red: 163/255, green: 56/255, blue: 145/225, alpha: 1),          // Christmas Time
+        UIColor(red: 42/255, green: 83/255, blue: 122/225, alpha: 1),           // Commands
+        UIColor(red: 198/255, green: 139/255, blue: 88/225, alpha: 1),          // Denomations
+        UIColor(red: 53/255, green: 151/255, blue: 156/225, alpha: 1),          // Easter
+        UIColor(red: 202/255, green: 195/255, blue: 99/225, alpha: 1),          // Famous Christians
+        UIColor(red: 171/255, green: 59/255, blue: 62/225, alpha: 1),           // Feasts
+        UIColor(red: 123/255, green: 53/255, blue: 156/225, alpha: 1),           // History
+        UIColor(red: 75/255, green: 101/255, blue: 195/225, alpha: 1),           // Kids
+        UIColor(red: 56/255, green: 159/255, blue: 168/225, alpha: 1),           // Relics and Saints
+        UIColor(red: 24/255, green: 59/255, blue: 73/225, alpha: 1),             // Revelation
+        UIColor(red: 157/255, green: 85/255, blue: 52/225, alpha: 1),           // Sins
+        UIColor(red: 153/255, green: 56/255, blue: 138/225, alpha: 1),           // Worship
+
     ]
     
     
@@ -91,8 +91,11 @@ class Game {
     var christiannation:Category!
     var christmastime:Category!
     var denominations:Category!
+    var easter:Category!
     var famous:Category!
     var feasts:Category!
+    var history:Category!
+    var kids:Category!
     var relics:Category!
     var revelation:Category!
     var sins:Category!
@@ -160,26 +163,27 @@ class Game {
         } else {
             self.commands.purchased = false
         }
-
-        
+        // Easter
+        self.easter = Category(title:"Easter",summary: "All words related to the holiday in which we celebrate the Resurrection of Jesus Christ, including the days leading up to it.")
+            if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
+                self.easter.purchased = true
+            } else {
+                self.easter.purchased = false
+            }
         // Denominations
         self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
-                self.denominations.purchased = true
-            } else {
-                self.denominations.purchased = false
-            }
-        
-        
-        // Famous
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+            self.denominations.purchased = true
+        } else {
+            self.denominations.purchased = false
+        }
+        // Famous Christians
         self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
                 self.famous.purchased = true
             } else {
                 self.famous.purchased = false
             }
-        
-        
         // Feasts
         self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
@@ -187,16 +191,27 @@ class Game {
             } else {
                 self.feasts.purchased = false
             }
-        
-        
-        // Relics
+        // History
+        self.history = Category(title:"History",summary: "The movements, councils, people, wars, translations, churches, schools and more that shaped Christianity.")
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
+            self.history.purchased = true
+        } else {
+            self.history.purchased = false
+        }
+        // Kids
+        self.kids = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
+            self.kids.purchased = true
+        } else {
+            self.kids.purchased = false
+        }
+        // Relics and Saints
         self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
                 self.relics.purchased = true
             } else {
                 self.relics.purchased = false
             }
-        
         // Revelation
         self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
@@ -232,8 +247,11 @@ class Game {
                                 self.christmastime,
                                 self.commands,
                                 self.denominations,
+                                self.easter,
                                 self.famous,
                                 self.feasts,
+                                self.history,
+                                self.kids,
                                 self.relics,
                                 self.revelation,
                                 self.sins,
@@ -298,16 +316,22 @@ class Game {
         case 10:
             selectedArray = self.denominations.wordsInCategory
         case 11:
-            selectedArray = self.famous.wordsInCategory
+            selectedArray = self.easter.wordsInCategory
         case 12:
-            selectedArray = self.feasts.wordsInCategory
+            selectedArray = self.famous.wordsInCategory
         case 13:
-            selectedArray = self.relics.wordsInCategory
+            selectedArray = self.feasts.wordsInCategory
         case 14:
-            selectedArray = self.revelation.wordsInCategory
+            selectedArray = self.history.wordsInCategory
         case 15:
-            selectedArray = self.sins.wordsInCategory
+            selectedArray = self.kids.wordsInCategory
         case 16:
+            selectedArray = self.relics.wordsInCategory
+        case 17:
+            selectedArray = self.revelation.wordsInCategory
+        case 19:
+            selectedArray = self.sins.wordsInCategory
+        case 20:
             selectedArray = self.worship.wordsInCategory
         default:
             break
@@ -321,7 +345,8 @@ class Game {
         
         if arrayOfUsedWords.contains(word) {
             // Run the method again.
-           // self.getWord(categorySelected)
+            self.getWord(categorySelected)
+            
             
         } else {
             self.arrayOfUsedWords.append(word)
@@ -364,18 +389,24 @@ class Game {
             return self.categoriesArray[9]
         case "com.thewordgame.denominations":
             return self.categoriesArray[10]
-        case "com.thewordgame.famouschristians":
+        case "com.thewordgame.easter":
             return self.categoriesArray[11]
-        case "com.thewordgame.feasts":
+        case "com.thewordgame.famouschristians":
             return self.categoriesArray[12]
-        case "com.thewordgame.relicsandsaints":
+        case "com.thewordgame.feasts":
             return self.categoriesArray[13]
-        case "com.thewordgame.revelation":
+        case "com.thewordgame.history":
             return self.categoriesArray[14]
-        case "com.thewordgame.sins":
+        case "com.thewordgame.kids":
             return self.categoriesArray[15]
-        case "com.thewordgame.worship":
+        case "com.thewordgame.relicsandsaints":
             return self.categoriesArray[16]
+        case "com.thewordgame.revelation":
+            return self.categoriesArray[17]
+        case "com.thewordgame.sins":
+            return self.categoriesArray[18]
+        case "com.thewordgame.worship":
+            return self.categoriesArray[19]
         default:
             break
         }
