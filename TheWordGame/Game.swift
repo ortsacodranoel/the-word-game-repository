@@ -51,30 +51,26 @@ class Game {
     
     // MARK: - Colors for screens and categories.
     let colors = [
-        UIColor(red: 43/255, green: 100/255, blue: 130/225, alpha: 1),      // Jesus
-        UIColor(red: 207/255, green: 127/255, blue: 110/225, alpha: 1),     // People
-        UIColor(red: 204/255, green: 188/255, blue: 113/225, alpha: 1),     // Places
-        UIColor(red: 209/255, green: 128/255, blue: 172/225, alpha: 1),     // Sunday School
-        UIColor(red: 146/255, green: 166/255, blue: 216/225, alpha: 1),     // Concordance
-        UIColor(red: 144/255, green: 93/255, blue: 198/225, alpha: 1),      // Angels
-        UIColor(red: 61/255, green: 34/255, blue: 103/225, alpha: 1),       // Books and Movies
-        UIColor(red: 228/255, green: 209/255, blue: 175/225, alpha: 1),     // Christian Nation
-        UIColor(red: 221/255, green: 152/255, blue: 182/225, alpha: 1),     // Christmas Time
-        UIColor(red: 133/255, green: 184/255, blue: 214/225, alpha: 1),     // Commands
-        UIColor(red: 187/255, green: 94/255, blue: 62/225, alpha: 1),       // Denomations
-        UIColor(red: 212/255, green: 186/255, blue: 232/225, alpha: 1),     // Easter
-        UIColor(red: 201/255, green: 209/255, blue: 117/225, alpha: 1),     // Famous Christians
-        UIColor(red: 152/255, green: 221/255, blue: 217/225, alpha: 1),     // Row 14
-        UIColor(red: 193/255, green: 68/255, blue: 93/225, alpha: 1),       // Row 15
-        UIColor(red: 190/255, green: 68/255, blue: 93/225, alpha: 1),       // Row 16
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 17
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 17
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 17
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1),       // Row 18
-        UIColor(red: 196/255, green: 54/255, blue: 93/225, alpha: 1)        // Row 119
-
-
-
+        UIColor(red: 43/255, green: 100/255, blue: 130/225, alpha: 1),          // Jesus
+        UIColor(red: 207/255, green: 127/255, blue: 110/225, alpha: 1),         // People
+        UIColor(red: 204/255, green: 188/255, blue: 113/225, alpha: 1),         // Places
+        UIColor(red: 209/255, green: 128/255, blue: 172/225, alpha: 1),         // Sunday School
+        UIColor(red: 46/255, green: 127/255, blue: 133/225, alpha: 1),          // Concordance
+        UIColor(red: 179/255, green: 67/255, blue: 61/225, alpha: 1),           // Angels
+        UIColor(red: 202/255, green: 154/255, blue: 53/225, alpha: 1),          // Books and Movies
+        UIColor(red: 193/255, green: 204/255, blue: 107/225, alpha: 1),         // Christian Nation
+        UIColor(red: 163/255, green: 56/255, blue: 145/225, alpha: 1),          // Christmas Time
+        UIColor(red: 42/255, green: 83/255, blue: 122/225, alpha: 1),           // Commands
+        UIColor(red: 198/255, green: 139/255, blue: 88/225, alpha: 1),          // Denomations
+        UIColor(red: 53/255, green: 151/255, blue: 156/225, alpha: 1),          // Easter
+        UIColor(red: 202/255, green: 195/255, blue: 99/225, alpha: 1),          // Famous Christians
+        UIColor(red: 171/255, green: 59/255, blue: 62/225, alpha: 1),           // Feasts
+        UIColor(red: 123/255, green: 53/255, blue: 156/225, alpha: 1),           // History
+        UIColor(red: 75/255, green: 101/255, blue: 195/225, alpha: 1),           // Kids
+        UIColor(red: 56/255, green: 159/255, blue: 168/225, alpha: 1),           // Relics and Saints
+        UIColor(red: 24/255, green: 59/255, blue: 73/225, alpha: 1),             // Revelation
+        UIColor(red: 157/255, green: 85/255, blue: 52/225, alpha: 1),           // Sins
+        UIColor(red: 153/255, green: 56/255, blue: 138/225, alpha: 1),           // Worship
 
     ]
     
