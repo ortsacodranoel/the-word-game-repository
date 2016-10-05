@@ -71,12 +71,10 @@ class Game {
         UIColor(red: 24/255, green: 59/255, blue: 73/225, alpha: 1),             // Revelation
         UIColor(red: 157/255, green: 85/255, blue: 52/225, alpha: 1),           // Sins
         UIColor(red: 153/255, green: 56/255, blue: 138/225, alpha: 1),           // Worship
-
     ]
     
     
-    
-    
+
     // MARK: - Free categories
     var jesus:Category!
     var people:Category!

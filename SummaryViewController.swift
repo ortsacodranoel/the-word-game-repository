@@ -116,8 +116,6 @@ class SummaryViewController: UIViewController {
         self.wordSummaryLabel.attributedText = underlineAttributedString
         
 
-        
-        
 
     }
     

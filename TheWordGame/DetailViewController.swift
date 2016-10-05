@@ -211,6 +211,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         case "Denominations":
             let product = IAPManager.sharedInstance.products[5] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Denominations":
+            let product = IAPManager.sharedInstance.products[5] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         case "Famous Christians":
             let product = IAPManager.sharedInstance.products[6] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
