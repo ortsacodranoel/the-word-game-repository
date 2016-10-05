@@ -13,6 +13,7 @@
 		B30227BD1D9B45A1000694EE /* ConfettiParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */; };
 		B30227BF1D9B45D1000694EE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227BE1D9B45D1000694EE /* Actions.sks */; };
 		B30227C11D9B45DE000694EE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227C01D9B45DE000694EE /* GameScene.sks */; };
+		B30539331DA561B400D6F19B /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539321DA561B400D6F19B /* wrong.mp3 */; };
 		B30ED6F71DA46DBB006FCCC5 /* correctSwipe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30ED6F61DA46DBB006FCCC5 /* correctSwipe.mp3 */; };
 		B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */; };
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
@@ -72,6 +73,7 @@
 		B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ConfettiParticle.sks; sourceTree = "<group>"; };
 		B30227BE1D9B45D1000694EE /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		B30227C01D9B45DE000694EE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B30539321DA561B400D6F19B /* wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrong.mp3; sourceTree = "<group>"; };
 		B30ED6F61DA46DBB006FCCC5 /* correctSwipe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correctSwipe.mp3; sourceTree = "<group>"; };
 		B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		B35659051D6F9D87003E7DCD /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				B30539321DA561B400D6F19B /* wrong.mp3 */,
 				B30ED6F61DA46DBB006FCCC5 /* correctSwipe.mp3 */,
 				B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */,
 				B34D04E51DA45D8600BD7EE8 /* countdown.mp3 */,
@@ -392,6 +395,7 @@
 				B36733721D7F086000BA177B /* iap_product_ids.plist in Resources */,
 				B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */,
 				B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */,
+				B30539331DA561B400D6F19B /* wrong.mp3 in Resources */,
 				B30227BA1D9B4393000694EE /* CelebrationParticleSystem.scnp in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
 				B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */,
