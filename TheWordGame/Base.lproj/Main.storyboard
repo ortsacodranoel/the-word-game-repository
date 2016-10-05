@@ -389,7 +389,7 @@
         <!--Game View Controller-->
         <scene sceneID="vZM-6W-ck9">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="6sQ-Hb-dsp" customClass="GameViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6sQ-Hb-dsp" customClass="GameViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nHJ-BE-Jjg"/>
                         <viewControllerLayoutGuide type="bottom" id="q4h-EO-UYy"/>
@@ -763,6 +763,7 @@
                                 </state>
                                 <connections>
                                     <action selector="newGameTapped:" destination="hUy-8D-ucS" eventType="touchUpInside" id="qgI-mt-Ut1"/>
+                                    <segue destination="HOj-Gs-CDI" kind="unwind" unwindAction="unwindToGame:" id="Yry-zB-kEv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -781,8 +782,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSh-33-zOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HOj-Gs-CDI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="-17"/>
+            <point key="canvasLocation" x="1810" y="150"/>
         </scene>
     </scenes>
     <resources>

@@ -32,8 +32,22 @@ class CelebrationViewController: UIViewController {
     ///
     @IBAction func newGameTapped(_ sender: AnyObject) {
         
+        if Game.sharedGameInstance.teamOneIsActive == true {
+            Game.sharedGameInstance.teamOneIsActive = false
+        } else {
+            Game.sharedGameInstance.teamOneIsActive = true
+        }
+        
+        // Reset the game. 
+        Game.sharedGameInstance.won = false
+        Game.sharedGameInstance.clearArrays()
+        Game.sharedGameInstance.resetGame()
+        
         self.celebrationScreenActiveAudio.stop()
-        let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
+    
+        
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController")
         self.present(vc!, animated: true, completion: nil)
         
     }

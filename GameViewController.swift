@@ -570,13 +570,17 @@ class GameViewController: UIViewController {
     /// Used by the gameTimer to generate gameplay.
     func startRound() {
         if Game.sharedGameInstance.won {
-
-            // Segue to the CelebrationViewController.
-            performSegue(withIdentifier: "segueToCelebration", sender: self)
+           
             // Invalidate the gameTimer.
             self.gameTimer.invalidate()
+            
             // Stop the end round sound.
             self.audioPlayerRoundIsEndingSound.stop()
+            
+            // Segue to the CelebrationViewController.
+            performSegue(withIdentifier: "segueToCelebration", sender: self)
+
+
         }
         
         self.countdownLabel.text = " "
@@ -631,6 +635,9 @@ class GameViewController: UIViewController {
     
                         self.animateNewWordRightSwipe()
                     
+                        // Play correct swipe sound. 
+                        self.audioPlayerCorrectSwipe.play()
+                    
                     } else {
                         
                         self.audioPlayerSwipeSound.play()
@@ -638,6 +645,10 @@ class GameViewController: UIViewController {
                         teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
                         
                         self.animateNewWordRightSwipe()
+                        
+                        // Play correct swipe sound.
+                        self.audioPlayerCorrectSwipe.play()
+                        
                     }
                 }
             case UISwipeGestureRecognizerDirection.left:
@@ -821,9 +832,6 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", self.seconds)
         self.timerLabel.text = "\(strMinutes):\(strSeconds)"
     }
-
-
-
 }
 
 
