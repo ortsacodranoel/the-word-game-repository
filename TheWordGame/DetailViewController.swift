@@ -262,7 +262,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
             
             self.removeAnimations()
-
         }
     }
     
@@ -304,9 +303,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
             self.backButton.alpha = 0
             }, completion: nil)
     }
-    
-    
-    
+
     
 
     /// MARK: - Lock animations.

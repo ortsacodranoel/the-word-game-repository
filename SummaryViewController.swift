@@ -26,13 +26,22 @@ class SummaryViewController: UIViewController {
     
     @IBOutlet weak var wordSummaryTextview: UITextView!
     
-    // MARK: - Textviews
+    
 
+    
+    
+    
     // MARK: - Sound effect paths.
+    
+    // Used to create tap sound effect when button touched.
     let soundEffectButtonTap = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-
-    /// Used for menu interactions sounds.
+    // Used for menu interactions sounds.
     var audioPlayerButtonTapSound = AVAudioPlayer()
+    
+    
+    
+    
+    // MARK: - BUTTON ACTIONS
     
     
 
@@ -45,7 +54,10 @@ class SummaryViewController: UIViewController {
     
     
     
-    // MARK: - Audio
+    // MARK: - AUDIO SETUP
+    
+    
+    
     
     /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
     func loadSounds() {
@@ -66,10 +78,10 @@ class SummaryViewController: UIViewController {
     
     
     
+    // MARK: - VIEW SETUP
     
-    /*
-     
-    */
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     

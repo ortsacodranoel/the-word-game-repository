@@ -39,6 +39,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var teamTurnView: UIView!
     @IBOutlet weak var wordContainerView: UIView!
     @IBOutlet weak var timesUpView: UIView!
+    
+    
     /// Used when timer is running out.
     @IBOutlet weak var redBackgroundView: UIView!
     

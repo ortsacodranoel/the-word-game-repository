@@ -15,6 +15,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     fileprivate var lastContentOffset: CGFloat = 0
     
+    // MARK: - Views
+    @IBOutlet weak var tutorialView: UIView!
+    
+    
+    
+    
+    
+    
+    
     // MARK: Button Outlets
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
@@ -30,6 +39,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadSoundFile()
+        self.animateMenuFadeIn()
         
       // print(IAPManager.sharedInstance.products.count)
     }
@@ -39,8 +49,18 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // Configure the Select button appearance.
+        self.tutorialView.layer.cornerRadius = 7
+        self.tutorialView.layer.borderColor = UIColor.white.cgColor
+        self.tutorialView.layer.borderWidth = 3
+    }
+    
+    
+    
     
     // MARK: - Button Actions
+    
     /// Used to play sound when the button is tapped.
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.tapAudioPlayer.play()
@@ -119,9 +139,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - Animations
     func animateMenuFadeIn() {
         UIView.animate(withDuration: 0.5,animations: {
-            self.rulesButton.alpha = 1
+            self.tutorialView.alpha = 1
             }, completion: nil)
     }
+    
+    
     
     func animateMenuFadeOut() {
         UIView.animate(withDuration: 0.5, animations: {
