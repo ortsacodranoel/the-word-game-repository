@@ -12,28 +12,37 @@ import StoreKit
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
-
+    
     fileprivate var lastContentOffset: CGFloat = 0
+    
     
     // MARK: - Views
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
     
+    
     /// Used to delay the tutorialView animation. 
-    var tutorialTimer = Timer()
+    var popSoundTimer = Timer()
     
-    
-    
+
     // MARK: Button Outlets
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
 
-    
 
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
+    
+    
+    // MARK: - Audio
+    
+    var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
+    var popAudioPlayer = AVAudioPlayer()
+    
+    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
+    var tapAudioPlayer = AVAudioPlayer()
     
     
     
@@ -56,14 +65,43 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
         // Load sounds.
         self.loadSoundFile()
-//        
-//        // Animate tutorial bubble in.
-//        self.animateMenuFadeIn()
-//        
-//        
-      // print(IAPManager.sharedInstance.products.count)
+        
+    
+        // Timer to play pop sound.
+        if !self.popSoundTimer.isValid {
+            self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+        }
+        
+
+        
+              // print(IAPManager.sharedInstance.products.count)
     }
 
+    
+    
+    
+    
+    
+    
+    // MARK: - Audio Methods.
+    func loadSoundFile() {
+        do {
+            
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+            
+            self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
+            self.popAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+
+    func playPopSound() {
+        // Play pop sound once the tutorial view animates.
+        self.popAudioPlayer.play()
+    }
+    
     
     /**
      Used to hide the tutorial bubble from view and fade out the overlay when
@@ -71,6 +109,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
 
+        
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
@@ -107,21 +146,22 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         // Animate overlay.
         UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
-            self.viewOverlay.alpha = 0.75
+                self.viewOverlay.alpha = 0.75
 
             }, completion: nil)
-        
-        
+
         UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
-            self.tutorialView.alpha = 1
-            // Move the view into place.
-            self.tutorialView.center.x += self.view.bounds.width
-            self.tutorialView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        
 
-    }
+            
+                self.tutorialView.alpha = 1
+             
+                // Move the view into place.
+                self.tutorialView.center.x += self.view.bounds.width
+                self.tutorialView.center.y -= self.view.bounds.height
+                
+            }, completion: nil )
+        }
     
  
     
@@ -136,7 +176,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /// Used to play sound when the button is tapped.
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.tapAudioPlayer.play()
-        
     }
     
 
@@ -206,30 +245,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // MARK: - Audio
-    
-    ///
-    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-    var tapAudioPlayer = AVAudioPlayer()
 
-    func loadSoundFile() {
-        do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
-            self.tapAudioPlayer.prepareToPlay()
-        } catch {
-            print("Unable to load sound files.")
-        }
-    }
 
 }
 
