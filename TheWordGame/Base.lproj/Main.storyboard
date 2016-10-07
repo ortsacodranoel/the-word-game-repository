@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="25.5" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="26" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -93,8 +93,8 @@
                                         <frame key="frameInset" minX="0.0%" minY="280.00%" width="241" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Divide into two teams and choose a category." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-uZ-1jq">
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gamplay - Step 1  Divide into two teams, then select a category to start." lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-uZ-1jq">
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -103,10 +103,10 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="247" id="5H4-oq-BDO"/>
                                     <constraint firstAttribute="height" constant="133" id="CGM-8Y-JcK"/>
-                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="top" secondItem="8do-f1-dRM" secondAttribute="top" constant="21" id="IXy-Mx-zBE"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZCc-uZ-1jq" secondAttribute="trailing" constant="22" id="Opq-Zr-ThB"/>
-                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="bottom" secondItem="8do-f1-dRM" secondAttribute="bottomMargin" id="h9f-eg-etl"/>
-                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="leading" secondItem="8do-f1-dRM" secondAttribute="leading" constant="30" id="wqj-Tp-Abp"/>
+                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="top" secondItem="8do-f1-dRM" secondAttribute="top" constant="22" id="IXy-Mx-zBE"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZCc-uZ-1jq" secondAttribute="trailing" constant="45" id="Opq-Zr-ThB"/>
+                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="bottom" secondItem="8do-f1-dRM" secondAttribute="bottomMargin" constant="-9" id="h9f-eg-etl"/>
+                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="leading" secondItem="8do-f1-dRM" secondAttribute="leading" constant="52" id="wqj-Tp-Abp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-405" y="-319"/>
+            <point key="canvasLocation" x="-405.63380281690144" y="-320.625"/>
         </scene>
         <!--Spash Screen View Controller-->
         <scene sceneID="xr4-vU-SJu">
@@ -280,7 +280,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-381" y="789"/>
+            <point key="canvasLocation" x="-428" y="857"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -680,7 +680,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-cI-hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1207" y="-161"/>
+            <point key="canvasLocation" x="1030" y="604"/>
         </scene>
         <!--Summary View Controller-->
         <scene sceneID="0Fh-4e-9iv">
@@ -766,7 +766,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDt-e7-KDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FKf-0K-xAz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2239" y="-1483"/>
+            <point key="canvasLocation" x="1737" y="-681"/>
         </scene>
         <!--Celebration View Controller-->
         <scene sceneID="So2-YL-xAK">
@@ -816,7 +816,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSh-33-zOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HOj-Gs-CDI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1810" y="150"/>
+            <point key="canvasLocation" x="1796" y="604"/>
         </scene>
     </scenes>
     <resources>
