@@ -42,6 +42,19 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - Init() Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// Add gesture recognizer for tap on overlayView
+       
+
+        // or for swift 2 +
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
+        
+        
+        
+        
+        self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
+
+    
         self.loadSoundFile()
         self.animateMenuFadeIn()
         
@@ -53,7 +66,18 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
       // print(IAPManager.sharedInstance.products.count)
     }
-    
+
+
+    func hideTutorialAction(sender:UITapGestureRecognizer) {
+
+        print("Overlay tapped")
+        
+        
+    }
+
+
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
