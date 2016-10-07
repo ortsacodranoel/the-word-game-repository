@@ -46,9 +46,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Initiate countdown.
         if !self.tutorialTimer.isValid {
-            self.tutorialTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.animateTutorialStep), userInfo:nil, repeats: true)
+            self.tutorialTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CategoriesViewController.animateTutorialStep), userInfo:nil, repeats: false)
         }
-
         
         
       // print(IAPManager.sharedInstance.products.count)
@@ -60,16 +59,26 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Configure the Select button appearance.
+       
+        UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.tutorialView.alpha = 1
+            // Move the view into place.
+            self.tutorialView.center.x += self.view.bounds.width
+            self.tutorialView.center.y -= self.view.bounds.height
+            }, completion: nil)
+        
 
     }
     
     
-    /// Animates the first tutorial step on screen load. 
+    /// Animates the first tutorial step on screen load.
     func animateTutorialStep() {
+
+        tutorialTimer.invalidate()
         
-        
-        
+        print("in animate tutorial step")
+
         
     }
     
