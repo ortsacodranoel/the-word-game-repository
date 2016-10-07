@@ -35,6 +35,7 @@
 		B3AB51BA1D89D90E0003B09F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB51B91D89D90E0003B09F /* GameViewController.swift */; };
 		B3C3835D1D7E0FFA0020C9DB /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */; };
 		B3E23CC81D907F5B0038A761 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */; };
+		B3E3318A1DA81AAC0087C7B7 /* BubblePop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3E331891DA81AAC0087C7B7 /* BubblePop.mp3 */; };
 		B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */; };
 		B3F48AD01D89AF460052AA32 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F48ACF1D89AF460052AA32 /* StoreKit.framework */; };
 		B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B413DBDD1D2DF1900006FB9D /* Game.swift */; };
@@ -95,6 +96,7 @@
 		B3AB51B91D89D90E0003B09F /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ../GameViewController.swift; sourceTree = "<group>"; };
 		B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryViewController.swift; path = ../SummaryViewController.swift; sourceTree = "<group>"; };
+		B3E331891DA81AAC0087C7B7 /* BubblePop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BubblePop.mp3; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
 		B3F48ACF1D89AF460052AA32 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B413DBDD1D2DF1900006FB9D /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		B35659051D6F9D87003E7DCD /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				B3E331891DA81AAC0087C7B7 /* BubblePop.mp3 */,
 				B30539381DA56D0200D6F19B /* correctSwipe.mp3 */,
 				B30539321DA561B400D6F19B /* wrong.mp3 */,
 				B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */,
@@ -398,6 +401,7 @@
 				B30539331DA561B400D6F19B /* wrong.mp3 in Resources */,
 				B30227BA1D9B4393000694EE /* CelebrationParticleSystem.scnp in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
+				B3E3318A1DA81AAC0087C7B7 /* BubblePop.mp3 in Resources */,
 				B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
