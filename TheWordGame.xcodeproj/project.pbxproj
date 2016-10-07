@@ -13,8 +13,11 @@
 		B30227BD1D9B45A1000694EE /* ConfettiParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */; };
 		B30227BF1D9B45D1000694EE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227BE1D9B45D1000694EE /* Actions.sks */; };
 		B30227C11D9B45DE000694EE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227C01D9B45DE000694EE /* GameScene.sks */; };
+		B30539331DA561B400D6F19B /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539321DA561B400D6F19B /* wrong.mp3 */; };
+		B30539391DA56D0200D6F19B /* correctSwipe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539381DA56D0200D6F19B /* correctSwipe.mp3 */; };
+		B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */; };
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
-		B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */; };
+		B34D04E61DA45D8600BD7EE8 /* countdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34D04E51DA45D8600BD7EE8 /* countdown.mp3 */; };
 		B360F6611DA0A5AA00415ECB /* celebrationMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B360F6601DA0A5AA00415ECB /* celebrationMusic.mp3 */; };
 		B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3634F441D6FD9E10060D517 /* ButtonTapped.wav */; };
 		B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F481D6FE2AE0060D517 /* winner.mp3 */; };
@@ -44,7 +47,6 @@
 		D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D67774DB1D1C392B0051C634 /* Assets.xcassets */; };
 		D67774EA1D1C392B0051C634 /* TheWordGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67774E91D1C392B0051C634 /* TheWordGameTests.swift */; };
 		D67775031D1C4FDC0051C634 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */; };
-		D6A39C111D7141D200FD65E6 /* countdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6A39C101D7141D200FD65E6 /* countdown.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +73,11 @@
 		B30227BC1D9B45A1000694EE /* ConfettiParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ConfettiParticle.sks; sourceTree = "<group>"; };
 		B30227BE1D9B45D1000694EE /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		B30227C01D9B45DE000694EE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B30539321DA561B400D6F19B /* wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrong.mp3; sourceTree = "<group>"; };
+		B30539381DA56D0200D6F19B /* correctSwipe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correctSwipe.mp3; sourceTree = "<group>"; };
+		B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
-		B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
+		B34D04E51DA45D8600BD7EE8 /* countdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = countdown.mp3; sourceTree = "<group>"; };
 		B360F6601DA0A5AA00415ECB /* celebrationMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = celebrationMusic.mp3; sourceTree = "<group>"; };
 		B3634F441D6FD9E10060D517 /* ButtonTapped.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTapped.wav; sourceTree = "<group>"; };
 		B3634F481D6FE2AE0060D517 /* winner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winner.mp3; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 		D67774F01D1C392B0051C634 /* TheWordGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWordGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67774F61D1C392B0051C634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = ../CollectionViewCell.swift; sourceTree = "<group>"; };
-		D6A39C101D7141D200FD65E6 /* countdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = countdown.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,10 +157,12 @@
 		B35659051D6F9D87003E7DCD /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				B30539381DA56D0200D6F19B /* correctSwipe.mp3 */,
+				B30539321DA561B400D6F19B /* wrong.mp3 */,
+				B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */,
+				B34D04E51DA45D8600BD7EE8 /* countdown.mp3 */,
 				B360F6601DA0A5AA00415ECB /* celebrationMusic.mp3 */,
 				B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */,
-				B343FFBE1D7214E500D10E06 /* initialCountdown.mp3 */,
-				D6A39C101D7141D200FD65E6 /* countdown.mp3 */,
 				B3634F4A1D6FED580060D517 /* Alert.mp3 */,
 				B3634F481D6FE2AE0060D517 /* winner.mp3 */,
 				B3634F441D6FD9E10060D517 /* ButtonTapped.wav */,
@@ -374,7 +380,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B343FFBF1D7214E500D10E06 /* initialCountdown.mp3 in Resources */,
 				B30227BD1D9B45A1000694EE /* ConfettiParticle.sks in Resources */,
 				B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */,
 				B37609061D675AA900A678A1 /* LaunchScreen.storyboard in Resources */,
@@ -385,9 +390,12 @@
 				B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */,
 				B30227BB1D9B4393000694EE /* spark.png in Resources */,
 				D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */,
-				D6A39C111D7141D200FD65E6 /* countdown.mp3 in Resources */,
+				B34D04E61DA45D8600BD7EE8 /* countdown.mp3 in Resources */,
 				B36733721D7F086000BA177B /* iap_product_ids.plist in Resources */,
+				B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */,
+				B30539391DA56D0200D6F19B /* correctSwipe.mp3 in Resources */,
 				B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */,
+				B30539331DA561B400D6F19B /* wrong.mp3 in Resources */,
 				B30227BA1D9B4393000694EE /* CelebrationParticleSystem.scnp in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
 				B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */,

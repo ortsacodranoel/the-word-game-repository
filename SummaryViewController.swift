@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import SpriteKit
 import GameplayKit
 
@@ -25,20 +26,65 @@ class SummaryViewController: UIViewController {
     
     @IBOutlet weak var wordSummaryTextview: UITextView!
     
-    // MARK: - Textviews
+    
 
     
     
-    // MARK: - Button Action
-    @IBAction func returnToGameTouched(_ sender: AnyObject) {
-        print("Return tapped")
+    
+    // MARK: - Sound effect paths.
+    
+    // Used to create tap sound effect when button touched.
+    let soundEffectButtonTap = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
+    // Used for menu interactions sounds.
+    var audioPlayerButtonTapSound = AVAudioPlayer()
+    
+    
+    
+    
+    // MARK: - BUTTON ACTIONS
+    
+    
+
+    @IBAction func backBtnTapped(_ sender: AnyObject) {
+        
+        print("Back button tapped")
+        self.audioPlayerButtonTapSound.play()
     }
     
     
+    
+    
+    // MARK: - AUDIO SETUP
+    
+    
+    
+    
+    /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
+    func loadSounds() {
+        do {
+            
+            // Configure Audioplayers.
+            self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
+            
+            // Prepare to play.
+            self.audioPlayerButtonTapSound.prepareToPlay()
+
+        } catch {
+            print("Error: unable to find sound files.")
+        }
+    }
+    
+    
+    
+    
+    
+    // MARK: - VIEW SETUP
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+    
         // Used to append correct/missed words.
         let words = NSMutableAttributedString()
         // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.
@@ -78,26 +124,37 @@ class SummaryViewController: UIViewController {
         
 
         self.wordSummaryTextview.textAlignment = .center
-    
+        
+        
+        
+        
+        // Load sounds.
+        self.loadSounds()
     }
     
     
+    /*
+     Used to layout the wordSummaryTextview when the screen noted.
+    */
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: false)
     }
     
     
-    /// Method:
-    override func didReceiveMemoryWarning() {
+    
+    /*
+     
+     */    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
     
-    
-    /// Method:
+    /*
+     
+     */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -116,16 +173,13 @@ class SummaryViewController: UIViewController {
         self.wordSummaryLabel.attributedText = underlineAttributedString
         
 
-        
-        
 
     }
     
     
-    
-    
-    
-    
+    /*
+     
+     */
     /// Set the initial background color of the main view.
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]
