@@ -17,6 +17,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Views
     @IBOutlet weak var tutorialView: UIView!
+    @IBOutlet weak var viewOverlay: UIView!
     
     /// Used to delay the tutorialView animation. 
     var tutorialTimer = Timer()
@@ -60,7 +61,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
        
-        UIView.animate(withDuration: 0.2, delay: 0.4,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        
+        UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.viewOverlay.alpha = 0.75
+
+            }, completion: nil)
+        
+        
+        UIView.animate(withDuration: 0.2, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
             self.tutorialView.alpha = 1
             // Move the view into place.
