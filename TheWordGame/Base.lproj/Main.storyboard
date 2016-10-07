@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -46,7 +46,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="-18.5" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="-19" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -82,18 +82,26 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Ts6-Ta-N50"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8do-f1-dRM" userLabel="tutorialView">
-                                <frame key="frameInset" minY="168" width="255" height="145"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8do-f1-dRM" userLabel="tutorialView">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bubble" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-b5-DT1">
-                                        <frame key="frameInset" minX="46.67%" minY="52.94%" width="240" height="128"/>
+                                        <frame key="frameInset" minX="0.0%" minY="280.00%" width="241" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Divide into two teams and choose a category." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-uZ-1jq">
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.42013736190000001" green="0.52252905510000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="255" id="5H4-oq-BDO"/>
-                                    <constraint firstAttribute="height" constant="145" id="CGM-8Y-JcK"/>
+                                    <constraint firstAttribute="width" constant="247" id="5H4-oq-BDO"/>
+                                    <constraint firstAttribute="height" constant="133" id="CGM-8Y-JcK"/>
+                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="top" secondItem="8do-f1-dRM" secondAttribute="top" constant="21" id="IXy-Mx-zBE"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZCc-uZ-1jq" secondAttribute="trailing" constant="22" id="Opq-Zr-ThB"/>
+                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="bottom" secondItem="8do-f1-dRM" secondAttribute="bottomMargin" id="h9f-eg-etl"/>
+                                    <constraint firstItem="ZCc-uZ-1jq" firstAttribute="leading" secondItem="8do-f1-dRM" secondAttribute="leading" constant="30" id="wqj-Tp-Abp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -101,7 +109,7 @@
                         <constraints>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="3us-9G-Ujm"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-0.5" id="Axu-fT-Izh"/>
-                            <constraint firstItem="8do-f1-dRM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="183" id="FFv-lA-fcG"/>
+                            <constraint firstItem="8do-f1-dRM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="FFv-lA-fcG"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="88" id="ITm-1H-7mV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="-205" id="LPw-6C-yp4"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="-7" id="aSB-QC-dsU"/>
@@ -123,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188.45577211394306" y="116"/>
+            <point key="canvasLocation" x="-188.75" y="114.375"/>
         </scene>
         <!--Spash Screen View Controller-->
         <scene sceneID="xr4-vU-SJu">

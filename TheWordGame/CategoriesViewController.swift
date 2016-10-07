@@ -18,6 +18,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - Views
     @IBOutlet weak var tutorialView: UIView!
     
+    /// Used to delay the tutorialView animation. 
+    var tutorialTimer = Timer()
+    
     
     
     
@@ -41,6 +44,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.loadSoundFile()
         self.animateMenuFadeIn()
         
+        // Initiate countdown.
+        if !self.tutorialTimer.isValid {
+            self.tutorialTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.animateTutorialStep), userInfo:nil, repeats: true)
+        }
+
+        
+        
       // print(IAPManager.sharedInstance.products.count)
     }
     
@@ -51,12 +61,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         // Configure the Select button appearance.
-        self.tutorialView.layer.cornerRadius = 7
-        self.tutorialView.layer.borderColor = UIColor.white.cgColor
-        self.tutorialView.layer.borderWidth = 3
+
     }
     
     
+    /// Animates the first tutorial step on screen load. 
+    func animateTutorialStep() {
+        
+        
+        
+        
+    }
     
     
     // MARK: - Button Actions
