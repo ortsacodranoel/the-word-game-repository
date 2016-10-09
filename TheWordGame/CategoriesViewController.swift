@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import StoreKit
+import CoreData
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
@@ -45,7 +46,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var tapAudioPlayer = AVAudioPlayer()
     
     
-    
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
     
@@ -56,6 +58,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // If the tutorial value is false, skip that code below
+        
+
+        // ShowPopUp from Game.swift should be set to true. 
+        
+        
+        
+        
+        
+        
         
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))

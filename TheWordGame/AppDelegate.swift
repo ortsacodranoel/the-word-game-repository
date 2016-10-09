@@ -19,6 +19,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // If the array of tutorialPopUp is empty...
+        
+        let moc = managedObjectContext
+        
+        let request: NSFetchRequest<TutorialPopUp> = TutorialPopUp.fetchRequest
+
+    
+        do {
+            let fetchedEmployees = try moc.executeFetchRequest(employeesFetch) as! [AAAEmployeeMO]
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+    }
+        
+        
+        
+        
+//        
+//            // Create the object.
+//            let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
+//            tutorial.enabled = true
+//            
+    
+        
+        
+        
+        
 //        if SKPaymentQueue.canMakePayments(){
 //            
 //            canPurchase = true
@@ -64,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.url(forResource: "TheWordGame", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "thewordgame", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
