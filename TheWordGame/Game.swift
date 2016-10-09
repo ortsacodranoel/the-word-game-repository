@@ -14,6 +14,12 @@ class Game {
     
     static let sharedGameInstance = Game()
     
+    // Tutorial
+    
+    // Used to determine if a pop tutorial is shown.
+    var showPopUp = true
+    
+    
     // Used to determine if a team is still playing its turn.
     var roundInProgress = true
     // Used to determine if Team 1 is playing.

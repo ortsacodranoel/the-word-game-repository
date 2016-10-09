@@ -4,6 +4,27 @@
         -
         -
  
+ 
+ 
+    Algorithm for showing tutorial popup.
+ 
+    1. Check to see if it's the first time running the app or if the player has selected the 'Show PopUp'. [ showPopUp == true? ]
+ 
+    2. When the player taps the `Start Button` and the first word appears on the screen, stop the gameTimer at 59seconds.
+ 
+    3. Animate tutorialBubbleTwoView onto the top left hand corner of the screen with th message `Gamplay: Step 2 Have your team members
+        guess the word that you are seeing on-screen without telling them any part of the word. 
+ 
+    4. When the player taps any part of the screen, animate the tutorialBubbleThreeView from the bottom right hand corner of the screen. 
+        The message should be Swipe Right if your team guessed correctly, or Swipe Left to pass. 
+
+    5. Animate the tutorialBubbleFourView w/ msg 'pointing to the Scores "the first team to reach 25 points, wins!
+ 
+    5. When the player taps the screen again, animate the view off-screen again, and fadeOut the tutorialOverlayView to reveal the screen again.
+ 
+
+ 
+ 
 */
 
 
@@ -12,214 +33,167 @@ import AVFoundation
 
 class GameViewController: UIViewController {
 
-    //MARK:- General properties
-    var categoryTapped = Int()
-    let UP = "UP"
-    let DOWN = "DOWN"
-    let OUT = "OUT"
-    let IN = "IN"
-    /// Used to store the value for the initial countdown.
-    var countdown = 4
-    ///
-    var wordOnScreen = false
-    ///
-    var wordRemoved = false
-    /// Used to determine if round is in progress.
-    var roundInProgress = false
+    
+    // MARK: - Tutorial
+    @IBOutlet weak var tutorialBubbleTwoView: UIView!
+    @IBOutlet weak var tutorialOverlayView: UIView!
+    
+    func animateFirstPopUp() {
+        
+        // Fade-in the overlayView to simulate diming the screen.
+        UIView.animate(withDuration: 0.5, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.tutorialOverlayView.alpha = 0.8
+            }, completion: nil)
+        
+        self.tutorialBubbleTwoView.alpha = 1
+        // Animate the first tutorial bubble from the top left hand corner of the screen.
+        UIView.animate(withDuration: 0.5, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
 
-    //MARK: - Views
-    @IBOutlet weak var menuButtonView: UIView!
-    @IBOutlet weak var timerView: UIView!
-    @IBOutlet weak var teamOneView: UIView!
-    @IBOutlet weak var teamOneScoreView: UIView!
-    @IBOutlet weak var teamTwoView: UIView!
-    @IBOutlet weak var teamTwoScoreView: UIView!
-    @IBOutlet weak var startButtonView: UIView!
-    @IBOutlet weak var countdownView: UIView!
-    @IBOutlet weak var teamTurnView: UIView!
-    @IBOutlet weak var wordContainerView: UIView!
-    @IBOutlet weak var timesUpView: UIView!
+                // Move the view to original center.
+                self.tutorialBubbleTwoView.center.x = self.tutorialBubbleTwoView.center.x
+                self.tutorialBubbleTwoView.center.y = self.tutorialBubbleTwoView.center.y
+            
+            }, completion: nil )
+    }
     
-    
-    /// Used when timer is running out.
-    @IBOutlet weak var redBackgroundView: UIView!
-    
-    
-    
-    
-    //MARK:- Labels
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var teamOneLabel: UILabel!
-    @IBOutlet weak var teamTwoLabel: UILabel!
-    @IBOutlet weak var teamOneScoreLabel: UILabel!
-    @IBOutlet weak var teamTwoScoreLabel: UILabel!
-    @IBOutlet weak var teamTurnLabel: UILabel!
-    @IBOutlet weak var countdownLabel: UILabel!
-    @IBOutlet weak var wordLabel: UILabel!
-    
-    
-    
-    
-    // MARK: - Transition Managers
-    let transitionManager = TransitionManager()
 
     
-    //MARK:- Buttons
-    @IBOutlet weak var startButton: UIButton!
+
     
-    //MARK:- Animation Properties
-    var animatingLeft = false
-    var animationInProgress = false
-    
-    //MARK:- Timer Properties
-    var gameTimer = Timer()
-    var countdownTimer = Timer()
-    var segueDelayTimer = Timer()
-    /// Used to animate Time's Up prior to summary screen.
-    var timesUpTimer = Timer()
-    
-    var seconds = 00
-    var minutes = 1
-    var time = ""
-    var timeIsUp = false
-    
-    
-    //MARK:- Swipe Gesture Recognizer Properties
-    var swipedRight = false
-    var timesSwipedRight = 0
 
     
     
-    // Paths to sound effects.
-    let soundEffectButtonTap = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-    let soundEffectSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "swipeSoundEffect", ofType: "mp3")!)
-    let soundEffectWinner = URL(fileURLWithPath: Bundle.main.path(forResource: "winner", ofType: "mp3")!)
-    let soundEffectStartRound = URL(fileURLWithPath: Bundle.main.path(forResource: "initialCountdown", ofType: "mp3")!)
-    let soundEffectEndRound = URL(fileURLWithPath: Bundle.main.path(forResource: "countdown", ofType: "mp3")!)
-    let soundEffectCorrectSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "correctSwipe", ofType: "mp3")!)
-    let soundEffectWrongSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "wrong", ofType: "mp3")!)
     
     
+    // MARK:- View loads
     
-    /// Used for menu interactions sounds.
-    var audioPlayerButtonTapSound = AVAudioPlayer()
-    /// Used for sound effect when a word is swiped during the game.
-    var audioPlayerSwipeSound = AVAudioPlayer()
-    /// Used to play the sound effect when a team wins.
-    var audioPlayerWinSound = AVAudioPlayer()
-    /// Used to play sound effects before a game round begins.
-    var audioPlayerRoundIsStartingSound = AVAudioPlayer()
-    /// Used to play sound effects when the game timer is coming to an end.
-    var audioPlayerRoundIsEndingSound = AVAudioPlayer()
-    /// Used to play the correct swipe.
-    var audioPlayerCorrectSwipe = AVAudioPlayer()
-    /// Used to play the missed swipe.
-    var audioPlayerWrondSwipe = AVAudioPlayer()
-    
-    
-    
-    // View centers.
-    var menuButtonCenter:CGPoint!
-    var timerButtonCenter:CGPoint!
-    var startButtonCenter:CGPoint!
-    var teamTurnCenter:CGPoint!
-    var wordContainerCenter:CGPoint!
-    var timesUpCenter:CGPoint!
-    
-    
-    
-    // Used to test celebration screen. 
-    var gameWon = false
-    
-    
-    
-    
-    
-    
-    
-    // MARK:- VIEW METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+        // Tutorial View and Background configuration.
         
-        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
- 
+
+        
+            // Right G.R.
+            let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+            swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+            self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+            // Left G.R.
+            let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+            swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+            self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
     }
     
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+
+            self.tutorialBubbleTwoView.alpha = 1
+        
+
+        
+        
+            // Get centers of the views.
+            menuButtonCenter = self.menuButtonView.center
+            timerButtonCenter = self.timerView.center
+            startButtonCenter = self.startButtonView.center
+            teamTurnCenter = self.teamTurnView.center
+            wordContainerCenter = self.wordContainerView.center
+            timesUpCenter = self.timesUpView.center
+            
+            self.resetTimer()
+            self.setTeamTurn()
+            self.updateScore()
+            self.setColorForViewBackground()
+            self.configureViewStyles()
+            self.configureLabelContent()
+            self.loadSounds()
+            
+            // ANIMATION: Fade out `Time's Up` message off the screen so it's not seen during the game.
+            self.timesUpView.alpha = 0
+            
+            UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: teamOneView up (-)
+                self.teamOneView.center.y -= self.view.bounds.height
+                }, completion:nil)
+            UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: teamOneScore up (-)
+                self.teamOneScoreView.center.y -= self.view.bounds.height
+                }, completion: nil)
+            UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: teamTwoView up (-)
+                self.teamTwoView.center.y -= self.view.bounds.height
+                }, completion: nil)
+            UIView.animate(withDuration: 0.4, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: teamTwoScore (-)
+                self.teamTwoScoreView.center.y -= self.view.bounds.height
+                }, completion: nil)
+            UIView.animate(withDuration: 0.4, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: menuBtn animation
+                self.menuButtonView.center.y += self.view.bounds.height
+                }, completion: nil)
+            UIView.animate(withDuration: 0.4, delay: 0.7, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: timerView animate down (+)
+                self.timerView.center.y += self.view.bounds.height
+                }, completion: nil)
+            UIView.animate(withDuration: 0.4, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: teamTurn animation
+                self.teamTurnView.center.y += self.view.bounds.height
+                }, completion: nil)
+            UIView.animate(withDuration: 0.4, delay: 0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // ONSCREEN: startBtn animation
+                self.startButtonView.center.y -= self.view.bounds.height
+                }, completion: nil)
+        
+            self.teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
+            self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
+    }
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning() }
 
 
-    /**
-     - Get center of menuButtonView
-     - Get center of
-     */
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // Get centers of the views.
-        menuButtonCenter = self.menuButtonView.center
-        timerButtonCenter = self.timerView.center
-        startButtonCenter = self.startButtonView.center
-        teamTurnCenter = self.teamTurnView.center
-        wordContainerCenter = self.wordContainerView.center
-        timesUpCenter = self.timesUpView.center
+    
+    // MARK: - Main Game
+    
+    
+    /// Used by the gameTimer to generate gameplay.
+    func playgame() {
+    
+        // If the popUpTutorial is enabled, stop the gameTimer at 59 seconds and animate
+        if Game.sharedGameInstance.showPopUp {
+            print("PopUp Enabled")
+            
+            self.animateFirstPopUp()
+            self.gameTimer.invalidate()
         
-        self.resetTimer()
+        } else if Game.sharedGameInstance.won {
+                
+                // Invalidate the gameTimer.
+                self.gameTimer.invalidate()
+                
+                // Stop the end round sound.
+                self.audioPlayerRoundIsEndingSound.stop()
+                
+                // Segue to the CelebrationViewController.
+                performSegue(withIdentifier: "segueToCelebration", sender: self)
+        } else {
+        
+        
+        // Reset Countdown for next team animation.
+        self.countdownLabel.text = " "
         self.setTeamTurn()
+        self.prepareGameTimer()
+        self.startGameTimer()
         self.updateScore()
-        self.setColorForViewBackground()
-        self.configureViewStyles()
-        self.configureLabelContent()
-        self.loadSounds()
-
-        // ANIMATION: Fade out `Time's Up` message off the screen so it's not seen during the game.
-        self.timesUpView.alpha = 0
-        
-        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: teamOneView up (-)
-            self.teamOneView.center.y -= self.view.bounds.height
-            }, completion:nil)
-        UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: teamOneScore up (-)
-            self.teamOneScoreView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: teamTwoView up (-)
-            self.teamTwoView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: teamTwoScore (-)
-            self.teamTwoScoreView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: menuBtn animation
-            self.menuButtonView.center.y += self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.7, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: timerView animate down (+)
-            self.timerView.center.y += self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: teamTurn animation
-            self.teamTurnView.center.y += self.view.bounds.height
-            }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0.9, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            // ONSCREEN: startBtn animation
-            self.startButtonView.center.y -= self.view.bounds.height
-            }, completion: nil)
-        
-        
-        self.teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
-        self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
-        
-
+        self.endRound(40)
+    
+        }
     }
+    
     
     
     
@@ -290,7 +264,19 @@ class GameViewController: UIViewController {
             }, completion: nil )
         self.runCountdownTimer()
         
-
+        
+        // For Tutorial Animations:
+        
+        
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+            self.tutorialBubbleTwoView.center.y -= self.view.bounds.height
+            self.tutorialBubbleTwoView.center.x -= self.view.bounds.width
+            
+            }, completion:nil)
+        
+        
+        // Reset swipe count.
         self.timesSwipedRight = 0
         
     }
@@ -495,7 +481,7 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK: - Countdown animations ###############################################################################################
+    // MARK: - Countdown animations
     /**
      Used to create the message "3,2,1...Go!" that informs players that
      a round will begin shortly. Once the countdown animations have concluded,
@@ -529,7 +515,7 @@ class GameViewController: UIViewController {
 
     
     
-    // MARK:- INIT METHODS - METHOD() ####################################################################################################
+    // MARK:- INIT METHODS - METHOD()
     
     func configureViewStyles(){
         let views = [self.startButton,
@@ -581,31 +567,7 @@ class GameViewController: UIViewController {
         self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
     }
     
-    
 
-    /// Used by the gameTimer to generate gameplay.
-    func startRound() {
-        if Game.sharedGameInstance.won {
-           
-            // Invalidate the gameTimer.
-            self.gameTimer.invalidate()
-            
-            // Stop the end round sound.
-            self.audioPlayerRoundIsEndingSound.stop()
-            
-            // Segue to the CelebrationViewController.
-            performSegue(withIdentifier: "segueToCelebration", sender: self)
-
-
-        }
-        
-        self.countdownLabel.text = " "
-        self.setTeamTurn()
-        self.prepareGameTimer()
-        self.startGameTimer()
-        self.updateScore()
-        self.endRound(40)
-    }
     
 
     
@@ -812,7 +774,7 @@ class GameViewController: UIViewController {
      */
     func runGameTimer() {
         if !self.gameTimer.isValid {
-            self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.startRound), userInfo:nil, repeats: true)
+            self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.playgame), userInfo:nil, repeats: true)
         }
     }
     
@@ -855,6 +817,130 @@ class GameViewController: UIViewController {
         let strSeconds = String(format: "%02d", self.seconds)
         self.timerLabel.text = "\(strMinutes):\(strSeconds)"
     }
+
+
+
+    
+    
+    
+    //MARK:- General properties
+    var categoryTapped = Int()
+    let UP = "UP"
+    let DOWN = "DOWN"
+    let OUT = "OUT"
+    let IN = "IN"
+    /// Used to store the value for the initial countdown.
+    var countdown = 4
+    ///
+    var wordOnScreen = false
+    ///
+    var wordRemoved = false
+    /// Used to determine if round is in progress.
+    var roundInProgress = false
+    
+    //MARK: - Views
+    @IBOutlet weak var menuButtonView: UIView!
+    @IBOutlet weak var timerView: UIView!
+    @IBOutlet weak var teamOneView: UIView!
+    @IBOutlet weak var teamOneScoreView: UIView!
+    @IBOutlet weak var teamTwoView: UIView!
+    @IBOutlet weak var teamTwoScoreView: UIView!
+    @IBOutlet weak var startButtonView: UIView!
+    @IBOutlet weak var countdownView: UIView!
+    @IBOutlet weak var teamTurnView: UIView!
+    @IBOutlet weak var wordContainerView: UIView!
+    @IBOutlet weak var timesUpView: UIView!
+    
+    
+    /// Used when timer is running out.
+    @IBOutlet weak var redBackgroundView: UIView!
+    
+    
+    
+    
+    //MARK:- Labels
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var teamOneLabel: UILabel!
+    @IBOutlet weak var teamTwoLabel: UILabel!
+    @IBOutlet weak var teamOneScoreLabel: UILabel!
+    @IBOutlet weak var teamTwoScoreLabel: UILabel!
+    @IBOutlet weak var teamTurnLabel: UILabel!
+    @IBOutlet weak var countdownLabel: UILabel!
+    @IBOutlet weak var wordLabel: UILabel!
+    
+    
+    
+    // MARK: - Transition Managers
+    let transitionManager = TransitionManager()
+    
+    
+    //MARK:- Buttons
+    @IBOutlet weak var startButton: UIButton!
+    
+    //MARK:- Animation Properties
+    var animatingLeft = false
+    var animationInProgress = false
+    
+    //MARK:- Timer Properties
+    var gameTimer = Timer()
+    var countdownTimer = Timer()
+    var segueDelayTimer = Timer()
+    /// Used to animate Time's Up prior to summary screen.
+    var timesUpTimer = Timer()
+    
+    var seconds = 00
+    var minutes = 1
+    var time = ""
+    var timeIsUp = false
+    
+    
+    //MARK:- Swipe Gesture Recognizer Properties
+    var swipedRight = false
+    var timesSwipedRight = 0
+    
+    
+    
+    // Paths to sound effects.
+    let soundEffectButtonTap = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
+    let soundEffectSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "swipeSoundEffect", ofType: "mp3")!)
+    let soundEffectWinner = URL(fileURLWithPath: Bundle.main.path(forResource: "winner", ofType: "mp3")!)
+    let soundEffectStartRound = URL(fileURLWithPath: Bundle.main.path(forResource: "initialCountdown", ofType: "mp3")!)
+    let soundEffectEndRound = URL(fileURLWithPath: Bundle.main.path(forResource: "countdown", ofType: "mp3")!)
+    let soundEffectCorrectSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "correctSwipe", ofType: "mp3")!)
+    let soundEffectWrongSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "wrong", ofType: "mp3")!)
+    
+    
+    
+    /// Used for menu interactions sounds.
+    var audioPlayerButtonTapSound = AVAudioPlayer()
+    /// Used for sound effect when a word is swiped during the game.
+    var audioPlayerSwipeSound = AVAudioPlayer()
+    /// Used to play the sound effect when a team wins.
+    var audioPlayerWinSound = AVAudioPlayer()
+    /// Used to play sound effects before a game round begins.
+    var audioPlayerRoundIsStartingSound = AVAudioPlayer()
+    /// Used to play sound effects when the game timer is coming to an end.
+    var audioPlayerRoundIsEndingSound = AVAudioPlayer()
+    /// Used to play the correct swipe.
+    var audioPlayerCorrectSwipe = AVAudioPlayer()
+    /// Used to play the missed swipe.
+    var audioPlayerWrondSwipe = AVAudioPlayer()
+    
+    
+    
+    // View centers.
+    var menuButtonCenter:CGPoint!
+    var timerButtonCenter:CGPoint!
+    var startButtonCenter:CGPoint!
+    var teamTurnCenter:CGPoint!
+    var wordContainerCenter:CGPoint!
+    var timesUpCenter:CGPoint!
+    
+    
+    
+    // Used to test celebration screen.
+    var gameWon = false
+    
 }
 
 
