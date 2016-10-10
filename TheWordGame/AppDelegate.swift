@@ -17,43 +17,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var canPurchase:Bool = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+     
         // Override point for customization after application launch.
-        
-        // If the array of tutorialPopUp is empty...
-        
-        let moc = managedObjectContext
-        
-        let request: NSFetchRequest<TutorialPopUp> = TutorialPopUp.fetchRequest
 
     
-        do {
-            let fetchedEmployees = try moc.executeFetchRequest(employeesFetch) as! [AAAEmployeeMO]
-        } catch {
-            fatalError("Failed to fetch employees: \(error)")
+        let fetchRequest : NSFetchRequest<TutorialPopUp>
+        // 1. Create the fetch request for all entities of type TutorialPopUp.
+        
+        if #available(iOS 10.0, OSX 10.12, *) {
+            fetchRequest = TutorialPopUp.fetchRequest()
+            // Fetch request for newer iOS versions.
+            
+        } else {
+            fetchRequest = NSFetchRequest(entityName: "TutorialPopUp")
+            // Fetch request for older iOS versions.
         }
-    }
         
         
         
+        do {
+            // 2. Fetch the request results from the managedObjectContext (MOC).
+            
+            let entities = try managedObjectContext.fetch(fetchRequest)
+            // Retrieve all the entities that have been saved in the MOC.
+            
+            print("Current # of entities in MOC = \(entities.count)")
+            // Display the total number of entities in the MOC
+   
+            if entities.count < 1 {
+            // 3. If the MOC does not have any entities, add a single entity to it.
+                
+                let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
+                // Add TutorialPopUp entity to the MOC.
+                tutorial.enabled = true
+                // Set tutorialPopUp's enabled attribute to TRUE to notify that popUpAnimations are allowed.
+                try managedObjectContext.save()
+                // Try to save the entity into the MOC.
+            }
+            else {
+                print("Total # of entities in MOC = \(entities.count)")
+                // Display the total number of entities in the MOC           
+            }
+            
+        } catch let error {
+            print(error.localizedDescription)
+            // Display information about the type of error.
+        }
+
         
-//        
-//            // Create the object.
-//            let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
-//            tutorial.enabled = true
-//            
-    
-        
-        
-        
-        
-//        if SKPaymentQueue.canMakePayments(){
-//            
-//            canPurchase = true
-//            IAPManager.sharedInstance.setupInAppPurchases()
-//        }
-//    
-//        IAPManager.sharedInstance.restorePurchases()
-//        
         return true
     }
 
