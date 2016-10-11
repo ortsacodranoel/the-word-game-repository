@@ -29,7 +29,7 @@ class CelebrationViewController: UIViewController {
     var celebrationScreenActiveAudio = AVAudioPlayer()
     
 
-    ///
+    /// 
     @IBAction func newGameTapped(_ sender: AnyObject) {
         
         if Game.sharedGameInstance.teamOneIsActive == true {

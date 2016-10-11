@@ -9,12 +9,11 @@
 import UIKit
 import AVFoundation
 import StoreKit
+import CoreData
 
 class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
-    
     fileprivate var lastContentOffset: CGFloat = 0
-    
     
     // MARK: - Views
     @IBOutlet weak var tutorialView: UIView!
@@ -45,7 +44,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var tapAudioPlayer = AVAudioPlayer()
     
     
-    
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
     
@@ -53,11 +53,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     // MARK: - Init() Methods
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
@@ -72,11 +72,48 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
         }
         
-
+        
         
               // print(IAPManager.sharedInstance.products.count)
     }
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+
+        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        
+        if enabled == true {
+        
+            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.viewOverlay.alpha = 0.8
+                // Change the color of the screen so tutorial pop up stands out.
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.tutorialView.alpha = 1
+                // The tutorial is set to alpha = 0 by default.
+                
+                self.tutorialView.center.x += self.view.bounds.width
+                // Move the tutorial view right.
+                self.tutorialView.center.y -= self.view.bounds.height
+                // Move the tutorial view up.
+            }, completion: nil )
+        }
+    }
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -103,15 +140,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+    
+    
     /**
      Used to hide the tutorial bubble from view and fade out the overlay when
      the overlayView or bubbleView is tapped.
     */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
-
         
         // Animate overlay off-screen.
-        UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
             // Increase the alpha of the view.
             self.viewOverlay.alpha = 0
@@ -119,7 +157,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             }, completion: nil)
         
         // Animate tutorialView off-screen.
-        UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
             self.tutorialView.alpha = 1
             
@@ -129,44 +167,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             }, completion: { (bool) in
                 self.tutorialView.alpha = 0
         })
-
-        
     }
 
 
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-       
-        // Animate overlay.
-        UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-                self.viewOverlay.alpha = 0.5
-
-            }, completion: nil)
-
-        UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-
-            
-                self.tutorialView.alpha = 1
-             
-                // Move the view into place.
-                self.tutorialView.center.x += self.view.bounds.width
-                self.tutorialView.center.y -= self.view.bounds.height
-                
-            }, completion: nil )
-        }
-    
- 
-    
-    
-    
     
     
     
