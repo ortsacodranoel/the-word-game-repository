@@ -38,7 +38,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
 
-    
     /// Used to check if tutorial is enabled.
     func tutorialEnabledCheck() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
@@ -49,18 +48,46 @@ class GameViewController: UIViewController {
     }
     
     
-    
+    /**
+     Used to hide the tutorial bubble from view and fade out the overlay when
+     the overlayView or bubbleView is tapped.
+     */
+    func hideTutorialAction(sender:UITapGestureRecognizer) {
+        
+        // Animate overlay off-screen.
+        UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            // Increase the alpha of the view.
+            self.tutorialOverlayView.alpha = 0
+            
+            }, completion: nil)
+        
+        // Animate tutorialView off-screen.
+        UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            // Move the view into place.
+            self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
+            self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+            }, completion: { (bool) in
+                self.tutorialBubbleTwoView.alpha = 0
+        })
+    }
 
     
 
-    
-    
+
     
     
     // MARK:- View loads
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// Add gesture recognizer for tap on overlayView.
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(GameViewController.hideTutorialAction(sender:)))
+        self.tutorialOverlayView.addGestureRecognizer(tapGestureRecognizer)
+
+        
             let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
             swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
             self.view.addGestureRecognizer(swipeRightGestureRecognizer)
@@ -140,20 +167,25 @@ class GameViewController: UIViewController {
 
 
     
-    // MARK: - Main Game
-    
     
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
         
         // FIXME: - PopUp
+        
+        
+
         self.tutorialBubbleTwoView.alpha = 1
         // The tutorialBubbleTwoView has an alpha of 0 in the main.storyboard
         self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
         self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+        // Move the tutorial on-screen.
         
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                // Tutorial animation.
+            
+            self.tutorialOverlayView.alpha = 0.8
+            // Fade-in the background.
+            
                 self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
                 self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
                 self.gameTimer.invalidate()
