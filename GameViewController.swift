@@ -74,8 +74,7 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tutorialBubbleTwoView.alpha = 1
-
+        self.tutorialBubbleTwoView.alpha = 0
 
 
         
@@ -146,13 +145,20 @@ class GameViewController: UIViewController {
     
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
-    
-//        // If the popUpTutorial is enabled, stop the gameTimer at 59 seconds and animate
-//        if Game.sharedGameInstance.showPopUp {
-//            print("PopUp Enabled")
-//            
-//            self.animateFirstPopUp()
-//            self.gameTimer.invalidate()
+        
+        // FIXME: - PopUp
+        self.tutorialBubbleTwoView.alpha = 1
+        // The tutorialBubbleTwoView has an alpha of 0 in the main.storyboard
+        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
+        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+        
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                // Tutorial animation.
+                self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
+                self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
+                self.gameTimer.invalidate()
+            }, completion: nil)
+        
         
          if Game.sharedGameInstance.won {
                 
@@ -164,7 +170,8 @@ class GameViewController: UIViewController {
                 
                 // Segue to the CelebrationViewController.
                 performSegue(withIdentifier: "segueToCelebration", sender: self)
-        } else {
+       
+         } else {
         
         
         // Reset Countdown for next team animation.
@@ -219,30 +226,16 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK:- startButtonTouchUpInside()
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
     
-        self.tutorialBubbleTwoView.alpha = 1
+
+
 
         
-        if self.tutorialEnabledCheck() {
-            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.tutorialBubbleTwoView.center.y = 0
-                self.tutorialBubbleTwoView.center.x = 0
-                }, completion: nil)
-        }
 
         
-        
-        
-        // MARK: - Tutorial
-        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-         
-            // Tutorial animation.
-            self.tutorialBubbleTwoView.center.y += self.view.bounds.height
-            self.tutorialBubbleTwoView.center.x += self.view.bounds.width
-            }, completion:nil)
+
         
 
         self.audioPlayerButtonTapSound.play()
