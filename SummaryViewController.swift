@@ -112,7 +112,7 @@ class SummaryViewController: UIViewController {
                 let entity = result[0] as! NSManagedObject
                 // Get the first entity.
                 
-                entity.setValue(false, forKey: "enabled")
+                entity.setValue(true, forKey: "enabled")
                 
                 try managedObjectContext.save()
 

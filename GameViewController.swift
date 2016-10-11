@@ -37,26 +37,18 @@ class GameViewController: UIViewController {
     // MARK: - Tutorial
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
-    
-    func animateFirstPopUp() {
-        
-        // Fade-in the overlayView to simulate diming the screen.
-        UIView.animate(withDuration: 0.5, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.tutorialOverlayView.alpha = 0.8
-            }, completion: nil)
-        
-        self.tutorialBubbleTwoView.alpha = 1
-        // Animate the first tutorial bubble from the top left hand corner of the screen.
-        UIView.animate(withDuration: 0.5, delay: 0.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
 
-                // Move the view to original center.
-                self.tutorialBubbleTwoView.center.x = self.tutorialBubbleTwoView.center.x
-                self.tutorialBubbleTwoView.center.y = self.tutorialBubbleTwoView.center.y
-            
-            }, completion: nil )
+    
+    /// Used to check if tutorial is enabled.
+    func tutorialEnabledCheck() -> Bool {
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+        // Get the tutorial instance.
+        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        // Retrieve data.
+        return enabled
     }
     
-
+    
     
 
     
@@ -69,16 +61,10 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Tutorial View and Background configuration.
-        
-
-        
-            // Right G.R.
             let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
             swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
             self.view.addGestureRecognizer(swipeRightGestureRecognizer)
-            // Left G.R.
+        
             let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
             swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
             self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
@@ -88,27 +74,8 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
-        
-        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
-        
-        if enabled == true {
-            
-            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.tutorialOverlayView.alpha = 0.0
-                // Change the color of the screen so tutorial pop up stands out.
-                }, completion: nil)
-            
-            UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.tutorialBubbleTwoView.alpha = 1
-                // The tutorial is set to alpha = 0 by default.
-                
-                self.tutorialBubbleTwoView.center.x -= self.view.bounds.width
-                // Move the tutorial view right.
-                self.tutorialBubbleTwoView.center.y += self.view.bounds.height
-                // Move the tutorial view up.
-                }, completion: nil )
-        }
+        self.tutorialBubbleTwoView.alpha = 1
+
 
 
         
@@ -255,7 +222,29 @@ class GameViewController: UIViewController {
     // MARK:- startButtonTouchUpInside()
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
+    
+        self.tutorialBubbleTwoView.alpha = 1
+
         
+        if self.tutorialEnabledCheck() {
+            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.tutorialBubbleTwoView.center.y = 0
+                self.tutorialBubbleTwoView.center.x = 0
+                }, completion: nil)
+        }
+
+        
+        
+        
+        // MARK: - Tutorial
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+         
+            // Tutorial animation.
+            self.tutorialBubbleTwoView.center.y += self.view.bounds.height
+            self.tutorialBubbleTwoView.center.x += self.view.bounds.width
+            }, completion:nil)
+        
+
         self.audioPlayerButtonTapSound.play()
         self.audioPlayerRoundIsStartingSound.play()
         
@@ -282,16 +271,7 @@ class GameViewController: UIViewController {
         self.runCountdownTimer()
         
         
-        // For Tutorial Animations:
-        
-        
-        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
-            self.tutorialBubbleTwoView.center.y -= self.view.bounds.height
-            self.tutorialBubbleTwoView.center.x -= self.view.bounds.width
-            
-            }, completion:nil)
-        
+
         
         // Reset swipe count.
         self.timesSwipedRight = 0
