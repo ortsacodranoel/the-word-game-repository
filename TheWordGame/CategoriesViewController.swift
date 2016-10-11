@@ -65,9 +65,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         // ShowPopUp from Game.swift should be set to true. 
         
         
-        
-        
-        
+
         
         
         /// Add gesture recognizer for tap on overlayView.
@@ -83,7 +81,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
         }
         
-
+        
         
               // print(IAPManager.sharedInstance.products.count)
     }
@@ -91,22 +89,28 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         
-        // TUTORIAL: overview
-        UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-            self.viewOverlay.alpha = 0.8
-            
-            }, completion: nil)
+   
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+
+        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
         
-        UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+        if enabled == true {
+        
+            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.viewOverlay.alpha = 0.8
+                // Change the color of the screen so tutorial pop up stands out.
+            }, completion: nil)
             
-            self.tutorialView.alpha = 1
-            
-            // Move the view into place.
-            self.tutorialView.center.x += self.view.bounds.width
-            self.tutorialView.center.y -= self.view.bounds.height
-            
+            UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.tutorialView.alpha = 1
+                // The tutorial is set to alpha = 0 by default.
+                
+                self.tutorialView.center.x += self.view.bounds.width
+                // Move the tutorial view right.
+                self.tutorialView.center.y -= self.view.bounds.height
+                // Move the tutorial view up.
             }, completion: nil )
+        }
     }
     
 

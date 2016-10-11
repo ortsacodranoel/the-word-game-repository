@@ -85,6 +85,8 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
+        
         // Used to append correct/missed words.
         let words = NSMutableAttributedString()
         // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.

@@ -16,10 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var canPurchase:Bool = false
 
+    /// Used to determine if the 'Pop Up Tutorials' should be enabled. 
+    var sharedTutorialEntity:NSManagedObject!
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-     
         // Override point for customization after application launch.
-
     
         let fetchRequest : NSFetchRequest<TutorialPopUp>
         // 1. Create the fetch request for all entities of type TutorialPopUp.
@@ -49,10 +52,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
                 // Add TutorialPopUp entity to the MOC.
+                
                 tutorial.enabled = true
                 // Set tutorialPopUp's enabled attribute to TRUE to notify that popUpAnimations are allowed.
+                
                 try managedObjectContext.save()
                 // Try to save the entity into the MOC.
+
+                
+                // 4. Retrieve saved entity.
+                do {
+                    
+                    let result = try self.managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    
+                    if (result.count > 0) {
+                        
+                        self.sharedTutorialEntity = result[0] as! NSManagedObject
+                        // Get the first entity.
+                    
+                        self.sharedTutorialEntity.setValue(false, forKey: "enabled")
+                        
+                        print(sharedTutorialEntity.value(forKey: "enabled"))
+                        
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+                
+            } else if entities.count > 0 {
+                
+                do {
+                    let result = try self.managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    
+                    if (result.count > 0) {
+                        self.sharedTutorialEntity = result[0] as! NSManagedObject
+                        // Get the first entity.
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+                
             }
             else {
                 print("Total # of entities in MOC = \(entities.count)")
