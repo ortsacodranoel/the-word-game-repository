@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
                         // Get the first entity.
                     
-                        self.sharedTutorialEntity.setValue(false, forKey: "enabled")
+                        self.sharedTutorialEntity.setValue(true, forKey: "enabled")
                         
                         print(sharedTutorialEntity.value(forKey: "enabled"))
                         

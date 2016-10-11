@@ -89,7 +89,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         
-   
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
 
         let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool

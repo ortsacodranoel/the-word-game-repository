@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import SpriteKit
 import GameplayKit
+import CoreData
 
 class SummaryViewController: UIViewController {
 
@@ -85,6 +86,43 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+
+        
+        let fetchRequest : NSFetchRequest<TutorialPopUp>
+        // 1. Create the fetch request for all entities of type TutorialPopUp.
+        
+        if #available(iOS 10.0, OSX 10.12, *) {
+            fetchRequest = TutorialPopUp.fetchRequest()
+            // Fetch request for newer iOS versions.
+            
+        } else {
+            fetchRequest = NSFetchRequest(entityName: "TutorialPopUp")
+            // Fetch request for older iOS versions.
+        }
+        
+        
+        // Retrieve saved entity.
+        do {
+            
+            let result = try managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+            
+            if (result.count > 0) {
+                
+                let entity = result[0] as! NSManagedObject
+                // Get the first entity.
+                
+                entity.setValue(false, forKey: "enabled")
+                
+                try managedObjectContext.save()
+
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        
+        
         
         
         // Used to append correct/missed words.
@@ -141,6 +179,8 @@ class SummaryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: false)
+        
+        
     }
     
     

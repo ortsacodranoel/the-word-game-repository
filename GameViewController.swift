@@ -88,12 +88,29 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         
+        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        
+        if enabled == true {
+            
+            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.tutorialOverlayView.alpha = 0.0
+                // Change the color of the screen so tutorial pop up stands out.
+                }, completion: nil)
+            
+            UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.tutorialBubbleTwoView.alpha = 1
+                // The tutorial is set to alpha = 0 by default.
+                
+                self.tutorialBubbleTwoView.center.x -= self.view.bounds.width
+                // Move the tutorial view right.
+                self.tutorialBubbleTwoView.center.y += self.view.bounds.height
+                // Move the tutorial view up.
+                }, completion: nil )
+        }
 
-            self.tutorialBubbleTwoView.alpha = 1
-        
 
-        
         
             // Get centers of the views.
             menuButtonCenter = self.menuButtonView.center
@@ -163,14 +180,14 @@ class GameViewController: UIViewController {
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
     
-        // If the popUpTutorial is enabled, stop the gameTimer at 59 seconds and animate
-        if Game.sharedGameInstance.showPopUp {
-            print("PopUp Enabled")
-            
-            self.animateFirstPopUp()
-            self.gameTimer.invalidate()
+//        // If the popUpTutorial is enabled, stop the gameTimer at 59 seconds and animate
+//        if Game.sharedGameInstance.showPopUp {
+//            print("PopUp Enabled")
+//            
+//            self.animateFirstPopUp()
+//            self.gameTimer.invalidate()
         
-        } else if Game.sharedGameInstance.won {
+         if Game.sharedGameInstance.won {
                 
                 // Invalidate the gameTimer.
                 self.gameTimer.invalidate()
