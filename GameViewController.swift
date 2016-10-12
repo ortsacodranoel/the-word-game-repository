@@ -37,8 +37,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
     @IBOutlet weak var tutorial3view: UIView!
-    
-    
+
 
     
     /// Used to check if tutorial is enabled.
@@ -71,8 +70,13 @@ class GameViewController: UIViewController {
             // Move the view into place.
             self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
             self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+            
+            self.tutorial3view.center.y += self.tutorial3view.frame.size.height
+            self.tutorial3view.center.x += self.tutorial3view.frame.size.width
+
             }, completion: { (bool) in
                 self.tutorialBubbleTwoView.alpha = 0
+                self.tutorial3view.alpha = 0
         })
     }
 
@@ -104,10 +108,13 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // TODO: - Tutorial
-        self.tutorialBubbleTwoView.alpha = 0
-        self.tutorial3view.alpha = 0
-
+            // TODO: - Tutorial
+            self.tutorialBubbleTwoView.alpha = 0
+            self.tutorial3view.alpha = 0
+        
+        
+        
+        
             // Get centers of the views.
             menuButtonCenter = self.menuButtonView.center
             timerButtonCenter = self.timerView.center
@@ -174,13 +181,21 @@ class GameViewController: UIViewController {
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
         
-        // FIXME: - Tutorial
+        // TODO: - Tutorial
         // 1. The code below should run only if tutorial is enabled.
 
-        // 2. Bring the bubble into view and setup the view offScreen so that it can be animated onScreen.
+        // 2. Increase alpha of views and move offScreen so that the onScreen animation can occur.
         self.tutorialBubbleTwoView.alpha = 1
         self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
         self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+        
+        self.tutorial3view.alpha = 1
+        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
+        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
+
+        
+        
+        
         
         // 3. Bring the bubble view onScreen and change the background color by increasing the alpha. Invalidate timer during the presentation.
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -189,6 +204,17 @@ class GameViewController: UIViewController {
             self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
             self.gameTimer.invalidate()
             }, completion: nil)
+
+        
+        UIView.animate(withDuration: 0.4, delay: 2.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorial3view.alpha = 1
+            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
+            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
+            // Animates the tutorial3view onScreen.
+            }, completion: nil)
+        
+
+        
         
         // 4. Make sure timer is started again. 
         
