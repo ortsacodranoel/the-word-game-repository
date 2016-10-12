@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -94,7 +94,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Divide into two teams, then select a category to start." lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-uZ-1jq">
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -158,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOF-wN-00Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1035" y="-1984"/>
+            <point key="canvasLocation" x="16" y="-1967"/>
         </scene>
         <!--Rules View Controller-->
         <scene sceneID="HXC-YQ-azn">
@@ -619,28 +619,32 @@
                                     <constraint firstAttribute="height" constant="50" id="9PJ-uS-oOx"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyW-OO-DFM" userLabel="tutorial2View">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="261" id="6qe-Pd-e7d"/>
-                                    <constraint firstAttribute="height" constant="202" id="xVU-ls-4bl"/>
-                                </constraints>
-                            </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-7N-vEF" userLabel="tutorialOverlayView">
                                 <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scL-lG-nbx" userLabel="tutorial4view">
+                                        <frame key="frameInset" minX="0.0%" minY="96.02%" width="189" height="119"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.38823529410000002" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kx-uz-Qw0" userLabel="tutorialBubbleTwoView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyW-OO-DFM" userLabel="tutorial3view">
+                                <color key="backgroundColor" red="0.41431451009999998" green="0.56828034459999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Dac-0a-wLk"/>
+                                    <constraint firstAttribute="height" constant="140" id="Kzi-rJ-ZOY"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kx-uz-Qw0" userLabel="tutorial2view">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BubbleTwo-1" translatesAutoresizingMaskIntoConstraints="NO" id="vEj-ZV-xdZ" userLabel="BubbleTwoImageView">
                                         <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY3-fs-bxb" userLabel="tutorialLabel">
-                                        <string key="text">- Make your team guess the Words that appear on screen.  
-- You can use any means, just don’t say any form of or part of the answer.
-</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your team to guess the answer without saying any form of the word(s) in the answer" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY3-fs-bxb" userLabel="tutorialLabel">
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -662,7 +666,6 @@
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="ESi-v0-8h2" secondAttribute="bottom" constant="8" id="7fd-Y7-Nqb"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leadingMargin" constant="-20" id="8NT-M6-rKa"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="15t-ah-ixH" secondAttribute="bottom" constant="8" id="BVO-ya-SQJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MyW-OO-DFM" secondAttribute="trailing" constant="-20" id="D5i-B2-XeA"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="X4h-Ud-9qu" secondAttribute="bottom" constant="107" id="I4k-QL-Xrq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Cw-LS-R2j" secondAttribute="trailing" id="Km8-Fn-aNh"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leading" id="Kuz-7Y-CRP"/>
@@ -671,11 +674,9 @@
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="KRW-gC-67k" secondAttribute="bottom" constant="8" id="O4s-XF-WjK"/>
                             <constraint firstItem="oMq-Hf-dTF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="PgM-4F-fR6"/>
                             <constraint firstAttribute="trailing" secondItem="Jzo-Ve-eBY" secondAttribute="trailing" id="RMS-bv-rfP"/>
-                            <constraint firstAttribute="bottom" secondItem="MyW-OO-DFM" secondAttribute="bottom" constant="-1" id="TF7-ul-JKf"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" id="W1W-OB-8zU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jzo-Ve-eBY" secondAttribute="trailing" constant="-20" id="X1I-XQ-NTF"/>
                             <constraint firstItem="0BN-u8-UiN" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="YFF-nc-NWX"/>
-                            <constraint firstAttribute="bottom" secondItem="MyW-OO-DFM" secondAttribute="bottom" constant="-1" id="YtX-yH-VSp"/>
                             <constraint firstItem="Jzo-Ve-eBY" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" constant="8" id="ZtV-y6-OT0"/>
                             <constraint firstAttribute="leadingMargin" secondItem="KRW-gC-67k" secondAttribute="leading" id="bZj-Gn-5q3"/>
                             <constraint firstItem="0BN-u8-UiN" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" id="bej-IW-3bz"/>
@@ -690,7 +691,9 @@
                             <constraint firstItem="8Yo-P8-eRF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="jlp-lm-gbM"/>
                             <constraint firstItem="0BN-u8-UiN" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="kj6-cO-hOx"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" id="l3D-aO-fYj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MyW-OO-DFM" secondAttribute="trailing" constant="-20" id="mBX-ZL-hxu"/>
                             <constraint firstItem="b1c-FI-qe6" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="nT2-VZ-jtH"/>
+                            <constraint firstAttribute="bottom" secondItem="MyW-OO-DFM" secondAttribute="bottom" id="pIp-7I-3X4"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leading" id="qW3-iM-hN0"/>
                             <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="13" id="qfV-up-BZl"/>
                             <constraint firstItem="6Cw-LS-R2j" firstAttribute="leading" secondItem="15t-ah-ixH" secondAttribute="trailing" constant="8" id="sHV-9A-Baw"/>
@@ -718,7 +721,7 @@
                         <outlet property="timerLabel" destination="2Mq-7s-cd5" id="9Zf-uT-5aV"/>
                         <outlet property="timerView" destination="Jzo-Ve-eBY" id="RYQ-oc-luz"/>
                         <outlet property="timesUpView" destination="b1c-FI-qe6" id="a44-qU-PZ1"/>
-                        <outlet property="tutorial2view" destination="MyW-OO-DFM" id="Mb9-Zb-t6h"/>
+                        <outlet property="tutorial3view" destination="MyW-OO-DFM" id="UBV-vg-RFf"/>
                         <outlet property="tutorialBubbleTwoView" destination="1kx-uz-Qw0" id="hD4-bg-Ejd"/>
                         <outlet property="tutorialOverlayView" destination="f20-7N-vEF" id="DWG-oH-sLL"/>
                         <outlet property="wordContainerView" destination="8Yo-P8-eRF" id="C4e-7b-sKA"/>
@@ -729,7 +732,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-cI-hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="590" y="-276"/>
+            <point key="canvasLocation" x="838.75" y="-506.25"/>
         </scene>
         <!--Summary View Controller-->
         <scene sceneID="0Fh-4e-9iv">
@@ -865,7 +868,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSh-33-zOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HOj-Gs-CDI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1630" y="1050"/>
+            <point key="canvasLocation" x="913" y="1410"/>
         </scene>
     </scenes>
     <resources>

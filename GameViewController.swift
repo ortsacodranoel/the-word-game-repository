@@ -36,7 +36,9 @@ class GameViewController: UIViewController {
     // MARK: - Tutorial
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
-    @IBOutlet weak var tutorial2view: UIView!
+    @IBOutlet weak var tutorial3view: UIView!
+    
+    
 
     
     /// Used to check if tutorial is enabled.
@@ -104,7 +106,7 @@ class GameViewController: UIViewController {
         
         // TODO: - Tutorial
         self.tutorialBubbleTwoView.alpha = 0
-        self.tutorial2view.alpha = 0
+        self.tutorial3view.alpha = 0
 
             // Get centers of the views.
             menuButtonCenter = self.menuButtonView.center
@@ -189,9 +191,6 @@ class GameViewController: UIViewController {
             }, completion: nil)
         
         // 4. Make sure timer is started again. 
-        
-        
-        
         
         
          if Game.sharedGameInstance.won {
