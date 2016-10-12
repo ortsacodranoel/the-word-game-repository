@@ -627,7 +627,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-7N-vEF" userLabel="tutorialOverlayView">
-                                <frame key="frameInset" minX="0.0%" minY="0.62%" width="100.21%" height="99.69%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -718,6 +718,7 @@
                         <outlet property="timerLabel" destination="2Mq-7s-cd5" id="9Zf-uT-5aV"/>
                         <outlet property="timerView" destination="Jzo-Ve-eBY" id="RYQ-oc-luz"/>
                         <outlet property="timesUpView" destination="b1c-FI-qe6" id="a44-qU-PZ1"/>
+                        <outlet property="tutorial2view" destination="MyW-OO-DFM" id="Mb9-Zb-t6h"/>
                         <outlet property="tutorialBubbleTwoView" destination="1kx-uz-Qw0" id="hD4-bg-Ejd"/>
                         <outlet property="tutorialOverlayView" destination="f20-7N-vEF" id="DWG-oH-sLL"/>
                         <outlet property="wordContainerView" destination="8Yo-P8-eRF" id="C4e-7b-sKA"/>

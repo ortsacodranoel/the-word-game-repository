@@ -32,12 +32,13 @@ import UIKit
 import AVFoundation
 
 class GameViewController: UIViewController {
-
     
     // MARK: - Tutorial
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
+    @IBOutlet weak var tutorial2view: UIView!
 
+    
     /// Used to check if tutorial is enabled.
     func tutorialEnabledCheck() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
@@ -103,7 +104,7 @@ class GameViewController: UIViewController {
         
         // TODO: - Tutorial
         self.tutorialBubbleTwoView.alpha = 0
-
+        self.tutorial2view.alpha = 0
 
             // Get centers of the views.
             menuButtonCenter = self.menuButtonView.center
