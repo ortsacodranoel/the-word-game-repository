@@ -78,7 +78,7 @@ class GameViewController: UIViewController {
 
     
     
-    // MARK:- View loads
+    // MARK:- View Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,10 +101,10 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // TODO: - Tutorial
         self.tutorialBubbleTwoView.alpha = 0
 
 
-        
             // Get centers of the views.
             menuButtonCenter = self.menuButtonView.center
             timerButtonCenter = self.timerView.center
@@ -171,25 +171,26 @@ class GameViewController: UIViewController {
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
         
-        // FIXME: - PopUp
-        
-        
+        // FIXME: - Tutorial
+        // 1. The code below should run only if tutorial is enabled.
 
+        // 2. Bring the bubble into view and setup the view offScreen so that it can be animated onScreen.
         self.tutorialBubbleTwoView.alpha = 1
-        // The tutorialBubbleTwoView has an alpha of 0 in the main.storyboard
         self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
         self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
-        // Move the tutorial on-screen.
         
+        // 3. Bring the bubble view onScreen and change the background color by increasing the alpha. Invalidate timer during the presentation.
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
             self.tutorialOverlayView.alpha = 0.8
-            // Fade-in the background.
-            
-                self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
-                self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
-                self.gameTimer.invalidate()
+            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
+            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
+            self.gameTimer.invalidate()
             }, completion: nil)
+        
+        // 4. Make sure timer is started again. 
+        
+        
+        
         
         
          if Game.sharedGameInstance.won {
