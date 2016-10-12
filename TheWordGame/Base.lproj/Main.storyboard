@@ -83,7 +83,7 @@
                                 </connections>
                             </collectionView>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="99.79%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -551,7 +551,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yo-P8-eRF" userLabel="wordContainerView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgD-7U-e6X" userLabel="wordLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="191"/>
+                                        <rect key="frame" x="0.0" y="-1" width="430" height="191"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
@@ -620,7 +620,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-7N-vEF" userLabel="tutorialOverlayView">
-                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
+                                <frame key="frameInset" minX="-0.21%" minY="0.0%" width="100.21%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -630,7 +630,7 @@
                                         <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your team to guess the answer without saying any form of the word(s) in the answer" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY3-fs-bxb" userLabel="tutorialLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your team to guess the answer without saying any form of the word(s) in the answer." lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY3-fs-bxb" userLabel="tutorialLabel">
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -646,14 +646,15 @@
                                     <constraint firstItem="fY3-fs-bxb" firstAttribute="leading" secondItem="1kx-uz-Qw0" secondAttribute="leadingMargin" constant="22" id="uJw-ER-EyW"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyW-OO-DFM" userLabel="tutorial3view">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyW-OO-DFM" userLabel="tutorial3view">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tutorial3image" translatesAutoresizingMaskIntoConstraints="NO" id="85d-6A-Vld" userLabel="tutorial3image">
-                                        <frame key="frameInset" minX="6.30%" minY="5.23%" width="87.11%" height="88.95%"/>
+                                        <frame key="frameInset" minX="0.86%" minY="4.00%" width="98.29%" height="93.33%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe right when they guess correctly, swipe left to pass. First team to 25 points wins!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yP0-Cx-qJE" userLabel="tutorial3label">
-                                        <frame key="frameInset" minX="3.73%" minY="7.56%" width="92.55%" height="84.88%"/>
+                                        <frame key="frameInset" minX="3.71%" minY="7.33%" width="92.57%" height="85.33%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -662,8 +663,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="172" id="MV2-oz-oxQ"/>
-                                    <constraint firstAttribute="width" constant="349" id="xY7-qI-1Uj"/>
+                                    <constraint firstAttribute="height" constant="150" id="G0t-ut-GZR"/>
+                                    <constraint firstAttribute="width" constant="350" id="zkR-cy-ZMY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -679,6 +680,7 @@
                             <constraint firstItem="b1c-FI-qe6" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="Mor-NV-tO0"/>
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="KRW-gC-67k" secondAttribute="bottom" constant="8" id="O4s-XF-WjK"/>
                             <constraint firstItem="oMq-Hf-dTF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="PgM-4F-fR6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MyW-OO-DFM" secondAttribute="trailing" constant="-21" id="Qvc-kG-4PI"/>
                             <constraint firstAttribute="trailing" secondItem="Jzo-Ve-eBY" secondAttribute="trailing" id="RMS-bv-rfP"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" id="W1W-OB-8zU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jzo-Ve-eBY" secondAttribute="trailing" constant="-20" id="X1I-XQ-NTF"/>
@@ -691,15 +693,14 @@
                             <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="6Cw-LS-R2j" secondAttribute="bottom" constant="8" id="cex-nl-x3u"/>
                             <constraint firstItem="u2h-JI-sPA" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" constant="8" id="dPv-YP-HZH"/>
                             <constraint firstItem="X4h-Ud-9qu" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="do0-64-XeB"/>
-                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="MyW-OO-DFM" secondAttribute="bottom" constant="1" id="fC7-t9-iTp"/>
                             <constraint firstItem="u2h-JI-sPA" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leadingMargin" constant="-20" id="fxC-Mq-tKE"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" id="gHY-Iq-Qdv"/>
                             <constraint firstItem="ESi-v0-8h2" firstAttribute="leading" secondItem="ef8-cL-Zo5" secondAttribute="trailing" constant="8" id="hFR-Je-asH"/>
                             <constraint firstItem="8Yo-P8-eRF" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="jlp-lm-gbM"/>
                             <constraint firstItem="0BN-u8-UiN" firstAttribute="centerY" secondItem="6RZ-Fk-ZnC" secondAttribute="centerY" id="kj6-cO-hOx"/>
+                            <constraint firstItem="q4h-EO-UYy" firstAttribute="top" secondItem="MyW-OO-DFM" secondAttribute="bottom" constant="1" id="kmo-d5-xEC"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="top" secondItem="nHJ-BE-Jjg" secondAttribute="bottom" id="l3D-aO-fYj"/>
                             <constraint firstItem="b1c-FI-qe6" firstAttribute="centerX" secondItem="6RZ-Fk-ZnC" secondAttribute="centerX" id="nT2-VZ-jtH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MyW-OO-DFM" secondAttribute="trailing" constant="-19" id="pgz-Sw-E9B"/>
                             <constraint firstItem="1kx-uz-Qw0" firstAttribute="leading" secondItem="6RZ-Fk-ZnC" secondAttribute="leading" id="qW3-iM-hN0"/>
                             <constraint firstItem="X4h-Ud-9qu" firstAttribute="top" secondItem="TBi-Pc-d7e" secondAttribute="bottom" constant="13" id="qfV-up-BZl"/>
                             <constraint firstItem="6Cw-LS-R2j" firstAttribute="leading" secondItem="15t-ah-ixH" secondAttribute="trailing" constant="8" id="sHV-9A-Baw"/>
@@ -738,7 +739,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-cI-hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="730" y="-547.5"/>
+            <point key="canvasLocation" x="657.5" y="-613.125"/>
         </scene>
         <!--Summary View Controller-->
         <scene sceneID="0Fh-4e-9iv">
@@ -884,7 +885,7 @@
         <image name="Lock" width="25" height="32"/>
         <image name="Menu" width="26" height="21"/>
         <image name="arrowDown" width="22" height="13"/>
-        <image name="tutorial3image" width="348" height="169"/>
+        <image name="tutorial3image" width="349" height="143"/>
     </resources>
     <color key="tintColor" red="1" green="0.31764356668945781" blue="0.16261317787767937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
