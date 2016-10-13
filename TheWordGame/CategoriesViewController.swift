@@ -113,7 +113,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
+    // MARK: - Tutorial methods
     
+    /// Used to check if tutorial is enabled.
+    func isTutorialEnabled() -> Bool {
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+        // Get the tutorial instance.
+        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        // Retrieve data.
+        return enabled
+    }
     
     
     
