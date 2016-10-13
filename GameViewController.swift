@@ -41,12 +41,18 @@ class GameViewController: UIViewController {
 
     
     /// Used to check if tutorial is enabled.
-    func tutorialEnabledCheck() -> Bool {
+    func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
         let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
         // Retrieve data.
         return enabled
+    }
+    
+    /// Disable pop ups.
+    func disablePopUps() {
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+        sharedTutorialInstance?.setValue(false, forKey: "enabled")
     }
     
     
@@ -55,15 +61,11 @@ class GameViewController: UIViewController {
      the overlayView or bubbleView is tapped.
      */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
-        
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
             // Increase the alpha of the view.
             self.tutorialOverlayView.alpha = 0
-            
             }, completion: nil)
-        
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
@@ -75,8 +77,15 @@ class GameViewController: UIViewController {
             self.tutorial3view.center.x += self.tutorial3view.frame.size.width
 
             }, completion: { (bool) in
+                
                 self.tutorialBubbleTwoView.alpha = 0
                 self.tutorial3view.alpha = 0
+                
+                // Start timer. 
+                self.runGameTimer()
+                
+                // Disable tutorial pop ups. 
+                self.disablePopUps()
         })
     }
 
@@ -111,9 +120,6 @@ class GameViewController: UIViewController {
             // TODO: - Tutorial
             self.tutorialBubbleTwoView.alpha = 0
             self.tutorial3view.alpha = 0
-        
-        
-        
         
             // Get centers of the views.
             menuButtonCenter = self.menuButtonView.center
@@ -176,49 +182,50 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning() }
 
 
+    // MARK: - Tutorial Methods
+    
+    func animateTutorialPopUps() {
+        
+        self.tutorialBubbleTwoView.alpha = 1
+        self.tutorial3view.alpha = 1
+        
+        // Animate views offScreen.
+        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
+        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+        
+        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
+        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
+        
+        // Animated views onScreen.
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorialOverlayView.alpha = 0.8
+            // Change the bkgd color so pop up stands out.
+            
+            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
+            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
+            self.gameTimer.invalidate()
+            }, completion: nil)
+        
+        UIView.animate(withDuration: 0.4, delay: 2.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
+            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
+            // Animates the tutorial3view onScreen.
+            }, completion:nil)
+    }
+    
+    
+    
     
     
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
         
         // TODO: - Tutorial
-        // 1. The code below should run only if tutorial is enabled.
+        if self.isTutorialEnabled() {
+            self.animateTutorialPopUps()
+        }
 
-        // 2. Increase alpha of views and move offScreen so that the onScreen animation can occur.
-        self.tutorialBubbleTwoView.alpha = 1
-        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
-        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
-        
-        self.tutorial3view.alpha = 1
-        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
-        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
 
-        
-        
-        
-        
-        // 3. Bring the bubble view onScreen and change the background color by increasing the alpha. Invalidate timer during the presentation.
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorialOverlayView.alpha = 0.8
-            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
-            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
-            self.gameTimer.invalidate()
-            }, completion: nil)
-
-        
-        UIView.animate(withDuration: 0.4, delay: 2.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorial3view.alpha = 1
-            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
-            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
-            // Animates the tutorial3view onScreen.
-            }, completion: nil)
-        
-
-        
-        
-        // 4. Make sure timer is started again. 
-        
-        
          if Game.sharedGameInstance.won {
                 
                 // Invalidate the gameTimer.
