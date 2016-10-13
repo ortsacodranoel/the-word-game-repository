@@ -39,21 +39,71 @@ class GameViewController: UIViewController {
     @IBOutlet weak var tutorial3view: UIView!
 
 
-    
     /// Used to check if tutorial is enabled.
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
         let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        print(enabled)
         // Retrieve data.
         return enabled
     }
     
     /// Disable pop ups.
     func disablePopUps() {
-        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
-        sharedTutorialInstance?.setValue(false, forKey: "enabled")
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        
+        delegate.sharedTutorialEntity.setValue(false, forKey: "enabled")
+   
+        do {
+            print("SAving Context")
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
+    
+        
+
+    // MARK: - Tutorial Methods
+    
+    func animateTutorialPopUps() {
+        
+        self.tutorialBubbleTwoView.alpha = 1
+        self.tutorial3view.alpha = 1
+        
+        // Animate views offScreen.
+        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
+        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+        
+        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
+        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
+        
+        // Animated views onScreen.
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorialOverlayView.alpha = 0.8
+            // Change the bkgd color so pop up stands out.
+            
+            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
+            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
+            self.gameTimer.invalidate()
+            }, completion: nil)
+        
+        UIView.animate(withDuration: 0.4, delay: 2.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
+            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
+            // Animates the tutorial3view onScreen.
+            }, completion:nil)
+    }
+    
+
+    
     
     
     /**
@@ -61,6 +111,7 @@ class GameViewController: UIViewController {
      the overlayView or bubbleView is tapped.
      */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
+    
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             // Increase the alpha of the view.
@@ -90,9 +141,6 @@ class GameViewController: UIViewController {
     }
 
     
-
-
-    
     
     // MARK:- View Methods
     
@@ -102,15 +150,14 @@ class GameViewController: UIViewController {
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(GameViewController.hideTutorialAction(sender:)))
         self.tutorialOverlayView.addGestureRecognizer(tapGestureRecognizer)
-
         
-            let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-            swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
-            self.view.addGestureRecognizer(swipeRightGestureRecognizer)
-        
-            let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-            swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
-            self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
+        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+    
+        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
     }
     
 
@@ -182,40 +229,7 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning() }
 
 
-    // MARK: - Tutorial Methods
-    
-    func animateTutorialPopUps() {
-        
-        self.tutorialBubbleTwoView.alpha = 1
-        self.tutorial3view.alpha = 1
-        
-        // Animate views offScreen.
-        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
-        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
-        
-        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
-        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
-        
-        // Animated views onScreen.
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorialOverlayView.alpha = 0.8
-            // Change the bkgd color so pop up stands out.
-            
-            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
-            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
-            self.gameTimer.invalidate()
-            }, completion: nil)
-        
-        UIView.animate(withDuration: 0.4, delay: 2.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
-            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
-            // Animates the tutorial3view onScreen.
-            }, completion:nil)
-    }
-    
-    
-    
-    
+
     
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
@@ -225,29 +239,26 @@ class GameViewController: UIViewController {
             self.animateTutorialPopUps()
         }
 
-
-         if Game.sharedGameInstance.won {
+        if Game.sharedGameInstance.won {
                 
-                // Invalidate the gameTimer.
-                self.gameTimer.invalidate()
-                
-                // Stop the end round sound.
-                self.audioPlayerRoundIsEndingSound.stop()
-                
-                // Segue to the CelebrationViewController.
-                performSegue(withIdentifier: "segueToCelebration", sender: self)
+            // Invalidate the gameTimer.
+            self.gameTimer.invalidate()
+            
+            // Stop the end round sound.
+            self.audioPlayerRoundIsEndingSound.stop()
+            
+            // Segue to the CelebrationViewController.
+            performSegue(withIdentifier: "segueToCelebration", sender: self)
        
-         } else {
+        } else {
         
-        
-        // Reset Countdown for next team animation.
-        self.countdownLabel.text = " "
-        self.setTeamTurn()
-        self.prepareGameTimer()
-        self.startGameTimer()
-        self.updateScore()
-        self.endRound(40)
-    
+            // Reset Countdown for next team animation.
+            self.countdownLabel.text = " "
+            self.setTeamTurn()
+            self.prepareGameTimer()
+            self.startGameTimer()
+            self.updateScore()
+            self.endRound(40)
         }
     }
     
@@ -283,26 +294,13 @@ class GameViewController: UIViewController {
         } catch {
           
             print("Error: unable to find sound files.")
-            
         }
     }
     
-    
 
-    
-    
     
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
-    
-
-
-
-        
-
-        
-
-        
 
         self.audioPlayerButtonTapSound.play()
         self.audioPlayerRoundIsStartingSound.play()
@@ -329,8 +327,6 @@ class GameViewController: UIViewController {
             }, completion: nil )
         self.runCountdownTimer()
         
-        
-
         
         // Reset swipe count.
         self.timesSwipedRight = 0
@@ -368,12 +364,13 @@ class GameViewController: UIViewController {
     }
     
 
-
     @IBAction func menuTapped(_ sender: AnyObject) {
+  
         // Audio tap sound.
         self.audioPlayerButtonTapSound.play()
         let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
         self.present(vc!, animated: true, completion: nil)
+        
     }
     
     
@@ -485,8 +482,6 @@ class GameViewController: UIViewController {
     
     
     
-    
-    
     // Used by segueTimer to display the summaryViewController.
     func displayWordSummaryScreen() {
   
@@ -569,7 +564,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    
     
     // MARK:- INIT METHODS - METHOD()
     

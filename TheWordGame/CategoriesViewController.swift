@@ -15,25 +15,22 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     fileprivate var lastContentOffset: CGFloat = 0
     
-    // MARK: - Views
+    // MARK: - View Properties
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
-    
-    
-    /// Used to delay the tutorialView animation. 
-    var popSoundTimer = Timer()
-    
-
-    // MARK: Button Outlets
-    @IBOutlet weak var menuButton: UIButton!
-    @IBOutlet weak var rulesButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    // MARK: - Audio Timer
+    /// Used to delay the tutorialView animation.
+    var popSoundTimer = Timer()
 
+    // MARK: Button Properties
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var rulesButton: UIButton!
+    
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
-    
     
     // MARK: - Audio
     
@@ -43,58 +40,37 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
-    
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
     
     
-    
-    
-    // MARK: - Init() Methods
+    // MARK: - View Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
-
         // Load sounds.
         self.loadSoundFile()
-        
-    
         // Timer to play pop sound.
         if !self.popSoundTimer.isValid {
             self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
         }
-        
-        
-        
-              // print(IAPManager.sharedInstance.products.count)
+        // print(IAPManager.sharedInstance.products.count)
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
-
-        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
-        
-        if enabled == true {
-        
+        if isTutorialEnabled() {
             UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0.8
                 // Change the color of the screen so tutorial pop up stands out.
             }, completion: nil)
-            
             UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.tutorialView.alpha = 1
-                // The tutorial is set to alpha = 0 by default.
-                
                 self.tutorialView.center.x += self.view.bounds.width
                 // Move the tutorial view right.
                 self.tutorialView.center.y -= self.view.bounds.height
@@ -114,7 +90,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     // MARK: - Tutorial methods
-    
     /// Used to check if tutorial is enabled.
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
