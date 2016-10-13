@@ -57,18 +57,19 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Load sounds.
         self.loadSoundFile()
-        // Timer to play pop sound.
-        if !self.popSoundTimer.isValid {
-            self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
-        }
-        // print(IAPManager.sharedInstance.products.count)
+         // print(IAPManager.sharedInstance.products.count)
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         
         if isTutorialEnabled() {
-            print("In VWA, means isTutorialEnabled == true")
+            
+            // Timer to play pop sound.
+            if !self.popSoundTimer.isValid {
+                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+            }
+
             UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0.8
                 // Change the color of the screen so tutorial pop up stands out.
