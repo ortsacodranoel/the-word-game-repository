@@ -159,6 +159,8 @@ class GameViewController: UIViewController {
                 self.tutorialBubbleTwoView.alpha = 0
                 self.tutorial3view.alpha = 0
                 
+                // Enable swipes.
+                self.addSwipeGestureRecognizers()
                 // Start timer. 
                 self.runGameTimer()
                 
@@ -167,6 +169,19 @@ class GameViewController: UIViewController {
         })
     }
 
+    func addSwipeGestureRecognizers() {
+        
+        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+        
+        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
+    }
+    
+    
+    
     
     
     // MARK:- View Methods
@@ -174,17 +189,13 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if self.isTutorialEnabled() == true {
         /// Add gesture recognizer for tap on overlayView.
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(GameViewController.hideTutorialAction(sender:)))
-        self.tutorialOverlayView.addGestureRecognizer(tapGestureRecognizer)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(GameViewController.hideTutorialAction(sender:)))
+            self.tutorialOverlayView.addGestureRecognizer(tapGestureRecognizer)
+        }
         
-        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
-    
-        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
+        self.addSwipeGestureRecognizers()
     }
     
 

@@ -83,7 +83,7 @@
                                 </connections>
                             </collectionView>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
+                                <frame key="frameInset" minX="0.0%" minY="-0.31%" width="99.58%" height="100.31%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
