@@ -86,7 +86,6 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         // Used to append correct/missed words.
         let words = NSMutableAttributedString()
         // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.
@@ -141,24 +140,15 @@ class SummaryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: false)
-        
-        
     }
     
-    
-    
-    /*
-     
-     */    override func didReceiveMemoryWarning() {
+
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    /*
-     
-     */
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -175,15 +165,11 @@ class SummaryViewController: UIViewController {
         let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         let underlineAttributedString = NSAttributedString(string: "Words Summary", attributes: underlineAttribute)
         self.wordSummaryLabel.attributedText = underlineAttributedString
-        
-
 
     }
     
     
-    /*
-     
-     */
+
     /// Set the initial background color of the main view.
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]
