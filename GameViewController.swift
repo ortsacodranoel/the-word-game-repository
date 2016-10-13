@@ -95,7 +95,7 @@ class GameViewController: UIViewController {
             self.gameTimer.invalidate()
             }, completion: nil)
         
-        UIView.animate(withDuration: 0.4, delay: 2.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+        UIView.animate(withDuration: 0.4, delay: 1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
             self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
             self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
             // Animates the tutorial3view onScreen.
