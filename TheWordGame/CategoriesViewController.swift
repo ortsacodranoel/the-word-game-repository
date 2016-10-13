@@ -50,9 +50,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
+        
         // Load sounds.
         self.loadSoundFile()
         // Timer to play pop sound.
@@ -64,7 +66,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     override func viewWillAppear(_ animated: Bool) {
+        
         if isTutorialEnabled() {
+            print("In VWA, means isTutorialEnabled == true")
             UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0.8
                 // Change the color of the screen so tutorial pop up stands out.

@@ -44,7 +44,7 @@ class GameViewController: UIViewController {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
         let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
-        print(enabled)
+        print("This is in isTutorialEnabled value is:\(enabled)")
         // Retrieve data.
         return enabled
     }
@@ -117,6 +117,7 @@ class GameViewController: UIViewController {
             // Increase the alpha of the view.
             self.tutorialOverlayView.alpha = 0
             }, completion: nil)
+       
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
@@ -235,7 +236,7 @@ class GameViewController: UIViewController {
     func playgame() {
         
         // TODO: - Tutorial
-        if self.isTutorialEnabled() {
+        if self.isTutorialEnabled() == true {
             self.animateTutorialPopUps()
         }
 
