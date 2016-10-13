@@ -38,7 +38,11 @@ class GameViewController: UIViewController {
     @IBOutlet weak var tutorialOverlayView: UIView!
     @IBOutlet weak var tutorial3view: UIView!
 
-
+    // MARK: - Audio Properties
+    var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
+    var popAudioPlayer = AVAudioPlayer()
+    
+    
     /// Used to check if tutorial is enabled.
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
@@ -58,7 +62,7 @@ class GameViewController: UIViewController {
         delegate.sharedTutorialEntity.setValue(false, forKey: "enabled")
    
         do {
-            print("SAving Context")
+            print("Saving Context")
             try context.save()
         } catch {
             // Replace this implementation with code to handle the error appropriately.
@@ -69,11 +73,33 @@ class GameViewController: UIViewController {
         }
     }
     
-        
+    func playPopSound() {
+        // Play pop sound once the tutorial view animates.
+        self.popAudioPlayer.play()
+    }
+    
 
     // MARK: - Tutorial Methods
     
     func animateTutorialPopUps() {
+        
+        // Timer to play pop sound.
+        if !self.popSoundTimer1.isValid {
+            self.popSoundTimer1 = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+        }
+        
+        // Timer to play pop sound.
+        if !self.popSoundTimer2.isValid {
+            self.popSoundTimer2 = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+        }
+        
+        
+        
+        
+        
+        // Disable swipes.
+        self.view.gestureRecognizers?.removeAll()
+        
         
         self.tutorialBubbleTwoView.alpha = 1
         self.tutorial3view.alpha = 1
@@ -291,6 +317,9 @@ class GameViewController: UIViewController {
             // Swipes
             self.audioPlayerCorrectSwipe.prepareToPlay()
             self.audioPlayerWrondSwipe.prepareToPlay()
+            // Tutorial
+            self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
+            self.popAudioPlayer.prepareToPlay()
         
         } catch {
           
@@ -938,7 +967,10 @@ class GameViewController: UIViewController {
     var segueDelayTimer = Timer()
     /// Used to animate Time's Up prior to summary screen.
     var timesUpTimer = Timer()
-    
+    //
+    var popSoundTimer1 = Timer()
+    var popSoundTimer2 = Timer()
+
     var seconds = 00
     var minutes = 1
     var time = ""
