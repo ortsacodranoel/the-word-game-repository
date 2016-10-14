@@ -38,6 +38,12 @@ class GameViewController: UIViewController {
     @IBOutlet weak var tutorialOverlayView: UIView!
     @IBOutlet weak var tutorial3view: UIView!
 
+    
+    
+    
+    
+    
+    
     // MARK: - Audio Properties
     var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
     var popAudioPlayer = AVAudioPlayer()

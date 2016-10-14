@@ -41,7 +41,26 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var tapAudioPlayer = AVAudioPlayer()
     
     // Retreive the managedObjectContext from AppDelegate
+    @IBAction func settingsBtnTapped(_ sender: AnyObject) {
+        
+        performSegue(withIdentifier: "segueToSettings", sender: self)
+        
+        
+        
+    }
+    
+    
+    
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+    
+
+    
+    
+    
+    
+    
+    
+    
     
     
     
