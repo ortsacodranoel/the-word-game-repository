@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
                         
                         
-                        print(sharedTutorialEntity.value(forKey: "enabled"))
+                        print(sharedTutorialEntity.value(forKey: "gameScreenEnabled"))
                         
                     }
                 } catch {

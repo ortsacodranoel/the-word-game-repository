@@ -80,6 +80,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 self.tutorialView.center.y -= self.view.bounds.height
                 // Move the tutorial view up.
             }, completion: nil )
+            
+            self.disablePopUps()
         }
     }
     
@@ -104,6 +106,24 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+    /// Disable pop ups.
+    func disablePopUps() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
+        
+        do {
+            print("Saving Context")
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+
     
     
     
