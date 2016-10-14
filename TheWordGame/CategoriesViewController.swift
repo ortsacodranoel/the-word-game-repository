@@ -98,7 +98,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
-        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        let enabled = sharedTutorialInstance?.value(forKey: "categoriesScreenEnabled") as! Bool
         // Retrieve data.
         return enabled
     }

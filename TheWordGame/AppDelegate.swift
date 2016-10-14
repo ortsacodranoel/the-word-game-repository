@@ -66,8 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
                 // Add TutorialPopUp entity to the MOC.
                 
-                tutorial.enabled = true
+                tutorial.categoriesScreenEnabled = true
                 // Set tutorialPopUp's enabled attribute to TRUE to notify that popUpAnimations are allowed.
+                tutorial.gameScreenEnabled = true
+                
                 
                 try managedObjectContext.save()
                 // Try to save the entity into the MOC.
@@ -83,7 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
                         // Get the first entity.
                     
-                        self.sharedTutorialEntity.setValue(true, forKey: "enabled")
+                        self.sharedTutorialEntity.setValue(true, forKey: "categoriesScreenEnabled")
+                        self.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
+                        
                         
                         print(sharedTutorialEntity.value(forKey: "enabled"))
                         

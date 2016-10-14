@@ -47,7 +47,7 @@ class GameViewController: UIViewController {
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
-        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
+        let enabled = sharedTutorialInstance?.value(forKey: "gameScreenEnabled") as! Bool
         print("This is in isTutorialEnabled value is:\(enabled)")
         // Retrieve data.
         return enabled
@@ -59,7 +59,7 @@ class GameViewController: UIViewController {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         
-        delegate.sharedTutorialEntity.setValue(false, forKey: "enabled")
+        delegate.sharedTutorialEntity.setValue(false, forKey: "gameScreenEnabled")
    
         do {
             print("Saving Context")
