@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z97-k5-l5n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -32,7 +32,7 @@
                                     <color key="titleColor" red="0.1747477053" green="0.5472472625" blue="0.87843137979999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="o0C-mE-Sf2" kind="presentation" identifier="segueToSettings" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="0MA-PL-k0W"/>
+                                    <segue destination="o0C-mE-Sf2" kind="presentation" identifier="segueToSettings" modalPresentationStyle="overCurrentContext" id="0MA-PL-k0W"/>
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nlr-VK-F1a">
@@ -82,16 +82,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Ts6-Ta-N50"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPL-fc-bp5" userLabel="settingsButton">
-                                <frame key="frameInset" width="32" height="32" maxX="33" maxY="13.5"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPL-fc-bp5" userLabel="settingsButton">
+                                <frame key="frameInset" width="32" height="32" maxX="33" maxY="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" image="Settings"/>
                                 <connections>
                                     <action selector="settingsBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rHU-gl-Lpn"/>
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="0.0%" minY="-0.27%" width="100.00%" height="100.67%"/>
+                                <frame key="frameInset" minX="0.0%" minY="-0.27%" width="100.00%" height="100.53%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -179,13 +180,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX" userLabel="backButton">
-                                <frame key="frameInset" minX="12" minY="20" width="49" height="120"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3d-VT-CtQ" userLabel="backgroundView">
+                                <frame key="frameInset" width="667" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTe-L1-Pgn" userLabel="officialRulesBtn">
+                                <frame key="frameInset" minX="193" minY="105" width="275" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <state key="normal" title="Official Rules Site">
+                                    <color key="titleColor" red="0.99309133979999997" green="0.99309133979999997" blue="0.99309133979999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="rulesButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="6Hi-nZ-aE4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX" userLabel="backButton">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="Vdk-iE-ASP"/>
-                                    <constraint firstAttribute="height" constant="120" id="Zgo-6b-h7Q"/>
+                                    <constraint firstAttribute="height" constant="60" id="pve-Nc-N1Q"/>
+                                    <constraint firstAttribute="width" constant="103" id="tCw-3Q-jls"/>
                                 </constraints>
-                                <state key="normal" image="Back Chevron"/>
+                                <state key="normal" image="arrowDownWhite"/>
                                 <connections>
                                     <action selector="menuButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="AVx-XH-0QD"/>
                                 </connections>
@@ -195,18 +210,23 @@
                                     <constraint firstAttribute="width" constant="194" id="owv-Bz-BJJ"/>
                                     <constraint firstAttribute="height" constant="41" id="qOR-bI-Woi"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tEN-DX-7LX" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="FxC-gF-iKQ"/>
+                            <constraint firstItem="TdX-dK-yno" firstAttribute="top" secondItem="tEN-DX-7LX" secondAttribute="bottom" constant="1" id="UHC-eK-Xd4"/>
                             <constraint firstItem="J5R-nk-aSs" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="YwN-Io-SZ0"/>
                             <constraint firstItem="J5R-nk-aSs" firstAttribute="top" secondItem="r6D-Fp-Tj5" secondAttribute="bottom" constant="20" id="e5O-fH-Inh"/>
+                            <constraint firstItem="pTe-L1-Pgn" firstAttribute="top" secondItem="r6D-Fp-Tj5" secondAttribute="bottom" constant="105" id="o0n-cB-Azp"/>
+                            <constraint firstItem="pTe-L1-Pgn" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" constant="-3" id="zeT-vw-k4u"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="W3d-VT-CtQ" id="rBH-YO-WK9"/>
                         <outlet property="settingsLabel" destination="J5R-nk-aSs" id="UzM-rO-PbB"/>
                         <segue destination="AcR-VF-W4M" kind="unwind" identifier="unwindToCategories" unwindAction="unwindToCategories:" id="Rnd-jW-WEs"/>
                     </connections>
@@ -214,7 +234,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1520" y="-1105"/>
+            <point key="canvasLocation" x="-1571.0644677661171" y="-1319.2"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -485,7 +505,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yo-P8-eRF" userLabel="wordContainerView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgD-7U-e6X" userLabel="wordLabel">
-                                        <rect key="frame" x="0.0" y="-1.5" width="430" height="192"/>
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="429" height="192"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
@@ -554,7 +574,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-7N-vEF" userLabel="tutorialOverlayView">
-                                <frame key="frameInset" minX="0.0%" minY="-0.13%" width="99.70%" height="100.00%"/>
+                                <frame key="frameInset" minX="0.0%" minY="-0.53%" width="99.40%" height="100.27%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -759,7 +779,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDt-e7-KDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FKf-0K-xAz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1618" y="-2249"/>
+            <point key="canvasLocation" x="536" y="-2130"/>
         </scene>
         <!--Celebration View Controller-->
         <scene sceneID="So2-YL-xAK">
@@ -809,7 +829,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSh-33-zOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HOj-Gs-CDI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1618" y="-1260"/>
+            <point key="canvasLocation" x="-149" y="-1319"/>
         </scene>
     </scenes>
     <resources>
@@ -819,6 +839,7 @@
         <image name="Menu" width="26" height="21"/>
         <image name="Settings" width="32" height="32"/>
         <image name="arrowDown" width="22" height="13"/>
+        <image name="arrowDownWhite" width="22" height="13"/>
         <image name="tutorial1image" width="349" height="143"/>
         <image name="tutorial3image" width="349" height="143"/>
     </resources>

@@ -27,34 +27,27 @@ class RulesViewController: UIViewController {
 
     @IBOutlet weak var settingsLabel: UILabel!
 
+    // Visual Effects
+    var blurView:UIVisualEffectView!
     
-    // MARK:- Button Actions
-    @IBAction func menuButtonTapped(_ sender: AnyObject) {
-    
-        self.loadSoundFile()
-        self.tapAudioPlayer.play()
-        
-        UIView.animate(withDuration: 0.2, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-        
-            self.settingsLabel.alpha = 0
-
-            }, completion:{(bool) in
-                self.performSegue(withIdentifier: "unwindToCategories", sender: self)
-
-        })
-            
-        
-    }
-    
-    
-    /**
-        Used to link to the official rules page.
-    */
     @IBAction func rulesButtonTapped(_ sender: AnyObject) {
+    
         if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
             UIApplication.shared.openURL(url)
         }
+    
     }
+    
+    
+    
+    // MARK:- Button Actions
+    @IBAction func menuButtonTapped(_ sender: AnyObject) {
+        self.loadSoundFile()
+        self.tapAudioPlayer.play()
+        self.performSegue(withIdentifier: "unwindToCategories", sender: self)
+    }
+    
+
     
     // MARK: - Transition Managers
     let rulesScreenTransitionManager = RulesTransitionManager()
@@ -67,6 +60,12 @@ class RulesViewController: UIViewController {
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     
     var tapAudioPlayer = AVAudioPlayer()
+    
+    @IBOutlet weak var backgroundView: UIView!
+
+    
+    
+    
     
     func loadSoundFile() {
         do {
@@ -81,9 +80,6 @@ class RulesViewController: UIViewController {
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-
-    
     }
     
     
@@ -92,27 +88,26 @@ class RulesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /**
-     
-    */
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Underline Settings.
+        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "Settings", attributes: underlineAttribute)
+        self.settingsLabel.attributedText = underlineAttributedString
 
+        // Background blur.
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        self.blurView = UIVisualEffectView(effect: blurEffect)
+        self.blurView.frame = self.view.bounds
+        self.blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.backgroundView.addSubview((self.blurView))
         
-        
-        
-        
-        
-//        // Swipe Right - Gesture Recognizer.
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-//        self.view.addGestureRecognizer(swipeRight)
-//        
-
     }
     
-
+    
+    // MARK: - Swipe Gestures
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

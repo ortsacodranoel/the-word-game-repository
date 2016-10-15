@@ -45,12 +45,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     
-    var blurView:UIVisualEffectView!
-    
-    
-    
-    
-    
     
     
     
@@ -89,12 +83,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 // Change the color of the screen so tutorial pop up stands out.
             }, completion: nil)
             UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+    
                 self.tutorialView.alpha = 1
+                
                 self.tutorialView.center.x += self.view.bounds.width
                 // Move the tutorial view right.
+                
                 self.tutorialView.center.y -= self.view.bounds.height
                 // Move the tutorial view up.
-            }, completion: nil )
+            
+                }, completion: nil )
             
             self.disablePopUps()
         }
@@ -194,7 +192,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     /// Needed for segue action.
-    @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
+    @IBAction func categoryButtonTapped(_ sender: AnyObject) { self.settingsButton.alpha = 0}
     
     
     
@@ -206,33 +204,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
  
         // self.tapAudioPlayer.play()
-        self.blurView.removeFromSuperview()
     }
     
 
     
     // TO THE SETTINGS
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
-        
-      //  UIView.animate(withDuration: 0.4, animations: {
-            
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-            
-            self.blurView = UIVisualEffectView(effect: blurEffect)
-            
-            self.blurView.frame = self.view.bounds
-            
-            self.blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            self.view.addSubview((self.blurView))
-            
-      //      }, completion: nil)
-        
-        
-        
         performSegue(withIdentifier: "segueToSettings", sender: self)
-
-        
     }
     
     

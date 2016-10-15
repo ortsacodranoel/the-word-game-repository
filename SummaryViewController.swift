@@ -43,14 +43,10 @@ class SummaryViewController: UIViewController {
     
     
     // MARK: - BUTTON ACTIONS
-    
-    
 
     @IBAction func backBtnTapped(_ sender: AnyObject) {
-        
         print("Back button tapped")
         self.audioPlayerButtonTapSound.play()
-  
     }
     
     
@@ -58,19 +54,13 @@ class SummaryViewController: UIViewController {
     
     // MARK: - AUDIO SETUP
     
-    
-    
-    
     /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
     func loadSounds() {
         do {
-            
             // Configure Audioplayers.
             self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
-            
             // Prepare to play.
             self.audioPlayerButtonTapSound.prepareToPlay()
-
         } catch {
             print("Error: unable to find sound files.")
         }
