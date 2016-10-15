@@ -19,6 +19,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var settingsButton: UIButton!
 
     // MARK: - Audio Timer
     /// Used to delay the tutorialView animation.
@@ -39,23 +40,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
-    
-    // Retreive the managedObjectContext from AppDelegate
-    @IBAction func settingsBtnTapped(_ sender: AnyObject) {
-        
-        performSegue(withIdentifier: "segueToSettings", sender: self)
-        
-        
-        
-    }
-    
-    
-    
+     
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
 
     
-    
+    var blurView:UIVisualEffectView!
     
     
     
@@ -80,6 +70,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // Fade Settings Button in.
+            self.settingsButton.alpha = 1
+            },completion:nil)
+        
+        
         
         if isTutorialEnabled() {
             
@@ -206,6 +202,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /// Used to play sound when the button is tapped.
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.tapAudioPlayer.play()
+    
+        UIView.animate(withDuration: 0.3, animations: {
+            
+
+            
+            self.blurView.removeFromSuperview()
+            
+            
+            }, completion: nil)
+        
+    
     }
     
 
@@ -213,6 +220,40 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
     
     
+    // Retreive the managedObjectContext from AppDelegate
+    @IBAction func settingsBtnTapped(_ sender: AnyObject) {
+        
+
+        //self.collectionView.backgroundColor = UIColor.clear
+        
+        
+
+        
+
+        
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            
+            self.blurView = UIVisualEffectView(effect: blurEffect)
+            
+            self.blurView.frame = self.view.bounds
+            
+            self.blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            
+            self.view.addSubview((self.blurView))
+            
+            
+            }, completion: nil)
+        
+        
+        
+        performSegue(withIdentifier: "segueToSettings", sender: self)
+
+        
+    }
     
     
     

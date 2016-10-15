@@ -69,6 +69,9 @@ class RulesViewController: UIViewController {
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+
+    
     }
     
     
@@ -82,6 +85,12 @@ class RulesViewController: UIViewController {
     */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+
+        
+        
+        
+        
         
 //        // Swipe Right - Gesture Recognizer.
 //        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
