@@ -43,11 +43,8 @@ class SummaryViewController: UIViewController {
     
     
     // MARK: - BUTTON ACTIONS
-    
-    
 
     @IBAction func backBtnTapped(_ sender: AnyObject) {
-        
         print("Back button tapped")
         self.audioPlayerButtonTapSound.play()
     }
@@ -57,19 +54,13 @@ class SummaryViewController: UIViewController {
     
     // MARK: - AUDIO SETUP
     
-    
-    
-    
     /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
     func loadSounds() {
         do {
-            
             // Configure Audioplayers.
             self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
-            
             // Prepare to play.
             self.audioPlayerButtonTapSound.prepareToPlay()
-
         } catch {
             print("Error: unable to find sound files.")
         }
@@ -85,46 +76,7 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
 
-        
-        let fetchRequest : NSFetchRequest<TutorialPopUp>
-        // 1. Create the fetch request for all entities of type TutorialPopUp.
-        
-        if #available(iOS 10.0, OSX 10.12, *) {
-            fetchRequest = TutorialPopUp.fetchRequest()
-            // Fetch request for newer iOS versions.
-            
-        } else {
-            fetchRequest = NSFetchRequest(entityName: "TutorialPopUp")
-            // Fetch request for older iOS versions.
-        }
-        
-        
-        // Retrieve saved entity.
-        do {
-            
-            let result = try managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-            
-            if (result.count > 0) {
-                
-                let entity = result[0] as! NSManagedObject
-                // Get the first entity.
-                
-                entity.setValue(true, forKey: "enabled")
-                
-                try managedObjectContext.save()
-
-            }
-        } catch {
-            let fetchError = error as NSError
-            print(fetchError)
-        }
-        
-        
-        
-        
         // Used to append correct/missed words.
         let words = NSMutableAttributedString()
         // Used to add the carriage return to the attributed string passed to the wordSummaryTextview.
@@ -179,24 +131,15 @@ class SummaryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.wordSummaryTextview.setContentOffset(CGPoint.zero, animated: false)
-        
-        
     }
     
-    
-    
-    /*
-     
-     */    override func didReceiveMemoryWarning() {
+
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    /*
-     
-     */
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -213,15 +156,11 @@ class SummaryViewController: UIViewController {
         let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         let underlineAttributedString = NSAttributedString(string: "Words Summary", attributes: underlineAttribute)
         self.wordSummaryLabel.attributedText = underlineAttributedString
-        
-
 
     }
     
     
-    /*
-     
-     */
+
     /// Set the initial background color of the main view.
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.colors[categoryTapped]

@@ -2,7 +2,7 @@
 //  TutorialPopUp+CoreDataProperties.swift
 //  TheWordGame
 //
-//  Created by Daniel Castro on 10/9/16.
+//  Created by Leo on 10/13/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -16,6 +16,7 @@ extension TutorialPopUp {
         return NSFetchRequest<TutorialPopUp>(entityName: "TutorialPopUp");
     }
 
-    @NSManaged public var enabled: Bool
+    @NSManaged public var categoriesScreenEnabled: Bool
+    @NSManaged public var gameScreenEnabled: Bool
 
 }

@@ -15,25 +15,23 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     fileprivate var lastContentOffset: CGFloat = 0
     
-    // MARK: - Views
+    // MARK: - View Properties
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
-    
-    
-    /// Used to delay the tutorialView animation. 
-    var popSoundTimer = Timer()
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var settingsButton: UIButton!
 
-    // MARK: Button Outlets
+    // MARK: - Audio Timer
+    /// Used to delay the tutorialView animation.
+    var popSoundTimer = Timer()
+
+    // MARK: Button Properties
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
-    @IBOutlet weak var collectionView: UICollectionView!
-
-
+    
     // MARK: - Transition Managers
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
-    
     
     // MARK: - Audio
     
@@ -42,64 +40,61 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
-    
-    
-    // Retreive the managedObjectContext from AppDelegate
+     
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
+
     
     
     
     
     
-    // MARK: - Init() Methods
+    // MARK: - View Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
-
+        
         // Load sounds.
         self.loadSoundFile()
-        
-    
-        // Timer to play pop sound.
-        if !self.popSoundTimer.isValid {
-            self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
-        }
-        
-        
-        
-              // print(IAPManager.sharedInstance.products.count)
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // Fade Settings Button in.
+            self.settingsButton.alpha = 1
+            },completion:nil)
         
-        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+        
+        
+        if isTutorialEnabled() {
+            
+            // Timer to play pop sound.
+            if !self.popSoundTimer.isValid {
+                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+            }
 
-        let enabled = sharedTutorialInstance?.value(forKey: "enabled") as! Bool
-        
-        if enabled == true {
-        
             UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0.8
                 // Change the color of the screen so tutorial pop up stands out.
             }, completion: nil)
-            
             UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+    
                 self.tutorialView.alpha = 1
-                // The tutorial is set to alpha = 0 by default.
                 
                 self.tutorialView.center.x += self.view.bounds.width
                 // Move the tutorial view right.
+                
                 self.tutorialView.center.y -= self.view.bounds.height
                 // Move the tutorial view up.
-            }, completion: nil )
+            
+                }, completion: nil )
+            
+            self.disablePopUps()
         }
     }
     
@@ -113,9 +108,35 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
+    // MARK: - Tutorial methods
+    /// Used to check if tutorial is enabled.
+    func isTutorialEnabled() -> Bool {
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+        // Get the tutorial instance.
+        let enabled = sharedTutorialInstance?.value(forKey: "categoriesScreenEnabled") as! Bool
+        // Retrieve data.
+        return enabled
+    }
     
     
-    
+    /// Disable pop ups.
+    func disablePopUps() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
+        
+        do {
+            print("Saving Context")
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+
     
     
     
@@ -169,23 +190,28 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         })
     }
 
-
+    
+    /// Needed for segue action.
+    @IBAction func categoryButtonTapped(_ sender: AnyObject) { self.settingsButton.alpha = 0}
+    
     
     
     
     
     // MARK: - Button Actions
     
-    /// Used to play sound when the button is tapped.
+    /// BACK FROM SETTINGS
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
-        self.tapAudioPlayer.play()
+ 
+        // self.tapAudioPlayer.play()
     }
     
 
-    /// Needed for segue action.
-    @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
     
-    
+    // TO THE SETTINGS
+    @IBAction func settingsBtnTapped(_ sender: AnyObject) {
+        performSegue(withIdentifier: "segueToSettings", sender: self)
+    }
     
     
     

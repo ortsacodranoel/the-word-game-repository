@@ -25,24 +25,33 @@ class RulesViewController: UIViewController {
     
     @IBOutlet weak var rulesLabel: UILabel!
 
+    @IBOutlet weak var settingsLabel: UILabel!
 
+    // Visual Effects
+    var blurView:UIVisualEffectView!
+    
+    @IBAction func rulesButtonTapped(_ sender: AnyObject) {
+    
+        if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
+            UIApplication.shared.openURL(url)
+        }
+    
+    }
+    
+    @IBAction func restorButtonTapped(_ sender: AnyObject) {
+        
+        
+    }
+    
     
     // MARK:- Button Actions
     @IBAction func menuButtonTapped(_ sender: AnyObject) {
         self.loadSoundFile()
         self.tapAudioPlayer.play()
-        performSegue(withIdentifier: "unwindToCategories", sender: self)
+        self.performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
-    
-    /**
-        Used to link to the official rules page.
-    */
-    @IBAction func rulesButtonTapped(_ sender: AnyObject) {
-        if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
-            UIApplication.shared.openURL(url)
-        }
-    }
+
     
     // MARK: - Transition Managers
     let rulesScreenTransitionManager = RulesTransitionManager()
@@ -55,6 +64,12 @@ class RulesViewController: UIViewController {
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     
     var tapAudioPlayer = AVAudioPlayer()
+    
+    @IBOutlet weak var backgroundView: UIView!
+
+    
+    
+    
     
     func loadSoundFile() {
         do {
@@ -77,24 +92,26 @@ class RulesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /**
-     
-    */
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        // Swipe Right - Gesture Recognizer.
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-//        self.view.addGestureRecognizer(swipeRight)
-//        
-        UIView.animate(withDuration: 0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-           // self.rulesLabel.alpha = 1
+        // Underline Settings.
+        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "Settings", attributes: underlineAttribute)
+        self.settingsLabel.attributedText = underlineAttributedString
+
+        // Background blur.
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        self.blurView = UIVisualEffectView(effect: blurEffect)
+        self.blurView.frame = self.view.bounds
+        self.blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.backgroundView.addSubview((self.blurView))
         
-            }, completion: nil)
     }
     
-
+    
+    // MARK: - Swipe Gestures
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

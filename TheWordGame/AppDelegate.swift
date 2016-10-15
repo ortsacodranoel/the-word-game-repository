@@ -24,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
+        
+        if SKPaymentQueue.canMakePayments(){
+            
+            canPurchase = true
+            IAPManager.sharedInstance.setupInAppPurchases()
+        }
+        
+        IAPManager.sharedInstance.restorePurchases()
+        
+        
+        
+        
+        
         let fetchRequest : NSFetchRequest<TutorialPopUp>
         // 1. Create the fetch request for all entities of type TutorialPopUp.
         
@@ -53,8 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
                 // Add TutorialPopUp entity to the MOC.
                 
-                tutorial.enabled = true
+                tutorial.categoriesScreenEnabled = true
                 // Set tutorialPopUp's enabled attribute to TRUE to notify that popUpAnimations are allowed.
+                tutorial.gameScreenEnabled = true
+                
                 
                 try managedObjectContext.save()
                 // Try to save the entity into the MOC.
@@ -70,9 +85,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
                         // Get the first entity.
                     
-                        self.sharedTutorialEntity.setValue(true, forKey: "enabled")
+                        self.sharedTutorialEntity.setValue(true, forKey: "categoriesScreenEnabled")
+                        self.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
                         
-                        print(sharedTutorialEntity.value(forKey: "enabled"))
+                        
+                        print(sharedTutorialEntity.value(forKey: "gameScreenEnabled"))
                         
                     }
                 } catch {
