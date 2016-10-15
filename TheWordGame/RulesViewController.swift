@@ -25,13 +25,25 @@ class RulesViewController: UIViewController {
     
     @IBOutlet weak var rulesLabel: UILabel!
 
+    @IBOutlet weak var settingsLabel: UILabel!
 
     
     // MARK:- Button Actions
     @IBAction func menuButtonTapped(_ sender: AnyObject) {
+    
         self.loadSoundFile()
         self.tapAudioPlayer.play()
-        performSegue(withIdentifier: "unwindToCategories", sender: self)
+        
+        UIView.animate(withDuration: 0.2, delay: 0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
+        
+            self.settingsLabel.alpha = 0
+
+            }, completion:{(bool) in
+                self.performSegue(withIdentifier: "unwindToCategories", sender: self)
+
+        })
+            
+        
     }
     
     
@@ -97,10 +109,7 @@ class RulesViewController: UIViewController {
 //        swipeRight.direction = UISwipeGestureRecognizerDirection.right
 //        self.view.addGestureRecognizer(swipeRight)
 //        
-        UIView.animate(withDuration: 0.4, delay: 1.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-           // self.rulesLabel.alpha = 1
-        
-            }, completion: nil)
+
     }
     
 

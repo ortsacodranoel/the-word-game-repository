@@ -192,47 +192,29 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         })
     }
 
-
+    
+    /// Needed for segue action.
+    @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
+    
     
     
     
     
     // MARK: - Button Actions
     
-    /// Used to play sound when the button is tapped.
+    /// BACK FROM SETTINGS
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
-        self.tapAudioPlayer.play()
-    
-        UIView.animate(withDuration: 0.3, animations: {
-            
-
-            
-            self.blurView.removeFromSuperview()
-            
-            
-            }, completion: nil)
-        
-    
+ 
+        // self.tapAudioPlayer.play()
+        self.blurView.removeFromSuperview()
     }
     
 
-    /// Needed for segue action.
-    @IBAction func categoryButtonTapped(_ sender: AnyObject) {}
     
-    
-    // Retreive the managedObjectContext from AppDelegate
+    // TO THE SETTINGS
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
         
-
-        //self.collectionView.backgroundColor = UIColor.clear
-        
-        
-
-        
-
-        
-        
-        UIView.animate(withDuration: 0.3, animations: {
+      //  UIView.animate(withDuration: 0.4, animations: {
             
             let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
             
@@ -242,11 +224,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             
             self.blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
-            
             self.view.addSubview((self.blurView))
             
-            
-            }, completion: nil)
+      //      }, completion: nil)
         
         
         
