@@ -38,6 +38,10 @@ class RulesViewController: UIViewController {
     
     }
     
+    @IBAction func restorButtonTapped(_ sender: AnyObject) {
+        
+        
+    }
     
     
     // MARK:- Button Actions

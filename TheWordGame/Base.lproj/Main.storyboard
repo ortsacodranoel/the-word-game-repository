@@ -185,14 +185,45 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTe-L1-Pgn" userLabel="officialRulesBtn">
-                                <frame key="frameInset" minX="193" minY="105" width="275" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTe-L1-Pgn" userLabel="officialRulesBtn">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ENY-4C-3gi"/>
+                                    <constraint firstAttribute="width" constant="275" id="Wbl-AB-Cmk"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
                                 <state key="normal" title="Official Rules Site">
                                     <color key="titleColor" red="0.99309133979999997" green="0.99309133979999997" blue="0.99309133979999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="rulesButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="6Hi-nZ-aE4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-bC-Bp5" userLabel="restoreBtn">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="1Y5-Ql-I0M"/>
+                                    <constraint firstAttribute="height" constant="30" id="UTC-bT-Kd5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <state key="normal" title="Restore Purchases">
+                                    <color key="titleColor" red="0.99309133979999997" green="0.99309133979999997" blue="0.99309133979999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="restorButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="8cn-pd-ATI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-Is-apQ" userLabel="restoreBtn">
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="dNB-VE-CYS"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="hQp-yl-p9y"/>
+                                    <constraint firstAttribute="height" constant="30" id="hd3-as-ThD"/>
+                                    <constraint firstAttribute="width" constant="275" id="sod-fq-IzH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <state key="normal" title="Enable Tutorial">
+                                    <color key="titleColor" red="0.99309133979999997" green="0.99309133979999997" blue="0.99309133979999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="restorButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="obp-R1-oc9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX" userLabel="backButton">
@@ -218,10 +249,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tEN-DX-7LX" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="FxC-gF-iKQ"/>
+                            <constraint firstItem="hwU-bC-Bp5" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="L6G-fh-gfw"/>
+                            <constraint firstItem="Gws-Is-apQ" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="Ssy-F0-ibj"/>
                             <constraint firstItem="TdX-dK-yno" firstAttribute="top" secondItem="tEN-DX-7LX" secondAttribute="bottom" constant="1" id="UHC-eK-Xd4"/>
                             <constraint firstItem="J5R-nk-aSs" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" id="YwN-Io-SZ0"/>
                             <constraint firstItem="J5R-nk-aSs" firstAttribute="top" secondItem="r6D-Fp-Tj5" secondAttribute="bottom" constant="20" id="e5O-fH-Inh"/>
+                            <constraint firstItem="TdX-dK-yno" firstAttribute="top" secondItem="Gws-Is-apQ" secondAttribute="bottom" constant="110" id="eVG-AY-ilb"/>
                             <constraint firstItem="pTe-L1-Pgn" firstAttribute="top" secondItem="r6D-Fp-Tj5" secondAttribute="bottom" constant="105" id="o0n-cB-Azp"/>
+                            <constraint firstItem="hwU-bC-Bp5" firstAttribute="centerY" secondItem="4q6-a4-gf1" secondAttribute="centerY" id="pGC-wf-lIN"/>
                             <constraint firstItem="pTe-L1-Pgn" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" constant="-3" id="zeT-vw-k4u"/>
                         </constraints>
                     </view>
