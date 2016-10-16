@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             IAPManager.sharedInstance.setupInAppPurchases()
         }
         
-        IAPManager.sharedInstance.restorePurchases()
+     //   IAPManager.sharedInstance.restorePurchases()
         
         
         

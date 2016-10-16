@@ -83,7 +83,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPL-fc-bp5" userLabel="settingsButton">
-                                <frame key="frameInset" width="32" height="32" maxX="33" maxY="14"/>
+                                <frame key="frameInset" width="32" height="32" maxX="33" maxY="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" image="Settings"/>
@@ -92,19 +92,19 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="0.0%" minY="-0.27%" width="100.00%" height="100.53%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.80%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8do-f1-dRM" userLabel="tutorial1view">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8do-f1-dRM" userLabel="tutorialView">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tutorial1image" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-b5-DT1" userLabel="tutorial1image">
-                                        <frame key="frameInset" minX="50.00%" minY="52.38%" width="330" height="129"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <frame key="frameInset" minX="0.0%" minY="4.00%" width="100.30%" height="86.00%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Divide into two teams, then select a category to start." lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-uZ-1jq" userLabel="tutorial1label">
-                                        <frame key="frameInset" minX="51" minY="33" width="274" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <frame key="frameInset" minX="15.20%" minY="20.67%" width="78.42%" height="50.00%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -112,7 +112,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="5H4-oq-BDO"/>
+                                    <constraint firstAttribute="width" constant="329" id="5H4-oq-BDO"/>
                                     <constraint firstAttribute="height" constant="150" id="CGM-8Y-JcK"/>
                                 </constraints>
                             </view>
@@ -121,7 +121,7 @@
                         <constraints>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="3us-9G-Ujm"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-0.5" id="Axu-fT-Izh"/>
-                            <constraint firstItem="8do-f1-dRM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-36" id="FFv-lA-fcG"/>
+                            <constraint firstItem="8do-f1-dRM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="FFv-lA-fcG"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="88" id="ITm-1H-7mV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="-205" id="LPw-6C-yp4"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="-7" id="aSB-QC-dsU"/>
@@ -145,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1519" y="-2130"/>
+            <point key="canvasLocation" x="-1519.7901049475263" y="-2130.4000000000001"/>
         </scene>
         <!--Spash Screen View Controller-->
         <scene sceneID="xr4-vU-SJu">
@@ -211,7 +211,7 @@
                                     <action selector="restorButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="8cn-pd-ATI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-Is-apQ" userLabel="restoreBtn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-Is-apQ" userLabel="enableTutorialBtn">
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="dNB-VE-CYS"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="hQp-yl-p9y"/>
@@ -223,7 +223,7 @@
                                     <color key="titleColor" red="0.99309133979999997" green="0.99309133979999997" blue="0.99309133979999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="restorButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="obp-R1-oc9"/>
+                                    <action selector="enableTutorialTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="z5e-kx-HiQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX" userLabel="backButton">
@@ -269,7 +269,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzE-Fb-XIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AcR-VF-W4M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1571.0644677661171" y="-1319.2"/>
+            <point key="canvasLocation" x="-1520" y="-1225"/>
         </scene>
         <!--DetailViewController-->
         <scene sceneID="qAj-CK-xCL">
@@ -609,7 +609,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-7N-vEF" userLabel="tutorialOverlayView">
-                                <frame key="frameInset" minX="0.0%" minY="-0.53%" width="99.40%" height="100.27%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>

@@ -9,47 +9,21 @@
 import UIKit
 import AVFoundation
 
-class RulesViewController: UIViewController {
+class RulesViewController: UIViewController, IAPManagerDelegate {
     
     // MARK: - Game Properties
     @IBOutlet weak var rulesScrollView: UIScrollView!
     
     // MARK: - Labels
-    @IBOutlet weak var rulesTitle: UILabel!
-    @IBOutlet weak var ruleOne: UILabel!
-    @IBOutlet weak var ruleTwo: UILabel!
-    @IBOutlet weak var ruleThree: UILabel!
-    @IBOutlet weak var ruleFour: UILabel!
-    @IBOutlet weak var ruleFive: UILabel!
-    @IBOutlet weak var ruleSix: UILabel!
-    
-    @IBOutlet weak var rulesLabel: UILabel!
-
     @IBOutlet weak var settingsLabel: UILabel!
 
-    // Visual Effects
+    // MARK: - Visual Effects
     var blurView:UIVisualEffectView!
     
-    @IBAction func rulesButtonTapped(_ sender: AnyObject) {
-    
-        if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
-            UIApplication.shared.openURL(url)
-        }
-    
-    }
-    
-    @IBAction func restorButtonTapped(_ sender: AnyObject) {
-        
-        
-    }
+    // MARK: - CoreData
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
-    // MARK:- Button Actions
-    @IBAction func menuButtonTapped(_ sender: AnyObject) {
-        self.loadSoundFile()
-        self.tapAudioPlayer.play()
-        self.performSegue(withIdentifier: "unwindToCategories", sender: self)
-    }
     
 
     
@@ -60,7 +34,7 @@ class RulesViewController: UIViewController {
     let swipeRecognizer = UISwipeGestureRecognizer()
     
     
-    // MARK: - Audio
+    // MARK: - Audio Properties
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     
     var tapAudioPlayer = AVAudioPlayer()
@@ -69,21 +43,12 @@ class RulesViewController: UIViewController {
 
     
     
+
+    // MARK: - View Methods
     
-    
-    func loadSoundFile() {
-        do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
-            self.tapAudioPlayer.prepareToPlay()
-        } catch {
-            print("Unable to load sound files.")
-        }
-    }
-    
-    
-    // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
+        IAPManager.sharedInstance.delegate = self
     }
     
     
@@ -111,6 +76,80 @@ class RulesViewController: UIViewController {
     }
     
     
+    
+    // MARK: - Button Methods
+    
+    @IBAction func rulesButtonTapped(_ sender: AnyObject) {
+        if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    
+    @IBAction func restorButtonTapped(_ sender: AnyObject) {
+        IAPManager.sharedInstance.restorePurchases()
+    }
+    
+    
+    @IBAction func menuButtonTapped(_ sender: AnyObject) {
+        self.loadSoundFile()
+        self.tapAudioPlayer.play()
+        self.performSegue(withIdentifier: "unwindToCategories", sender: self)
+    }
+    
+    
+    @IBAction func enableTutorialTapped(_ sender: AnyObject) {
+        self.enablePopUps()
+    }
+    
+    
+    // MARK: - Tutorial Methods 
+    
+    /// Enable pop ups.
+    func enablePopUps() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
+        delegate.sharedTutorialEntity.setValue(true, forKey: "categoriesScreenEnabled")
+        do {
+            print("Enabled Tutorial & Saving Context")
+            try context.save()
+            Game.sharedGameInstance.showPopUp = true
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
+    
+    
+    
+    
+    // MARK: - Audio Methods
+    
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
+    
+    
+    // MARK: - In-App Purchase Methods
+    
+    func managerDidRestorePurchases() {
+        let alertController = UIAlertController(title: "In-App Purchase", message: "Your purchases have been restored", preferredStyle: .alert)
+        let okAction = UIAlertAction(title:"OK", style:.default,handler:nil)
+        alertController.addAction(okAction)
+        self.present(alertController,animated:true, completion:nil)
+    }
+    
+
     // MARK: - Swipe Gestures
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -122,7 +161,5 @@ class RulesViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 

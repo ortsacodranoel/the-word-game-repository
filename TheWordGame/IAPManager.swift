@@ -11,7 +11,6 @@ import StoreKit
 
 protocol IAPManagerDelegate{
     func managerDidRestorePurchases()
-
 }
 
 

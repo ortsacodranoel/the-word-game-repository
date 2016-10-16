@@ -21,31 +21,31 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var settingsButton: UIButton!
 
-    // MARK: - Audio Timer
+    // MARK: - Timer Properties
     /// Used to delay the tutorialView animation.
     var popSoundTimer = Timer()
 
     // MARK: Button Properties
-    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
     
-    // MARK: - Transition Managers
+    // MARK: - Transition Manager Properties
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
     
-    // MARK: - Audio
+    // MARK: - Audio Properties
     
+    // Used for tutorial pop up.
     var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
     var popAudioPlayer = AVAudioPlayer()
     
-    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
+    // Used when button tapped.
+    var tapSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
-     
+    
+    // MARK: - CoreData
+    
+    // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-    
-
-    
-    
     
     
     
@@ -65,48 +65,24 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            // Fade Settings Button in.
-            self.settingsButton.alpha = 1
+                self.settingsButton.alpha = 1
             },completion:nil)
-        
-        
-        
-        if isTutorialEnabled() {
-            
-            // Timer to play pop sound.
-            if !self.popSoundTimer.isValid {
-                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
-            }
-
-            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.viewOverlay.alpha = 0.8
-                // Change the color of the screen so tutorial pop up stands out.
-            }, completion: nil)
-            UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-    
-                self.tutorialView.alpha = 1
-                
-                self.tutorialView.center.x += self.view.bounds.width
-                // Move the tutorial view right.
-                
-                self.tutorialView.center.y -= self.view.bounds.height
-                // Move the tutorial view up.
-            
-                }, completion: nil )
-            
-            self.disablePopUps()
-        }
     }
     
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.animatePopUpTutorial()
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-    
-    
+
     
     // MARK: - Tutorial methods
     /// Used to check if tutorial is enabled.
@@ -137,17 +113,52 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
 
+    // Used to animate the `tutorialView` onScreen.
+    func animatePopUpTutorial() {
+        
+        if isTutorialEnabled() {
+            
+            // Timer to play pop sound.
+            if !self.popSoundTimer.isValid {
+                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+            }
+            
+            // Move tutorialView offScreen so it can be animated onScreen.
+            self.tutorialView.center.y += self.tutorialView.frame.size.height
+            self.tutorialView.center.x -= self.tutorialView.frame.size.width
+            
+            // Change the color of the screen so tutorial pop up stands out.
+            UIView.animate(withDuration: 0.4, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.viewOverlay.alpha = 0.8
+                }, completion: nil)
+          
+            // Animate `tutorial` view onScreen.
+            UIView.animate(withDuration: 0.4, delay:0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                
+                    self.tutorialView.alpha = 1
+                    // Move the tutorial view right.
+                    self.tutorialView.center.x += self.tutorialView.bounds.width
+                    // Move the tutorial view up.
+                    self.tutorialView.center.y -= self.tutorialView.bounds.height
+                
+                }, completion: nil )
+            
+            self.disablePopUps()
+        }
+    }
+    
+    
+    
     
     
     
     
     // MARK: - Audio Methods.
+    
     func loadSoundFile() {
         do {
-            
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.tapSound, fileTypeHint: "wav")
             self.tapAudioPlayer.prepareToPlay()
-            
             self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
             self.popAudioPlayer.prepareToPlay()
         } catch {
@@ -155,6 +166,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
 
+    
     func playPopSound() {
         // Play pop sound once the tutorial view animates.
         self.popAudioPlayer.play()
@@ -180,13 +192,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
-            self.tutorialView.alpha = 1
-            
-            // Move the view into place.
-            self.tutorialView.center.x -= self.view.bounds.width
-            self.tutorialView.center.y += self.view.bounds.height
+                // Move the view into place.
+                self.tutorialView.center.x -= self.view.bounds.width
+                self.tutorialView.center.y += self.view.bounds.height
+           
             }, completion: { (bool) in
                 self.tutorialView.alpha = 0
+                self.tutorialView.center.x += self.view.bounds.width
+                self.tutorialView.center.y -= self.view.bounds.height
+                
         })
     }
 
@@ -204,6 +218,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
  
         // self.tapAudioPlayer.play()
+        
+        if Game.sharedGameInstance.showPopUp {
+            self.animatePopUpTutorial()
+        }
+        
+        Game.sharedGameInstance.showPopUp = false
     }
     
 
