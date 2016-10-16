@@ -21,26 +21,30 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var settingsButton: UIButton!
 
-    // MARK: - Audio Timer
+    // MARK: - Timer Properties
     /// Used to delay the tutorialView animation.
     var popSoundTimer = Timer()
 
     // MARK: Button Properties
     @IBOutlet weak var rulesButton: UIButton!
     
-    // MARK: - Transition Managers
+    // MARK: - Transition Manager Properties
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
     
-    // MARK: - Audio
+    // MARK: - Audio Properties
     
+    // Used for tutorial pop up.
     var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
     var popAudioPlayer = AVAudioPlayer()
     
-    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
+    // Used when button tapped.
+    var tapSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
     // MARK: - CoreData
+    
+    // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
@@ -63,15 +67,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.settingsButton.alpha = 1
             },completion:nil)
-
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         self.animatePopUpTutorial()
-
     }
     
     
@@ -156,7 +157,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func loadSoundFile() {
         do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.tapSound, fileTypeHint: "wav")
             self.tapAudioPlayer.prepareToPlay()
             self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
             self.popAudioPlayer.prepareToPlay()
