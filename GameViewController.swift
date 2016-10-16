@@ -59,6 +59,9 @@ class GameViewController: UIViewController {
         return enabled
     }
     
+    
+    // MARK: - Tutorial Methods
+    
     /// Disable pop ups.
     func disablePopUps() {
         
@@ -85,7 +88,7 @@ class GameViewController: UIViewController {
     }
     
 
-    // MARK: - Tutorial Methods
+
     
     func animateTutorialPopUps() {
         

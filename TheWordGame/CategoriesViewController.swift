@@ -40,14 +40,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
-     
+    
+    // MARK: - CoreData
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
 
-    
-    
-    
-    
     
     // MARK: - View Methods
 

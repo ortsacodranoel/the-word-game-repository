@@ -92,7 +92,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="0.0%" minY="-0.27%" width="100.00%" height="100.53%"/>
+                                <frame key="frameInset" minX="0.0%" minY="-0.27%" width="100.00%" height="100.80%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -211,7 +211,7 @@
                                     <action selector="restorButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="8cn-pd-ATI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-Is-apQ" userLabel="restoreBtn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-Is-apQ" userLabel="enableTutorialBtn">
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="dNB-VE-CYS"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="hQp-yl-p9y"/>
@@ -223,7 +223,7 @@
                                     <color key="titleColor" red="0.99309133979999997" green="0.99309133979999997" blue="0.99309133979999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="restorButtonTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="obp-R1-oc9"/>
+                                    <action selector="enableTutorialTapped:" destination="o0C-mE-Sf2" eventType="touchUpInside" id="z5e-kx-HiQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-DX-7LX" userLabel="backButton">
@@ -609,7 +609,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-7N-vEF" userLabel="tutorialOverlayView">
-                                <frame key="frameInset" minX="0.0%" minY="-0.53%" width="99.40%" height="100.27%"/>
+                                <frame key="frameInset" minX="0.0%" minY="-0.53%" width="99.25%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
