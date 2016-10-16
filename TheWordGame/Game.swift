@@ -17,7 +17,7 @@ class Game {
     // Tutorial
     
     // Used to determine if a pop tutorial is shown.
-    var showPopUp = true
+    var showPopUp = false
     
     
     // Used to determine if a team is still playing its turn.

@@ -46,6 +46,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     
+    
+    
+    
     // MARK: - View Methods
 
     override func viewDidLoad() {
@@ -55,45 +58,27 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
         
+        
         // Load sounds.
         self.loadSoundFile()
+    
+
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            // Fade Settings Button in.
-            self.settingsButton.alpha = 1
+                self.settingsButton.alpha = 1
             },completion:nil)
-        
-        
-        
-        if isTutorialEnabled() {
-            
-            // Timer to play pop sound.
-            if !self.popSoundTimer.isValid {
-                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
-            }
 
-            UIView.animate(withDuration: 0.7, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                self.viewOverlay.alpha = 0.8
-                // Change the color of the screen so tutorial pop up stands out.
-            }, completion: nil)
-            UIView.animate(withDuration: 0.2, delay: 0.7,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-    
-                self.tutorialView.alpha = 1
-                
-                self.tutorialView.center.x += self.view.bounds.width
-                // Move the tutorial view right.
-                
-                self.tutorialView.center.y -= self.view.bounds.height
-                // Move the tutorial view up.
-            
-                }, completion: nil )
-            
-            self.disablePopUps()
-        }
+        self.animatePopUpTutorial()
     }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     
 
     override func didReceiveMemoryWarning() {
@@ -102,8 +87,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
-    
-    
+
     
     // MARK: - Tutorial methods
     /// Used to check if tutorial is enabled.
@@ -135,16 +119,49 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     
+    func animatePopUpTutorial() {
+        if isTutorialEnabled() {
+            
+            print("In `isTutorialEnabled`")
+            // Timer to play pop sound.
+            if !self.popSoundTimer.isValid {
+                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+            }
+            
+            // 0.5 and 0.7
+            
+            UIView.animate(withDuration: 0.7, delay: 1.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                self.viewOverlay.alpha = 0.8
+                // Change the color of the screen so tutorial pop up stands out.
+                }, completion: nil)
+            UIView.animate(withDuration: 0.2, delay:2.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+                
+                self.tutorialView.alpha = 1
+                
+                self.tutorialView.center.x += self.view.bounds.width
+                // Move the tutorial view right.
+                
+                self.tutorialView.center.y -= self.view.bounds.height
+                // Move the tutorial view up.
+                
+                }, completion: nil )
+            
+            self.disablePopUps()
+        }
+    }
+    
+    
+    
+    
     
     
     
     // MARK: - Audio Methods.
+    
     func loadSoundFile() {
         do {
-            
             self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
             self.tapAudioPlayer.prepareToPlay()
-            
             self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
             self.popAudioPlayer.prepareToPlay()
         } catch {
@@ -152,6 +169,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
 
+    
     func playPopSound() {
         // Play pop sound once the tutorial view animates.
         self.popAudioPlayer.play()
@@ -201,6 +219,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
  
         // self.tapAudioPlayer.play()
+        
+        if Game.sharedGameInstance.showPopUp {
+            self.animatePopUpTutorial()
+        }
+        
+        Game.sharedGameInstance.showPopUp = false
     }
     
 
