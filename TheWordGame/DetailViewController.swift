@@ -211,26 +211,32 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         case "Denominations":
             let product = IAPManager.sharedInstance.products[5] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Denominations":
-            let product = IAPManager.sharedInstance.products[5] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Famous Christians":
+        case "Easter":
             let product = IAPManager.sharedInstance.products[6] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Feasts":
+        case "Famous Christians":
             let product = IAPManager.sharedInstance.products[7] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Relics and Saints":
+        case "Feasts":
             let product = IAPManager.sharedInstance.products[8] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Revelation":
+        case "History":
             let product = IAPManager.sharedInstance.products[9] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Sins":
+        case "Kids":
             let product = IAPManager.sharedInstance.products[10] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
-        case "Worship":
+        case "Relics and Saints":
             let product = IAPManager.sharedInstance.products[11] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Revelation":
+            let product = IAPManager.sharedInstance.products[12] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Sins":
+            let product = IAPManager.sharedInstance.products[13] as! SKProduct
+            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+        case "Worship":
+            let product = IAPManager.sharedInstance.products[14] as! SKProduct
             self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
         default:
             break
