@@ -26,7 +26,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var popSoundTimer = Timer()
 
     // MARK: Button Properties
-    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var rulesButton: UIButton!
     
     // MARK: - Transition Managers
@@ -44,9 +43,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - CoreData
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
-
-    
-    
     
     
     // MARK: - View Methods
@@ -58,11 +54,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
         
-        
         // Load sounds.
         self.loadSoundFile()
-    
-
     }
 
     
@@ -71,16 +64,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 self.settingsButton.alpha = 1
             },completion:nil)
 
-        self.animatePopUpTutorial()
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        self.animatePopUpTutorial()
+
     }
     
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -121,12 +115,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func animatePopUpTutorial() {
         if isTutorialEnabled() {
+            
             // Timer to play pop sound.
             if !self.popSoundTimer.isValid {
                 self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
             }
             
-
             // Animate views offScreen.
             self.tutorialView.center.y += self.tutorialView.frame.size.height
             self.tutorialView.center.x -= self.tutorialView.frame.size.width
@@ -136,15 +130,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 self.viewOverlay.alpha = 0.8
                 // Change the color of the screen so tutorial pop up stands out.
                 }, completion: nil)
+          
+            
             UIView.animate(withDuration: 0.2, delay:2.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 
-                self.tutorialView.alpha = 1
-                
-                self.tutorialView.center.x += self.view.bounds.width
-                // Move the tutorial view right.
-                
-                self.tutorialView.center.y -= self.view.bounds.height
-                // Move the tutorial view up.
+                    self.tutorialView.alpha = 1
+                    // Move the tutorial view right.
+                    self.tutorialView.center.x += self.tutorialView.bounds.width
+                    // Move the tutorial view up.
+                    self.tutorialView.center.y -= self.tutorialView.bounds.height
                 
                 }, completion: nil )
             
@@ -197,13 +191,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             
-            self.tutorialView.alpha = 1
-            
-            // Move the view into place.
-            self.tutorialView.center.x -= self.view.bounds.width
-            self.tutorialView.center.y += self.view.bounds.height
+                // Move the view into place.
+                self.tutorialView.center.x -= self.view.bounds.width
+                self.tutorialView.center.y += self.view.bounds.height
+           
             }, completion: { (bool) in
                 self.tutorialView.alpha = 0
+                self.tutorialView.center.x += self.view.bounds.width
+                self.tutorialView.center.y -= self.view.bounds.height
+                
         })
     }
 
