@@ -113,27 +113,27 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
 
-    
+    // Used to animate the `tutorialView` onScreen.
     func animatePopUpTutorial() {
+        
         if isTutorialEnabled() {
             
             // Timer to play pop sound.
             if !self.popSoundTimer.isValid {
-                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+                self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
             }
             
-            // Animate views offScreen.
+            // Move tutorialView offScreen so it can be animated onScreen.
             self.tutorialView.center.y += self.tutorialView.frame.size.height
             self.tutorialView.center.x -= self.tutorialView.frame.size.width
             
-            
-            UIView.animate(withDuration: 0.7, delay: 1.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // Change the color of the screen so tutorial pop up stands out.
+            UIView.animate(withDuration: 0.4, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0.8
-                // Change the color of the screen so tutorial pop up stands out.
                 }, completion: nil)
           
-            
-            UIView.animate(withDuration: 0.2, delay:2.0,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // Animate `tutorial` view onScreen.
+            UIView.animate(withDuration: 0.4, delay:0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 
                     self.tutorialView.alpha = 1
                     // Move the tutorial view right.
