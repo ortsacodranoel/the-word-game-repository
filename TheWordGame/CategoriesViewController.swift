@@ -121,14 +121,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func animatePopUpTutorial() {
         if isTutorialEnabled() {
-            
-            print("In `isTutorialEnabled`")
             // Timer to play pop sound.
             if !self.popSoundTimer.isValid {
                 self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
             }
             
-            // 0.5 and 0.7
+
+            // Animate views offScreen.
+            self.tutorialView.center.y += self.tutorialView.frame.size.height
+            self.tutorialView.center.x -= self.tutorialView.frame.size.width
+            
             
             UIView.animate(withDuration: 0.7, delay: 1.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0.8
