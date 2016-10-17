@@ -719,7 +719,6 @@ class GameViewController: UIViewController {
                         self.audioPlayerSwipeSound.play()
                         self.timesSwipedRight += 1
                     
-                      //  print("Swiped left")
                         self.animateNewWordLeftSwipe()
                         
                         // Play sound for wrong swipe.
@@ -727,7 +726,7 @@ class GameViewController: UIViewController {
                   
                     } else {
                         
-                        //    animatePassMessage()
+                        animatePassMessage()
                         self.audioPlayerWrondSwipe.play()
                     }
                 }
@@ -752,7 +751,19 @@ class GameViewController: UIViewController {
     }
     
     
-    
+    func animatePassMessage() {
+        UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            
+                self.passLabel.alpha = 1
+            
+            },completion: {(bool) in
+                UIView.animate(withDuration: 0.4, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+                    
+                    self.passLabel.alpha = 0
+                    
+                    },completion:nil)
+        })
+    }
     
     
     /**
@@ -965,6 +976,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var teamTurnLabel: UILabel!
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var passLabel: UILabel!
     
     
     

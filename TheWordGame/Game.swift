@@ -65,12 +65,12 @@ class Game {
         UIColor(red: 179/255, green: 67/255, blue: 61/225, alpha: 1),           // Angels
         UIColor(red: 202/255, green: 154/255, blue: 53/225, alpha: 1),          // Books and Movies
         UIColor(red: 193/255, green: 204/255, blue: 107/225, alpha: 1),         // Christian Nation
-        UIColor(red: 163/255, green: 56/255, blue: 145/225, alpha: 1),          // Christmas Time
+        UIColor(red: 171/255, green: 59/255, blue: 62/225, alpha: 1),          // Christmas Time
         UIColor(red: 42/255, green: 83/255, blue: 122/225, alpha: 1),           // Commands
         UIColor(red: 198/255, green: 139/255, blue: 88/225, alpha: 1),          // Denomations
         UIColor(red: 53/255, green: 151/255, blue: 156/225, alpha: 1),          // Easter
         UIColor(red: 202/255, green: 195/255, blue: 99/225, alpha: 1),          // Famous Christians
-        UIColor(red: 171/255, green: 59/255, blue: 62/225, alpha: 1),           // Feasts
+        UIColor(red: 163/255, green: 56/255, blue: 145/225, alpha: 1),           // Feasts
         UIColor(red: 123/255, green: 53/255, blue: 156/225, alpha: 1),           // History
         UIColor(red: 75/255, green: 101/255, blue: 195/225, alpha: 1),           // Kids
         UIColor(red: 56/255, green: 159/255, blue: 168/225, alpha: 1),           // Relics and Saints
