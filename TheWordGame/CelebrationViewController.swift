@@ -47,8 +47,8 @@ class CelebrationViewController: UIViewController {
     
         
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController")
-        self.present(vc!, animated: true, completion: nil)
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController")
+//        self.present(vc!, animated: true, completion: nil)
         
     }
     
@@ -87,8 +87,8 @@ class CelebrationViewController: UIViewController {
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            //view.showsFPS = true
+            // view.showsNodeCount = true
         }
     }
 

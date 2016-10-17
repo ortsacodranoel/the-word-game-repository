@@ -33,20 +33,36 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
-    // MARK: - Tutorial
+    // MARK: - Tutorial Properties
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
     @IBOutlet weak var tutorial3view: UIView!
 
-    
-    
-    
-    
-    
+
     
     // MARK: - Audio Properties
     var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
     var popAudioPlayer = AVAudioPlayer()
+    
+    
+
+    
+    // MARK: - Tutorial Methods
+    
+    /// Disable pop ups.
+    func disablePopUps() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(false, forKey: "gameScreenEnabled")
+        
+        do {
+            print("Saving Context")
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
     
     
     /// Used to check if tutorial is enabled.
@@ -60,51 +76,17 @@ class GameViewController: UIViewController {
     }
     
     
-    // MARK: - Tutorial Methods
-    
-    /// Disable pop ups.
-    func disablePopUps() {
-        
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.managedObjectContext
-        
-        delegate.sharedTutorialEntity.setValue(false, forKey: "gameScreenEnabled")
-   
-        do {
-            print("Saving Context")
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-    }
-    
-    func playPopSound() {
-        // Play pop sound once the tutorial view animates.
-        self.popAudioPlayer.play()
-    }
-    
-
-
-    
+    ///
     func animateTutorialPopUps() {
-        
-        // Timer to play pop sound.
+        // Used to play first pop sound.
         if !self.popSoundTimer1.isValid {
             self.popSoundTimer1 = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
         }
         
-        // Timer to play pop sound.
+        // Used to play second pop sound.
         if !self.popSoundTimer2.isValid {
             self.popSoundTimer2 = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
         }
-        
-        
-        
-        
         
         // Disable swipes.
         self.view.gestureRecognizers?.removeAll()
@@ -138,8 +120,6 @@ class GameViewController: UIViewController {
     }
     
 
-    
-    
     
     /**
      Used to hide the tutorial bubble from view and fade out the overlay when
@@ -178,17 +158,8 @@ class GameViewController: UIViewController {
         })
     }
 
-    func addSwipeGestureRecognizers() {
-        
-        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
-        
-        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
-        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
-    }
     
+
     
     
     
@@ -346,6 +317,16 @@ class GameViewController: UIViewController {
             print("Error: unable to find sound files.")
         }
     }
+    
+    
+    // MARK: - Audio Methods
+    func playPopSound() {
+        // Play pop sound once the tutorial view animates.
+        self.popAudioPlayer.play()
+    }
+
+    
+    
     
 
     
@@ -693,7 +674,7 @@ class GameViewController: UIViewController {
     
     
     
-    // MARK: - SWIPE GESTURES
+    // MARK: - Gesture recognizer methods
     
     /**
      When the team know the answer they will swipe left. When they do not, they can pass on the
@@ -757,6 +738,23 @@ class GameViewController: UIViewController {
     }
     
 
+    
+    
+    func addSwipeGestureRecognizers() {
+        
+        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRightGestureRecognizer)
+        
+        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
+        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
+    }
+    
+    
+    
+    
+    
     /**
      The initial word animation moves the wordContainerView into view from the left side of the screen.
      */
