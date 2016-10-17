@@ -26,12 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         
         if SKPaymentQueue.canMakePayments(){
-            
             canPurchase = true
             IAPManager.sharedInstance.setupInAppPurchases()
         }
         
-     //   IAPManager.sharedInstance.restorePurchases()
+       //   IAPManager.sharedInstance.restorePurchases()
         
         
         
