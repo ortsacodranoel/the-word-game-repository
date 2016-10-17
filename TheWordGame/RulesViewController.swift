@@ -100,6 +100,8 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     @IBAction func enableTutorialTapped(_ sender: AnyObject) {
         self.enablePopUps()
+        self.performSegue(withIdentifier: "unwindToCategories", sender: self)
+
     }
     
     
