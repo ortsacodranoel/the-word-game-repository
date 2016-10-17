@@ -15,9 +15,9 @@ class CelebrationViewController: UIViewController {
 
     // Displays winning team.
     @IBOutlet weak var winningTeamLabel: UILabel!
-    
+    // Used to display winning team name.
     var winningTeamName = String()
-    
+    // Used to start a new game.
     @IBOutlet weak var newGameButton: UIButton!
     
     //MARK:- Audio Properties
