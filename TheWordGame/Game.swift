@@ -91,9 +91,10 @@ class Game {
     // MARK: - Paid categories
     var angels:Category!
     var books:Category!
-    var commands:Category!
     var christiannation:Category!
     var christmastime:Category!
+
+    var commands:Category!
     var denominations:Category!
     var easter:Category!
     var famous:Category!
@@ -167,13 +168,8 @@ class Game {
         } else {
             self.commands.purchased = false
         }
-        // Easter
-        self.easter = Category(title:"Easter",summary: "All words related to the holiday in which we celebrate the Resurrection of Jesus Christ, including the days leading up to it.")
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
-                self.easter.purchased = true
-            } else {
-                self.easter.purchased = false
-            }
+        
+
         // Denominations
         self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
@@ -181,6 +177,16 @@ class Game {
         } else {
             self.denominations.purchased = false
         }
+        
+        // Easter
+        self.easter = Category(title:"Easter",summary: "All words related to the holiday in which we celebrate the Resurrection of Jesus Christ, including the days leading up to it.")
+        if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
+            self.easter.purchased = true
+        } else {
+            self.easter.purchased = false
+        }
+        
+        
         // Famous Christians
         self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
@@ -188,6 +194,7 @@ class Game {
             } else {
                 self.famous.purchased = false
             }
+    
         // Feasts
         self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
@@ -195,6 +202,7 @@ class Game {
             } else {
                 self.feasts.purchased = false
             }
+ 
         // History
         self.history = Category(title:"History",summary: "The movements, councils, people, wars, translations, churches, schools and more that shaped Christianity.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
@@ -202,6 +210,7 @@ class Game {
         } else {
             self.history.purchased = false
         }
+
         // Kids
         self.kids = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
@@ -209,6 +218,7 @@ class Game {
         } else {
             self.kids.purchased = false
         }
+  
         // Relics and Saints
         self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
@@ -216,6 +226,7 @@ class Game {
             } else {
                 self.relics.purchased = false
             }
+
         // Revelation
         self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
@@ -223,6 +234,7 @@ class Game {
             } else {
                 self.revelation.purchased = false
             }
+  
         // Sins
         self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
@@ -230,6 +242,7 @@ class Game {
             } else {
                 self.sins.purchased = false
             }
+        
         // Worship
         self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
@@ -298,44 +311,64 @@ class Game {
         
         switch categorySelected {
         case 0:
+            // Jesus
             selectedArray = self.jesus.wordsInCategory
         case 1:
+            // People
             selectedArray = self.people.wordsInCategory
         case 2:
+            // Places
             selectedArray = self.places.wordsInCategory
         case 3:
+            // Sunday
             selectedArray = self.sunday.wordsInCategory
         case 4:
+            // Concordance
             selectedArray = self.concordance.wordsInCategory
         case 5:
+            // Angels
             selectedArray = self.angels.wordsInCategory
         case 6:
+            // Books and Movies
             selectedArray = self.books.wordsInCategory
         case 7:
+            // Christian Nation
             selectedArray = self.christiannation.wordsInCategory
         case 8:
+            // Christmas Time
             selectedArray = self.christmastime.wordsInCategory
         case 9:
+            // Commands
             selectedArray = self.commands.wordsInCategory
         case 10:
+            // Denominations
             selectedArray = self.denominations.wordsInCategory
         case 11:
+            // Easter
             selectedArray = self.easter.wordsInCategory
         case 12:
+            // Famous Christians
             selectedArray = self.famous.wordsInCategory
         case 13:
+            // Feasts
             selectedArray = self.feasts.wordsInCategory
         case 14:
+            // History
             selectedArray = self.history.wordsInCategory
         case 15:
+            // Kids
             selectedArray = self.kids.wordsInCategory
         case 16:
+            // Relics
             selectedArray = self.relics.wordsInCategory
         case 17:
+            // Revelation
             selectedArray = self.revelation.wordsInCategory
         case 19:
+            // Sins
             selectedArray = self.sins.wordsInCategory
         case 20:
+            // Worship
             selectedArray = self.worship.wordsInCategory
         default:
             break
