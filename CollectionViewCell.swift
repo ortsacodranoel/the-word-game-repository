@@ -18,6 +18,7 @@ class CollectionViewCell: UICollectionViewCell {
     // MARK: - Buttons
     @IBOutlet weak var categoryButton: UIButton!
 
+    @IBOutlet weak var lockView: UIView!
     
     // MARK: - Audio
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)

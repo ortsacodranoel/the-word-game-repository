@@ -243,11 +243,15 @@ class GameViewController: UIViewController {
     }
     
 
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning() }
 
 
 
+    // MARK: - Game Methods
     
     /// Used by the gameTimer to generate gameplay.
     func playgame() {
