@@ -64,6 +64,16 @@
                                                         <segue destination="4Fc-eW-5Eo" kind="show" identifier="segueToDetails" id="dnU-hx-LEo"/>
                                                     </connections>
                                                 </button>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FXj-Ud-VAP" userLabel="lockView">
+                                                    <frame key="frameInset" minX="93.09%" minY="124.24%" width="25" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="colorLock" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-eF-q4K">
+                                                            <frame key="frameInset" minX="0.0%" minY="0.0%" width="25" height="27"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -83,7 +93,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPL-fc-bp5" userLabel="settingsButton">
-                                <frame key="frameInset" width="33" height="32" maxX="34" maxY="16"/>
+                                <frame key="frameInset" width="33" height="31" maxX="35" maxY="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" image="Settings"/>
@@ -92,7 +102,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="100.00%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="99.79%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -126,7 +136,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lps-DJ-njf" secondAttribute="bottom" constant="-205" id="LPw-6C-yp4"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lps-DJ-njf" secondAttribute="leading" constant="-7" id="aSB-QC-dsU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8do-f1-dRM" secondAttribute="bottom" constant="-15" id="eyB-4J-Q1d"/>
-                            <constraint firstAttribute="bottom" secondItem="nlr-VK-F1a" secondAttribute="bottom" id="ki7-g3-iA2"/>
+                            <constraint firstAttribute="bottom" secondItem="nlr-VK-F1a" secondAttribute="bottom" constant="10" id="ki7-g3-iA2"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-0.5" id="wfR-s7-05h"/>
                             <constraint firstItem="nlr-VK-F1a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-0.5" id="xxD-LX-TSZ"/>
                         </constraints>
@@ -299,9 +309,9 @@
                             <view opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDN-Ix-uGz" userLabel="categoryTitleView">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-V4-IEU" userLabel="categoryTitleLabel">
-                                        <frame key="frameInset" minX="-1" minY="-1" maxX="1"/>
+                                        <frame key="frameInset" maxY="-1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -370,9 +380,9 @@
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" constant="-5.5" id="Nq4-7V-EUk"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="OUW-pe-d8W"/>
                             <constraint firstItem="0yI-Hq-yE4" firstAttribute="leading" secondItem="Hu0-ky-z89" secondAttribute="leading" constant="12" id="SBi-rf-h9K"/>
-                            <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="mDN-Ix-uGz" secondAttribute="trailing" constant="-350" id="gms-cS-ckX"/>
+                            <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="mDN-Ix-uGz" secondAttribute="trailing" constant="-341" id="gms-cS-ckX"/>
                             <constraint firstItem="0yI-Hq-yE4" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="hIj-8p-gVV"/>
-                            <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="mDN-Ix-uGz" secondAttribute="bottom" constant="8.5" id="kg7-ej-PA6"/>
+                            <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="mDN-Ix-uGz" secondAttribute="bottom" constant="-10" id="kg7-ej-PA6"/>
                             <constraint firstItem="0yI-Hq-yE4" firstAttribute="leading" secondItem="Hu0-ky-z89" secondAttribute="leadingMargin" constant="-8" id="pQh-lf-tRs"/>
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="top" secondItem="qg2-86-sEz" secondAttribute="bottom" constant="12.666666666666686" id="qD1-i9-XZK"/>
                         </constraints>
@@ -888,6 +898,7 @@
         <image name="Settings" width="32" height="32"/>
         <image name="arrowDown" width="22" height="13"/>
         <image name="arrowDownWhite" width="22" height="13"/>
+        <image name="colorLock" width="27" height="35"/>
         <image name="tutorial1image" width="349" height="143"/>
         <image name="tutorial3image" width="349" height="143"/>
     </resources>
