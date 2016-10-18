@@ -59,7 +59,7 @@ class CelebrationViewController: UIViewController {
         super.viewDidLoad()
       
         self.newGameButton.layer.cornerRadius = 7
-        self.newGameButton.layer.borderColor = UIColor.darkGray.cgColor
+        self.newGameButton.layer.borderColor = UIColor.green.cgColor
         self.newGameButton.layer.borderWidth = 3
         
         

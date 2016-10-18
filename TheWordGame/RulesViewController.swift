@@ -146,7 +146,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     func managerDidRestorePurchases() {
         let alertController = UIAlertController(title: "In-App Purchase", message: "Your purchases have been restored", preferredStyle: .alert)
-        let okAction = UIAlertAction(title:"OK", style:.default,handler:nil)
+        let okAction = UIAlertAction(title:"OK", style:.default,handler: {action in self.performSegue(withIdentifier: "unwindToCategories", sender: self)})
         alertController.addAction(okAction)
         self.present(alertController,animated:true, completion:nil)
     }
