@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lps-DJ-njf" userLabel="rulesButton">
@@ -47,7 +47,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" alpha="0.0" contentMode="center" reuseIdentifier="cell" id="jYI-0V-R3N" customClass="CollectionViewCell" customModule="TheWordGame" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
+                                        <rect key="frame" x="75" y="0.0" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
@@ -89,8 +89,8 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Nu3-1G-6Gp">
-                                    <rect key="frame" x="0.0" y="60" width="1000" height="15"/>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewHeader" id="Nu3-1G-6Gp">
+                                    <rect key="frame" x="0.0" y="60" width="450" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
@@ -108,7 +108,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVS-IB-wLS" userLabel="viewOverlay">
-                                <frame key="frameInset" minX="-0.21%" minY="0.0%" width="100.42%" height="100.00%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.60%" height="100.00%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -172,7 +172,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iob-2N-vam">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -193,7 +193,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TdX-dK-yno"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4q6-a4-gf1">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3d-VT-CtQ" userLabel="backgroundView">
@@ -296,7 +296,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oTV-zm-k0o"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Hu0-ky-z89">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yI-Hq-yE4" userLabel="backButton">
@@ -333,7 +333,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYY-Zs-90x" userLabel="descriptionLabel">
                                         <frame key="frameInset"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -386,7 +386,7 @@
                             <constraint firstItem="8wf-r9-ZNq" firstAttribute="centerX" secondItem="Hu0-ky-z89" secondAttribute="centerX" constant="-5.5" id="Nq4-7V-EUk"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" constant="-17.5" id="OUW-pe-d8W"/>
                             <constraint firstItem="0yI-Hq-yE4" firstAttribute="leading" secondItem="Hu0-ky-z89" secondAttribute="leading" constant="12" id="SBi-rf-h9K"/>
-                            <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="mDN-Ix-uGz" secondAttribute="trailing" constant="-351" id="gms-cS-ckX"/>
+                            <constraint firstItem="qg2-86-sEz" firstAttribute="leading" secondItem="mDN-Ix-uGz" secondAttribute="trailing" constant="-347" id="gms-cS-ckX"/>
                             <constraint firstItem="0yI-Hq-yE4" firstAttribute="centerY" secondItem="Hu0-ky-z89" secondAttribute="centerY" id="hIj-8p-gVV"/>
                             <constraint firstItem="qg2-86-sEz" firstAttribute="top" secondItem="mDN-Ix-uGz" secondAttribute="bottom" constant="1" id="kg7-ej-PA6"/>
                             <constraint firstItem="0yI-Hq-yE4" firstAttribute="leading" secondItem="Hu0-ky-z89" secondAttribute="leadingMargin" constant="-8" id="pQh-lf-tRs"/>
@@ -431,7 +431,7 @@
                         <viewControllerLayoutGuide type="bottom" id="q4h-EO-UYy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6RZ-Fk-ZnC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0BN-u8-UiN" userLabel="redBackgroundView">
@@ -767,7 +767,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XlG-o8-AuK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M9i-qF-Rti">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwe-7R-Q4V" userLabel="backgroundView">
@@ -853,7 +853,7 @@
                         <viewControllerLayoutGuide type="bottom" id="v44-w5-yxg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fUg-xj-9aY" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team One Wins!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sju-Ie-Lic" userLabel="winningTeamLabel">
