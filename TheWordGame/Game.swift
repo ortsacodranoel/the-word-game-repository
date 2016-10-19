@@ -107,35 +107,36 @@ class Game {
     var worship:Category!
     
     init() {
-        
+        // Jesus category.
         self.jesus = Category(title: "Jesus",summary: "His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ.")
         self.jesus.purchased = true
-        
+       
+        // People category.
         self.people = Category(title: "People", summary: "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.")
         self.people.purchased = true
-        
-        self.places = Category(title: "Places", summary: "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and bible times.")
+      
+        // Places category.
+        self.places = Category(title: "Places", summary: "Stories from the Bible as well as Jesus’ parables.  * answers do not have to be exact, but must contain the main words.")
         self.places.purchased = true
-        
-        self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  *teams need not guess the exact answer, but must clearly guess the correct story or parable.")
+      
+        // Sunday School category.
+        self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  * answers do not have to be exact, but must contain the main words.")
         self.sunday.purchased = true
-        
+       
+        // Concordance category.
         self.concordance = Category(title: "Concordance", summary:"Words found in the concordance of a Bible, excluding names and places.")
         self.concordance.purchased = true
         
-        // Angels
+        // Angels category.
         self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
             self.angels.purchased = true
         } else {
             self.angels.purchased = false
         }
         
-        
-        // Books
+        // Books and Movies category.
         self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
             self.books.purchased = true
         } else {
@@ -162,7 +163,7 @@ class Game {
         
         
         // Commands
-        self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word need not be guessed exactly, but must contain the main words.")
+        self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word do not have to be exact, but must contain the main words.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
             self.commands.purchased = true
         } else {
@@ -236,7 +237,7 @@ class Game {
             }
   
         // Sins
-        self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word need not be guessed exactly, but must contain the main words.")
+        self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word do not have to be exact, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
                 self.sins.purchased = true
             } else {
@@ -244,7 +245,7 @@ class Game {
             }
         
         // Worship
-        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” need not be guessed exactly, but must contain the main words.")
+        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” do not have to be exact, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
                 self.worship.purchased = true
             } else {
