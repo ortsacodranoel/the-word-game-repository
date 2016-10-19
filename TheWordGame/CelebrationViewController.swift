@@ -15,9 +15,9 @@ class CelebrationViewController: UIViewController {
 
     // Displays winning team.
     @IBOutlet weak var winningTeamLabel: UILabel!
-    
+    // Used to display winning team name.
     var winningTeamName = String()
-    
+    // Used to start a new game.
     @IBOutlet weak var newGameButton: UIButton!
     
     //MARK:- Audio Properties
@@ -47,8 +47,8 @@ class CelebrationViewController: UIViewController {
     
         
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController")
-        self.present(vc!, animated: true, completion: nil)
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController")
+//        self.present(vc!, animated: true, completion: nil)
         
     }
     
@@ -59,7 +59,7 @@ class CelebrationViewController: UIViewController {
         super.viewDidLoad()
       
         self.newGameButton.layer.cornerRadius = 7
-        self.newGameButton.layer.borderColor = UIColor.darkGray.cgColor
+        self.newGameButton.layer.borderColor = UIColor.green.cgColor
         self.newGameButton.layer.borderWidth = 3
         
         
@@ -87,8 +87,8 @@ class CelebrationViewController: UIViewController {
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            //view.showsFPS = true
+            // view.showsNodeCount = true
         }
     }
 

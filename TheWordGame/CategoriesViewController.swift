@@ -15,6 +15,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     fileprivate var lastContentOffset: CGFloat = 0
     
+    
+    
+    
     // MARK: - View Properties
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
@@ -72,7 +75,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.collectionView.reloadData()
         self.animatePopUpTutorial()
+        
     }
     
     
@@ -115,7 +120,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     // Used to animate the `tutorialView` onScreen.
     func animatePopUpTutorial() {
-        
         if isTutorialEnabled() {
             
             // Timer to play pop sound.
@@ -206,7 +210,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     /// Needed for segue action.
-    @IBAction func categoryButtonTapped(_ sender: AnyObject) { self.settingsButton.alpha = 0}
+    @IBAction func categoryButtonTapped(_ sender: AnyObject) {
+        self.settingsButton.alpha = 0
+    }
     
     
     
@@ -230,6 +236,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // TO THE SETTINGS
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
+        self.tapAudioPlayer.play()
         performSegue(withIdentifier: "segueToSettings", sender: self)
     }
     
@@ -254,6 +261,21 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.categoryButton.backgroundColor = Game.sharedGameInstance.colors[(indexPath as NSIndexPath).row]
         cell.tag = (indexPath as NSIndexPath).row
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
+        
+        var category:Category!
+       
+        
+        category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row] 
+            
+        if category.purchased == true {
+            print("Category purchased")
+            cell.lockView.alpha = 0
+        } else if category.purchased == false {
+            print("Category not purchased")
+            cell.lockView.alpha = 1
+        }
+        
+        
         
         return cell
     }
