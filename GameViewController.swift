@@ -70,7 +70,7 @@ class GameViewController: UIViewController {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
         let enabled = sharedTutorialInstance?.value(forKey: "gameScreenEnabled") as! Bool
-        print("This is in isTutorialEnabled value is:\(enabled)")
+        // print("This is in isTutorialEnabled value is:\(enabled)")
         // Retrieve data.
         return enabled
     }

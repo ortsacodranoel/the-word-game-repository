@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import StoreKit
 
-class DetailViewController: UIViewController, IAPManagerDelegate {
+class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationDelegate {
     
     // MARK: - Variables
     var categoryTapped = Int()
@@ -39,13 +39,22 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
     var fromDetailVC:Bool!
     
 
-    // MARK: - init() Methods
+    
+    
+    
+    // MARK: - View Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
-        // Load sound.
         self.loadSoundFile()
+
+
+    
+    
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,6 +84,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate {
         }
         startAnimations()
     }
+    
+    
+
+    
+    
     
     
     // MARK: - Button Actions.

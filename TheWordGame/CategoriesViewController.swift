@@ -268,10 +268,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row] 
             
         if category.purchased == true {
-            print("Category purchased")
+           // print("Category purchased")
             cell.lockView.alpha = 0
         } else if category.purchased == false {
-            print("Category not purchased")
+            //print("Category not purchased")
             cell.lockView.alpha = 1
         }
         
