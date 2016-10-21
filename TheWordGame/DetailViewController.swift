@@ -38,7 +38,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     // Used by GameViewController to determine if a segue occured from this VC.
     var fromDetailVC:Bool!
     
-
+    // Used to check internet reachability.
+    var reachability: Reachability?
+    
     
     
     
@@ -87,7 +89,37 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
 
+    ///
+    func reachabilityChanged(notification: NSNotification) {
+        print("Status changed")
+        //          reachability = notification.object as? Reachability
+        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+    }
     
+    
+    
+    
+    ///
+    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+        
+        var networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        var statusString: String = ""
+        
+        print("StatusValue: \(networkStatus)")
+        
+        if networkStatus == NotReachable {
+            print("Netowrk is not reachable")
+            reachabilityStatus = kNorReachable
+        }
+        else if networkStatus == ReachableViaWiFi {
+            print("Via WIFI")
+            reachabilityStatus = kReachabilityWithWiFi
+        }
+        else if networkStatus == ReachableViaWWAN {
+            print("WAN reachable")
+            reachabilityStatus  = kReachableWithWWAN
+        }
+    }
     
     
     
@@ -125,12 +157,41 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             performSegue(withIdentifier: "segueToGame", sender: self)
     
         case "Angels":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
-                self.selectButton.setTitle("Select", for: UIControlState())
-                performSegue(withIdentifier: "segueToGame", sender: self)
-            } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
+            
+            
+            reachability = Reachability.forInternetConnection()
+            reachability?.startNotifier()
+            
+            NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
+            NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
+
+            
+            
+            if reachability != nil
+            {
+                self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
             }
+            
+            
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+            
+            // Check if connected to the internet.
+            
+            let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
+
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
+            } else {
+            
+                
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
+                    self.selectButton.setTitle("Select", for: UIControlState())
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
+                }
+            }
+            
         case "Books and Movies":
             if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
                 performSegue(withIdentifier: "segueToGame", sender: self)

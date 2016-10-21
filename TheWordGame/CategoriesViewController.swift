@@ -15,9 +15,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     fileprivate var lastContentOffset: CGFloat = 0
     
-    
-    
-    
     // MARK: - View Properties
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
@@ -52,10 +49,24 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
     // MARK: - View Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
@@ -63,6 +74,14 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Load sounds.
         self.loadSoundFile()
+
+        
+        
+        
+        
+        
+        
+        
     }
 
     
@@ -78,6 +97,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.collectionView.reloadData()
         self.animatePopUpTutorial()
         
+
     }
     
     

@@ -19,6 +19,7 @@ let kNorReachable = "NotReachable"
 let kReachableWithWWAN = "ReachableWithWWAN"
 
 var reachability: Reachability?
+
 var reachabilityStatus = kReachabilityWithWiFi
 
 
@@ -35,38 +36,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// Used to determine if the 'Pop Up Tutorials' should be enabled.
     var sharedTutorialEntity:NSManagedObject!
-    
-    // Used to check internet reachability.
-    var internetReach: Reachability?
 
     
+    
+    
 
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-    
-        
-        NotificationCenter.default.addObserver(self, selector:Selector(("checkForReachability:")), name: NSNotification.Name.reachabilityChanged, object: nil);
-        
-        self.internetReach = Reachability.forInternetConnection();
-        self.internetReach?.startNotifier();
-        
-        
-//        internetReach = Reachability.forInternetConnection()
-//        internetReach?.startNotifier()
-//        
-//        if internetReach != nil
-//        {
-//            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
-//        } else {
-//            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
-//            
-//        }        
-//        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.reachabilityChanged), name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil)
-//
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil)
-//
-//        
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+
 
         
 
@@ -79,10 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
        //   IAPManager.sharedInstance.restorePurchases()
-        
-        
-        
-        
+
         
         let fetchRequest : NSFetchRequest<TutorialPopUp>
         // 1. Create the fetch request for all entities of type TutorialPopUp.
@@ -168,11 +143,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error.localizedDescription)
             // Display information about the type of error.
         }
+        
+        
 
         
         return true
     }
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -195,7 +197,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.reachabilityChanged, object:nil)
         
         self.saveContext()
     }
@@ -264,32 +265,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func checkForReachability(notification:NSNotification)
-    {
-        // Remove the next two lines of code. You cannot instantiate the object
-        // you want to receive notifications from inside of the notification
-        // handler that is meant for the notifications it emits.
-        
-        var networkReachability = Reachability.forInternetConnection()
-        networkReachability?.startNotifier()
-        
-        //let networkReachability = notification.object as! Reachability;
-        var remoteHostStatus = networkReachability?.currentReachabilityStatus()
-        
-        if (remoteHostStatus == NotReachable)
-        {
-            print("Not Reachable")
-        }
-        else if (remoteHostStatus == ReachableViaWiFi)
-        {
-            print("Reachable via Wifi")
-        }
-        else
-        {
-            print("Reachable")
-        }
-    }
-    
+//    func checkForReachability(notification:NSNotification)
+//    {
+//        // Remove the next two lines of code. You cannot instantiate the object
+//        // you want to receive notifications from inside of the notification
+//        // handler that is meant for the notifications it emits.
+//        
+//        var networkReachability = Reachability.forInternetConnection()
+//        networkReachability?.startNotifier()
+//        
+//        //let networkReachability = notification.object as! Reachability;
+//        var remoteHostStatus = networkReachability?.currentReachabilityStatus()
+//        
+//        if (remoteHostStatus == NotReachable)
+//        {
+//            print("Not Reachable")
+//        }
+//        else if (remoteHostStatus == ReachableViaWiFi)
+//        {
+//            print("Reachable via Wifi")
+//        }
+//        else
+//        {
+//            print("Reachable")
+//        }
+//    }
+//    
     
     // MARK: - Reachability
 //    

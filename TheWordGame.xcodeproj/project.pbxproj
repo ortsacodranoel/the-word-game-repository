@@ -15,6 +15,7 @@
 		B30227C11D9B45DE000694EE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227C01D9B45DE000694EE /* GameScene.sks */; };
 		B30539331DA561B400D6F19B /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539321DA561B400D6F19B /* wrong.mp3 */; };
 		B30539391DA56D0200D6F19B /* correctSwipe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539381DA56D0200D6F19B /* correctSwipe.mp3 */; };
+		B30986851DBAA16400BA6E1A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30986841DBAA16400BA6E1A /* SystemConfiguration.framework */; };
 		B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */; };
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
 		B32BA8031DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */; };
@@ -79,6 +80,7 @@
 		B30227C01D9B45DE000694EE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		B30539321DA561B400D6F19B /* wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrong.mp3; sourceTree = "<group>"; };
 		B30539381DA56D0200D6F19B /* correctSwipe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correctSwipe.mp3; sourceTree = "<group>"; };
+		B30986841DBAA16400BA6E1A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TutorialPopUp+CoreDataClass.swift"; path = "../TutorialPopUp+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30986851DBAA16400BA6E1A /* SystemConfiguration.framework in Frameworks */,
 				B3F48AD01D89AF460052AA32 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +222,7 @@
 		B3F48ACE1D89AF460052AA32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B30986841DBAA16400BA6E1A /* SystemConfiguration.framework */,
 				B3F48ACF1D89AF460052AA32 /* StoreKit.framework */,
 			);
 			name = Frameworks;
