@@ -44,22 +44,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
-        internetReach = Reachability.forInternetConnection()
-        internetReach?.startNotifier()
         
-        if internetReach != nil
-        {
-            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
-        } else {
-            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
-            
-        }        
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.reachabilityChanged), name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil)
-
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector:Selector(("checkForReachability:")), name: NSNotification.Name.reachabilityChanged, object: nil);
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+        self.internetReach = Reachability.forInternetConnection();
+        self.internetReach?.startNotifier();
+        
+        
+//        internetReach = Reachability.forInternetConnection()
+//        internetReach?.startNotifier()
+//        
+//        if internetReach != nil
+//        {
+//            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
+//        } else {
+//            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
+//            
+//        }        
+//        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.reachabilityChanged), name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil)
+//
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil)
+//
+//        
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
 
         
 
@@ -256,25 +263,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    
+    func checkForReachability(notification:NSNotification)
+    {
+        // Remove the next two lines of code. You cannot instantiate the object
+        // you want to receive notifications from inside of the notification
+        // handler that is meant for the notifications it emits.
+        
+        var networkReachability = Reachability.forInternetConnection()
+        networkReachability?.startNotifier()
+        
+        //let networkReachability = notification.object as! Reachability;
+        var remoteHostStatus = networkReachability?.currentReachabilityStatus()
+        
+        if (remoteHostStatus == NotReachable)
+        {
+            print("Not Reachable")
+        }
+        else if (remoteHostStatus == ReachableViaWiFi)
+        {
+            print("Reachable via Wifi")
+        }
+        else
+        {
+            print("Reachable")
+        }
+    }
+    
+    
     // MARK: - Reachability
-    
-    
-    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        
-        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        var statusString: String = ""
-        
-        print("StatusValue: \(networkStatus)")
-        
-    }
-    
-    
-    func reachabilityChanged() {
-        print("Reachability status changes...")
-    }
-    
-    
-    
+//    
+//    
+//    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+//        
+//        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+//        var statusString: String = ""
+//        
+//        print("StatusValue: \(networkStatus)")
+//        
+//    }
+//    
+//    
+//    func reachabilityChanged() {
+//        print("Reachability status changes...")
+//    }
+//    
+//    
+//    
     
 }
 
