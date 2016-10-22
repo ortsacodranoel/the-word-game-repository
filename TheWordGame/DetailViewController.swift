@@ -191,9 +191,20 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             
             
         case "Books and Movies":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
+            if networkStatus == NotReachable && self.lockView.alpha == 0 {
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            
+            else if networkStatus == NotReachable && self.lockView.alpha == 1 {
+  
+                let alertController = UIAlertController(title: "No internet connection", message: "Please connect to the internet.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            
+            else
+            {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {

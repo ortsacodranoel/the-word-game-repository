@@ -109,6 +109,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     /// Enable pop ups.
     func enablePopUps() {
+        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
