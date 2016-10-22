@@ -184,6 +184,26 @@
 			name = "Sound Effects";
 			sourceTree = "<group>";
 		};
+		B365CBD71DBBEB1800E34B94 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */,
+				B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */,
+				B32BA8021DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		B365CBD81DBBEB8A00E34B94 /* In-App Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				B36733711D7F086000BA177B /* iap_product_ids.plist */,
+				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
+				B39C3D061D7A4B2800636B85 /* Category.swift */,
+			);
+			name = "In-App Purchases";
+			sourceTree = "<group>";
+		};
 		B37786021D494B1E00639A8B /* Transition Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,16 +273,13 @@
 		D67774D01D1C392B0051C634 /* thewordgame */ = {
 			isa = PBXGroup;
 			children = (
-				B3A158981DB7F2130029AC63 /* Reachability */,
-				B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */,
-				B32BA8021DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift */,
 				D67774D11D1C392B0051C634 /* AppDelegate.swift */,
+				B365CBD71DBBEB1800E34B94 /* CoreData */,
+				B3A158981DB7F2130029AC63 /* Reachability */,
 				B35659051D6F9D87003E7DCD /* Sound Effects */,
 				B3F39C6C1D4672D80049F8FB /* View Controllers */,
 				B30227B51D9B4289000694EE /* Celebration Files */,
-				B36733711D7F086000BA177B /* iap_product_ids.plist */,
-				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
-				B39C3D061D7A4B2800636B85 /* Category.swift */,
+				B365CBD81DBBEB8A00E34B94 /* In-App Purchases */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				D67774D51D1C392B0051C634 /* Main.storyboard */,
@@ -270,7 +287,6 @@
 				B37786021D494B1E00639A8B /* Transition Managers */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
-				B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */,
 				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
 			);
 			name = thewordgame;

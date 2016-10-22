@@ -103,7 +103,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
         
         let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        var statusString: String = ""
+       // var statusString: String = ""
         
         print("StatusValue: \(networkStatus)")
         

@@ -42,12 +42,14 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var tapSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
+    
     // MARK: - CoreData Properties
     
     // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
+    // MARK: - Reachability Properties
     
     // Used to check internet reachability.
     var reachability: Reachability?
@@ -71,11 +73,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
         
-        // Load sounds.
         self.loadSoundFile()
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.settingsButton.alpha = 1
@@ -87,8 +87,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLayoutSubviews()
         self.collectionView.reloadData()
         self.animatePopUpTutorial()
-        
-
     }
     
     
@@ -101,6 +99,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     // MARK: - Tutorial methods
+    
     /// Used to check if tutorial is enabled.
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
@@ -113,12 +112,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     /// Disable pop ups.
     func disablePopUps() {
+        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
         
         do {
-            print("Saving Context")
             try context.save()
         } catch {
             // Replace this implementation with code to handle the error appropriately.
@@ -189,42 +188,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
-    
-    /**
-     Used to hide the tutorial bubble from view and fade out the overlay when
-     the overlayView or bubbleView is tapped.
-    */
-    func hideTutorialAction(sender:UITapGestureRecognizer) {
-        
-        // Animate overlay off-screen.
-        UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-            // Increase the alpha of the view.
-            self.viewOverlay.alpha = 0
 
-            }, completion: nil)
-        
-        // Animate tutorialView off-screen.
-        UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-                // Move the view into place.
-                self.tutorialView.center.x -= self.view.bounds.width
-                self.tutorialView.center.y += self.view.bounds.height
-           
-            }, completion: { (bool) in
-                self.tutorialView.alpha = 0
-                self.tutorialView.center.x += self.view.bounds.width
-                self.tutorialView.center.y -= self.view.bounds.height
-                
-        })
-    }
-
-    
-    /// Needed for segue action.
-    @IBAction func categoryButtonTapped(_ sender: AnyObject) {
-        self.settingsButton.alpha = 0
-    }
-    
     
     
     
@@ -252,6 +216,41 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+    /**
+     Used to hide the tutorial bubble from view and fade out the overlay when
+     the overlayView or bubbleView is tapped.
+     */
+    func hideTutorialAction(sender:UITapGestureRecognizer) {
+        
+        // Animate overlay off-screen.
+        UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            // Increase the alpha of the view.
+            self.viewOverlay.alpha = 0
+            
+            }, completion: nil)
+        
+        // Animate tutorialView off-screen.
+        UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            // Move the view into place.
+            self.tutorialView.center.x -= self.view.bounds.width
+            self.tutorialView.center.y += self.view.bounds.height
+            
+            }, completion: { (bool) in
+                self.tutorialView.alpha = 0
+                self.tutorialView.center.x += self.view.bounds.width
+                self.tutorialView.center.y -= self.view.bounds.height
+                
+        })
+    }
+    
+    
+    /// Needed for segue action.
+    @IBAction func categoryButtonTapped(_ sender: AnyObject) {
+        self.settingsButton.alpha = 0
+    }
+    
     
     
     
@@ -267,11 +266,17 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     ///
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let indexPosition = indexPath.row
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = Game.sharedGameInstance.colors[(indexPath as NSIndexPath).row]
         cell.tag = (indexPath as NSIndexPath).row
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
+        
+        
         
         // Used to determine if a category has been purchased.
         var category:Category!
@@ -285,22 +290,35 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
         
         
-        
-        if reachability != nil
-        {
-            self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-        }
-        
+//        
+//        if reachability != nil
+//        {
+//            self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+//        }
+//        
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
         
         // Check if connected to the internet.
-        
         let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
 
         
+        // MARK: - Configure categories
+        
+        // 1. Configure locks
+        
+        if networkStatus == NotReachable && indexPosition < 5  {
+            cell.lockView.alpha = 0
+        }
+        
+        else if networkStatus == NotReachable && indexPosition > 5 {
+            cell.lockView.alpha = 1
+        }
+        
+        
+        
         // If there is no internet and the category wasn't bought.
-        if networkStatus == NotReachable && category.purchased == false {
+        if networkStatus == NotReachable && cell.lockView.alpha == 1 {
             cell.lockView.alpha = 1
         }
        
