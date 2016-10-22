@@ -264,53 +264,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    
-//    func checkForReachability(notification:NSNotification)
-//    {
-//        // Remove the next two lines of code. You cannot instantiate the object
-//        // you want to receive notifications from inside of the notification
-//        // handler that is meant for the notifications it emits.
-//        
-//        var networkReachability = Reachability.forInternetConnection()
-//        networkReachability?.startNotifier()
-//        
-//        //let networkReachability = notification.object as! Reachability;
-//        var remoteHostStatus = networkReachability?.currentReachabilityStatus()
-//        
-//        if (remoteHostStatus == NotReachable)
-//        {
-//            print("Not Reachable")
-//        }
-//        else if (remoteHostStatus == ReachableViaWiFi)
-//        {
-//            print("Reachable via Wifi")
-//        }
-//        else
-//        {
-//            print("Reachable")
-//        }
-//    }
-//    
-    
-    // MARK: - Reachability
-//    
-//    
-//    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-//        
-//        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-//        var statusString: String = ""
-//        
-//        print("StatusValue: \(networkStatus)")
-//        
-//    }
-//    
-//    
-//    func reachabilityChanged() {
-//        print("Reachability status changes...")
-//    }
-//    
-//    
-//    
-    
-}
+ }
 

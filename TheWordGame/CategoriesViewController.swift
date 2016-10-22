@@ -42,14 +42,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var tapSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
-    // MARK: - CoreData
+    // MARK: - CoreData Properties
     
     // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
     
-
+    // Used to check internet reachability.
+    var reachability: Reachability?
+    
     
     
     
@@ -64,24 +66,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        
+
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
         
         // Load sounds.
         self.loadSoundFile()
-
-        
-        
-        
-        
-        
-        
-        
     }
 
     
@@ -254,7 +245,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     
-    // TO THE SETTINGS
+    // Action used to segue to settings view controller. 
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
         self.tapAudioPlayer.play()
         performSegue(withIdentifier: "segueToSettings", sender: self)
@@ -282,28 +273,54 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.tag = (indexPath as NSIndexPath).row
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
         
+        // Used to determine if a category has been purchased.
         var category:Category!
-       
+        category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row]
         
-        category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row] 
-            
-        if category.purchased == true {
-           // print("Category purchased")
-            cell.lockView.alpha = 0
-        } else if category.purchased == false {
-            //print("Category not purchased")
-            cell.lockView.alpha = 1
+        
+        reachability = Reachability.forInternetConnection()
+        reachability?.startNotifier()
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
+        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
+        
+        
+        
+        if reachability != nil
+        {
+            self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
         }
         
         
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+        
+        // Check if connected to the internet.
+        
+        let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
+
+        
+        // If there is no internet and the category wasn't bought.
+        if networkStatus == NotReachable && category.purchased == false {
+            cell.lockView.alpha = 1
+        }
+       
+        // If there isn't internet and that category was bought.
+        else if networkStatus == NotReachable && category.purchased == true {
+            cell.lockView.alpha = 0
+        }
+            
+        // If online and category was purchased.
+        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == true {
+                cell.lockView.alpha = 0
+        }
+        
+        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == false {
+    
+                cell.lockView.alpha = 1
+            }
         
         return cell
     }
-    
-    
-    
-    
-    
     
     
     
@@ -335,12 +352,47 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             toViewController.transitioningDelegate = self.transitionManager
         }
     }
+
+
+
+    
+    // MARK: - Reachibility Methods
+    
+    
+    ///
+    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+        
+        var networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        var statusString: String = ""
+        
+        print("StatusValue: \(networkStatus)")
+        
+        if networkStatus == NotReachable {
+            print("Netowrk is not reachable")
+            reachabilityStatus = kNorReachable
+        }
+        else if networkStatus == ReachableViaWiFi {
+            print("Via WIFI")
+            reachabilityStatus = kReachabilityWithWiFi
+        }
+        else if networkStatus == ReachableViaWWAN {
+            print("WAN reachable")
+            reachabilityStatus  = kReachableWithWWAN
+        }
+    }
+    
+    
+    
+    func reachabilityChanged(notification: NSNotification) {
+        print("Status changed")
+        //          reachability = notification.object as? Reachability
+        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+    }
     
 
 
+
 }
-
-
 
 
 

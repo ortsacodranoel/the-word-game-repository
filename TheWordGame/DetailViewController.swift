@@ -102,7 +102,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
         
-        var networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
         var statusString: String = ""
         
         print("StatusValue: \(networkStatus)")
@@ -136,11 +136,32 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
         
-            Game.sharedGameInstance.segueFromDetailVC = true
+        reachability = Reachability.forInternetConnection()
+        reachability?.startNotifier()
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
+        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
+        
+        if reachability != nil
+        {
+            self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+        }
+        
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+        
+        // Check if connected to the internet.
+        let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
+        
+        
+        Game.sharedGameInstance.segueFromDetailVC = true
 
-            if (sender.isTouchInside != nil) {
+        // Play
+        if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
+        
+        
         
         let title = self.categoryTitleLabel.text! as String
         
@@ -157,33 +178,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             performSegue(withIdentifier: "segueToGame", sender: self)
     
         case "Angels":
-            
-            
-            reachability = Reachability.forInternetConnection()
-            reachability?.startNotifier()
-            
-            NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
-            NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
-
-            
-            
-            if reachability != nil
-            {
-                self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-            }
-            
-            
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
-            
-            // Check if connected to the internet.
-            
-            let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
-
             if networkStatus == NotReachable {
                 print("you must connect to the internet")
             } else {
-            
-                
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
                     self.selectButton.setTitle("Select", for: UIControlState())
                     performSegue(withIdentifier: "segueToGame", sender: self)
@@ -192,98 +189,188 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 }
             }
             
+            
         case "Books and Movies":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct) // Books
-            }
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct) // Books
+                }
+        }
+            
         case "Christian Nation":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct) // Christian Nation
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct) // Christian Nation
+                }
             }
+            
+                
         case "Christmas Time":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3) as! SKProduct) // Christmas Time
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3) as! SKProduct) // Christmas Time
+                }
             }
+            
         case "Commands":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4) as! SKProduct)  // Commands
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4) as! SKProduct)  // Commands
+                }
             }
+            
+            
         case "Denominations":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5) as! SKProduct) // Denominations
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5) as! SKProduct) // Denominations
+                }
             }
-
+            
+            
+            
+            
         case "Easter":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6) as! SKProduct) // Easter
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6) as! SKProduct) // Easter
+                }
+                
             }
+            
             
             
         case "Famous Christians":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7) as! SKProduct) // Famous Christians
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7) as! SKProduct) // Famous Christians
+                }
+                
             }
+            
             
         case "Feasts":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
-                
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8) as! SKProduct) // Feasts
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
+                    
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8) as! SKProduct) // Feasts
+                }
             }
+            
+            
         case "History":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
-                
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9) as! SKProduct) // History
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
+                    
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9) as! SKProduct) // History
+                }
             }
+            
+            
+            
             
         case "Kids":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
-                
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10) as! SKProduct)  // Kids
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
+                    
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10) as! SKProduct)  // Kids
+                }
             }
             
+            
+            
+            
         case "Relics and Saints":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11) as! SKProduct)  // Relics
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11) as! SKProduct)  // Relics
+                }
             }
+            
+            
+            
         case "Revelation":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 12) as! SKProduct) // Revelation
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 12) as! SKProduct) // Revelation
+                }
             }
+                
+            
+            
+            
         case "Sins":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 13) as! SKProduct) // Sins
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 13) as! SKProduct) // Sins
+                }
             }
+            
+            
+            
         case "Worship":
-            if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
-                performSegue(withIdentifier: "segueToGame", sender: self)
+            if networkStatus == NotReachable {
+                print("you must connect to the internet")
             } else {
-                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 14) as! SKProduct) // Worship
+                if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
+                    performSegue(withIdentifier: "segueToGame", sender: self)
+                } else {
+                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 14) as! SKProduct) // Worship
+                }
+
             }
         default:
             break

@@ -383,8 +383,8 @@ class Game {
         
         if arrayOfUsedWords.contains(word) {
             // Run the method again.
-            self.getWord(categorySelected)
-            
+            let temp = self.getWord(categorySelected)
+            print(temp)
             
         } else {
             self.arrayOfUsedWords.append(word)
