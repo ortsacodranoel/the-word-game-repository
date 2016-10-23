@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var canPurchase:Bool = false
+   
 
     /// Used to determine if the 'Pop Up Tutorials' should be enabled.
     var sharedTutorialEntity:NSManagedObject!

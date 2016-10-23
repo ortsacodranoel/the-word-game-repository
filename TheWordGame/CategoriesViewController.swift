@@ -55,7 +55,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var reachability: Reachability?
     
     
-    
+    var purchasedCategoriesEntity:PurchasedCategories!
     
     
     
@@ -98,7 +98,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Core data categories
     func retrieveCoredataCategoryEntities() {
-        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
@@ -112,8 +111,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-        
-        
     }
     
     
@@ -287,11 +284,43 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
-    ///
+    /// Setup categories.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let indexPosition = indexPath.row
+        // 1. Configure locks by looking at PurchasedCategories entity stored in MOC.
+        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
+        // 1. Create a fetch request for all entities of type PurchasedCategories.
+        if #available(iOS 10.0, OSX 10.12, *) {
+            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
+            // Fetch request for newer iOS versions.
+        } else {
+            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
+            // Fetch request for older iOS versions.
+        }
         
+        do {
+            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
+            
+            if purchasedCategoryEntities.count > 0 {
+                print("purchasedCategories entity exists in the MOC.")
+                do {
+                    let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    if (purchasedCategoryEntitiesInMOC.count > 0) {
+                        self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+
+
+        // Configure each cell in the collection view.
+        _ = indexPath.row
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         cell.categoryButton.layer.cornerRadius = 7
@@ -299,66 +328,77 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.tag = (indexPath as NSIndexPath).row
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
         
-        
-        
-        // Used to determine if a category has been purchased.
         var category:Category!
         category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row]
         
+        let title : String = category.title
         
-        reachability = Reachability.forInternetConnection()
-        reachability?.startNotifier()
+        switch title {
+        case "Angels":
+            if purchasedCategoriesEntity.angels {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+                print("Angels is locked")
+            }
+        default:
+            break
+        }
         
-        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
-        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
         
         
+//        reachability = Reachability.forInternetConnection()
+//        reachability?.startNotifier()
 //        
-//        if reachability != nil
-//        {
-//            self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-//        }
-//        
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+//        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
+//        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
         
         // Check if connected to the internet.
-        let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
+        // let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
 
         
         // MARK: - Configure categories
         
-        // 1. Configure locks
-        
-        if networkStatus == NotReachable && indexPosition < 5  {
-            cell.lockView.alpha = 0
-        }
-        
-        else if networkStatus == NotReachable && indexPosition > 5 {
-            cell.lockView.alpha = 1
-        }
-        
-        
-        
-        // If there is no internet and the category wasn't bought.
-        if networkStatus == NotReachable && cell.lockView.alpha == 1 {
-            cell.lockView.alpha = 1
-        }
-       
-        // If there isn't internet and that category was bought.
-        else if networkStatus == NotReachable && category.purchased == true {
-            cell.lockView.alpha = 0
-        }
-            
-        // If online and category was purchased.
-        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == true {
-                cell.lockView.alpha = 0
-        }
-        
-        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == false {
     
-                cell.lockView.alpha = 1
-            }
+    
+        
+        
+        
+        
+        
+        
+    
+    
+//        if networkStatus == NotReachable && indexPosition < 5  {
+//            cell.lockView.alpha = 0
+//        }
+//        
+//        else if networkStatus == NotReachable && indexPosition > 5 {
+//            cell.lockView.alpha = 1
+//        }
+//        
+//        
+//        
+//        // If there is no internet and the category wasn't bought.
+//        if networkStatus == NotReachable && cell.lockView.alpha == 1 {
+//            cell.lockView.alpha = 1
+//        }
+//       
+//        // If there isn't internet and that category was bought.
+//        else if networkStatus == NotReachable && category.purchased == true {
+//            cell.lockView.alpha = 0
+//        }
+//            
+//        // If online and category was purchased.
+//        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == true {
+//                cell.lockView.alpha = 0
+//        }
+//        
+//        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == false {
+//    
+//                cell.lockView.alpha = 1
+//        }
         
         return cell
     }
