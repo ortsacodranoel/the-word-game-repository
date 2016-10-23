@@ -96,6 +96,29 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+    // MARK: - Core data categories
+    func retrieveCoredataCategoryEntities() {
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
+        
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        
+    }
+    
+    
+    
+    
 
     
     // MARK: - Tutorial methods
@@ -380,8 +403,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
         
-        var networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        var statusString: String = ""
+        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+  //      var statusString: String = ""
         
         print("StatusValue: \(networkStatus)")
         
