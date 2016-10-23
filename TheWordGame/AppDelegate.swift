@@ -42,120 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func setupPurchasedCategories() {
-        
-        /*
-         If the app launches for the first time and the network is unavailable, there is no way to
-         determine if a category should be locked or open.
-         
-         This method will create a `purchasedCategories` entity the first time the application
-         launches with the preset values that will help determine which category should be
-         locked/open.
-         
-         The method will run everytime the application finishes launching. If an entity of type
-         PurchasedCategories has already been saved in the applications managedObjectContext, the
-         method will simply retrieve that entity and assign it to a shared instance variable
-         called `purchasedCategoriesSharedInstance`. Else it will create the entity and save it in
-         the managedObjectContext.
-         
-         */
-        
-        // 1. Create a fetch request for all entities of PurchasedCategories
-        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-
-        
-        if #available(iOS 10.0, OSX 10.12, *)
-        {
-            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
-            // Fetch request for newer iOS versions.
-        }
-        else
-        {
-            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
-            // Fetch request for older iOS versions.
-        }
-        
-        
-        do {
-            // 2. Fetch the purchasedCategories entity from the MOC.
-            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
-        
-                if purchasedCategoryEntities.count < 1
-                {
-                    // 3. If the MOC does not have any PurchasedCategories entity, add a single entity to it.
-                
-                    // Add the purchased category into the MOC.
-                    let purchasedCategories = NSEntityDescription.insertNewObject(forEntityName: "PurchasedCategories", into: self.managedObjectContext) as! PurchasedCategories
-                
-                    // Save the MOC.
-                    try self.managedObjectContext.save()
-        
-                    
-                    
-                    
-                    // 4. Retrieve the saved PurchasedCategory entity that was saved.
-                    do {
-                        
-                        let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-                        
-                        if (result.count > 0)
-                        {
-                
-                            // Get the first entity.
-                            self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
-                            
-                            // Set the category values to determine if a 'lock' is enabled.
-                            self.purchasedCategoriesSharedInstance.setValue(true, forKey: "jesus")
-                            self.purchasedCategoriesSharedInstance.setValue(true, forKey: "people")
-                            self.purchasedCategoriesSharedInstance.setValue(true, forKey: "places")
-                            self.purchasedCategoriesSharedInstance.setValue(true, forKey: "sundaySchool")
-                            self.purchasedCategoriesSharedInstance.setValue(true, forKey: "concordance")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "angels")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "booksAndMovies")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "christianNation")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "christmasTime")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "commands")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "denominations")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "easter")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "famousChristians")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "feasts")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "history")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "kids")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "relicsAndSaints")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "revelation")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "sins")
-                            self.purchasedCategoriesSharedInstance.setValue(false, forKey: "worship")
-                        }
-                        } catch {
-                            let fetchError = error as NSError
-                            print(fetchError)
-                        }
-                            
-        
-                } else if purchasedCategoryEntities.count > 0 {
-                    print("Hello")
-                }
-                    
-                    do {
-                        let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-                        
-                        if (result.count > 0) {
-                            self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
-                            // Get the first entity.
-                        }
-                    } catch {
-                        let fetchError = error as NSError
-                        print(fetchError)
-                    }
-                    
-            
-                
-            } catch let error {
-                print(error.localizedDescription)
-                // Display information about the type of error.
-            }
-    
-    }
 
 
 
@@ -172,7 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
         
-
+        // Initialize PurchasedCategoriesSharedInstance
+        self.setupPurchasedCategories()
         
         
         
@@ -390,5 +277,128 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    
+    
+    
+    
+    
+    /*
+     If the app launches for the first time and the network is unavailable, there is no way to
+     determine if a category should be locked or open.
+     
+     This method will create a `purchasedCategories` entity the first time the application
+     launches with the preset values that will help determine which category should be
+     locked/open.
+     
+     The method will run everytime the application finishes launching. If an entity of type
+     PurchasedCategories has already been saved in the applications managedObjectContext, the
+     method will simply retrieve that entity and assign it to a shared instance variable
+     called `purchasedCategoriesSharedInstance`. Else it will create the entity and save it in
+     the managedObjectContext.
+     
+     */
+    func setupPurchasedCategories() {
+        
+
+        // 1. Create a fetch request for all entities of PurchasedCategories
+        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
+        
+        
+        if #available(iOS 10.0, OSX 10.12, *)
+        {
+            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
+            // Fetch request for newer iOS versions.
+        }
+        else
+        {
+            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
+            // Fetch request for older iOS versions.
+        }
+        
+        
+        do {
+            // 2. Fetch the purchasedCategories entity from the MOC.
+            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
+            
+            if purchasedCategoryEntities.count < 1
+            {
+                // 3. If the MOC does not have any PurchasedCategories entity, add a single entity to it.
+                
+                // Add the purchased category into the MOC.
+                _ = NSEntityDescription.insertNewObject(forEntityName: "PurchasedCategories", into: self.managedObjectContext) as! PurchasedCategories
+                
+                // Save the MOC.
+                try self.managedObjectContext.save()
+                
+                
+                
+                
+                // 4. Retrieve the saved PurchasedCategory entity that was saved.
+                do {
+                    
+                    let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    
+                    if (result.count > 0)
+                    {
+                        
+                        // Get the first entity.
+                        self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
+                        
+                        // Set the category values to determine if a 'lock' is enabled.
+                        self.purchasedCategoriesSharedInstance.setValue(true, forKey: "jesus")
+                        self.purchasedCategoriesSharedInstance.setValue(true, forKey: "people")
+                        self.purchasedCategoriesSharedInstance.setValue(true, forKey: "places")
+                        self.purchasedCategoriesSharedInstance.setValue(true, forKey: "sundaySchool")
+                        self.purchasedCategoriesSharedInstance.setValue(true, forKey: "concordance")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "angels")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "booksAndMovies")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "christianNation")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "christmasTime")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "commands")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "denominations")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "easter")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "famousChristians")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "feasts")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "history")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "kids")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "relicsAndSaints")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "revelation")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "sins")
+                        self.purchasedCategoriesSharedInstance.setValue(false, forKey: "worship")
+                        
+                        print("Saved values for PurchasedCategoriesSharedInstance")
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+                
+                
+            } else if purchasedCategoryEntities.count > 0 {
+                print("Hello")
+            }
+            
+            do {
+                let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                
+                if (result.count > 0) {
+                    self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
+                    // Get the first entity.
+                }
+            } catch {
+                let fetchError = error as NSError
+                print(fetchError)
+            }
+            
+            
+            
+        } catch let error {
+            print(error.localizedDescription)
+            // Display information about the type of error.
+        }
+        
+    }
+
+    
  }
 

@@ -425,7 +425,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     func reachabilityChanged(notification: NSNotification) {
-        print("Status changed")
+   //     print("Status changed")
         //          reachability = notification.object as? Reachability
         //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
     }
