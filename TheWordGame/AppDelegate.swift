@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         // Initialize PurchasedCategoriesSharedInstance
-        self.setupPurchasedCategories()
+        self.setupPurchasedCategoriesEntity()
         
         
         
@@ -297,52 +297,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      the managedObjectContext.
      
      */
-    func setupPurchasedCategories() {
-        
-
-        // 1. Create a fetch request for all entities of PurchasedCategories
+    func setupPurchasedCategoriesEntity() {
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-        
-        
-        if #available(iOS 10.0, OSX 10.12, *)
-        {
+        // 1. Create a fetch request for all entities of type PurchasedCategories.
+        if #available(iOS 10.0, OSX 10.12, *) {
             purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
             // Fetch request for newer iOS versions.
-        }
-        else
-        {
+        } else {
             purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
             // Fetch request for older iOS versions.
         }
         
-        
         do {
-            // 2. Fetch the purchasedCategories entity from the MOC.
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
             
-            if purchasedCategoryEntities.count < 1
-            {
-                // 3. If the MOC does not have any PurchasedCategories entity, add a single entity to it.
-                
-                // Add the purchased category into the MOC.
+            if purchasedCategoryEntities.count < 1 {
+                // If the MOC does not have any PurchasedCategories entity stored, add a single entity to it.
                 _ = NSEntityDescription.insertNewObject(forEntityName: "PurchasedCategories", into: self.managedObjectContext) as! PurchasedCategories
-                
-                // Save the MOC.
+                // Create the entity and insert it into the MOC.
                 try self.managedObjectContext.save()
-                
-                
-                
-                
-                // 4. Retrieve the saved PurchasedCategory entity that was saved.
+                // Save the context.
+               
                 do {
-                    
+                    // Fetch the `purchasedCategories` entity from the managed object context that was just saved.
                     let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-                    
-                    if (result.count > 0)
-                    {
-                        
-                        // Get the first entity.
+                    if (result.count > 0) {
                         self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
+                        // Get the first entity stored in the MOC.
                         
                         // Set the category values to determine if a 'lock' is enabled.
                         self.purchasedCategoriesSharedInstance.setValue(true, forKey: "jesus")
@@ -368,37 +349,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         print("Saved values for PurchasedCategoriesSharedInstance")
                     }
-                } catch {
-                    let fetchError = error as NSError
-                    print(fetchError)
-                }
-                
-                
+                    } catch {
+                        let fetchError = error as NSError
+                        print(fetchError)
+                    }
             } else if purchasedCategoryEntities.count > 0 {
-                print("Hello")
-            }
-            
-            do {
-                let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-                
-                if (result.count > 0) {
-                    self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
-                    // Get the first entity.
+                print("purchasedCategories entity exists in the MOC.")
+                do {
+                    let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    if (purchasedCategoryEntitiesInMOC.count > 0) {
+                        self.purchasedCategoriesSharedInstance = purchasedCategoryEntitiesInMOC[0] as! NSManagedObject
+                        // Set the shared instance equal to that entity.
+                    }
+                    } catch {
+                        let fetchError = error as NSError
+                        print(fetchError)
+                    }
                 }
-            } catch {
-                let fetchError = error as NSError
-                print(fetchError)
-            }
-            
-            
-            
         } catch let error {
             print(error.localizedDescription)
             // Display information about the type of error.
         }
-        
     }
-
-    
  }
 
