@@ -339,8 +339,92 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.lockView.alpha = 1
             } else {
                 cell.lockView.alpha = 0
-                print("Angels is locked")
             }
+        case "Books and Movies":
+            if purchasedCategoriesEntity.booksAndMovies {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Christian Nation":
+            if purchasedCategoriesEntity.christianNation {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Christmas Time":
+            if purchasedCategoriesEntity.christmasTime {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Commands":
+            if purchasedCategoriesEntity.commands {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Denominations":
+            if purchasedCategoriesEntity.denominations {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Easter":
+            if purchasedCategoriesEntity.easter {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Famous Christians":
+            if purchasedCategoriesEntity.famousChristians {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Feasts":
+            if purchasedCategoriesEntity.feasts {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "History":
+            if purchasedCategoriesEntity.history {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Kids":
+            if purchasedCategoriesEntity.kids {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Relics and Saints":
+            if purchasedCategoriesEntity.relicsAndSaints {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Revelation":
+            if purchasedCategoriesEntity.revelation {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Sins":
+            if purchasedCategoriesEntity.sins {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+        case "Worship":
+            if purchasedCategoriesEntity.worship {
+                cell.lockView.alpha = 1
+            } else {
+                cell.lockView.alpha = 0
+            }
+
         default:
             break
         }

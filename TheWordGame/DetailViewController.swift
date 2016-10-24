@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import StoreKit
+import CoreData
 
 class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationDelegate {
     
@@ -41,8 +42,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     // Used to check internet reachability.
     var reachability: Reachability?
     
-    
-    
+    // Used to save boolean state that determines if tutorial is enabled.
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+   
+    var purchasedCategoriesEntity:PurchasedCategories!
+
     
     // MARK: - View Methods
     
@@ -160,6 +164,53 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
+        
+        
+        // Get Purchase Category entity 
+        // 1. Configure locks by looking at PurchasedCategories entity stored in MOC.
+        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
+        // 1. Create a fetch request for all entities of type PurchasedCategories.
+        if #available(iOS 10.0, OSX 10.12, *) {
+            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
+            // Fetch request for newer iOS versions.
+        } else {
+            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
+            // Fetch request for older iOS versions.
+        }
+        
+        do {
+            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
+            
+            if purchasedCategoryEntities.count > 0 {
+                print("purchasedCategories entity exists in the MOC.")
+                do {
+                    let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    if (purchasedCategoryEntitiesInMOC.count > 0) {
+                        self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
