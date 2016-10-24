@@ -215,6 +215,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         case "Concordance":
             performSegue(withIdentifier: "segueToGame", sender: self)
     
+        // Angels
         case "Angels":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == true
             {
@@ -244,7 +245,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             }
             
             
-            
+        // Books and movies
         case "Books and Movies":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.booksAndMovies == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -269,192 +270,335 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct)
             }
        
-            
+        // Christian Nation
         case "Christian Nation":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
-                    self.purchasedCategoriesEntity.christianNation = true
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.christianNation == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.christianNation == false {
+                // Display Alert View.
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") == true {
+                if self.purchasedCategoriesEntity.booksAndMovies == false {
+                    self.purchasedCategoriesEntity.booksAndMovies = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct) // Christian Nation
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") == false
+            {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct)
             }
             
-                
+
+        // Christmas Time
         case "Christmas Time":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.christmasTime == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.christmasTime == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") == true {
+                if self.purchasedCategoriesEntity.christmasTime == false {
                     self.purchasedCategoriesEntity.christmasTime = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3) as! SKProduct) // Christmas Time
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3 ) as! SKProduct)
+            }
+
+        // Commands
         case "Commands":
-            if networkStatus == NotReachable {
-                
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.commands == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.commands == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") == true {
+                if self.purchasedCategoriesEntity.commands == false {
                     self.purchasedCategoriesEntity.commands = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4) as! SKProduct)  // Commands
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4 ) as! SKProduct)
+            }
+
+            // Denominations
         case "Denominations":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.denominations == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.denominations == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") == true {
+                if self.purchasedCategoriesEntity.denominations == false {
                     self.purchasedCategoriesEntity.denominations = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5) as! SKProduct) // Denominations
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5 ) as! SKProduct)
+            }
+
             
             
         case "Easter":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.easter == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.easter == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") == true {
+                if self.purchasedCategoriesEntity.easter == false {
                     self.purchasedCategoriesEntity.easter = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6) as! SKProduct) // Easter
                 }
-                
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6 ) as! SKProduct)
+            }
+
             
             
             
         case "Famous Christians":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.famousChristians == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.famousChristians == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") == true {
+                if self.purchasedCategoriesEntity.famousChristians == false {
                     self.purchasedCategoriesEntity.famousChristians = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7) as! SKProduct) // Famous Christians
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7 ) as! SKProduct)
+            }
+
             
         case "Feasts":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.feasts == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.feasts == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") == true {
+                if self.purchasedCategoriesEntity.feasts == false {
                     self.purchasedCategoriesEntity.feasts = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8) as! SKProduct) // Feasts
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8 ) as! SKProduct)
+            }
+
             
         case "History":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.history == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.history == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.history") == true {
+                if self.purchasedCategoriesEntity.history == false {
                     self.purchasedCategoriesEntity.history = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9) as! SKProduct) // History
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
-            
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.history") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9 ) as! SKProduct)
+            }
+
             
         case "Kids":
-            
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.kids == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.kids == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") == true {
+                if self.purchasedCategoriesEntity.kids == false {
                     self.purchasedCategoriesEntity.kids = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10) as! SKProduct)  // Kids
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
-            
-            
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10 ) as! SKProduct)
+            }
+
         case "Relics and Saints":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.relicsAndSaints == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.relicsAndSaints == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") == true {
+                if self.purchasedCategoriesEntity.relicsAndSaints == false {
                     self.purchasedCategoriesEntity.relicsAndSaints = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11) as! SKProduct)  // Relics
                 }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11 ) as! SKProduct)
+            }
+
             
             
         case "Revelation":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 12) as! SKProduct) // Revelation
-                }
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.revelation == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.revelation == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") == true {
+                if self.purchasedCategoriesEntity.revelation == false {
+                    self.purchasedCategoriesEntity.revelation = true
+                    self.saveContext()
+                }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 12 ) as! SKProduct)
+            }
+
             
         case "Sins":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 13) as! SKProduct) // Sins
-                }
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.sins == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
-            
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.sins == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") == true {
+                if self.purchasedCategoriesEntity.sins == false {
+                    self.purchasedCategoriesEntity.sins = true
+                    self.saveContext()
+                }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 13 ) as! SKProduct)
+            }
+
         case "Worship":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.worship == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+                // Display Alert View.
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.worship == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") == true {
+                if self.purchasedCategoriesEntity.worship == false {
                     self.purchasedCategoriesEntity.worship = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 14) as! SKProduct) // Worship
                 }
-
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") == false {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 14 ) as! SKProduct)
+            }
+
         default:
             break
         }
