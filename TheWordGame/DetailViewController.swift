@@ -66,6 +66,10 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Retrieve and assigen the PurchasedCategories entity.
+        self.getPurchasedCategoryEntity()
+
+        
         // Configure the Select button appearance.
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.white.cgColor
@@ -77,6 +81,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
 
         // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
+            print("purchased = true in VWA")
             self.selectButton.setTitle(("Select"), for: UIControlState())
         } else {
             self.setPrices()
@@ -211,7 +216,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             performSegue(withIdentifier: "segueToGame", sender: self)
     
         case "Angels":
-            
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == true
             {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -219,52 +223,52 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             }
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == false
             {
-                print("Please connect to the internet")
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"OK", style:.default)
+                alertController.addAction(okAction)
+                self.present(alertController,animated:true, completion:nil)
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true
             {
-                self.purchasedCategoriesEntity.angels = true
-                self.saveContext()
+                if self.purchasedCategoriesEntity.angels == false {
+                    self.purchasedCategoriesEntity.angels = true
+                    self.saveContext()
+                }
                 
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == false
             {
-                // Create the purchase request.
-                print("Create purchase request.")
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
             }
             
             
             
         case "Books and Movies":
-            if networkStatus == NotReachable && self.lockView.alpha == 0 {
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.booksAndMovies == true {
+                self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
-                
-                
             }
-            
-            else if networkStatus == NotReachable && self.lockView.alpha == 1 {
-  
-                let alertController = UIAlertController(title: "No internet connection", message: "Please connect to the internet.", preferredStyle: .alert)
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.booksAndMovies == false {
+                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
                 let okAction = UIAlertAction(title:"OK", style:.default)
                 alertController.addAction(okAction)
                 self.present(alertController,animated:true, completion:nil)
             }
-            
-            else
-            {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
-                    
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.books") == true {
+                if self.purchasedCategoriesEntity.booksAndMovies == false {
                     self.purchasedCategoriesEntity.booksAndMovies = true
                     self.saveContext()
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                    
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct) // Books
                 }
-        }
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.books") == false
+            {
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct)
+            }
+       
             
         case "Christian Nation":
             if networkStatus == NotReachable {
@@ -455,57 +459,76 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             break
         }
     }
-    
 
     
+    
+    
+    
+
     func setPrices() {
         let title = self.categoryTitleLabel.text! as String
         switch title {
         case "Angels":
-            let product = IAPManager.sharedInstance.products[0] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            // Check to see if the category was purchased.
+            if self.purchasedCategoriesEntity.angels == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Books and Movies":
-            let product = IAPManager.sharedInstance.products[1] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.booksAndMovies == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Christian Nation":
-            let product = IAPManager.sharedInstance.products[2] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.christianNation == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Christmas Time":
-            let product = IAPManager.sharedInstance.products[3] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.christmasTime == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Commands":
-            let product = IAPManager.sharedInstance.products[4] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.commands == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Denominations":
-            let product = IAPManager.sharedInstance.products[5] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.denominations == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Easter":
-            let product = IAPManager.sharedInstance.products[6] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.easter == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Famous Christians":
-            let product = IAPManager.sharedInstance.products[7] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.famousChristians == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Feasts":
-            let product = IAPManager.sharedInstance.products[8] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.feasts == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "History":
-            let product = IAPManager.sharedInstance.products[9] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.history == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Kids":
-            let product = IAPManager.sharedInstance.products[10] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.kids == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Relics and Saints":
-            let product = IAPManager.sharedInstance.products[11] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.relicsAndSaints == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Revelation":
-            let product = IAPManager.sharedInstance.products[12] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.revelation == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Sins":
-            let product = IAPManager.sharedInstance.products[13] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.sins == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         case "Worship":
-            let product = IAPManager.sharedInstance.products[14] as! SKProduct
-            self.selectButton.setTitle(("$\(product.price)"), for: UIControlState())
+            if self.purchasedCategoriesEntity.worship == false {
+                self.selectButton.setTitle("$0.99",  for: UIControlState())
+            }
         default:
             break
         }
@@ -513,6 +536,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - CoreData
+    
+    /// Used to save any new changes to the managed object context.
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -522,12 +547,51 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
             }
         }
     }
 
 
+    
+    /// Retrieves and assigns a `PurchasedCategory` entity to a local variable.
+    func getPurchasedCategoryEntity() {
+        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
+        if #available(iOS 10.0, OSX 10.12, *) {
+            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
+        } else {
+            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
+        }
+        do {
+            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
+            // Retrieve an entity of type PurchasedCategories if it exists in the managed object context.
+            if purchasedCategoryEntities.count > 0 {
+                do {
+                    let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    if (purchasedCategoryEntitiesInMOC.count > 0) {
+                        self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
      //MARK: Additional Methods
@@ -544,7 +608,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
        self.descriptionLabel.text = Game.sharedGameInstance.categoriesArray[category].summary
     }
 
-    /// Segue to game.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToGame" {
             let toViewController = segue.destination as! GameViewController

@@ -216,8 +216,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     /// BACK FROM SETTINGS
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
- 
-        // self.tapAudioPlayer.play()
+         // self.tapAudioPlayer.play()
         
         if Game.sharedGameInstance.showPopUp {
             self.animatePopUpTutorial()
@@ -268,6 +267,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /// Needed for segue action.
     @IBAction func categoryButtonTapped(_ sender: AnyObject) {
         self.settingsButton.alpha = 0
+        print("CategoryVC: - categoryBtnTapped")
     }
     
     
@@ -347,10 +347,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
       
         case "Angels":
             if purchasedCategoriesEntity.angels == true {
-                print("Angels is true")
+                //print("Angels is true")
                 cell.lockView.alpha = 0
             } else if purchasedCategoriesEntity.angels == false{
-                print("Angels is false")
+                //print("Angels is false")
                 cell.lockView.alpha = 1
             }
             
