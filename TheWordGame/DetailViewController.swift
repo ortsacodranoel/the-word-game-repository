@@ -54,10 +54,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
         self.loadSoundFile()
-
-
-    
-    
     }
     
     
@@ -82,7 +78,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
             self.selectButton.setTitle(("Select"), for: UIControlState())
-            //print("Active")
         } else {
             self.setPrices()
             self.lockCategory()
@@ -201,19 +196,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         let title = self.categoryTitleLabel.text! as String
         
         switch title {
@@ -229,21 +211,38 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             performSegue(withIdentifier: "segueToGame", sender: self)
     
         case "Angels":
-            if networkStatus == NotReachable {
-                print("you must connect to the internet")
-            } else {
-                if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
-                    self.selectButton.setTitle("Select", for: UIControlState())
-                    performSegue(withIdentifier: "segueToGame", sender: self)
-                } else {
-                    IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
-                }
+            
+            if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == true
+            {
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
             }
+            else if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == false
+            {
+                print("Please connect to the internet")
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true
+            {
+                self.purchasedCategoriesEntity.angels = true
+                self.saveContext()
+                
+                self.selectButton.setTitle("Select", for: UIControlState())
+                performSegue(withIdentifier: "segueToGame", sender: self)
+            }
+            else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == false
+            {
+                // Create the purchase request.
+                print("Create purchase request.")
+                IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
+            }
+            
             
             
         case "Books and Movies":
             if networkStatus == NotReachable && self.lockView.alpha == 0 {
                 performSegue(withIdentifier: "segueToGame", sender: self)
+                
+                
             }
             
             else if networkStatus == NotReachable && self.lockView.alpha == 1 {
@@ -257,7 +256,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else
             {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
+                    
+                    self.purchasedCategoriesEntity.booksAndMovies = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
+                    
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct) // Books
                 }
@@ -268,6 +271,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
+                    self.purchasedCategoriesEntity.christianNation = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct) // Christian Nation
@@ -280,6 +285,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
+                    self.purchasedCategoriesEntity.christmasTime = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3) as! SKProduct) // Christmas Time
@@ -288,9 +295,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             
         case "Commands":
             if networkStatus == NotReachable {
+                
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
+                    self.purchasedCategoriesEntity.commands = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4) as! SKProduct)  // Commands
@@ -303,6 +313,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
+                    self.purchasedCategoriesEntity.denominations = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5) as! SKProduct) // Denominations
@@ -317,6 +329,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
+                    self.purchasedCategoriesEntity.easter = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6) as! SKProduct) // Easter
@@ -331,11 +345,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
+                    self.purchasedCategoriesEntity.famousChristians = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7) as! SKProduct) // Famous Christians
                 }
-                
             }
             
             
@@ -344,7 +359,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
-                    
+                    self.purchasedCategoriesEntity.feasts = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8) as! SKProduct) // Feasts
@@ -357,7 +373,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
-                    
+                    self.purchasedCategoriesEntity.history = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9) as! SKProduct) // History
@@ -373,7 +390,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
-                    
+                    self.purchasedCategoriesEntity.kids = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10) as! SKProduct)  // Kids
@@ -388,6 +406,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
+                    self.purchasedCategoriesEntity.relicsAndSaints = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11) as! SKProduct)  // Relics
@@ -406,9 +426,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 12) as! SKProduct) // Revelation
                 }
             }
-                
-            
-            
             
         case "Sins":
             if networkStatus == NotReachable {
@@ -421,13 +438,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 }
             }
             
-            
-            
         case "Worship":
             if networkStatus == NotReachable {
                 print("you must connect to the internet")
             } else {
                 if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
+                    self.purchasedCategoriesEntity.worship = true
+                    self.saveContext()
                     performSegue(withIdentifier: "segueToGame", sender: self)
                 } else {
                     IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 14) as! SKProduct) // Worship
@@ -494,6 +511,22 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         }
     }
     
+    
+    // MARK: - CoreData
+    func saveContext () {
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                abort()
+            }
+        }
+    }
+
 
     
 

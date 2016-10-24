@@ -24,10 +24,6 @@ var reachabilityStatus = kReachabilityWithWiFi
 
 
 
-
-
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -42,23 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var purchasedCategoriesSharedInstance:NSManagedObject!
     
     
-    
 
-
-
-
-
-        
-        
-        
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-
-        
         // Initialize PurchasedCategoriesSharedInstance
         self.setupPurchasedCategoriesEntity()
         
@@ -310,6 +296,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         do {
+            
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
             
             if purchasedCategoryEntities.count < 1 {
@@ -348,14 +335,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.purchasedCategoriesSharedInstance.setValue(false, forKey: "sins")
                         self.purchasedCategoriesSharedInstance.setValue(false, forKey: "worship")
                         
+                        
+                        self.saveContext()
+                        
                         print("Saved values for PurchasedCategoriesSharedInstance")
+
+                        
                     }
                     } catch {
                         let fetchError = error as NSError
                         print(fetchError)
                     }
             } else if purchasedCategoryEntities.count > 0 {
-                print("purchasedCategories entity exists in the MOC.")
+               // print("purchasedCategories entity exists in the MOC.")
                 do {
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (purchasedCategoryEntitiesInMOC.count > 0) {

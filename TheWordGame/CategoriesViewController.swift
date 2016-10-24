@@ -54,7 +54,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     // Used to check internet reachability.
     var reachability: Reachability?
     
-    
     var purchasedCategoriesEntity:PurchasedCategories!
     
     
@@ -302,9 +301,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
             
             if purchasedCategoryEntities.count > 0 {
-                print("purchasedCategories entity exists in the MOC.")
+               // print("purchasedCategories entity exists in the MOC.")
                 do {
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    
                     if (purchasedCategoryEntitiesInMOC.count > 0) {
                         self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
                     }
@@ -334,95 +334,117 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         let title : String = category.title
         
         switch title {
+        case "Jesus":
+            cell.lockView.alpha = 0
+        case "People":
+            cell.lockView.alpha = 0
+        case "Places":
+            cell.lockView.alpha = 0
+        case "Sunday School":
+            cell.lockView.alpha = 0
+        case "Concordance":
+            cell.lockView.alpha = 0
+      
         case "Angels":
-            if purchasedCategoriesEntity.angels {
-                cell.lockView.alpha = 1
-            } else {
+            if purchasedCategoriesEntity.angels == true {
+                print("Angels is true")
                 cell.lockView.alpha = 0
+            } else if purchasedCategoriesEntity.angels == false{
+                print("Angels is false")
+                cell.lockView.alpha = 1
             }
+            
         case "Books and Movies":
             if purchasedCategoriesEntity.booksAndMovies {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Christian Nation":
             if purchasedCategoriesEntity.christianNation {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Christmas Time":
             if purchasedCategoriesEntity.christmasTime {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Commands":
             if purchasedCategoriesEntity.commands {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Denominations":
             if purchasedCategoriesEntity.denominations {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Easter":
             if purchasedCategoriesEntity.easter {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Famous Christians":
             if purchasedCategoriesEntity.famousChristians {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Feasts":
             if purchasedCategoriesEntity.feasts {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
         case "History":
             if purchasedCategoriesEntity.history {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
+            
         case "Kids":
             if purchasedCategoriesEntity.kids {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
         case "Relics and Saints":
             if purchasedCategoriesEntity.relicsAndSaints {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
         case "Revelation":
             if purchasedCategoriesEntity.revelation {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
         case "Sins":
             if purchasedCategoriesEntity.sins {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
         case "Worship":
             if purchasedCategoriesEntity.worship {
-                cell.lockView.alpha = 1
-            } else {
                 cell.lockView.alpha = 0
+            } else {
+                cell.lockView.alpha = 1
             }
 
         default:
