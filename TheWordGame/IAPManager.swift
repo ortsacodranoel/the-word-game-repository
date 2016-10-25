@@ -196,11 +196,8 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     func unlockPurchasedFunctionalityforProductIdentifier(_ productIdentifier:String){
         UserDefaults.standard.set(true, forKey: productIdentifier)
-        
         UserDefaults.standard.synchronize()
-        
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        
         let categoryToUnlock = Game.sharedGameInstance.getCategoryForProductKey(productIdentifier)
         categoryToUnlock.purchased = true
     }

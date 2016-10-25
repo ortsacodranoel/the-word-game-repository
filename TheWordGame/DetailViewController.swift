@@ -295,9 +295,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 2) as! SKProduct)
             }
-            
-
-        // Christmas Time
         case "Christmas Time":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.christmasTime == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -321,8 +318,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 3 ) as! SKProduct)
             }
-
-        // Commands
         case "Commands":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.commands == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -346,8 +341,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 4 ) as! SKProduct)
             }
-
-            // Denominations
         case "Denominations":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.denominations == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -371,9 +364,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 5 ) as! SKProduct)
             }
-
-            
-            
         case "Easter":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.easter == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -397,10 +387,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 6 ) as! SKProduct)
             }
-
-            
-            
-            
         case "Famous Christians":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.famousChristians == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -424,8 +410,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 7 ) as! SKProduct)
             }
-
-            
         case "Feasts":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.feasts == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -449,8 +433,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 8 ) as! SKProduct)
             }
-
-            
         case "History":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.history == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -475,7 +457,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9 ) as! SKProduct)
             }
 
-            
         case "Kids":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.kids == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -523,9 +504,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 11 ) as! SKProduct)
             }
-
-            
-            
         case "Revelation":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.revelation == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -549,8 +527,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 12 ) as! SKProduct)
             }
-
-            
         case "Sins":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.sins == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -574,7 +550,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 13 ) as! SKProduct)
             }
-
         case "Worship":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.worship == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -598,7 +573,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 14 ) as! SKProduct)
             }
-
         default:
             break
         }
@@ -606,9 +580,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
 
     
     
-    
-    
-
     func setPrices() {
         let title = self.categoryTitleLabel.text! as String
         switch title {

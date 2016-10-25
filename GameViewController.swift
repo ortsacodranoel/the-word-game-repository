@@ -369,7 +369,6 @@ class GameViewController: UIViewController {
     }
     
     
-    // MARK:- unwindToGame()
     /// Used to execute something when the view returns from the summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -400,12 +399,9 @@ class GameViewController: UIViewController {
     
 
     @IBAction func menuTapped(_ sender: AnyObject) {
-  
-        // Audio tap sound.
         self.audioPlayerButtonTapSound.play()
         let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
         self.present(vc!, animated: true, completion: nil)
-        
     }
     
     

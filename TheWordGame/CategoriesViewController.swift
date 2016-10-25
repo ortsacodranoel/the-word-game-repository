@@ -75,6 +75,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.loadSoundFile()
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.7, delay: 0.3,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.settingsButton.alpha = 1
@@ -108,7 +109,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
         }
     }
     
@@ -214,20 +214,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Button Actions
     
-    /// BACK FROM SETTINGS
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
-         // self.tapAudioPlayer.play()
-        
+        self.collectionView.reloadData()
+        // self.tapAudioPlayer.play()
         if Game.sharedGameInstance.showPopUp {
             self.animatePopUpTutorial()
         }
-        
         Game.sharedGameInstance.showPopUp = false
     }
     
 
-    
-    // Action used to segue to settings view controller. 
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
         self.tapAudioPlayer.play()
         performSegue(withIdentifier: "segueToSettings", sender: self)
@@ -250,7 +246,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
             // Move the view into place.
             self.tutorialView.center.x -= self.view.bounds.width
             self.tutorialView.center.y += self.view.bounds.height
@@ -259,7 +254,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                 self.tutorialView.alpha = 0
                 self.tutorialView.center.x += self.view.bounds.width
                 self.tutorialView.center.y -= self.view.bounds.height
-                
         })
     }
     
@@ -267,7 +261,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /// Needed for segue action.
     @IBAction func categoryButtonTapped(_ sender: AnyObject) {
         self.settingsButton.alpha = 0
-        print("CategoryVC: - categoryBtnTapped")
     }
     
     
@@ -286,9 +279,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     /// Setup categories.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // 1. Configure locks by looking at PurchasedCategories entity stored in MOC.
+        // Configure locks by looking at PurchasedCategories entity stored in MOC.
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-        // 1. Create a fetch request for all entities of type PurchasedCategories.
+        // Create a fetch request for all entities of type PurchasedCategories.
         if #available(iOS 10.0, OSX 10.12, *) {
             purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
             // Fetch request for newer iOS versions.
