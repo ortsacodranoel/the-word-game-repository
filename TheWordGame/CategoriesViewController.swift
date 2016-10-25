@@ -238,10 +238,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-            // Increase the alpha of the view.
-            self.viewOverlay.alpha = 0
-            
+                // Increase the alpha of the view.
+                self.viewOverlay.alpha = 0
             }, completion: nil)
         
         // Animate tutorialView off-screen.
@@ -270,7 +268,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // MARK: - Collection View Methods
     
-    ///
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Game.sharedGameInstance.categoriesArray.count
     }
@@ -312,7 +309,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
 
 
-        // Configure each cell in the collection view.
         _ = indexPath.row
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
@@ -337,109 +333,96 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.lockView.alpha = 0
         case "Concordance":
             cell.lockView.alpha = 0
-      
         case "Angels":
-            if purchasedCategoriesEntity.angels == true {
-                //print("Angels is true")
+            if self.purchasedCategoriesEntity.angels == true {
                 cell.lockView.alpha = 0
-            } else if purchasedCategoriesEntity.angels == false{
-                //print("Angels is false")
+            } else if self.purchasedCategoriesEntity.angels == false{
                 cell.lockView.alpha = 1
             }
-            
         case "Books and Movies":
-            if purchasedCategoriesEntity.booksAndMovies {
+            if self.purchasedCategoriesEntity.booksAndMovies == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.booksAndMovies == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Christian Nation":
-            if purchasedCategoriesEntity.christianNation {
+            if self.purchasedCategoriesEntity.christianNation == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.christianNation == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Christmas Time":
-            if purchasedCategoriesEntity.christmasTime {
+            if self.purchasedCategoriesEntity.christmasTime == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.christmasTime == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Commands":
-            if purchasedCategoriesEntity.commands {
+            if self.purchasedCategoriesEntity.commands == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.commands == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Denominations":
-            if purchasedCategoriesEntity.denominations {
+            if self.purchasedCategoriesEntity.denominations == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.denominations == false{
                 cell.lockView.alpha = 1
             }
-            
         case "Easter":
-            if purchasedCategoriesEntity.easter {
+            if self.purchasedCategoriesEntity.easter == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.easter == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Famous Christians":
-            if purchasedCategoriesEntity.famousChristians {
+            if self.purchasedCategoriesEntity.famousChristians == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.famousChristians == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Feasts":
-            if purchasedCategoriesEntity.feasts {
+            if self.purchasedCategoriesEntity.feasts == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.feasts == false {
                 cell.lockView.alpha = 1
             }
         case "History":
-            if purchasedCategoriesEntity.history {
+            if self.purchasedCategoriesEntity.history == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.history == false {
                 cell.lockView.alpha = 1
             }
-            
         case "Kids":
-            if purchasedCategoriesEntity.kids {
+            if self.purchasedCategoriesEntity.kids == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.kids == false {
                 cell.lockView.alpha = 1
             }
         case "Relics and Saints":
-            if purchasedCategoriesEntity.relicsAndSaints {
+            if self.purchasedCategoriesEntity.relicsAndSaints == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.relicsAndSaints == false {
                 cell.lockView.alpha = 1
             }
         case "Revelation":
-            if purchasedCategoriesEntity.revelation {
+            if self.purchasedCategoriesEntity.revelation == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.revelation == false {
                 cell.lockView.alpha = 1
             }
         case "Sins":
-            if purchasedCategoriesEntity.sins {
+            if self.purchasedCategoriesEntity.sins == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.sins == false{
                 cell.lockView.alpha = 1
             }
         case "Worship":
-            if purchasedCategoriesEntity.worship {
+            if self.purchasedCategoriesEntity.worship == true {
                 cell.lockView.alpha = 0
-            } else {
+            } else if self.purchasedCategoriesEntity.worship == false {
                 cell.lockView.alpha = 1
             }
-
         default:
             break
         }

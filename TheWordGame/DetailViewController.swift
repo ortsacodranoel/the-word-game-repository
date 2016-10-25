@@ -56,8 +56,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         self.loadSoundFile()
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -81,7 +79,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
 
         // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
-            print("purchased = true in VWA")
             self.selectButton.setTitle(("Select"), for: UIControlState())
         } else {
             self.setPrices()
@@ -91,9 +88,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         startAnimations()
     }
     
-    
 
-    ///
     func reachabilityChanged(notification: NSNotification) {
        // print("Status changed")
         //          reachability = notification.object as? Reachability
@@ -129,6 +124,10 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     // MARK: - Button Actions.
     @IBAction func backButtonTapped(_ sender: AnyObject)  {
+        
+        
+        
+        
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
@@ -146,30 +145,25 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
         NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
         
-        if reachability != nil
-        {
+        if reachability != nil {
             self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
         }
-        
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
         
         // Check if connected to the internet.
         let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
         
-        
         Game.sharedGameInstance.segueFromDetailVC = true
 
-        // Play
         if (sender.isTouchInside != nil) {
             self.tapAudioPlayer.play()
         }
         
-        
-        // Get Purchase Category entity 
-        // 1. Configure locks by looking at PurchasedCategories entity stored in MOC.
+        // Get Purchase Category entity
+        // Configure locks by looking at PurchasedCategories entity stored in MOC.
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-        // 1. Create a fetch request for all entities of type PurchasedCategories.
+        // Create a fetch request for all entities of type PurchasedCategories.
         if #available(iOS 10.0, OSX 10.12, *) {
             purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
             // Fetch request for newer iOS versions.
@@ -182,7 +176,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
             
             if purchasedCategoryEntities.count > 0 {
-                print("purchasedCategories entity exists in the MOC.")
                 do {
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (purchasedCategoryEntitiesInMOC.count > 0) {
@@ -244,7 +237,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
             }
             
-            
         // Books and movies
         case "Books and Movies":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.booksAndMovies == true {
@@ -284,8 +276,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.present(alertController,animated:true, completion:nil)
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") == true {
-                if self.purchasedCategoriesEntity.booksAndMovies == false {
-                    self.purchasedCategoriesEntity.booksAndMovies = true
+                if self.purchasedCategoriesEntity.christianNation == false {
+                    self.purchasedCategoriesEntity.christianNation = true
                     self.saveContext()
                 }
                 self.selectButton.setTitle("Select", for: UIControlState())
@@ -584,7 +576,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         let title = self.categoryTitleLabel.text! as String
         switch title {
         case "Angels":
-            // Check to see if the category was purchased.
             if self.purchasedCategoriesEntity.angels == false {
                 self.selectButton.setTitle("$0.99",  for: UIControlState())
             }
@@ -658,8 +649,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             do {
                 try managedObjectContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
@@ -710,12 +699,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
 
      //MARK: Additional Methods
+    
     func setCategory(_ category: Int) {
         categoryTitleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
     }
     
     func setColor(_ category: Int) {
-        //self.view.backgroundColor = Game.sharedGameInstance.colors[category]
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
@@ -728,7 +717,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             let toViewController = segue.destination as! GameViewController
             toViewController.categoryTapped = self.categoryTapped
             toViewController.transitioningDelegate = self.gameScreenTransitionManager
-            
             self.removeAnimations()
         }
     }
@@ -798,8 +786,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - IAPManagerDelegate
+
     func managerDidRestorePurchases() {
-        print("Purchase has been restored")
         self.unlockCategory()
         self.selectButton.setTitle(("Select"), for: UIControlState())
         Game.sharedGameInstance.categoriesArray[categoryTapped].purchased = true
