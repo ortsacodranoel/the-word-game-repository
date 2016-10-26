@@ -164,10 +164,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     func updatePurchasedCategoriesEntity() {
-        
-        
-        
-        
+
         if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true {
             self.purchasedCategoriesEntity.angels = true
             self.saveContext()

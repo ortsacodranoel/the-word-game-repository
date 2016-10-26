@@ -46,7 +46,40 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
    
     var purchasedCategoriesEntity:PurchasedCategories!
-
+    
+    var categoryKeys : [String: String] = [ "com.thewordgame.angels": "angels",
+                                            "com.thewordgame.books": "booksAndMovies",
+                                            "com.thewordgame.christiannation": "christianNation",
+                                            "com.thewordgame.christmastime": "christmasTime",
+                                            "com.thewordgame.commands": "commands",
+                                            "com.thewordgame.denominations": "denominations",
+                                            "com.thewordgame.easter": "easter",
+                                            "com.thewordgame.famouschristians": "famousChristians",
+                                            "com.thewordgame.feasts": "feasts",
+                                            "com.thewordgame.history": "history",
+                                            "com.thewordgame.kids": "kids",
+                                            "com.thewordgame.relicsandsaints": "relicsAndSaints",
+                                            "com.thewordgame.revelation": "revelation",
+                                            "com.thewordgame.sins": "sins",
+                                            "com.thewordgame.worship": "worship"]
+//    
+//    let purchasedCategoryEntityKey = ["angels",
+//                                      "bookAndMovies",
+//                                      "christianNation",
+//                                      "christmasTime",
+//                                      "commands",
+//                                      "denominations",
+//                                      "easter",
+//                                      "famousChristians",
+//                                      "feasts","history",
+//                                      "kids","relicsAndSaints",
+//                                      "revelation",
+//                                      "sins",
+//                                      "worship"]
+    
+    
+    
+    
     
     // MARK: - View Methods
     
@@ -121,12 +154,28 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     
+    func updateEntityPurchasedCategories() {
+        for (categoryKey, purchasedCategoryKey) in self.categoryKeys {
+            if UserDefaults.standard.bool(forKey: categoryKey ) == true {
+
+                self.purchasedCategoriesEntity.setValue(true, forKey: purchasedCategoryKey)
+                print("Set \(categoryKey) for \(purchasedCategoryKey)")
+                self.saveContext()
+            }
+        }
+    }
+
+
+
+
+    
+    
     
     // MARK: - Button Actions.
     @IBAction func backButtonTapped(_ sender: AnyObject)  {
         
         
-        
+        self.updateEntityPurchasedCategories()
         
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
@@ -138,60 +187,22 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
      are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
-        
+        self.tapAudioPlayer.play()
+        Game.sharedGameInstance.segueFromDetailVC = true
+
+        // Internet Connection.
         reachability = Reachability.forInternetConnection()
         reachability?.startNotifier()
-        
         NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
         NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
-        
         if reachability != nil {
             self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
         }
-        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
-        
-        // Check if connected to the internet.
         let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
         
-        Game.sharedGameInstance.segueFromDetailVC = true
-
-        if (sender.isTouchInside != nil) {
-            self.tapAudioPlayer.play()
-        }
-        
-        // Get Purchase Category entity
-        // Configure locks by looking at PurchasedCategories entity stored in MOC.
-        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-        // Create a fetch request for all entities of type PurchasedCategories.
-        if #available(iOS 10.0, OSX 10.12, *) {
-            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
-            // Fetch request for newer iOS versions.
-        } else {
-            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
-            // Fetch request for older iOS versions.
-        }
-        
-        do {
-            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
-            
-            if purchasedCategoryEntities.count > 0 {
-                do {
-                    let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-                    if (purchasedCategoryEntitiesInMOC.count > 0) {
-                        self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
-                    }
-                } catch {
-                    let fetchError = error as NSError
-                    print(fetchError)
-                }
-            }
-        } catch {
-            let fetchError = error as NSError
-            print(fetchError)
-        }
-
-        
+        // CoreData Purchased Categories
+        self.getPurchasedCategoryEntity()
         
         
         let title = self.categoryTitleLabel.text! as String
@@ -207,14 +218,16 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             performSegue(withIdentifier: "segueToGame", sender: self)
         case "Concordance":
             performSegue(withIdentifier: "segueToGame", sender: self)
-    
-        // Angels
         case "Angels":
+            
+            // NO NETWORK + PURCHASED [FROM COREDATA]
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == true
             {
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
+                
+            // NO NETWORK + NOT PURCHASED [FROM COREDATA]
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == false
             {
                 let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
@@ -222,8 +235,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 alertController.addAction(okAction)
                 self.present(alertController,animated:true, completion:nil)
             }
+            
+            // NETWORK OK + APPLE PURCHASE TRUE
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true
             {
+                // UPDATE COREDATA
                 if self.purchasedCategoriesEntity.angels == false {
                     self.purchasedCategoriesEntity.angels = true
                     self.saveContext()
@@ -232,6 +248,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
+                
+            // NETWORK OK + APPLE PURCHASE FALSE
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == false
             {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
