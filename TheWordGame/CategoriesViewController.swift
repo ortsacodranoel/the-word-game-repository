@@ -47,31 +47,19 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-    
-    
-    // MARK: - Reachability Properties
-    
     // Used to check internet reachability.
     var reachability: Reachability?
-    
     var purchasedCategoriesEntity:PurchasedCategories!
     
     
-    
-    
 
-    
-    
-    
     // MARK: - View Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
-        
         self.loadSoundFile()
     }
 
@@ -89,73 +77,54 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.animatePopUpTutorial()
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
-    // MARK: - Core data categories
+    // MARK: - Core Data Methods
+    
     func retrieveCoredataCategoryEntities() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
-        
         do {
             try context.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
     
+    // MARK: - Tutorial Methods
     
-    
-
-    
-    // MARK: - Tutorial methods
-    
-    /// Used to check if tutorial is enabled.
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
-        // Get the tutorial instance.
         let enabled = sharedTutorialInstance?.value(forKey: "categoriesScreenEnabled") as! Bool
-        // Retrieve data.
         return enabled
     }
     
     
-    /// Disable pop ups.
     func disablePopUps() {
-        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
-        
         do {
             try context.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
         }
     }
 
-    // Used to animate the `tutorialView` onScreen.
+    
     func animatePopUpTutorial() {
         if isTutorialEnabled() {
-            
-            // Timer to play pop sound.
             if !self.popSoundTimer.isValid {
                 self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
             }
-            
+        
             // Move tutorialView offScreen so it can be animated onScreen.
             self.tutorialView.center.y += self.tutorialView.frame.size.height
             self.tutorialView.center.x -= self.tutorialView.frame.size.width
@@ -167,24 +136,18 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
           
             // Animate `tutorial` view onScreen.
             UIView.animate(withDuration: 0.4, delay:0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                
                     self.tutorialView.alpha = 1
                     // Move the tutorial view right.
                     self.tutorialView.center.x += self.tutorialView.bounds.width
                     // Move the tutorial view up.
                     self.tutorialView.center.y -= self.tutorialView.bounds.height
-                
                 }, completion: nil )
-            
             self.disablePopUps()
         }
     }
     
     
-    
-    
-    
-    
+
     
     // MARK: - Audio Methods.
     
@@ -205,11 +168,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.popAudioPlayer.play()
     }
     
-    
-    
 
-    
-    
     
     
     // MARK: - Button Actions
@@ -233,7 +192,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
      the overlayView or bubbleView is tapped.
      */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
-        
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 // Increase the alpha of the view.
@@ -254,7 +212,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
-    /// Needed for segue action.
     @IBAction func categoryButtonTapped(_ sender: AnyObject) {
         self.settingsButton.alpha = 0
     }
@@ -271,7 +228,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
-    /// Setup categories.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Configure locks by looking at PurchasedCategories entity stored in MOC.
@@ -425,61 +381,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             break
         }
         
-        
-        
-//        reachability = Reachability.forInternetConnection()
-//        reachability?.startNotifier()
-//        
-//        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
-//        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
-        
-        // Check if connected to the internet.
-        // let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
-
-        
-        // MARK: - Configure categories
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-//        if networkStatus == NotReachable && indexPosition < 5  {
-//            cell.lockView.alpha = 0
-//        }
-//        
-//        else if networkStatus == NotReachable && indexPosition > 5 {
-//            cell.lockView.alpha = 1
-//        }
-//        
-//        
-//        
-//        // If there is no internet and the category wasn't bought.
-//        if networkStatus == NotReachable && cell.lockView.alpha == 1 {
-//            cell.lockView.alpha = 1
-//        }
-//       
-//        // If there isn't internet and that category was bought.
-//        else if networkStatus == NotReachable && category.purchased == true {
-//            cell.lockView.alpha = 0
-//        }
-//            
-//        // If online and category was purchased.
-//        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == true {
-//                cell.lockView.alpha = 0
-//        }
-//        
-//        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == false {
-//    
-//                cell.lockView.alpha = 1
-//        }
-        
         return cell
     }
     
@@ -495,10 +396,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
        
         } else if segue.identifier == "segueToDetails" {
-            // Fade rules if visible.
+
             self.rulesButton.alpha = 0
             
-            // Retrieve the indexPath row.
             let button = sender as! UIButton
             let view = button.superview!
             let cell = view.superview! as! CollectionViewCell
@@ -506,7 +406,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
           
             Game.sharedGameInstance.gameColor = Game.sharedGameInstance.colors[((indexPath! as NSIndexPath).row)]
             
-            // Prepare destinationVC.
             let toViewController = segue.destination as! DetailViewController
             toViewController.categoryTapped = ((indexPath! as NSIndexPath).row)
             toViewController.transitioningDelegate = self.transitionManager
@@ -517,13 +416,9 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     
     // MARK: - Reachibility Methods
-    
-    
-    ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
         
         let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-  //      var statusString: String = ""
         
         print("StatusValue: \(networkStatus)")
         
@@ -543,11 +438,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
-    func reachabilityChanged(notification: NSNotification) {
-   //     print("Status changed")
-        //          reachability = notification.object as? Reachability
-        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-    }
+//    func reachabilityChanged(notification: NSNotification) {
+//   //     print("Status changed")
+//        //          reachability = notification.object as? Reachability
+//        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+//    }
     
 
 
