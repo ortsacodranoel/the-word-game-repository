@@ -109,15 +109,15 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         }
     }
     
-//    
-//    func reachabilityChanged(notification: NSNotification) {
-//       // print("Status changed")
-//        //          reachability = notification.object as? Reachability
-//        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-//    }
-//    
-//    
-//    
+    
+    func reachabilityChanged(notification: NSNotification) {
+       // print("Status changed")
+        //          reachability = notification.object as? Reachability
+        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+    }
+    
+    
+    
     
     ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
