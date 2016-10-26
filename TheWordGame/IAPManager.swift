@@ -68,13 +68,12 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     //MARK: SKPaymentTransactionObserver Delegate Protocol
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        //
+        
         for transaction in transactions as [SKPaymentTransaction]{
             switch transaction.transactionState{
             case .purchasing:
                 print("Purchasing")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
-                
             case .deferred:
                 print("Deferrred")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -196,11 +195,8 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     func unlockPurchasedFunctionalityforProductIdentifier(_ productIdentifier:String){
         UserDefaults.standard.set(true, forKey: productIdentifier)
-        
         UserDefaults.standard.synchronize()
-        
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        
         let categoryToUnlock = Game.sharedGameInstance.getCategoryForProductKey(productIdentifier)
         categoryToUnlock.purchased = true
     }

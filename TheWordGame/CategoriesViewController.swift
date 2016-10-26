@@ -15,9 +15,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     fileprivate var lastContentOffset: CGFloat = 0
     
-    
-    
-    
     // MARK: - View Properties
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
@@ -45,10 +42,24 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var tapSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     var tapAudioPlayer = AVAudioPlayer()
     
-    // MARK: - CoreData
+    
+    // MARK: - CoreData Properties
     
     // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+    
+    
+    // MARK: - Reachability Properties
+    
+    // Used to check internet reachability.
+    var reachability: Reachability?
+    
+    var purchasedCategoriesEntity:PurchasedCategories!
+    
+    
+    
+    
+
     
     
     
@@ -56,12 +67,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         /// Add gesture recognizer for tap on overlayView.
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
         self.viewOverlay.addGestureRecognizer(tapGestureRecognizer)
         
-        // Load sounds.
         self.loadSoundFile()
     }
 
@@ -77,7 +87,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLayoutSubviews()
         self.collectionView.reloadData()
         self.animatePopUpTutorial()
-        
     }
     
     
@@ -87,9 +96,29 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+    // MARK: - Core data categories
+    func retrieveCoredataCategoryEntities() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
+        
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    
+    
+    
 
     
     // MARK: - Tutorial methods
+    
     /// Used to check if tutorial is enabled.
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
@@ -102,12 +131,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     /// Disable pop ups.
     func disablePopUps() {
+        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(false, forKey: "categoriesScreenEnabled")
         
         do {
-            print("Saving Context")
             try context.save()
         } catch {
             // Replace this implementation with code to handle the error appropriately.
@@ -178,36 +207,54 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
+
+    
+    
+    
+    
+    // MARK: - Button Actions
+    
+    @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
+        self.collectionView.reloadData()
+        // self.tapAudioPlayer.play()
+        if Game.sharedGameInstance.showPopUp {
+            self.animatePopUpTutorial()
+        }
+        Game.sharedGameInstance.showPopUp = false
+    }
+    
+
+    @IBAction func settingsBtnTapped(_ sender: AnyObject) {
+        self.tapAudioPlayer.play()
+        performSegue(withIdentifier: "segueToSettings", sender: self)
+    }
+    
     
     /**
      Used to hide the tutorial bubble from view and fade out the overlay when
      the overlayView or bubbleView is tapped.
-    */
+     */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
         
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-            // Increase the alpha of the view.
-            self.viewOverlay.alpha = 0
-
+                // Increase the alpha of the view.
+                self.viewOverlay.alpha = 0
             }, completion: nil)
         
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // Move the view into place.
+            self.tutorialView.center.x -= self.view.bounds.width
+            self.tutorialView.center.y += self.view.bounds.height
             
-                // Move the view into place.
-                self.tutorialView.center.x -= self.view.bounds.width
-                self.tutorialView.center.y += self.view.bounds.height
-           
             }, completion: { (bool) in
                 self.tutorialView.alpha = 0
                 self.tutorialView.center.x += self.view.bounds.width
                 self.tutorialView.center.y -= self.view.bounds.height
-                
         })
     }
-
+    
     
     /// Needed for segue action.
     @IBAction func categoryButtonTapped(_ sender: AnyObject) {
@@ -218,44 +265,52 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
-    // MARK: - Button Actions
-    
-    /// BACK FROM SETTINGS
-    @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
- 
-        // self.tapAudioPlayer.play()
-        
-        if Game.sharedGameInstance.showPopUp {
-            self.animatePopUpTutorial()
-        }
-        
-        Game.sharedGameInstance.showPopUp = false
-    }
-    
-
-    
-    // TO THE SETTINGS
-    @IBAction func settingsBtnTapped(_ sender: AnyObject) {
-        self.tapAudioPlayer.play()
-        performSegue(withIdentifier: "segueToSettings", sender: self)
-    }
-    
-    
-    
-    
-    
-    
     
     // MARK: - Collection View Methods
     
-    ///
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Game.sharedGameInstance.categoriesArray.count
     }
     
     
-    ///
+    /// Setup categories.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Configure locks by looking at PurchasedCategories entity stored in MOC.
+        let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
+        // Create a fetch request for all entities of type PurchasedCategories.
+        if #available(iOS 10.0, OSX 10.12, *) {
+            purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
+            // Fetch request for newer iOS versions.
+        } else {
+            purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
+            // Fetch request for older iOS versions.
+        }
+        
+        do {
+            let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
+            
+            if purchasedCategoryEntities.count > 0 {
+               // print("purchasedCategories entity exists in the MOC.")
+                do {
+                    let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    
+                    if (purchasedCategoryEntitiesInMOC.count > 0) {
+                        self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+
+
+        _ = indexPath.row
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         cell.categoryButton.layer.cornerRadius = 7
         cell.categoryButton.backgroundColor = Game.sharedGameInstance.colors[(indexPath as NSIndexPath).row]
@@ -263,27 +318,172 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
         
         var category:Category!
-       
+        category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row]
         
-        category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row] 
-            
-        if category.purchased == true {
-            print("Category purchased")
+        let title : String = category.title
+        
+        switch title {
+        case "Jesus":
             cell.lockView.alpha = 0
-        } else if category.purchased == false {
-            print("Category not purchased")
-            cell.lockView.alpha = 1
+        case "People":
+            cell.lockView.alpha = 0
+        case "Places":
+            cell.lockView.alpha = 0
+        case "Sunday School":
+            cell.lockView.alpha = 0
+        case "Concordance":
+            cell.lockView.alpha = 0
+        case "Angels":
+            if self.purchasedCategoriesEntity.angels == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.angels == false{
+                cell.lockView.alpha = 1
+            }
+        case "Books and Movies":
+            if self.purchasedCategoriesEntity.booksAndMovies == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.booksAndMovies == false {
+                cell.lockView.alpha = 1
+            }
+        case "Christian Nation":
+            if self.purchasedCategoriesEntity.christianNation == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.christianNation == false {
+                cell.lockView.alpha = 1
+            }
+        case "Christmas Time":
+            if self.purchasedCategoriesEntity.christmasTime == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.christmasTime == false {
+                cell.lockView.alpha = 1
+            }
+        case "Commands":
+            if self.purchasedCategoriesEntity.commands == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.commands == false {
+                cell.lockView.alpha = 1
+            }
+        case "Denominations":
+            if self.purchasedCategoriesEntity.denominations == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.denominations == false{
+                cell.lockView.alpha = 1
+            }
+        case "Easter":
+            if self.purchasedCategoriesEntity.easter == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.easter == false {
+                cell.lockView.alpha = 1
+            }
+        case "Famous Christians":
+            if self.purchasedCategoriesEntity.famousChristians == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.famousChristians == false {
+                cell.lockView.alpha = 1
+            }
+        case "Feasts":
+            if self.purchasedCategoriesEntity.feasts == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.feasts == false {
+                cell.lockView.alpha = 1
+            }
+        case "History":
+            if self.purchasedCategoriesEntity.history == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.history == false {
+                cell.lockView.alpha = 1
+            }
+        case "Kids":
+            if self.purchasedCategoriesEntity.kids == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.kids == false {
+                cell.lockView.alpha = 1
+            }
+        case "Relics and Saints":
+            if self.purchasedCategoriesEntity.relicsAndSaints == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.relicsAndSaints == false {
+                cell.lockView.alpha = 1
+            }
+        case "Revelation":
+            if self.purchasedCategoriesEntity.revelation == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.revelation == false {
+                cell.lockView.alpha = 1
+            }
+        case "Sins":
+            if self.purchasedCategoriesEntity.sins == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.sins == false{
+                cell.lockView.alpha = 1
+            }
+        case "Worship":
+            if self.purchasedCategoriesEntity.worship == true {
+                cell.lockView.alpha = 0
+            } else if self.purchasedCategoriesEntity.worship == false {
+                cell.lockView.alpha = 1
+            }
+        default:
+            break
         }
         
         
         
+//        reachability = Reachability.forInternetConnection()
+//        reachability?.startNotifier()
+//        
+//        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
+//        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+        
+        // Check if connected to the internet.
+        // let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
+
+        
+        // MARK: - Configure categories
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+//        if networkStatus == NotReachable && indexPosition < 5  {
+//            cell.lockView.alpha = 0
+//        }
+//        
+//        else if networkStatus == NotReachable && indexPosition > 5 {
+//            cell.lockView.alpha = 1
+//        }
+//        
+//        
+//        
+//        // If there is no internet and the category wasn't bought.
+//        if networkStatus == NotReachable && cell.lockView.alpha == 1 {
+//            cell.lockView.alpha = 1
+//        }
+//       
+//        // If there isn't internet and that category was bought.
+//        else if networkStatus == NotReachable && category.purchased == true {
+//            cell.lockView.alpha = 0
+//        }
+//            
+//        // If online and category was purchased.
+//        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == true {
+//                cell.lockView.alpha = 0
+//        }
+//        
+//        else if (networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) && category.purchased == false {
+//    
+//                cell.lockView.alpha = 1
+//        }
+        
         return cell
     }
-    
-    
-    
-    
-    
     
     
     
@@ -315,12 +515,47 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             toViewController.transitioningDelegate = self.transitionManager
         }
     }
+
+
+
+    
+    // MARK: - Reachibility Methods
+    
+    
+    ///
+    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+        
+        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+  //      var statusString: String = ""
+        
+        print("StatusValue: \(networkStatus)")
+        
+        if networkStatus == NotReachable {
+            print("Netowrk is not reachable")
+            reachabilityStatus = kNorReachable
+        }
+        else if networkStatus == ReachableViaWiFi {
+            print("Via WIFI")
+            reachabilityStatus = kReachabilityWithWiFi
+        }
+        else if networkStatus == ReachableViaWWAN {
+            print("WAN reachable")
+            reachabilityStatus  = kReachableWithWWAN
+        }
+    }
+    
+    
+    
+    func reachabilityChanged(notification: NSNotification) {
+   //     print("Status changed")
+        //          reachability = notification.object as? Reachability
+        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+    }
     
 
 
+
 }
-
-
 
 
 

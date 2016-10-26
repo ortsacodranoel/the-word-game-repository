@@ -15,6 +15,7 @@
 		B30227C11D9B45DE000694EE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B30227C01D9B45DE000694EE /* GameScene.sks */; };
 		B30539331DA561B400D6F19B /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539321DA561B400D6F19B /* wrong.mp3 */; };
 		B30539391DA56D0200D6F19B /* correctSwipe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30539381DA56D0200D6F19B /* correctSwipe.mp3 */; };
+		B30986851DBAA16400BA6E1A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30986841DBAA16400BA6E1A /* SystemConfiguration.framework */; };
 		B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */; };
 		B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32AF2651D458AC60097AFD2 /* TransitionManager.swift */; };
 		B32BA8031DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */; };
@@ -33,9 +34,12 @@
 		B392F42E1D66146100F3748A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42D1D66146100F3748A /* RulesViewController.swift */; };
 		B39C3D071D7A4B2800636B85 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C3D061D7A4B2800636B85 /* Category.swift */; };
 		B39E2A031D7E05CC00F59C4F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */; };
+		B3A158971DB7F20A0029AC63 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A158961DB7F20A0029AC63 /* Reachability.m */; };
 		B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */; };
 		B3AB51BA1D89D90E0003B09F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB51B91D89D90E0003B09F /* GameViewController.swift */; };
 		B3C3835D1D7E0FFA0020C9DB /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */; };
+		B3E0EF1C1DBC57A20012B3B3 /* PurchasedCategories+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E0EF1A1DBC57A20012B3B3 /* PurchasedCategories+CoreDataClass.swift */; };
+		B3E0EF1D1DBC57A20012B3B3 /* PurchasedCategories+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E0EF1B1DBC57A20012B3B3 /* PurchasedCategories+CoreDataProperties.swift */; };
 		B3E23CC81D907F5B0038A761 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */; };
 		B3E3318A1DA81AAC0087C7B7 /* BubblePop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3E331891DA81AAC0087C7B7 /* BubblePop.mp3 */; };
 		B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */; };
@@ -78,6 +82,7 @@
 		B30227C01D9B45DE000694EE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		B30539321DA561B400D6F19B /* wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrong.mp3; sourceTree = "<group>"; };
 		B30539381DA56D0200D6F19B /* correctSwipe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correctSwipe.mp3; sourceTree = "<group>"; };
+		B30986841DBAA16400BA6E1A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B31DBDD51DA464FC005CB1AF /* initialCountdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = initialCountdown.mp3; sourceTree = "<group>"; };
 		B32AF2651D458AC60097AFD2 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TutorialPopUp+CoreDataClass.swift"; path = "../TutorialPopUp+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -96,9 +101,14 @@
 		B392F42D1D66146100F3748A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		B39C3D061D7A4B2800636B85 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
 		B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		B3A158941DB7F2090029AC63 /* TheWordGame-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheWordGame-Bridging-Header.h"; sourceTree = "<group>"; };
+		B3A158951DB7F20A0029AC63 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B3A158961DB7F20A0029AC63 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipeSoundEffect.mp3; sourceTree = "<group>"; };
 		B3AB51B91D89D90E0003B09F /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ../GameViewController.swift; sourceTree = "<group>"; };
 		B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		B3E0EF1A1DBC57A20012B3B3 /* PurchasedCategories+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PurchasedCategories+CoreDataClass.swift"; path = "../PurchasedCategories+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B3E0EF1B1DBC57A20012B3B3 /* PurchasedCategories+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PurchasedCategories+CoreDataProperties.swift"; path = "../PurchasedCategories+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryViewController.swift; path = ../SummaryViewController.swift; sourceTree = "<group>"; };
 		B3E331891DA81AAC0087C7B7 /* BubblePop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BubblePop.mp3; sourceTree = "<group>"; };
 		B3F39C6A1D46722B0049F8FB /* GameScreenTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreenTransitionManager.swift; sourceTree = "<group>"; };
@@ -126,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30986851DBAA16400BA6E1A /* SystemConfiguration.framework in Frameworks */,
 				B3F48AD01D89AF460052AA32 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +188,28 @@
 			name = "Sound Effects";
 			sourceTree = "<group>";
 		};
+		B365CBD71DBBEB1800E34B94 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */,
+				B3E0EF1A1DBC57A20012B3B3 /* PurchasedCategories+CoreDataClass.swift */,
+				B3E0EF1B1DBC57A20012B3B3 /* PurchasedCategories+CoreDataProperties.swift */,
+				B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */,
+				B32BA8021DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		B365CBD81DBBEB8A00E34B94 /* In-App Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				B36733711D7F086000BA177B /* iap_product_ids.plist */,
+				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
+				B39C3D061D7A4B2800636B85 /* Category.swift */,
+			);
+			name = "In-App Purchases";
+			sourceTree = "<group>";
+		};
 		B37786021D494B1E00639A8B /* Transition Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,12 +221,22 @@
 			name = "Transition Managers";
 			sourceTree = "<group>";
 		};
+		B3A158981DB7F2130029AC63 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B3A158941DB7F2090029AC63 /* TheWordGame-Bridging-Header.h */,
+				B3A158951DB7F20A0029AC63 /* Reachability.h */,
+				B3A158961DB7F20A0029AC63 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		B3F39C6C1D4672D80049F8FB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				B36733731D7F3CD100BA177B /* spashScreenViewController.swift */,
-				B392F42D1D66146100F3748A /* RulesViewController.swift */,
 				D67774D31D1C392B0051C634 /* CategoriesViewController.swift */,
+				B392F42D1D66146100F3748A /* RulesViewController.swift */,
 				D604D47F1D21839B00FBCC2B /* DetailViewController.swift */,
 				B3AB51B91D89D90E0003B09F /* GameViewController.swift */,
 				B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */,
@@ -205,6 +248,7 @@
 		B3F48ACE1D89AF460052AA32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B30986841DBAA16400BA6E1A /* SystemConfiguration.framework */,
 				B3F48ACF1D89AF460052AA32 /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -235,15 +279,13 @@
 		D67774D01D1C392B0051C634 /* thewordgame */ = {
 			isa = PBXGroup;
 			children = (
-				B32BA8011DB0634A0017447C /* TutorialPopUp+CoreDataClass.swift */,
-				B32BA8021DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift */,
 				D67774D11D1C392B0051C634 /* AppDelegate.swift */,
+				B365CBD71DBBEB1800E34B94 /* CoreData */,
+				B3A158981DB7F2130029AC63 /* Reachability */,
 				B35659051D6F9D87003E7DCD /* Sound Effects */,
 				B3F39C6C1D4672D80049F8FB /* View Controllers */,
 				B30227B51D9B4289000694EE /* Celebration Files */,
-				B36733711D7F086000BA177B /* iap_product_ids.plist */,
-				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
-				B39C3D061D7A4B2800636B85 /* Category.swift */,
+				B365CBD81DBBEB8A00E34B94 /* In-App Purchases */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				D67774D51D1C392B0051C634 /* Main.storyboard */,
@@ -251,7 +293,6 @@
 				B37786021D494B1E00639A8B /* Transition Managers */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
-				B381D5C11D7E0E3900E40B45 /* thewordgame.xcdatamodeld */,
 				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
 			);
 			name = thewordgame;
@@ -439,12 +480,15 @@
 				B36733741D7F3CD100BA177B /* spashScreenViewController.swift in Sources */,
 				D67774D41D1C392B0051C634 /* CategoriesViewController.swift in Sources */,
 				B413DBDE1D2DF1900006FB9D /* Game.swift in Sources */,
+				B3E0EF1D1DBC57A20012B3B3 /* PurchasedCategories+CoreDataProperties.swift in Sources */,
 				B3E23CC81D907F5B0038A761 /* SummaryViewController.swift in Sources */,
 				B381D5C31D7E0E3900E40B45 /* thewordgame.xcdatamodeld in Sources */,
 				B392F42C1D66112F00F3748A /* RulesTransitionManager.swift in Sources */,
 				D604D4801D21839B00FBCC2B /* DetailViewController.swift in Sources */,
+				B3A158971DB7F20A0029AC63 /* Reachability.m in Sources */,
 				D67775031D1C4FDC0051C634 /* CollectionViewCell.swift in Sources */,
 				B3F39C6B1D46722B0049F8FB /* GameScreenTransitionManager.swift in Sources */,
+				B3E0EF1C1DBC57A20012B3B3 /* PurchasedCategories+CoreDataClass.swift in Sources */,
 				B30227B71D9B42DE000694EE /* GameScene.swift in Sources */,
 				B32AF2661D458AC60097AFD2 /* TransitionManager.swift in Sources */,
 				D6249F371D9B6D5B00173C78 /* CelebrationViewController.swift in Sources */,
@@ -591,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
@@ -598,6 +643,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
 				PRODUCT_NAME = TheWordGame;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TheWordGame/TheWordGame-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -607,6 +654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
@@ -614,6 +662,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
 				PRODUCT_NAME = TheWordGame;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TheWordGame/TheWordGame-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

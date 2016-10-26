@@ -70,7 +70,7 @@ class GameViewController: UIViewController {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         // Get the tutorial instance.
         let enabled = sharedTutorialInstance?.value(forKey: "gameScreenEnabled") as! Bool
-        print("This is in isTutorialEnabled value is:\(enabled)")
+        // print("This is in isTutorialEnabled value is:\(enabled)")
         // Retrieve data.
         return enabled
     }
@@ -369,7 +369,6 @@ class GameViewController: UIViewController {
     }
     
     
-    // MARK:- unwindToGame()
     /// Used to execute something when the view returns from the summary screen.
     @IBAction func unwindToGame(_ segue: UIStoryboardSegue){
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -400,12 +399,9 @@ class GameViewController: UIViewController {
     
 
     @IBAction func menuTapped(_ sender: AnyObject) {
-  
-        // Audio tap sound.
         self.audioPlayerButtonTapSound.play()
         let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
         self.present(vc!, animated: true, completion: nil)
-        
     }
     
     
@@ -653,9 +649,7 @@ class GameViewController: UIViewController {
     }
     
 
-    
 
-    
     /**
      Used by the game to remove a word when the game round ends. It removes
      the word that is currently on the screen off to the right. Once the word
@@ -727,9 +721,7 @@ class GameViewController: UIViewController {
                         
                         // Play sound for wrong swipe.
                         self.audioPlayerWrondSwipe.play()
-                  
                     } else {
-                        
                         animatePassMessage()
                         self.audioPlayerWrondSwipe.play()
                     }
@@ -757,14 +749,10 @@ class GameViewController: UIViewController {
     
     func animatePassMessage() {
         UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            
                 self.passLabel.alpha = 1
-            
             },completion: {(bool) in
                 UIView.animate(withDuration: 0.4, delay:1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-                    
-                    self.passLabel.alpha = 0
-                    
+                        self.passLabel.alpha = 0
                     },completion:nil)
         })
     }
