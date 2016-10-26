@@ -46,7 +46,6 @@ class SummaryViewController: UIViewController {
 
     @IBAction func backBtnTapped(_ sender: AnyObject) {
         print("Back button tapped")
-        self.audioPlayerButtonTapSound.play()
     }
     
     

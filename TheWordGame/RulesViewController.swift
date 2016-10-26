@@ -98,7 +98,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     @IBAction func menuButtonTapped(_ sender: AnyObject) {
         self.loadSoundFile()
-        self.tapAudioPlayer.play()
         self.performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     

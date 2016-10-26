@@ -202,7 +202,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func playPopSound() {
         // Play pop sound once the tutorial view animates.
-        //self.popAudioPlayer.play()
+        self.popAudioPlayer.play()
     }
     
     
@@ -216,7 +216,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.collectionView.reloadData()
-        // self.tapAudioPlayer.play()
         if Game.sharedGameInstance.showPopUp {
             self.animatePopUpTutorial()
         }
@@ -225,7 +224,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
-        self.tapAudioPlayer.play()
         performSegue(withIdentifier: "segueToSettings", sender: self)
     }
     
@@ -493,7 +491,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == "segueToRules" {
-            self.tapAudioPlayer.play()
             let rulesViewController = segue.destination as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
        

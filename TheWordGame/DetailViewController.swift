@@ -165,7 +165,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
      are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
-        self.tapAudioPlayer.play()
         Game.sharedGameInstance.segueFromDetailVC = true
 
         // Internet Connection.
