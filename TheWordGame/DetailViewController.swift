@@ -62,21 +62,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                                             "com.thewordgame.revelation": "revelation",
                                             "com.thewordgame.sins": "sins",
                                             "com.thewordgame.worship": "worship"]
-//    
-//    let purchasedCategoryEntityKey = ["angels",
-//                                      "bookAndMovies",
-//                                      "christianNation",
-//                                      "christmasTime",
-//                                      "commands",
-//                                      "denominations",
-//                                      "easter",
-//                                      "famousChristians",
-//                                      "feasts","history",
-//                                      "kids","relicsAndSaints",
-//                                      "revelation",
-//                                      "sins",
-//                                      "worship"]
-    
+
     
     
     
@@ -97,19 +83,22 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Retrieve and assigen the PurchasedCategories entity.
         self.getPurchasedCategoryEntity()
-
-        
+        self.configureAppearance()
+        self.startAnimations()
+    }
+    
+    
+    func configureAppearance() {
         // Configure the Select button appearance.
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.white.cgColor
         self.selectButton.layer.borderWidth = 3
         
-        setCategory(categoryTapped)
-        setColor(categoryTapped)
-        setDescription(categoryTapped)
-
+        self.setCategory(categoryTapped)
+        self.setColor(categoryTapped)
+        self.setDescription(categoryTapped)
+        
         // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
             self.selectButton.setTitle(("Select"), for: UIControlState())
@@ -118,25 +107,23 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             self.lockCategory()
             self.setLockedColor()
         }
-        startAnimations()
     }
     
-
-    func reachabilityChanged(notification: NSNotification) {
-       // print("Status changed")
-        //          reachability = notification.object as? Reachability
-        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-    }
-    
-    
-    
+//    
+//    func reachabilityChanged(notification: NSNotification) {
+//       // print("Status changed")
+//        //          reachability = notification.object as? Reachability
+//        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+//    }
+//    
+//    
+//    
     
     ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        
         let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-       // var statusString: String = ""
-        
+        // var statusString: String = ""
+    
         print("StatusValue: \(networkStatus)")
         
         if networkStatus == NotReachable {
@@ -154,12 +141,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     
+    
     func updateEntityPurchasedCategories() {
         for (categoryKey, purchasedCategoryKey) in self.categoryKeys {
             if UserDefaults.standard.bool(forKey: categoryKey ) == true {
-
                 self.purchasedCategoriesEntity.setValue(true, forKey: purchasedCategoryKey)
-                print("Set \(categoryKey) for \(purchasedCategoryKey)")
                 self.saveContext()
             }
         }
@@ -167,19 +153,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
 
 
 
-
-    
-    
-    
     // MARK: - Button Actions.
     @IBAction func backButtonTapped(_ sender: AnyObject)  {
-        
-        
         self.updateEntityPurchasedCategories()
-        
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
-    
     
     
     /** 
@@ -201,9 +179,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
         let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
         
-        // CoreData Purchased Categories
         self.getPurchasedCategoryEntity()
-        
         
         let title = self.categoryTitleLabel.text! as String
         
@@ -685,7 +661,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         }
         do {
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
-            // Retrieve an entity of type PurchasedCategories if it exists in the managed object context.
             if purchasedCategoryEntities.count > 0 {
                 do {
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
@@ -716,7 +691,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
 
-     //MARK: Additional Methods
+     //MARK: View configuration
     
     func setCategory(_ category: Int) {
         categoryTitleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
@@ -743,7 +718,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
 
     // MARK: - Animations
     
-    /// Used to animate all objects when detailVC first loads.
     func startAnimations() {
         UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.categoryTitleView.alpha = 1
@@ -804,11 +778,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - IAPManagerDelegate
-
     func managerDidRestorePurchases() {
         self.unlockCategory()
         self.selectButton.setTitle(("Select"), for: UIControlState())
         Game.sharedGameInstance.categoriesArray[categoryTapped].purchased = true
+        self.updateEntityPurchasedCategories()
     }
     
     
@@ -824,7 +798,4 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             print("Unable to load sound files.")
         }
     }
-    
-    
-    
 }

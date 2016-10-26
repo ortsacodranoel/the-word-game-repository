@@ -16,18 +16,18 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     // MARK: - Game Properties
     @IBOutlet weak var rulesScrollView: UIScrollView!
     
+    
     // MARK: - Labels
     @IBOutlet weak var settingsLabel: UILabel!
+    
 
     // MARK: - Visual Effects
     var blurView:UIVisualEffectView!
     
     
-    
-
-    
     // MARK: - Transition Managers
     let rulesScreenTransitionManager = RulesTransitionManager()
+    
     
     // MARK: - Swipe Gesture Recognizer Properties
     let swipeRecognizer = UISwipeGestureRecognizer()
@@ -35,14 +35,13 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     // MARK: - Audio Properties
     var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-    
     var tapAudioPlayer = AVAudioPlayer()
     
     @IBOutlet weak var backgroundView: UIView!
 
     // MARK: - CoreData Properties
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-    // 
+
     var purchasedCategoriesEntity:PurchasedCategories!
 
 
@@ -248,8 +247,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             do {
                 try managedObjectContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
@@ -293,23 +290,14 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     // MARK: - Swipe Gestures
     
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.right: // RIGHT SWIPE
+            case UISwipeGestureRecognizerDirection.right:
                 performSegue(withIdentifier: "unwindToCategories", sender: self)
             default:
                 break
