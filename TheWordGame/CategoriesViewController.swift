@@ -202,7 +202,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func playPopSound() {
         // Play pop sound once the tutorial view animates.
-        self.popAudioPlayer.play()
+        //self.popAudioPlayer.play()
     }
     
     
