@@ -110,7 +110,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
 
-
     
     // MARK: - Button Actions
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
@@ -121,7 +120,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         Game.sharedGameInstance.showPopUp = false
     }
     
-
     @IBAction func settingsBtnTapped(_ sender: AnyObject) {
         performSegue(withIdentifier: "segueToSettings", sender: self)
     }
@@ -162,8 +160,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        // Configure locks by looking at PurchasedCategories entity stored in MOC.
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
         // Create a fetch request for all entities of type PurchasedCategories.
         if #available(iOS 10.0, OSX 10.12, *) {
