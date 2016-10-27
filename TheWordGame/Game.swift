@@ -14,9 +14,6 @@ class Game {
     
     static let sharedGameInstance = Game()
     
-    // Tutorial
-    
-    // Used to determine if a pop tutorial is shown.
     var showPopUp = false
     
     
@@ -93,7 +90,6 @@ class Game {
     var books:Category!
     var christiannation:Category!
     var christmastime:Category!
-
     var commands:Category!
     var denominations:Category!
     var easter:Category!
@@ -252,8 +248,6 @@ class Game {
                 self.worship.purchased = false
             }
         
-        
-        
         self.categoriesArray = [self.jesus,
                                 self.people,
                                 self.places,
@@ -286,15 +280,11 @@ class Game {
     }
     
     
-    /// Resets team scores back to 0.
     func resetGame() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
     }
     
-
-    
-    /// Used to get the String value of the team that has won the game.
     func checkForWinner() {
         if self.teamOneScore == 10 {
             self.won = true
@@ -305,71 +295,50 @@ class Game {
         }
     }
     
-    
     func getWord(_ categorySelected: Int) -> String {
-        // Used to store a copy of the category array selected.
+
         var selectedArray = [String()]
         
         switch categorySelected {
         case 0:
-            // Jesus
             selectedArray = self.jesus.wordsInCategory
         case 1:
-            // People
             selectedArray = self.people.wordsInCategory
         case 2:
-            // Places
             selectedArray = self.places.wordsInCategory
         case 3:
-            // Sunday
             selectedArray = self.sunday.wordsInCategory
         case 4:
-            // Concordance
             selectedArray = self.concordance.wordsInCategory
         case 5:
-            // Angels
             selectedArray = self.angels.wordsInCategory
         case 6:
-            // Books and Movies
             selectedArray = self.books.wordsInCategory
         case 7:
-            // Christian Nation
             selectedArray = self.christiannation.wordsInCategory
         case 8:
-            // Christmas Time
             selectedArray = self.christmastime.wordsInCategory
         case 9:
-            // Commands
             selectedArray = self.commands.wordsInCategory
         case 10:
-            // Denominations
             selectedArray = self.denominations.wordsInCategory
         case 11:
-            // Easter
             selectedArray = self.easter.wordsInCategory
         case 12:
-            // Famous Christians
             selectedArray = self.famous.wordsInCategory
         case 13:
-            // Feasts
             selectedArray = self.feasts.wordsInCategory
         case 14:
-            // History
             selectedArray = self.history.wordsInCategory
         case 15:
-            // Kids
             selectedArray = self.kids.wordsInCategory
         case 16:
-            // Relics
             selectedArray = self.relics.wordsInCategory
         case 17:
-            // Revelation
             selectedArray = self.revelation.wordsInCategory
-        case 19:
-            // Sins
+        case 18:
             selectedArray = self.sins.wordsInCategory
-        case 20:
-            // Worship
+        case 19:
             selectedArray = self.worship.wordsInCategory
         default:
             break
@@ -382,7 +351,6 @@ class Game {
         word = selectedArray[randomIndex]
         
         if arrayOfUsedWords.contains(word) {
-            // Run the method again.
             let temp = self.getWord(categorySelected)
             print(temp)
             
@@ -456,7 +424,6 @@ class Game {
     
     // MARK: - Array Methods
     
-    /// Clears all information in correct/missedWordsArray.
     func clearArrays() {
         self.correctWordsArray = []
         self.missedWordsArray = []

@@ -185,9 +185,7 @@ class GameViewController: UIViewController {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
         delegate.sharedTutorialEntity.setValue(false, forKey: "gameScreenEnabled")
-        
         do {
-            print("Saving Context")
             try context.save()
         } catch {
             let nserror = error as NSError
@@ -322,7 +320,6 @@ class GameViewController: UIViewController {
             }, completion: nil )
         self.runCountdownTimer()
         
-        
         // Reset swipe count.
         self.timesSwipedRight = 0
         
@@ -452,7 +449,7 @@ class GameViewController: UIViewController {
     func resetRound(_ time: Double ) {
         UIView.animate(withDuration: 0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
            
-            self.view.backgroundColor = Game.sharedGameInstance.colors[self.categoryTapped]
+                self.view.backgroundColor = Game.sharedGameInstance.colors[self.categoryTapped]
         
             }, completion: { (bool) in
                 
@@ -580,7 +577,6 @@ class GameViewController: UIViewController {
     
     ///
     func setColorForViewBackground() {
-        /// Set the initial background color of the main view.
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     

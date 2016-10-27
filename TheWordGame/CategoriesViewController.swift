@@ -198,6 +198,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.categoryButton.setTitle(Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row].title, for: UIControlState())
         
         var category:Category!
+        
         category =  Game.sharedGameInstance.categoriesArray[(indexPath as NSIndexPath).row]
         
         let title : String = category.title
