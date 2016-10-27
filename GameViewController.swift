@@ -337,7 +337,6 @@ class GameViewController: UIViewController {
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
 
-        self.audioPlayerButtonTapSound.play()
         self.audioPlayerRoundIsStartingSound.play()
         
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -399,7 +398,6 @@ class GameViewController: UIViewController {
     
 
     @IBAction func menuTapped(_ sender: AnyObject) {
-        self.audioPlayerButtonTapSound.play()
         let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
         self.present(vc!, animated: true, completion: nil)
     }

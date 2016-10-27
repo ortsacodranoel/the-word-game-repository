@@ -37,6 +37,5 @@ class CollectionViewCell: UICollectionViewCell {
    
     @IBAction func buttonTouched(_ sender: AnyObject) {
         self.loadSoundFile()
-        self.tapAudioPlayer.play()
     }
 }
