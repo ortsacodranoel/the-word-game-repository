@@ -11,8 +11,8 @@ import AVFoundation
 import StoreKit
 import CoreData
 
-class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
-{
+class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     fileprivate var lastContentOffset: CGFloat = 0
     @IBOutlet weak var tutorialView: UIView!
     @IBOutlet weak var viewOverlay: UIView!
@@ -32,7 +32,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     // MARK: - View Methods
-
     override func viewDidLoad() {
         super.viewDidLoad()
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(CategoriesViewController.hideTutorialAction(sender:)))
@@ -58,7 +57,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     // MARK: - Core Data Methods
-    
     func retrieveCoredataCategoryEntities() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
@@ -73,13 +71,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     // MARK: - Tutorial Methods
-    
     func isTutorialEnabled() -> Bool {
         let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
         let enabled = sharedTutorialInstance?.value(forKey: "categoriesScreenEnabled") as! Bool
         return enabled
     }
-    
     
     func disablePopUps() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -98,7 +94,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             if !self.popSoundTimer.isValid {
                 self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
             }
-        
             // Prepared the view for animation by animating it off-screen.
             self.tutorialView.center.y += self.tutorialView.frame.size.height
             self.tutorialView.center.x -= self.tutorialView.frame.size.width
@@ -108,38 +103,16 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             // Animate view on-screen.
             UIView.animate(withDuration: 0.4, delay:0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                     self.tutorialView.alpha = 1
-                    // Move the tutorial view right.
                     self.tutorialView.center.x += self.tutorialView.bounds.width
-                    // Move the tutorial view up.
                     self.tutorialView.center.y -= self.tutorialView.bounds.height
                 }, completion: nil )
             self.disablePopUps()
         }
     }
 
-    
-    // MARK: - Audio Methods.
-    
-    func loadSoundFile() {
-        do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.tapSound, fileTypeHint: "wav")
-            self.tapAudioPlayer.prepareToPlay()
-            self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
-            self.popAudioPlayer.prepareToPlay()
-        } catch {
-            print("Unable to load sound files.")
-        }
-    }
-
-    
-    func playPopSound() {
-        // Play pop sound once the tutorial view animates.
-        self.popAudioPlayer.play()
-    }
 
     
     // MARK: - Button Actions
-    
     @IBAction func unwindToCategories(_ segue: UIStoryboardSegue){
         self.collectionView.reloadData()
         if Game.sharedGameInstance.showPopUp {
@@ -161,13 +134,11 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     func hideTutorialAction(sender:UITapGestureRecognizer) {
         // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-                // Increase the alpha of the view.
                 self.viewOverlay.alpha = 0
             }, completion: nil)
         
         // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            // Move the view into place.
             self.tutorialView.center.x -= self.view.bounds.width
             self.tutorialView.center.y += self.view.bounds.height
             
@@ -184,12 +155,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
-    
-    
-    
-    
     // MARK: - Collection View Methods
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Game.sharedGameInstance.categoriesArray.count
     }
@@ -210,9 +176,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         do {
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
-            
             if purchasedCategoryEntities.count > 0 {
-               // print("purchasedCategories entity exists in the MOC.")
                 do {
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     
@@ -228,7 +192,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             let fetchError = error as NSError
             print(fetchError)
         }
-
 
         _ = indexPath.row
         
@@ -347,46 +310,32 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         default:
             break
         }
-        
         return cell
     }
     
     
-    
-    
     // MARK: - Segue Methods
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
         if segue.identifier == "segueToRules" {
             let rulesViewController = segue.destination as! RulesViewController
             rulesViewController.transitioningDelegate = self.rulesScreenTransitionManager
-       
         } else if segue.identifier == "segueToDetails" {
-
             self.rulesButton.alpha = 0
-            
             let button = sender as! UIButton
             let view = button.superview!
             let cell = view.superview! as! CollectionViewCell
             let indexPath = collectionView.indexPath(for: cell)
-          
             Game.sharedGameInstance.gameColor = Game.sharedGameInstance.colors[((indexPath! as NSIndexPath).row)]
-            
             let toViewController = segue.destination as! DetailViewController
             toViewController.categoryTapped = ((indexPath! as NSIndexPath).row)
             toViewController.transitioningDelegate = self.transitionManager
         }
     }
 
-
-
     
     // MARK: - Reachibility Methods
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        
         let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        
         print("StatusValue: \(networkStatus)")
         
         if networkStatus == NotReachable {
@@ -404,16 +353,21 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     
+    // MARK: - Audio Methods.
+    func loadSoundFile() {
+        do {
+            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.tapSound, fileTypeHint: "wav")
+            self.tapAudioPlayer.prepareToPlay()
+            self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
+            self.popAudioPlayer.prepareToPlay()
+        } catch {
+            print("Unable to load sound files.")
+        }
+    }
     
-//    func reachabilityChanged(notification: NSNotification) {
-//   //     print("Status changed")
-//        //          reachability = notification.object as? Reachability
-//        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-//    }
-    
-
-
-
+    func playPopSound() {
+        self.popAudioPlayer.play()
+    }
 }
 
 
@@ -424,62 +378,3 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
 
 
 
-
-
-
-
-
-
-
-
-/**
-
-
- 
- /// Animates the first tutorial step on screen load.
- func animateTutorialStep() {
- 
- tutorialTimer.invalidate()
- 
- print("in animate tutorial step")
- 
- 
- }
- 
- 
- 
- 
-
-    // MARK: - Animations
-    func animateMenuFadeIn() {
-        UIView.animate(withDuration: 0.5,animations: {
-            self.tutorialView.alpha = 1
-            }, completion: nil)
-    }
-
-
-
-    func animateMenuFadeOut() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.rulesButton.alpha = 0
-            }, completion: nil)
-    }
-
-
-
-
-
-    /// Used to animate rules menu fade-in.
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 30 {
-            //self.rulesButton.setTitleColor(self.buttonBackgroundColor[1], forState: .Normal)
-        }
-
-        if scrollView.contentOffset.y > 30 {
-            self.animateMenuFadeIn()
-        } else if scrollView.contentOffset.y < 30 {
-            self.animateMenuFadeOut()
-        }
-    }
-
-*/
