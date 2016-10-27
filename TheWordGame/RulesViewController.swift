@@ -26,6 +26,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
 
 
     // MARK: - View Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
@@ -33,7 +34,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -52,28 +52,25 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Button Actions
+    
     @IBAction func rulesButtonTapped(_ sender: AnyObject) {
         if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
             UIApplication.shared.openURL(url)
         }
     }
     
-    
     @IBAction func restorButtonTapped(_ sender: AnyObject) {
         IAPManager.sharedInstance.restorePurchases()
     }
-    
     
     @IBAction func menuButtonTapped(_ sender: AnyObject) {
         self.loadSoundFile()
         self.performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
-    
     @IBAction func enableTutorialTapped(_ sender: AnyObject) {
         self.enablePopUps()
         self.performSegue(withIdentifier: "unwindToCategories", sender: self)
-
     }
     
     
@@ -124,27 +121,22 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     func updatePurchasedCategoriesEntity() {
-
         if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true {
             self.purchasedCategoriesEntity.angels = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.books") == true {
             self.purchasedCategoriesEntity.booksAndMovies = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") == true {
             self.purchasedCategoriesEntity.christianNation = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") == true {
             self.purchasedCategoriesEntity.christmasTime = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") == true {
             self.purchasedCategoriesEntity.commands = true
             self.saveContext()
@@ -153,27 +145,22 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             self.purchasedCategoriesEntity.denominations = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") == true {
             self.purchasedCategoriesEntity.easter = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") == true {
             self.purchasedCategoriesEntity.famousChristians = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") == true {
             self.purchasedCategoriesEntity.feasts = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.history") == true {
             self.purchasedCategoriesEntity.history = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") == true {
             self.purchasedCategoriesEntity.kids = true
             self.saveContext()
@@ -183,17 +170,14 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             self.purchasedCategoriesEntity.relicsAndSaints = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") == true {
             self.purchasedCategoriesEntity.revelation = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") == true {
             self.purchasedCategoriesEntity.sins = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") == true {
             self.purchasedCategoriesEntity.worship = true
             self.saveContext()
@@ -201,8 +185,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     }
     
     
-    
-    /// Used to save any new changes to the managed object context.
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -214,14 +196,12 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
         }
     }
     
-
     
     // MARK: - In-App Purchase Methods
     
     func managerDidRestorePurchases() {
         self.getPurchasedCategoryEntity()
         let alertController = UIAlertController(title: "In-App Purchase", message: "Your purchases have been restored", preferredStyle: .alert)
-        
         let okAction = UIAlertAction(title:"OK", style:.default,handler: { action in
             self.updatePurchasedCategoriesEntity()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
@@ -232,7 +212,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     }
     
 
-    
     // MARK: - Swipe Gestures
     
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
@@ -245,6 +224,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             }
         }
     }
+    
     
     // MARK: - Audio Methods
     
