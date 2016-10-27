@@ -15,7 +15,7 @@ class spashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        perform(#selector(spashScreenViewController.showMainController), with: nil, afterDelay: 1.5)
+        perform(#selector(spashScreenViewController.showMainController), with: nil, afterDelay: 2.0)
     }
     
 
@@ -23,6 +23,4 @@ class spashScreenViewController: UIViewController {
     {
         performSegue(withIdentifier: "showMainViewController", sender: self)
     }
-    
-    
 }

@@ -1,168 +1,23 @@
-/*
-    FIX: 
-        - gameBegan variable change to false once game ends.
-        -
-        -
- 
- 
- 
-    Algorithm for showing tutorial popup.
- 
-    1. Check to see if it's the first time running the app or if the player has selected the 'Show PopUp'. [ showPopUp == true? ]
- 
-    2. When the player taps the `Start Button` and the first word appears on the screen, stop the gameTimer at 59seconds.
- 
-    3. Animate tutorialBubbleTwoView onto the top left hand corner of the screen with th message `Gamplay: Step 2 Have your team members
-        guess the word that you are seeing on-screen without telling them any part of the word. 
- 
-    4. When the player taps any part of the screen, animate the tutorialBubbleThreeView from the bottom right hand corner of the screen. 
-        The message should be Swipe Right if your team guessed correctly, or Swipe Left to pass. 
-
-    5. Animate the tutorialBubbleFourView w/ msg 'pointing to the Scores "the first team to reach 25 points, wins!
- 
-    5. When the player taps the screen again, animate the view off-screen again, and fadeOut the tutorialOverlayView to reveal the screen again.
- 
-
- 
- 
-*/
-
-
+//
+//  GameViewController.swift
+//  TheWordGame
+//
+//  Created by Leo on 7/24/16.
+//  Copyright © 2016 Daniel Castro. All rights reserved.
+//
 import UIKit
 import AVFoundation
 
 class GameViewController: UIViewController {
     
-    // MARK: - Tutorial Properties
     @IBOutlet weak var tutorialBubbleTwoView: UIView!
     @IBOutlet weak var tutorialOverlayView: UIView!
     @IBOutlet weak var tutorial3view: UIView!
-
-
-    
-    // MARK: - Audio Properties
     var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
     var popAudioPlayer = AVAudioPlayer()
     
-    
 
-    
-    // MARK: - Tutorial Methods
-    
-    /// Disable pop ups.
-    func disablePopUps() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.managedObjectContext
-        delegate.sharedTutorialEntity.setValue(false, forKey: "gameScreenEnabled")
-        
-        do {
-            print("Saving Context")
-            try context.save()
-        } catch {
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    
-    
-    /// Used to check if tutorial is enabled.
-    func isTutorialEnabled() -> Bool {
-        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
-        // Get the tutorial instance.
-        let enabled = sharedTutorialInstance?.value(forKey: "gameScreenEnabled") as! Bool
-        // print("This is in isTutorialEnabled value is:\(enabled)")
-        // Retrieve data.
-        return enabled
-    }
-    
-    
-    ///
-    func animateTutorialPopUps() {
-        // Used to play first pop sound.
-        if !self.popSoundTimer1.isValid {
-            self.popSoundTimer1 = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
-        }
-        
-        // Used to play second pop sound.
-        if !self.popSoundTimer2.isValid {
-            self.popSoundTimer2 = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
-        }
-        
-        // Disable swipes.
-        self.view.gestureRecognizers?.removeAll()
-        
-        
-        self.tutorialBubbleTwoView.alpha = 1
-        self.tutorial3view.alpha = 1
-        
-        // Animate views offScreen.
-        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
-        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
-        
-        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
-        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
-        
-        // Animated views onScreen.
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorialOverlayView.alpha = 0.8
-            // Change the bkgd color so pop up stands out.
-            
-            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
-            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
-            self.gameTimer.invalidate()
-            }, completion: nil)
-        
-        UIView.animate(withDuration: 0.4, delay: 1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
-            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
-            // Animates the tutorial3view onScreen.
-            }, completion:nil)
-    }
-    
-
-    
-    /**
-     Used to hide the tutorial bubble from view and fade out the overlay when
-     the overlayView or bubbleView is tapped.
-     */
-    func hideTutorialAction(sender:UITapGestureRecognizer) {
-    
-        // Animate overlay off-screen.
-        UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            // Increase the alpha of the view.
-            self.tutorialOverlayView.alpha = 0
-            }, completion: nil)
-       
-        // Animate tutorialView off-screen.
-        UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            
-            // Move the view into place.
-            self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
-            self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
-            
-            self.tutorial3view.center.y += self.tutorial3view.frame.size.height
-            self.tutorial3view.center.x += self.tutorial3view.frame.size.width
-
-            }, completion: { (bool) in
-                
-                self.tutorialBubbleTwoView.alpha = 0
-                self.tutorial3view.alpha = 0
-                
-                // Enable swipes.
-                self.addSwipeGestureRecognizers()
-                // Start timer. 
-                self.runGameTimer()
-                
-                // Disable tutorial pop ups. 
-                self.disablePopUps()
-        })
-    }
-
-    
-
-    
-    
-    
+ 
     
     // MARK:- View Methods
     
@@ -323,6 +178,112 @@ class GameViewController: UIViewController {
     }
     
     
+    // MARK: - Tutorial Methods
+    
+    /// Disable pop ups.
+    func disablePopUps() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        delegate.sharedTutorialEntity.setValue(false, forKey: "gameScreenEnabled")
+        
+        do {
+            print("Saving Context")
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    
+    func isTutorialEnabled() -> Bool {
+        let sharedTutorialInstance = (UIApplication.shared.delegate as! AppDelegate).sharedTutorialEntity
+        let enabled = sharedTutorialInstance?.value(forKey: "gameScreenEnabled") as! Bool
+        return enabled
+    }
+    
+    
+    ///
+    func animateTutorialPopUps() {
+        if !self.popSoundTimer1.isValid {
+            self.popSoundTimer1 = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+        }
+        
+        // Used to play second pop sound.
+        if !self.popSoundTimer2.isValid {
+            self.popSoundTimer2 = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
+        }
+        
+        // Disable swipes.
+        self.view.gestureRecognizers?.removeAll()
+        
+        self.tutorialBubbleTwoView.alpha = 1
+        self.tutorial3view.alpha = 1
+        
+        // Animate views offScreen.
+        self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
+        self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+        
+        self.tutorial3view.center.y += self.tutorial3view.frame.size.height
+        self.tutorial3view.center.x += self.tutorial3view.frame.size.width
+        
+        // Animated views onScreen.
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorialOverlayView.alpha = 0.8
+            // Change the bkgd color so pop up stands out.
+            
+            self.tutorialBubbleTwoView.center.y += self.tutorialBubbleTwoView.frame.size.height
+            self.tutorialBubbleTwoView.center.x += self.tutorialBubbleTwoView.frame.size.width
+            self.gameTimer.invalidate()
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.4, delay: 1.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
+            self.tutorial3view.center.y -= self.tutorial3view.frame.size.height
+            self.tutorial3view.center.x -= self.tutorial3view.frame.size.width
+            // Animates the tutorial3view onScreen.
+        }, completion:nil)
+    }
+    
+    
+    
+    /**
+     Used to hide the tutorial bubble from view and fade out the overlay when
+     the overlayView or bubbleView is tapped.
+     */
+    func hideTutorialAction(sender:UITapGestureRecognizer) {
+        
+        // Animate overlay off-screen.
+        UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            // Increase the alpha of the view.
+            self.tutorialOverlayView.alpha = 0
+        }, completion: nil)
+        
+        // Animate tutorialView off-screen.
+        UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
+            
+            // Move the view into place.
+            self.tutorialBubbleTwoView.center.y -= self.tutorialBubbleTwoView.frame.size.height
+            self.tutorialBubbleTwoView.center.x -= self.tutorialBubbleTwoView.frame.size.width
+            
+            self.tutorial3view.center.y += self.tutorial3view.frame.size.height
+            self.tutorial3view.center.x += self.tutorial3view.frame.size.width
+            
+        }, completion: { (bool) in
+            
+            self.tutorialBubbleTwoView.alpha = 0
+            self.tutorial3view.alpha = 0
+            
+            // Enable swipes.
+            self.addSwipeGestureRecognizers()
+            self.runGameTimer()
+            
+            self.disablePopUps()
+        })
+    }
+
+    
+    
+    
     // MARK: - Audio Methods
     func playPopSound() {
         // Play pop sound once the tutorial view animates.
@@ -337,7 +298,6 @@ class GameViewController: UIViewController {
     /// Animates menus off-screen and starts game.
     @IBAction func startButtonTouchUpInside(_ sender: AnyObject) {
 
-        self.audioPlayerButtonTapSound.play()
         self.audioPlayerRoundIsStartingSound.play()
         
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -399,7 +359,6 @@ class GameViewController: UIViewController {
     
 
     @IBAction func menuTapped(_ sender: AnyObject) {
-        self.audioPlayerButtonTapSound.play()
         let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController")
         self.present(vc!, animated: true, completion: nil)
     }

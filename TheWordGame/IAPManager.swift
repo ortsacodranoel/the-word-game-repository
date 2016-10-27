@@ -80,11 +80,10 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
                 print("Failed")
-                print(transaction.error?.localizedDescription)
+                //print(transaction.error?.localizedDescription ?? <#default value#>)
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case.purchased:
                 print("Purchased")
-                
                 self.verifyReceipt(transaction)
             case .restored:
                 print("Restored")
