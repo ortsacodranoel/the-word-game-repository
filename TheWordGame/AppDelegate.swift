@@ -11,16 +11,6 @@ import CoreData
 import StoreKit
 
 
-// MARK: - Global variables used in AppDelegate
-
-let kReachabilityWithWiFi = "ReachableWithWIFI"
-let kNorReachable = "NotReachable"
-let kReachableWithWWAN = "ReachableWithWWAN"
-var reachability: Reachability?
-var reachabilityStatus = kReachabilityWithWiFi
-
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -31,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
 
-        // Initialize PurchasedCategoriesSharedInstance
         self.setupPurchasedCategoriesEntity()
         
         if SKPaymentQueue.canMakePayments(){
@@ -41,88 +29,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             IAPManager.sharedInstance.setupInAppPurchases()
         }
         
-       //   IAPManager.sharedInstance.restorePurchases()
-        
-        // CoreData
-        
         let fetchRequest : NSFetchRequest<TutorialPopUp>
-        // 1. Create the fetch request for all entities of type TutorialPopUp.
-        
         if #available(iOS 10.0, OSX 10.12, *) {
             fetchRequest = TutorialPopUp.fetchRequest()
-            // Fetch request for newer iOS versions.
-            
         } else {
             fetchRequest = NSFetchRequest(entityName: "TutorialPopUp")
-            // Fetch request for older iOS versions.
         }
         
         do {
-            // 2. Fetch the request results from the managedObjectContext (MOC).
             
             let entities = try managedObjectContext.fetch(fetchRequest)
-            // Retrieve all the entities that have been saved in the MOC.
-            
-            //    print("Current # of entities in MOC = \(entities.count)")
-            // Display the total number of entities in the MOC
    
             if entities.count < 1 {
-            // 3. If the MOC does not have any entities, add a single entity to it.
                 
                 let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
-                // Add TutorialPopUp entity to the MOC.
                 
                 tutorial.categoriesScreenEnabled = true
-                // Set tutorialPopUp's enabled attribute to TRUE to notify that popUpAnimations are allowed.
                 tutorial.gameScreenEnabled = true
-                
-                
                 try managedObjectContext.save()
-                // Try to save the entity into the MOC.
 
-                // 4. Retrieve saved entity.
                 do {
-                    
                     let result = try self.managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     
                     if (result.count > 0) {
-                        
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
-                        // Get the first entity.
-                    
                         self.sharedTutorialEntity.setValue(true, forKey: "categoriesScreenEnabled")
                         self.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
-                        //print(sharedTutorialEntity.value(forKey: "gameScreenEnabled"))
                     }
                     } catch {
                         let fetchError = error as NSError
                         print(fetchError)
                     }
             
-            // 5. If a entity exists, retrieve the object and set the shared entity to it.
             } else if entities.count > 0 {
-                
                 do {
                     let result = try self.managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     
                     if (result.count > 0) {
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
-                        // Get the first entity.
                     }
                 } catch {
                     let fetchError = error as NSError
                     print(fetchError)
                 }
-                
             }
-            else {
-               // print("Total # of entities in MOC = \(entities.count)")
-                // Display the total number of entities in the MOC           
-            }
-            
         } catch let error {
             print(error.localizedDescription)
-            // Display information about the type of error.
         }
         
         return true
@@ -169,23 +121,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-        // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.appendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
-            // Report any error we got.
+
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
             dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
 
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
         }
         
@@ -199,9 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return managedObjectContext
     }()
 
-    
-    // MARK: - Core Data Saving support
-
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -213,35 +158,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    
-    
-    
-    
-    
-    /*
-     If the app launches for the first time and the network is unavailable, there is no way to
-     determine if a category should be locked or open.
-     
-     This method will create a `purchasedCategories` entity the first time the application
-     launches with the preset values that will help determine which category should be
-     locked/open.
-     
-     The method will run everytime the application finishes launching. If an entity of type
-     PurchasedCategories has already been saved in the applications managedObjectContext, the
-     method will simply retrieve that entity and assign it to a shared instance variable
-     called `purchasedCategoriesSharedInstance`. Else it will create the entity and save it in
-     the managedObjectContext.
-     
-     */
     func setupPurchasedCategoriesEntity() {
+        
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-        // 1. Create a fetch request for all entities of type PurchasedCategories.
         if #available(iOS 10.0, OSX 10.12, *) {
             purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
-            // Fetch request for newer iOS versions.
         } else {
             purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
-            // Fetch request for older iOS versions.
         }
         
         do {
@@ -249,20 +172,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
             
             if purchasedCategoryEntities.count < 1 {
-                // If the MOC does not have any PurchasedCategories entity stored, add a single entity to it.
                 _ = NSEntityDescription.insertNewObject(forEntityName: "PurchasedCategories", into: self.managedObjectContext) as! PurchasedCategories
-                // Create the entity and insert it into the MOC.
                 try self.managedObjectContext.save()
-                // Save the context.
                
                 do {
-                    // Fetch the `purchasedCategories` entity from the managed object context that was just saved.
+                    
                     let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (result.count > 0) {
                         self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
-                        // Get the first entity stored in the MOC.
                         
-                        // Set the category values to determine if a 'lock' is enabled.
                         self.purchasedCategoriesSharedInstance.setValue(true, forKey: "jesus")
                         self.purchasedCategoriesSharedInstance.setValue(true, forKey: "people")
                         self.purchasedCategoriesSharedInstance.setValue(true, forKey: "places")
@@ -285,15 +203,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.purchasedCategoriesSharedInstance.setValue(false, forKey: "worship")
                         
                         self.saveContext()
-                        
-                        print("Saved values for PurchasedCategoriesSharedInstance")
                     }
                     } catch {
                         let fetchError = error as NSError
                         print(fetchError)
                     }
             } else if purchasedCategoryEntities.count > 0 {
+                
                 do {
+                    
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (purchasedCategoryEntitiesInMOC.count > 0) {
                         self.purchasedCategoriesSharedInstance = purchasedCategoryEntitiesInMOC[0] as! NSManagedObject
@@ -305,7 +223,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
         } catch let error {
             print(error.localizedDescription)
-            // Display information about the type of error.
         }
     }
  }
