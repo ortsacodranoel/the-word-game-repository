@@ -35,31 +35,11 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
         self.networkStatus = reachability!.currentReachabilityStatus()
     }
     
-    func reachabilityChanged(notification: NSNotification) {
-    }
-    
-    
-    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        self.networkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        
-        if networkStatus == NotReachable {
-            print("Network is not reachable")
-            reachabilityStatus = kNorReachable
-        }
-        else if networkStatus == ReachableViaWiFi {
-            print("Via WIFI")
-            reachabilityStatus = kReachabilityWithWiFi
-        }
-        else if networkStatus == ReachableViaWWAN {
-            print("WAN reachable")
-            reachabilityStatus  = kReachableWithWWAN
-        }
-    }
 
-    
+
     // MARK: - Alert Views 
     func connectToNetworkAlert() {
-        let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to restore your purchases. Please connect and try again.", preferredStyle: .alert)
         let okAction = UIAlertAction(title:"OK", style:.default)
         alertController.addAction(okAction)
         self.present(alertController,animated:true, completion:nil)
