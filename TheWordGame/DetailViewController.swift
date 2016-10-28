@@ -62,10 +62,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                                             "com.thewordgame.revelation": "revelation",
                                             "com.thewordgame.sins": "sins",
                                             "com.thewordgame.worship": "worship"]
-
-    
-    
-    
     
     // MARK: - View Methods
     
@@ -82,7 +78,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.getPurchasedCategoryEntity()
         self.configureAppearance()
         self.startAnimations()
@@ -94,6 +89,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.white.cgColor
         self.selectButton.layer.borderWidth = 3
+        self.selectButton.showsTouchWhenHighlighted = false
+
         
         self.setCategory(categoryTapped)
         self.setColor(categoryTapped)
@@ -116,13 +113,9 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
     }
     
-    
-    
-    
     ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
         let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        // var statusString: String = ""
     
         print("StatusValue: \(networkStatus)")
         
@@ -165,6 +158,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
      are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
+    
+
         Game.sharedGameInstance.segueFromDetailVC = true
 
         // Internet Connection.
@@ -678,19 +673,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-     //MARK: View configuration
+    //MARK: View configuration
     
     func setCategory(_ category: Int) {
         categoryTitleLabel.text = Game.sharedGameInstance.categoriesArray[category].title

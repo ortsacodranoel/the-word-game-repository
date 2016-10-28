@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  TheWrodGame
+//  TheWordGame
 //
 //  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
@@ -13,13 +13,10 @@ import StoreKit
 
 // MARK: - Global variables used in AppDelegate
 
-// Constants to represent the stat of the app
 let kReachabilityWithWiFi = "ReachableWithWIFI"
 let kNorReachable = "NotReachable"
 let kReachableWithWWAN = "ReachableWithWWAN"
-
 var reachability: Reachability?
-
 var reachabilityStatus = kReachabilityWithWiFi
 
 
@@ -29,18 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var canPurchase:Bool = false
-   
-
-    /// Used to determine if the 'Pop Up Tutorials' should be enabled.
     var sharedTutorialEntity:NSManagedObject!
-
-    // Purchased Categories entity.
     var purchasedCategoriesSharedInstance:NSManagedObject!
     
-    
-
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -48,15 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize PurchasedCategoriesSharedInstance
         self.setupPurchasedCategoriesEntity()
         
-        
-        
         if SKPaymentQueue.canMakePayments(){
             canPurchase = true
             IAPManager.sharedInstance.setupInAppPurchases()
         }
         
        //   IAPManager.sharedInstance.restorePurchases()
-
         
         // CoreData
         
@@ -71,8 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fetchRequest = NSFetchRequest(entityName: "TutorialPopUp")
             // Fetch request for older iOS versions.
         }
-        
-        
         
         do {
             // 2. Fetch the request results from the managedObjectContext (MOC).
@@ -97,7 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try managedObjectContext.save()
                 // Try to save the entity into the MOC.
 
-                
                 // 4. Retrieve saved entity.
                 do {
                     
@@ -111,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.sharedTutorialEntity.setValue(true, forKey: "categoriesScreenEnabled")
                         self.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
                         //print(sharedTutorialEntity.value(forKey: "gameScreenEnabled"))
-                    
                     }
                     } catch {
                         let fetchError = error as NSError
@@ -144,14 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Display information about the type of error.
         }
         
-        
-
-        
         return true
     }
 
     
-
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -174,8 +151,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        
-        
         self.saveContext()
     }
 
@@ -218,13 +193,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     lazy var managedObjectContext: NSManagedObjectContext = {
-        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
 
+    
     // MARK: - Core Data Saving support
 
     func saveContext () {
@@ -309,24 +284,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.purchasedCategoriesSharedInstance.setValue(false, forKey: "sins")
                         self.purchasedCategoriesSharedInstance.setValue(false, forKey: "worship")
                         
-                        
                         self.saveContext()
                         
                         print("Saved values for PurchasedCategoriesSharedInstance")
-
-                        
                     }
                     } catch {
                         let fetchError = error as NSError
                         print(fetchError)
                     }
             } else if purchasedCategoryEntities.count > 0 {
-               // print("purchasedCategories entity exists in the MOC.")
                 do {
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (purchasedCategoryEntitiesInMOC.count > 0) {
                         self.purchasedCategoriesSharedInstance = purchasedCategoryEntitiesInMOC[0] as! NSManagedObject
-                        // Set the shared instance equal to that entity.
                     }
                     } catch {
                         let fetchError = error as NSError

@@ -97,13 +97,9 @@ class GameViewController: UIViewController {
             self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
     }
     
-
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning() }
-
 
 
     // MARK: - Game Methods
@@ -128,7 +124,6 @@ class GameViewController: UIViewController {
             performSegue(withIdentifier: "segueToCelebration", sender: self)
        
         } else {
-        
             // Reset Countdown for next team animation.
             self.countdownLabel.text = " "
             self.setTeamTurn()
@@ -147,9 +142,7 @@ class GameViewController: UIViewController {
     /// Configures the AVAudioPlayers with their respective sound files and prepares them to be played.
     func loadSounds() {
         do {
-            
             // Configure Audioplayers.
-            self.audioPlayerButtonTapSound = try AVAudioPlayer(contentsOf: self.soundEffectButtonTap, fileTypeHint: "wav")
             self.audioPlayerWinSound = try AVAudioPlayer(contentsOf: self.soundEffectWinner,fileTypeHint: "mp3")
             self.audioPlayerSwipeSound = try AVAudioPlayer(contentsOf: self.soundEffectSwipe, fileTypeHint: "wav")
             self.audioPlayerRoundIsStartingSound = try AVAudioPlayer(contentsOf: self.soundEffectStartRound, fileTypeHint: "mp3")
@@ -157,9 +150,7 @@ class GameViewController: UIViewController {
             self.audioPlayerCorrectSwipe = try AVAudioPlayer(contentsOf: self.soundEffectCorrectSwipe, fileTypeHint: "mp3")
             self.audioPlayerWrondSwipe = try AVAudioPlayer(contentsOf: self.soundEffectWrongSwipe, fileTypeHint: "mp3")
             
-            
             // Prepare to play.
-            self.audioPlayerButtonTapSound.prepareToPlay()
             self.audioPlayerWinSound.prepareToPlay()
             self.audioPlayerSwipeSound.prepareToPlay()
             self.audioPlayerRoundIsStartingSound.prepareToPlay()
@@ -170,9 +161,8 @@ class GameViewController: UIViewController {
             // Tutorial
             self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
             self.popAudioPlayer.prepareToPlay()
-        
+            
         } catch {
-          
             print("Error: unable to find sound files.")
         }
     }
@@ -201,7 +191,6 @@ class GameViewController: UIViewController {
     }
     
     
-    ///
     func animateTutorialPopUps() {
         if !self.popSoundTimer1.isValid {
             self.popSoundTimer1 = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
@@ -575,7 +564,6 @@ class GameViewController: UIViewController {
     }
     
     
-    ///
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
@@ -638,7 +626,6 @@ class GameViewController: UIViewController {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
                 if self.roundInProgress {
-                   // print("Swiped right")
                     if Game.sharedGameInstance.teamOneIsActive {
                     
                         self.audioPlayerSwipeSound.play()
@@ -647,7 +634,6 @@ class GameViewController: UIViewController {
     
                         self.animateNewWordRightSwipe()
                     
-                        // Play correct swipe sound. 
                         self.audioPlayerCorrectSwipe.play()
                     
                     } else {
@@ -658,24 +644,17 @@ class GameViewController: UIViewController {
                         
                         self.animateNewWordRightSwipe()
                         
-                        // Play correct swipe sound.
                         self.audioPlayerCorrectSwipe.play()
-                        
                     }
                 }
             
             // Left swipe used to pass.
             case UISwipeGestureRecognizerDirection.left:
                 if self.roundInProgress {
-                    
                     if  self.wordOnScreen && self.timesSwipedRight < 2 {
                         self.audioPlayerSwipeSound.play()
                         self.timesSwipedRight += 1
-                    
                         self.animateNewWordLeftSwipe()
-                        
-                        // Play sound for wrong swipe.
-                        self.audioPlayerWrondSwipe.play()
                     } else {
                         animatePassMessage()
                         self.audioPlayerWrondSwipe.play()
@@ -736,8 +715,6 @@ class GameViewController: UIViewController {
             
         }, completion: {(Bool) in
             if  Game.sharedGameInstance.won {
-                //self.animateGameWin()
-              //  print("Game won!")
             } else {
                 self.wordLabel.text = Game.sharedGameInstance.getWord(self.categoryTapped)
             }
