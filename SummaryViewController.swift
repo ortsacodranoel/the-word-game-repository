@@ -23,7 +23,6 @@ class SummaryViewController: UIViewController {
     
 
     // MARK: - View Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,7 +86,6 @@ class SummaryViewController: UIViewController {
     
     
     // MARK: - Button Actions
-    
     @IBAction func backBtnTapped(_ sender: AnyObject) {
     }
         

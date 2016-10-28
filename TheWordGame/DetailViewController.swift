@@ -124,16 +124,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
 
 
-    
-
     // MARK: - Button Actions.
     @IBAction func backButtonTapped(_ sender: AnyObject)  {
         self.updateEntityPurchasedCategories()
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
-    
-    
+
     
     /** 
      Touching the select button will segue to the game screen if the categories

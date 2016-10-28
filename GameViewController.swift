@@ -437,12 +437,9 @@ class GameViewController: UIViewController {
     
     func resetRound(_ time: Double ) {
         UIView.animate(withDuration: 0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-           
                 self.view.backgroundColor = Game.sharedGameInstance.colors[self.categoryTapped]
-        
             }, completion: { (bool) in
                 
-                // self.mainView.backgroundColor = UIColor.red
                 Game.sharedGameInstance.won = false
                 self.audioPlayerRoundIsEndingSound.prepareToPlay()
                 
@@ -452,7 +449,6 @@ class GameViewController: UIViewController {
                 self.setTeamTurn()
                 self.updateScore()
                 self.removeWord()
-                // self.animateTitleOnScreen()
         })
     }
     
@@ -557,12 +553,10 @@ class GameViewController: UIViewController {
     }
     
 
-    ///
     func configureLabelContent() {
         self.teamOneLabel.text = "Team 1"
         self.teamTwoLabel.text = "Team 2"
     }
-    
     
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
