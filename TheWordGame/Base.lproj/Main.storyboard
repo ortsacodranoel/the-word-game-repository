@@ -72,11 +72,11 @@
                                                     </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FXj-Ud-VAP" userLabel="lockView">
-                                                    <rect key="frame" x="266" y="41" width="23" height="27"/>
+                                                    <rect key="frame" x="264" y="41" width="23" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="colorLock" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-eF-q4K">
-                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                     </subviews>
@@ -216,8 +216,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3d-VT-CtQ" userLabel="backgroundView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3d-VT-CtQ" userLabel="backgroundView">
                                 <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTe-L1-Pgn" userLabel="officialRulesBtn">
@@ -280,13 +281,9 @@
                             <constraint firstItem="hwU-bC-Bp5" firstAttribute="top" secondItem="pTe-L1-Pgn" secondAttribute="bottom" constant="11" id="H7h-xf-lF1"/>
                             <constraint firstItem="hwU-bC-Bp5" firstAttribute="centerY" secondItem="4q6-a4-gf1" secondAttribute="centerY" constant="-6" id="NaH-1B-BVo"/>
                             <constraint firstItem="hwU-bC-Bp5" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" constant="2.5" id="Oui-zS-p5H"/>
-                            <constraint firstItem="W3d-VT-CtQ" firstAttribute="top" secondItem="r6D-Fp-Tj5" secondAttribute="bottom" id="QWv-dg-cIj"/>
                             <constraint firstItem="TdX-dK-yno" firstAttribute="top" secondItem="tEN-DX-7LX" secondAttribute="bottom" constant="1" id="UHC-eK-Xd4"/>
-                            <constraint firstItem="W3d-VT-CtQ" firstAttribute="leading" secondItem="4q6-a4-gf1" secondAttribute="leading" id="VuJ-26-jS1"/>
                             <constraint firstItem="Gws-Is-apQ" firstAttribute="top" secondItem="hwU-bC-Bp5" secondAttribute="bottom" constant="11" id="WuA-e3-50Q"/>
                             <constraint firstItem="J5R-nk-aSs" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" constant="-25.5" id="YwN-Io-SZ0"/>
-                            <constraint firstItem="TdX-dK-yno" firstAttribute="top" secondItem="W3d-VT-CtQ" secondAttribute="bottom" id="m5F-71-q0m"/>
-                            <constraint firstAttribute="trailing" secondItem="W3d-VT-CtQ" secondAttribute="trailing" id="xbz-Pw-OlN"/>
                             <constraint firstItem="pTe-L1-Pgn" firstAttribute="centerX" secondItem="4q6-a4-gf1" secondAttribute="centerX" constant="-4.5" id="xoT-Hz-qVc"/>
                         </constraints>
                     </view>
