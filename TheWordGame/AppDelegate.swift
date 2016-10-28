@@ -11,6 +11,14 @@ import CoreData
 import StoreKit
 
 
+let kReachabilityWithWiFi = "ReachableWithWIFI"
+let kNorReachable = "NotReachable"
+let kReachableWithWWAN = "ReachableWithWWAN"
+var reachability: Reachability?
+var reachabilityStatus = kReachabilityWithWiFi
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -72,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let fetchError = error as NSError
                     print(fetchError)
                 }
+                
             }
         } catch let error {
             print(error.localizedDescription)

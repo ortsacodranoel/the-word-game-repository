@@ -1,5 +1,5 @@
 //
-//  TransitionManager.swift
+//  RulesViewController.swift
 //  TheWordGame
 //
 //  Created by Leo on 7/24/16.
@@ -18,15 +18,55 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     var blurView:UIVisualEffectView!
     let rulesScreenTransitionManager = RulesTransitionManager()
     let swipeRecognizer = UISwipeGestureRecognizer()
-    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-    var tapAudioPlayer = AVAudioPlayer()
     @IBOutlet weak var backgroundView: UIView!
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     var purchasedCategoriesEntity:PurchasedCategories!
 
-
-    // MARK: - View Methods
     
+    var reachability : Reachability?
+    // Used to check network status.
+    var networkStatus : NetworkStatus? = nil
+
+    
+    // MARK: - Network Methods
+    func getNetworkStatus() {
+        self.reachability = Reachability.forInternetConnection()
+        self.reachability?.startNotifier()
+        self.networkStatus = reachability!.currentReachabilityStatus()
+    }
+    
+    
+    func reachabilityChanged(notification: NSNotification) {
+    }
+    
+    
+    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+        self.networkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        
+        if networkStatus == NotReachable {
+            print("Network is not reachable")
+            reachabilityStatus = kNorReachable
+        }
+        else if networkStatus == ReachableViaWiFi {
+            print("Via WIFI")
+            reachabilityStatus = kReachabilityWithWiFi
+        }
+        else if networkStatus == ReachableViaWWAN {
+            print("WAN reachable")
+            reachabilityStatus  = kReachableWithWWAN
+        }
+    }
+
+    
+    // MARK: - Alert Views 
+    func connectToNetworkAlert() {
+        let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title:"OK", style:.default)
+        alertController.addAction(okAction)
+        self.present(alertController,animated:true, completion:nil)
+    }
+    
+    // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
@@ -52,7 +92,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Button Actions
-    
     @IBAction func rulesButtonTapped(_ sender: AnyObject) {
         if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
             UIApplication.shared.openURL(url)
@@ -60,11 +99,16 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     }
     
     @IBAction func restorButtonTapped(_ sender: AnyObject) {
-        IAPManager.sharedInstance.restorePurchases()
+        self.getNetworkStatus()
+        
+        if self.networkStatus  == NotReachable {
+            self.connectToNetworkAlert()
+        } else {
+            IAPManager.sharedInstance.restorePurchases()
+        }
     }
     
     @IBAction func menuButtonTapped(_ sender: AnyObject) {
-        self.loadSoundFile()
         self.performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
@@ -75,7 +119,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Tutorial Methods 
-    
     func enablePopUps() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
@@ -92,7 +135,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
 
     
     // MARK: - Core Data Methods
-    
     func getPurchasedCategoryEntity() {
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
         if #available(iOS 10.0, OSX 10.12, *) {
@@ -165,7 +207,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             self.purchasedCategoriesEntity.kids = true
             self.saveContext()
         }
-        
         if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") == true {
             self.purchasedCategoriesEntity.relicsAndSaints = true
             self.saveContext()
@@ -198,7 +239,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - In-App Purchase Methods
-    
     func managerDidRestorePurchases() {
         self.getPurchasedCategoryEntity()
         let alertController = UIAlertController(title: "In-App Purchase", message: "Your purchases have been restored", preferredStyle: .alert)
@@ -213,7 +253,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
 
     // MARK: - Swipe Gestures
-    
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
@@ -222,18 +261,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             default:
                 break
             }
-        }
-    }
-    
-    
-    // MARK: - Audio Methods
-    
-    func loadSoundFile() {
-        do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
-            self.tapAudioPlayer.prepareToPlay()
-        } catch {
-            print("Unable to load sound files.")
         }
     }
 }

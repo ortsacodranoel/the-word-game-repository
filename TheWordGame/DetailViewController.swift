@@ -85,13 +85,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     func configureAppearance() {
-        // Configure the Select button appearance.
+        
         self.selectButton.layer.cornerRadius = 7
         self.selectButton.layer.borderColor = UIColor.white.cgColor
         self.selectButton.layer.borderWidth = 3
         self.selectButton.showsTouchWhenHighlighted = false
 
-        
         self.setCategory(categoryTapped)
         self.setColor(categoryTapped)
         self.setDescription(categoryTapped)
@@ -106,18 +105,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         }
     }
     
+    // MARK: - Network Methods
     
     func reachabilityChanged(notification: NSNotification) {
-       // print("Status changed")
-        //          reachability = notification.object as? Reachability
-        //          self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
     }
     
-    ///
     func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
         let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-    
-        print("StatusValue: \(networkStatus)")
         
         if networkStatus == NotReachable {
             print("Netowrk is not reachable")
@@ -132,8 +126,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             reachabilityStatus  = kReachableWithWWAN
         }
     }
-    
-    
     
     func updateEntityPurchasedCategories() {
         for (categoryKey, purchasedCategoryKey) in self.categoryKeys {
@@ -171,6 +163,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
         }
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
+       
         let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
         
         self.getPurchasedCategoryEntity()

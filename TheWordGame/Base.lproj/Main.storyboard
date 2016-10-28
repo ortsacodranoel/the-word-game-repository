@@ -170,10 +170,10 @@
             </objects>
             <point key="canvasLocation" x="-1520" y="-2131.875"/>
         </scene>
-        <!--Spash Screen View Controller-->
+        <!--Splash Screen View Controller-->
         <scene sceneID="xr4-vU-SJu">
             <objects>
-                <viewController id="Z97-k5-l5n" customClass="spashScreenViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Z97-k5-l5n" customClass="SplashScreenViewController" customModule="TheWordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uG3-Op-ciE"/>
                         <viewControllerLayoutGuide type="bottom" id="hLi-sH-jLk"/>
