@@ -19,8 +19,7 @@ class spashScreenViewController: UIViewController {
     }
     
 
-    func showMainController()
-    {
+    func showMainController() {
         performSegue(withIdentifier: "showMainViewController", sender: self)
     }
 }
