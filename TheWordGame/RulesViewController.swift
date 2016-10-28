@@ -35,7 +35,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
         self.networkStatus = reachability!.currentReachabilityStatus()
     }
     
-    
     func reachabilityChanged(notification: NSNotification) {
     }
     
@@ -100,7 +99,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     @IBAction func restorButtonTapped(_ sender: AnyObject) {
         self.getNetworkStatus()
-        
         if self.networkStatus  == NotReachable {
             self.connectToNetworkAlert()
         } else {
@@ -160,7 +158,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             print(fetchError)
         }
     }
-    
     
     func updatePurchasedCategoriesEntity() {
         if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true {
@@ -224,7 +221,6 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             self.saveContext()
         }
     }
-    
     
     func saveContext () {
         if managedObjectContext.hasChanges {
