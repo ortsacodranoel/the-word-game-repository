@@ -2,9 +2,11 @@
 //  GameViewController.swift
 //  TheWordGame
 //
-//  Created by Leo on 7/24/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
+
+
 import UIKit
 import AVFoundation
 
@@ -273,13 +275,8 @@ class GameViewController: UIViewController {
     
     // MARK: - Audio Methods
     func playPopSound() {
-        // Play pop sound once the tutorial view animates.
         self.popAudioPlayer.play()
     }
-
-    
-    
-    
 
     
     /// Animates menus off-screen and starts game.
@@ -350,28 +347,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
-    
-    
-
-    
-    /**
-    The method is used to execute actions pertaining to the end of a game round.
- 
-    - Alert sounds are played when the `gameTimer` reaches 3s left.
- 
-    - The background color fades to red to indicate time running out.
- 
-    - Updates the team turn.
- 
-    - Sets the team turn label.
- 
-    - Animates `Time's Up' onto the screen.
- 
-    - Executes segue to summary screen.
-
-    - Parameter time: used to indicate at what time the timer should stop.
-     */
     func endRound(_ time: Int) {
         if self.seconds == 43 {
       
@@ -437,12 +412,9 @@ class GameViewController: UIViewController {
     
     func resetRound(_ time: Double ) {
         UIView.animate(withDuration: 0.4, delay: time, usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9, options: [], animations: {
-           
                 self.view.backgroundColor = Game.sharedGameInstance.colors[self.categoryTapped]
-        
             }, completion: { (bool) in
                 
-                // self.mainView.backgroundColor = UIColor.red
                 Game.sharedGameInstance.won = false
                 self.audioPlayerRoundIsEndingSound.prepareToPlay()
                 
@@ -452,10 +424,8 @@ class GameViewController: UIViewController {
                 self.setTeamTurn()
                 self.updateScore()
                 self.removeWord()
-                // self.animateTitleOnScreen()
         })
     }
-    
     
     
     // Used by segueTimer to display the summaryViewController.
@@ -486,7 +456,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
     // METHOD: animateTimesUpOffScreen()
     
     // (-) means up.
@@ -502,9 +471,6 @@ class GameViewController: UIViewController {
                 }, completion: nil)
         })
     }
-    
-    
-    
     
     
     
@@ -557,23 +523,15 @@ class GameViewController: UIViewController {
     }
     
 
-    ///
     func configureLabelContent() {
         self.teamOneLabel.text = "Team 1"
         self.teamTwoLabel.text = "Team 2"
     }
     
-    
     func setColorForViewBackground() {
         self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
-    
-    
-
-    // SET_TEAM_TURN()
-    
-    /// Updates the team name displayed for each turn.
     func setTeamTurn() {
         if Game.sharedGameInstance.teamOneIsActive {
             self.teamTurnLabel.text = "Team One"
@@ -581,11 +539,7 @@ class GameViewController: UIViewController {
             self.teamTurnLabel.text = "Team Two"
         }
     }
-    
-    
-    // UPDATE_SCORE()
-    
-    /// Changes the score labels content depending on the current score.
+
     func updateScore() {
         self.teamOneScoreLabel.text = String(Game.sharedGameInstance.getTeamOneScore())
         self.teamTwoScoreLabel.text = String(Game.sharedGameInstance.getTeamTwoScore())
@@ -612,7 +566,6 @@ class GameViewController: UIViewController {
             }, completion:nil)
         }
     }
-    
     
     
     // MARK: - Gesture recognizer methods
@@ -647,8 +600,6 @@ class GameViewController: UIViewController {
                         self.audioPlayerCorrectSwipe.play()
                     }
                 }
-            
-            // Left swipe used to pass.
             case UISwipeGestureRecognizerDirection.left:
                 if self.roundInProgress {
                     if  self.wordOnScreen && self.timesSwipedRight < 2 {
@@ -670,16 +621,13 @@ class GameViewController: UIViewController {
     
     
     func addSwipeGestureRecognizers() {
-        
         let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(swipeRightGestureRecognizer)
-        
         let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameViewController.respondToSwipeGesture(_:)))
         swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeftGestureRecognizer)
     }
-    
     
     func animatePassMessage() {
         UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
@@ -690,7 +638,6 @@ class GameViewController: UIViewController {
                     },completion:nil)
         })
     }
-    
     
     /**
      The initial word animation moves the wordContainerView into view from the left side of the screen.
@@ -703,10 +650,7 @@ class GameViewController: UIViewController {
         
         // Animate new word from the right.
         UIView.animate(withDuration: 0.4, delay:0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.9,options: [], animations: {
-          
-            // Increase word container alpha.
             self.wordContainerView.alpha = 1
-            
             // Move the word view right (+)
             self.wordContainerView.center.x += self.view.bounds.width
             
@@ -721,8 +665,8 @@ class GameViewController: UIViewController {
         })
         
         UIView.animate(withDuration: 0.4, delay:0.2, options: [], animations: {
-            self.wordContainerView.center.x -= self.view.bounds.width
-            self.wordContainerView.alpha = 1
+                self.wordContainerView.center.x -= self.view.bounds.width
+                self.wordContainerView.alpha = 1
             }, completion: nil)
     }
     
@@ -763,7 +707,6 @@ class GameViewController: UIViewController {
     }
     
     
-    
     /**
      Sets a new word to display based on the selected category. Animates that word onto
      the screen from the left side of the view, and sets`wordOnScreen` equal to true.
@@ -779,7 +722,7 @@ class GameViewController: UIViewController {
     
     
 
-    // MARK: - TIMER METHODS
+    // MARK: - Timer Methods
     
     /**
      Used to runs the countdown that appears before a game round start.
@@ -858,17 +801,11 @@ class GameViewController: UIViewController {
     
     //MARK:- General properties
     var categoryTapped = Int()
-    let UP = "UP"
-    let DOWN = "DOWN"
-    let OUT = "OUT"
-    let IN = "IN"
+
     /// Used to store the value for the initial countdown.
     var countdown = 4
-    ///
     var wordOnScreen = false
-    ///
     var wordRemoved = false
-    /// Used to determine if round is in progress.
     var roundInProgress = false
     
     //MARK: - Views
@@ -884,12 +821,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var wordContainerView: UIView!
     @IBOutlet weak var timesUpView: UIView!
     
-    
     /// Used when timer is running out.
     @IBOutlet weak var redBackgroundView: UIView!
-    
-    
-    
     
     //MARK:- Labels
     @IBOutlet weak var timerLabel: UILabel!
@@ -921,7 +854,6 @@ class GameViewController: UIViewController {
     var segueDelayTimer = Timer()
     /// Used to animate Time's Up prior to summary screen.
     var timesUpTimer = Timer()
-    //
     var popSoundTimer1 = Timer()
     var popSoundTimer2 = Timer()
 
@@ -938,7 +870,6 @@ class GameViewController: UIViewController {
     
     
     // Paths to sound effects.
-    let soundEffectButtonTap = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
     let soundEffectSwipe = URL(fileURLWithPath: Bundle.main.path(forResource: "swipeSoundEffect", ofType: "mp3")!)
     let soundEffectWinner = URL(fileURLWithPath: Bundle.main.path(forResource: "winner", ofType: "mp3")!)
     let soundEffectStartRound = URL(fileURLWithPath: Bundle.main.path(forResource: "initialCountdown", ofType: "mp3")!)
@@ -948,8 +879,6 @@ class GameViewController: UIViewController {
     
     
     
-    /// Used for menu interactions sounds.
-    var audioPlayerButtonTapSound = AVAudioPlayer()
     /// Used for sound effect when a word is swiped during the game.
     var audioPlayerSwipeSound = AVAudioPlayer()
     /// Used to play the sound effect when a team wins.
@@ -977,7 +906,6 @@ class GameViewController: UIViewController {
     
     // Used to test celebration screen.
     var gameWon = false
-    
 }
 
 

@@ -1,8 +1,8 @@
- //
+//
 //  SummaryViewController.swift
 //  TheWordGame
 //
-//  Created by Leo on 9/19/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -19,11 +19,9 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var wordSummaryLabel: UILabel!
     @IBOutlet weak var wordSummaryTextview: UITextView!
-
     
 
     // MARK: - View Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,7 +85,6 @@ class SummaryViewController: UIViewController {
     
     
     // MARK: - Button Actions
-    
     @IBAction func backBtnTapped(_ sender: AnyObject) {
     }
         

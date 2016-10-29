@@ -2,9 +2,10 @@
 //  TransitionManager.swift
 //  TheWordGame
 //
-//  Created by Leo on 7/24/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
+
 import UIKit
 import AVFoundation
 import StoreKit
@@ -41,6 +42,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     // Used to check internet reachability.
     var reachability: Reachability?
+    // Used to check network status.
+    var networkStatus : NetworkStatus? = nil
     
     // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
@@ -68,7 +71,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     override func viewDidLoad() {
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
-        self.loadSoundFile()
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,26 +108,12 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     // MARK: - Network Methods
-    
-    func reachabilityChanged(notification: NSNotification) {
+    func getNetworkStatus() {
+        self.reachability = Reachability.forInternetConnection()
+        self.reachability?.startNotifier()
+        self.networkStatus = reachability!.currentReachabilityStatus()
     }
     
-    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        
-        if networkStatus == NotReachable {
-            print("Netowrk is not reachable")
-            reachabilityStatus = kNorReachable
-        }
-        else if networkStatus == ReachableViaWiFi {
-            print("Via WIFI")
-            reachabilityStatus = kReachabilityWithWiFi
-        }
-        else if networkStatus == ReachableViaWWAN {
-            print("WAN reachable")
-            reachabilityStatus  = kReachableWithWWAN
-        }
-    }
     
     func updateEntityPurchasedCategories() {
         for (categoryKey, purchasedCategoryKey) in self.categoryKeys {
@@ -137,34 +125,23 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
 
 
-
     // MARK: - Button Actions.
     @IBAction func backButtonTapped(_ sender: AnyObject)  {
         self.updateEntityPurchasedCategories()
         performSegue(withIdentifier: "unwindToCategories", sender: self)
     }
     
+
     
     /** 
      Touching the select button will segue to the game screen if the categories
      are free; else, it will create a payment request for that category product.
     **/
     @IBAction func selectButtonTapped(_ sender: AnyObject) {
-    
-
+        
         Game.sharedGameInstance.segueFromDetailVC = true
 
-        // Internet Connection.
-        reachability = Reachability.forInternetConnection()
-        reachability?.startNotifier()
-        NotificationCenter.default.addObserver(self, selector:#selector(reachabilityChanged(notification:)), name:NSNotification.Name("kReachabilityChangedNotification"), object:nil)
-        NotificationCenter.default.post(name:NSNotification.Name("kReachabilityChangedNotification"), object: nil)
-        if reachability != nil {
-            self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
-        }
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kReachabilityChangedNotification"), object: nil);
-       
-        let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
+        self.getNetworkStatus()
         
         self.getPurchasedCategoryEntity()
         
@@ -193,10 +170,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             // NO NETWORK + NOT PURCHASED [FROM COREDATA]
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == false
             {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+               self.connectToNetworkAlert()
             }
             
             // NETWORK OK + APPLE PURCHASE TRUE
@@ -217,18 +191,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
             }
-            
-        // Books and movies
         case "Books and Movies":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.booksAndMovies == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.booksAndMovies == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.books") == true {
                 if self.purchasedCategoriesEntity.booksAndMovies == false {
@@ -242,19 +211,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 1) as! SKProduct)
             }
-       
-        // Christian Nation
         case "Christian Nation":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.christianNation == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.christianNation == false {
-                // Display Alert View.
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") == true {
                 if self.purchasedCategoriesEntity.christianNation == false {
@@ -273,12 +236,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.christmasTime == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") == true {
                 if self.purchasedCategoriesEntity.christmasTime == false {
@@ -296,12 +255,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.commands == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") == true {
                 if self.purchasedCategoriesEntity.commands == false {
@@ -319,12 +274,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.denominations == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") == true {
                 if self.purchasedCategoriesEntity.denominations == false {
@@ -342,12 +293,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.easter == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") == true {
                 if self.purchasedCategoriesEntity.easter == false {
@@ -365,12 +312,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.famousChristians == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") == true {
                 if self.purchasedCategoriesEntity.famousChristians == false {
@@ -388,12 +331,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.feasts == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") == true {
                 if self.purchasedCategoriesEntity.feasts == false {
@@ -411,12 +350,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.history == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.history") == true {
                 if self.purchasedCategoriesEntity.history == false {
@@ -429,18 +364,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.history") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 9 ) as! SKProduct)
             }
-
         case "Kids":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.kids == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.kids == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") == true {
                 if self.purchasedCategoriesEntity.kids == false {
@@ -453,18 +383,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") == false {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 10 ) as! SKProduct)
             }
-
         case "Relics and Saints":
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.relicsAndSaints == true {
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.relicsAndSaints == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") == true {
                 if self.purchasedCategoriesEntity.relicsAndSaints == false {
@@ -482,12 +407,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.revelation == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") == true {
                 if self.purchasedCategoriesEntity.revelation == false {
@@ -505,12 +426,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.sins == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") == true {
                 if self.purchasedCategoriesEntity.sins == false {
@@ -528,12 +445,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                // Display Alert View.
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.worship == false {
-                let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:"OK", style:.default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated:true, completion:nil)
+                self.connectToNetworkAlert()
             }
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") == true {
                 if self.purchasedCategoriesEntity.worship == false {
@@ -551,7 +464,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         }
     }
 
-    
     
     func setPrices() {
         let title = self.categoryTitleLabel.text! as String
@@ -623,8 +535,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - CoreData
-    
-    /// Used to save any new changes to the managed object context.
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -635,10 +545,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             }
         }
     }
-
-
     
-    /// Retrieves and assigns a `PurchasedCategory` entity to a local variable.
     func getPurchasedCategoryEntity() {
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
         if #available(iOS 10.0, OSX 10.12, *) {
@@ -667,7 +574,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     //MARK: View configuration
-    
     func setCategory(_ category: Int) {
         categoryTitleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
     }
@@ -690,9 +596,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     
-
-    // MARK: - Animations
-    
+    // MARK: - Animation Methods
     func startAnimations() {
         UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.categoryTitleView.alpha = 1
@@ -729,7 +633,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
 
     
 
-    /// MARK: - Lock animations.
+    /// MARK: - Lock animations
     func lockCategory() {
             UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.lockView.alpha = 1
@@ -751,7 +655,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     
-    
     // MARK: - IAPManagerDelegate
     func managerDidRestorePurchases() {
         self.unlockCategory()
@@ -761,16 +664,11 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     
-    // MARK: - Audio
-    var buttonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-    var tapAudioPlayer = AVAudioPlayer()
-    
-    func loadSoundFile() {
-        do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.buttonSound, fileTypeHint: "wav")
-            self.tapAudioPlayer.prepareToPlay()
-        } catch {
-            print("Unable to load sound files.")
-        }
+    // MARK: - Alert Views
+    func connectToNetworkAlert() {
+        let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title:"OK", style:.default)
+        alertController.addAction(okAction)
+        self.present(alertController,animated:true, completion:nil)
     }
 }

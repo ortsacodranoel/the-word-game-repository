@@ -2,7 +2,7 @@
 //  PurchasedCategories+CoreDataProperties.swift
 //  TheWordGame
 //
-//  Created by Leo on 10/22/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -36,5 +36,4 @@ extension PurchasedCategories {
     @NSManaged public var places: Bool
     @NSManaged public var people: Bool
     @NSManaged public var jesus: Bool
-
 }

@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  thewordgame
+//  CategoriesViewController.swift
+//  TheWordGame
 //
 //  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
@@ -23,8 +23,6 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     let transitionManager = TransitionManager()
     let rulesScreenTransitionManager = RulesTransitionManager()
     var popSound = URL(fileURLWithPath: Bundle.main.path(forResource: "BubblePop", ofType: "mp3")!)
-    var tapSound = URL(fileURLWithPath: Bundle.main.path(forResource: "ButtonTapped", ofType: "wav")!)
-    var tapAudioPlayer = AVAudioPlayer()
     var popAudioPlayer = AVAudioPlayer()
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     var reachability: Reachability?
@@ -94,13 +92,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             if !self.popSoundTimer.isValid {
                 self.popSoundTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(CategoriesViewController.playPopSound), userInfo:nil, repeats: false)
             }
-            // Prepared the view for animation by animating it off-screen.
+
             self.tutorialView.center.y += self.tutorialView.frame.size.height
             self.tutorialView.center.x -= self.tutorialView.frame.size.width
             UIView.animate(withDuration: 0.4, delay: 0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                     self.viewOverlay.alpha = 0.8
                 }, completion: nil)
-            // Animate view on-screen.
+            
             UIView.animate(withDuration: 0.4, delay:0.5,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                     self.tutorialView.alpha = 1
                     self.tutorialView.center.x += self.tutorialView.bounds.width
@@ -124,27 +122,19 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         performSegue(withIdentifier: "segueToSettings", sender: self)
     }
     
-    
-    /**
-     Used to hide the tutorial bubble from view and fade out the overlay when
-     the overlayView or bubbleView is tapped.
-     */
     func hideTutorialAction(sender:UITapGestureRecognizer) {
-        // Animate overlay off-screen.
         UIView.animate(withDuration: 0.7, delay: 0.1,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.viewOverlay.alpha = 0
             }, completion: nil)
         
-        // Animate tutorialView off-screen.
         UIView.animate(withDuration: 0.5, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
-            self.tutorialView.center.x -= self.view.bounds.width
-            self.tutorialView.center.y += self.view.bounds.height
-            
+                self.tutorialView.center.x -= self.view.bounds.width
+                self.tutorialView.center.y += self.view.bounds.height
             }, completion: { (bool) in
                 self.tutorialView.alpha = 0
                 self.tutorialView.center.x += self.view.bounds.width
                 self.tutorialView.center.y -= self.view.bounds.height
-        })
+            })
     }
     
     
@@ -158,16 +148,12 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         return Game.sharedGameInstance.categoriesArray.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
-        // Create a fetch request for all entities of type PurchasedCategories.
         if #available(iOS 10.0, OSX 10.12, *) {
             purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
-            // Fetch request for newer iOS versions.
         } else {
             purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
-            // Fetch request for older iOS versions.
         }
         
         do {
@@ -186,7 +172,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         } catch {
             let fetchError = error as NSError
-            print(fetchError)
+            NSLog("Unresolved error \(fetchError), \(fetchError.userInfo)")
         }
 
         _ = indexPath.row
@@ -328,37 +314,15 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
             toViewController.transitioningDelegate = self.transitionManager
         }
     }
-
-    
-    // MARK: - Reachibility Methods
-    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        let networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
-        print("StatusValue: \(networkStatus)")
-        
-        if networkStatus == NotReachable {
-            print("Netowrk is not reachable")
-            reachabilityStatus = kNorReachable
-        }
-        else if networkStatus == ReachableViaWiFi {
-            print("Via WIFI")
-            reachabilityStatus = kReachabilityWithWiFi
-        }
-        else if networkStatus == ReachableViaWWAN {
-            print("WAN reachable")
-            reachabilityStatus  = kReachableWithWWAN
-        }
-    }
     
     
     // MARK: - Audio Methods.
     func loadSoundFile() {
         do {
-            self.tapAudioPlayer = try AVAudioPlayer(contentsOf: self.tapSound, fileTypeHint: "wav")
-            self.tapAudioPlayer.prepareToPlay()
             self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
             self.popAudioPlayer.prepareToPlay()
         } catch {
-            print("Unable to load sound files.")
+            // print("Unable to load sound files.")
         }
     }
     

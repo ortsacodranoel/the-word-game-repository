@@ -22,7 +22,6 @@
 		B32BA8041DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BA8021DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift */; };
 		B34D04E61DA45D8600BD7EE8 /* countdown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34D04E51DA45D8600BD7EE8 /* countdown.mp3 */; };
 		B360F6611DA0A5AA00415ECB /* celebrationMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B360F6601DA0A5AA00415ECB /* celebrationMusic.mp3 */; };
-		B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3634F441D6FD9E10060D517 /* ButtonTapped.wav */; };
 		B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F481D6FE2AE0060D517 /* winner.mp3 */; };
 		B3634F4B1D6FED580060D517 /* Alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3634F4A1D6FED580060D517 /* Alert.mp3 */; };
 		B36733721D7F086000BA177B /* iap_product_ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = B36733711D7F086000BA177B /* iap_product_ids.plist */; };
@@ -89,7 +88,6 @@
 		B32BA8021DB0634A0017447C /* TutorialPopUp+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TutorialPopUp+CoreDataProperties.swift"; path = "../TutorialPopUp+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B34D04E51DA45D8600BD7EE8 /* countdown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = countdown.mp3; sourceTree = "<group>"; };
 		B360F6601DA0A5AA00415ECB /* celebrationMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = celebrationMusic.mp3; sourceTree = "<group>"; };
-		B3634F441D6FD9E10060D517 /* ButtonTapped.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTapped.wav; sourceTree = "<group>"; };
 		B3634F481D6FE2AE0060D517 /* winner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winner.mp3; sourceTree = "<group>"; };
 		B3634F4A1D6FED580060D517 /* Alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alert.mp3; sourceTree = "<group>"; };
 		B36733711D7F086000BA177B /* iap_product_ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = iap_product_ids.plist; path = ../iap_product_ids.plist; sourceTree = "<group>"; };
@@ -158,7 +156,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B30227B51D9B4289000694EE /* Celebration Files */ = {
+		B30227B51D9B4289000694EE /* Celebration */ = {
 			isa = PBXGroup;
 			children = (
 				B30227BE1D9B45D1000694EE /* Actions.sks */,
@@ -168,10 +166,10 @@
 				B30227B91D9B4393000694EE /* spark.png */,
 				B30227B61D9B42DE000694EE /* GameScene.swift */,
 			);
-			name = "Celebration Files";
+			name = Celebration;
 			sourceTree = "<group>";
 		};
-		B35659051D6F9D87003E7DCD /* Sound Effects */ = {
+		B35659051D6F9D87003E7DCD /* SoundEffects */ = {
 			isa = PBXGroup;
 			children = (
 				B3E331891DA81AAC0087C7B7 /* BubblePop.mp3 */,
@@ -183,9 +181,8 @@
 				B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */,
 				B3634F4A1D6FED580060D517 /* Alert.mp3 */,
 				B3634F481D6FE2AE0060D517 /* winner.mp3 */,
-				B3634F441D6FD9E10060D517 /* ButtonTapped.wav */,
 			);
-			name = "Sound Effects";
+			name = SoundEffects;
 			sourceTree = "<group>";
 		};
 		B365CBD71DBBEB1800E34B94 /* CoreData */ = {
@@ -200,14 +197,14 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
-		B365CBD81DBBEB8A00E34B94 /* In-App Purchases */ = {
+		B365CBD81DBBEB8A00E34B94 /* In-AppPurchases */ = {
 			isa = PBXGroup;
 			children = (
 				B36733711D7F086000BA177B /* iap_product_ids.plist */,
 				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
 				B39C3D061D7A4B2800636B85 /* Category.swift */,
 			);
-			name = "In-App Purchases";
+			name = "In-AppPurchases";
 			sourceTree = "<group>";
 		};
 		B37786021D494B1E00639A8B /* Transition Managers */ = {
@@ -231,7 +228,16 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
-		B3F39C6C1D4672D80049F8FB /* View Controllers */ = {
+		B3A23BC51DC541910040871D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D67774D51D1C392B0051C634 /* Main.storyboard */,
+				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		B3F39C6C1D4672D80049F8FB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				B36733731D7F3CD100BA177B /* SplashScreenViewController.swift */,
@@ -242,7 +248,7 @@
 				B3E23CC71D907F5B0038A761 /* SummaryViewController.swift */,
 				D6249F361D9B6D5B00173C78 /* CelebrationViewController.swift */,
 			);
-			name = "View Controllers";
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		B3F48ACE1D89AF460052AA32 /* Frameworks */ = {
@@ -282,18 +288,17 @@
 				D67774D11D1C392B0051C634 /* AppDelegate.swift */,
 				B365CBD71DBBEB1800E34B94 /* CoreData */,
 				B3A158981DB7F2130029AC63 /* Reachability */,
-				B35659051D6F9D87003E7DCD /* Sound Effects */,
-				B3F39C6C1D4672D80049F8FB /* View Controllers */,
-				B30227B51D9B4289000694EE /* Celebration Files */,
-				B365CBD81DBBEB8A00E34B94 /* In-App Purchases */,
+				B35659051D6F9D87003E7DCD /* SoundEffects */,
+				B3F39C6C1D4672D80049F8FB /* ViewControllers */,
+				B30227B51D9B4289000694EE /* Celebration */,
+				B365CBD81DBBEB8A00E34B94 /* In-AppPurchases */,
+				B37786021D494B1E00639A8B /* Transition Managers */,
+				B3A23BC51DC541910040871D /* Storyboards */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
-				D67774D51D1C392B0051C634 /* Main.storyboard */,
 				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
-				B37786021D494B1E00639A8B /* Transition Managers */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
-				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
 			);
 			name = thewordgame;
 			path = TheWordGame;
@@ -444,7 +449,6 @@
 				B36733721D7F086000BA177B /* iap_product_ids.plist in Resources */,
 				B31DBDD61DA464FC005CB1AF /* initialCountdown.mp3 in Resources */,
 				B30539391DA56D0200D6F19B /* correctSwipe.mp3 in Resources */,
-				B3634F451D6FD9E10060D517 /* ButtonTapped.wav in Resources */,
 				B30539331DA561B400D6F19B /* wrong.mp3 in Resources */,
 				B30227BA1D9B4393000694EE /* CelebrationParticleSystem.scnp in Resources */,
 				D67774D71D1C392B0051C634 /* Main.storyboard in Resources */,
