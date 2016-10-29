@@ -15,23 +15,14 @@ class Game {
     static let sharedGameInstance = Game()
     
     var showPopUp = false
-        // Used to determine if a team is still playing its turn.
     var roundInProgress = true
-    // Used to determine if Team 1 is playing.
     var teamOneIsActive = true
-    // Keeps the score of the first team.
     var teamOneScore = 0
-    // Keeps the score of the second team.
     var teamTwoScore = 0
-    // Keeps track of the words used.
     var arrayOfUsedWords = [String]()
-    /// Variable to temporarily store a word.
     var word = String()
-    /// Used to determine if a team has won the game.
     var won = false
-    /// Used to temporarily store winner title.
     var winnerTitle = String()
-    // Used to verify the game has begun.
     var gameBegan = false
     
     /// Used to determine the color of the game being played.
@@ -74,16 +65,11 @@ class Game {
         UIColor(red: 153/255, green: 56/255, blue: 138/225, alpha: 1),           // Worship
     ]
     
-    
-
-    // MARK: - Free categories
     var jesus:Category!
     var people:Category!
     var places:Category!
     var sunday:Category!
     var concordance:Category!
-    
-    // MARK: - Paid categories
     var angels:Category!
     var books:Category!
     var christiannation:Category!
