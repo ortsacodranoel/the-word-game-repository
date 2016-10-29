@@ -228,6 +228,15 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		B3A23BC51DC541910040871D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D67774D51D1C392B0051C634 /* Main.storyboard */,
+				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		B3F39C6C1D4672D80049F8FB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,13 +293,12 @@
 				B30227B51D9B4289000694EE /* Celebration */,
 				B365CBD81DBBEB8A00E34B94 /* In-AppPurchases */,
 				B37786021D494B1E00639A8B /* Transition Managers */,
+				B3A23BC51DC541910040871D /* Storyboards */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
-				D67774D51D1C392B0051C634 /* Main.storyboard */,
 				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
-				B37609051D675AA900A678A1 /* LaunchScreen.storyboard */,
 			);
 			name = thewordgame;
 			path = TheWordGame;
