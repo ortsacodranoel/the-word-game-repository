@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
         
         if self.isTutorialEnabled() == true {
         /// Add gesture recognizer for tap on overlayView.
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(GameViewController.hideTutorialAction(sender:)))
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(GameViewController.hideTutorialAction(sender:)))
             self.tutorialOverlayView.addGestureRecognizer(tapGestureRecognizer)
         }
         

@@ -32,7 +32,6 @@
 		B392F42C1D66112F00F3748A /* RulesTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */; };
 		B392F42E1D66146100F3748A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392F42D1D66146100F3748A /* RulesViewController.swift */; };
 		B39C3D071D7A4B2800636B85 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C3D061D7A4B2800636B85 /* Category.swift */; };
-		B39E2A031D7E05CC00F59C4F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */; };
 		B3A158971DB7F20A0029AC63 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A158961DB7F20A0029AC63 /* Reachability.m */; };
 		B3A1D1961D760D720062D7BA /* swipeSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3A1D1951D760D720062D7BA /* swipeSoundEffect.mp3 */; };
 		B3AB51BA1D89D90E0003B09F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB51B91D89D90E0003B09F /* GameViewController.swift */; };
@@ -98,7 +97,6 @@
 		B392F42B1D66112F00F3748A /* RulesTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesTransitionManager.swift; sourceTree = "<group>"; };
 		B392F42D1D66146100F3748A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		B39C3D061D7A4B2800636B85 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
-		B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		B3A158941DB7F2090029AC63 /* TheWordGame-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheWordGame-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3A158951DB7F20A0029AC63 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		B3A158961DB7F20A0029AC63 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -296,7 +294,6 @@
 				B3A23BC51DC541910040871D /* Storyboards */,
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
-				B39E2A021D7E05CC00F59C4F /* Default-568h@2x.png */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
 				D67774E01D1C392B0051C634 /* Info.plist */,
 			);
@@ -441,7 +438,6 @@
 				B30227C11D9B45DE000694EE /* GameScene.sks in Resources */,
 				B30227BF1D9B45D1000694EE /* Actions.sks in Resources */,
 				B360F6611DA0A5AA00415ECB /* celebrationMusic.mp3 in Resources */,
-				B39E2A031D7E05CC00F59C4F /* Default-568h@2x.png in Resources */,
 				B3634F491D6FE2AE0060D517 /* winner.mp3 in Resources */,
 				B30227BB1D9B4393000694EE /* spark.png in Resources */,
 				D67774DC1D1C392B0051C634 /* Assets.xcassets in Resources */,
