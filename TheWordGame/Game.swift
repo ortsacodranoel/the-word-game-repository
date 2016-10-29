@@ -1,8 +1,8 @@
 //
 //  Game.swift
-//  testing-animations
+//  TheWordGame
 //
-//  Created by Leo on 7/6/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -15,9 +15,7 @@ class Game {
     static let sharedGameInstance = Game()
     
     var showPopUp = false
-    
-    
-    // Used to determine if a team is still playing its turn.
+        // Used to determine if a team is still playing its turn.
     var roundInProgress = true
     // Used to determine if Team 1 is playing.
     var teamOneIsActive = true

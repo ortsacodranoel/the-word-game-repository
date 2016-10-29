@@ -2,9 +2,11 @@
 //  TransitionManager.swift
 //  TheWordGame
 //
-//  Created by Leo on 7/24/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
+
+
 import UIKit
 
 class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
@@ -34,9 +36,7 @@ class GameScreenTransitionManager: NSObject, UIViewControllerAnimatedTransitioni
         else {
             toView.transform = offScreenLeft
         }
-        
-        
-        // add the both views to our view controller
+                
         container.addSubview(toView)
         container.addSubview(fromView)
         

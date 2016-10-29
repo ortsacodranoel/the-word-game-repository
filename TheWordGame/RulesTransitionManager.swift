@@ -2,9 +2,10 @@
 //  TransitionManager.swift
 //  TheWordGame
 //
-//  Created by Leo on 7/24/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
+
 
 import UIKit
 
@@ -19,12 +20,10 @@ class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
     // Animate transition between View Controllers.
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        // Get reference to fromView, toView, and containerView.
         let container = transitionContext.containerView
         let categoriesView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
         let rulesView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         
-        // Setup 2D transformations.
         let offScreenRight = CGAffineTransform(translationX: container.frame.width, y: 0)
         let offScreenLeft = CGAffineTransform(translationX: -container.frame.width, y: 0)
         
@@ -35,34 +34,22 @@ class RulesTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
             rulesView.transform = offScreenLeft
         }
         
-        
-        // add the both views to our view controller
         container.addSubview(rulesView)
         container.addSubview(categoriesView)
         
-        
         let duration = self.transitionDuration(using: transitionContext)
         
-        
         UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: [], animations: {
-            
-            
             if (self.presenting){
                 categoriesView.transform = offScreenLeft
             }
             else {
                 categoriesView.transform = offScreenRight
             }
-            
                 rulesView.transform = CGAffineTransform.identity
-            
             }, completion: { finished in
-                
-                // tell our transitionContext object that we've finished animating
                 transitionContext.completeTransition(true)
-                
         })
-        
     }
     
     

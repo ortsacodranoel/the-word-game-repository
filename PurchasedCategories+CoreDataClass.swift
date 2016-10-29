@@ -2,7 +2,7 @@
 //  PurchasedCategories+CoreDataClass.swift
 //  TheWordGame
 //
-//  Created by Leo on 10/22/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -11,5 +11,4 @@ import CoreData
 
 
 public class PurchasedCategories: NSManagedObject {
-
 }

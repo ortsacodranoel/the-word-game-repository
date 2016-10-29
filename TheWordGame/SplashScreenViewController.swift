@@ -2,7 +2,7 @@
 //  SplashScreenViewController.swift
 //  TheWordGame
 //
-//  Created by Leo on 9/6/16.
+//  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        perform(#selector(SplashScreenViewController.showMainController), with: nil, afterDelay: 2.0)
+        perform(#selector(SplashScreenViewController.showMainController), with: nil, afterDelay: 1.5)
     }
 
     func showMainController() {

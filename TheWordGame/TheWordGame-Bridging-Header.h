@@ -1,5 +1,9 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  TheWordGame-Bridging-Header.h
+//  TheWordGame
+//
+//  Created by Daniel Castro on 6/23/16.
+//  Copyright © 2016 Daniel Castro. All rights reserved.
 //
 
 #import "Reachability.h"
