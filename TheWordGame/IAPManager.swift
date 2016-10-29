@@ -1,6 +1,6 @@
 //
 //  IAPManager.swift
-//  testing-animations
+//  TheWordGame
 //
 //  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
@@ -23,13 +23,11 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     var delegate:IAPManagerDelegate?
     
-    /// Loads product identifiers for store usage.
     func setupInAppPurchases() {
         self.validateProductIdentifiers(self.getProductIdentifiersFromMainBundle())
         SKPaymentQueue.default().add(self)
     }
     
-    /// Get product identifiers.
     func getProductIdentifiersFromMainBundle() ->NSArray {
         var identifiers = NSArray()
         if let url = Bundle.main.url(forResource: "iap_product_ids", withExtension: "plist") {
@@ -37,10 +35,8 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         }
         
         return identifiers
-        
     }
     
-    /// Retrieve product information.
     func validateProductIdentifiers(_ identifiers:NSArray) {
         let productIdentifiers = NSSet(array: identifiers as [AnyObject])
         let productRequest = SKProductsRequest(productIdentifiers: productIdentifiers as! Set<String>)
@@ -50,7 +46,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     }
     
     
-    /// Create payment request for product.
     func createPaymentRequestForProduct(_ product:SKProduct){
         let payment = SKMutablePayment(product: product)
         payment.quantity = 1
@@ -68,7 +63,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     //MARK: SKPaymentTransactionObserver Delegate Protocol
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        
         for transaction in transactions as [SKPaymentTransaction]{
             switch transaction.transactionState{
             case .purchasing:
@@ -80,14 +74,12 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
                 print("Failed")
-                //print(transaction.error?.localizedDescription ?? <#default value#>)
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case.purchased:
                 print("Purchased")
                 self.verifyReceipt(transaction)
             case .restored:
                 print("Restored")
-                
             }
         }
     }
@@ -103,15 +95,10 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     func verifyReceipt(_ transaction:SKPaymentTransaction?){
         
-        // Find the receipt.
         let receiptURL = Bundle.main.appStoreReceiptURL!
         
-        // Check if NSData object can be created.
         if let receipt = try? Data(contentsOf: receiptURL){
             
-            // If the receipt exists we want to create a JSON object to send to apple for varification.
-            
-            // The request content will equal the receipt data encoded in a Base64 string.
             let requestContents = ["receipt-data" : receipt.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)), "password" : "326200e390c84cda8f7fb53750b72e05"]
             
             // Build a request.
@@ -140,12 +127,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                 let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                     do {
                         
-                        //let json = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary {
-                        
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary
-                        
-                        // Take a look at the receipt.
-                        print(json)
                         
                         // Check if the receipt that we received is valid. The 0 means it's valid and we can further process that receipt.
                         if (json.object(forKey: "status") as! NSNumber) == 0 {

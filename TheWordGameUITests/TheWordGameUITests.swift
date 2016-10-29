@@ -1,6 +1,6 @@
 //
-//  testing_animationsUITests.swift
-//  testing-animationsUITests
+//  TheWordGameUITests.swift
+//  TheWordGameUITests
 //
 //  Created by Daniel Castro on 6/23/16.
 //  Copyright © 2016 Daniel Castro. All rights reserved.
