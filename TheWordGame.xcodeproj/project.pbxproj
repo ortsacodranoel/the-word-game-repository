@@ -198,6 +198,7 @@
 		B365CBD81DBBEB8A00E34B94 /* In-AppPurchases */ = {
 			isa = PBXGroup;
 			children = (
+				D67774E01D1C392B0051C634 /* Info.plist */,
 				B36733711D7F086000BA177B /* iap_product_ids.plist */,
 				B3C3835C1D7E0FFA0020C9DB /* IAPManager.swift */,
 				B39C3D061D7A4B2800636B85 /* Category.swift */,
@@ -295,7 +296,6 @@
 				B413DBDD1D2DF1900006FB9D /* Game.swift */,
 				D67775021D1C4FDC0051C634 /* CollectionViewCell.swift */,
 				D67774DB1D1C392B0051C634 /* Assets.xcassets */,
-				D67774E01D1C392B0051C634 /* Info.plist */,
 			);
 			name = thewordgame;
 			path = TheWordGame;
