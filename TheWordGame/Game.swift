@@ -25,21 +25,17 @@ class Game {
     var winnerTitle = String()
     var gameBegan = false
     
-    /// Used to determine the color of the game being played.
     var gameColor:UIColor!
-    
-    // Used to notify GameVC if segue comes from DetailVC.
     var segueFromDetailVC:Bool!
     
-    
     // MARK: - Array properties
+    
     /// Categories array.
     var categoriesArray = [Category]()
     /// Used to store missed words.
     var missedWordsArray = [String]()
     /// Used to store correct words.
     var correctWordsArray = [String]()
-    
     
     // MARK: - Colors for screens and categories.
     let colors = [
@@ -87,144 +83,105 @@ class Game {
     var worship:Category!
     
     init() {
-        // Jesus category.
         self.jesus = Category(title: "Jesus",summary: "His many names, adjectives to describe His character, and words associated with our Lord Jesus Christ.")
         self.jesus.purchased = true
        
-        // People category.
         self.people = Category(title: "People", summary: "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.")
         self.people.purchased = true
       
-        // Places category.
         self.places = Category(title: "Places", summary: "Stories from the Bible as well as Jesus’ parables.  * answers do not have to be exact, but must contain the main words.")
         self.places.purchased = true
       
-        // Sunday School category.
         self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  * answers do not have to be exact, but must contain the main words.")
         self.sunday.purchased = true
        
-        // Concordance category.
         self.concordance = Category(title: "Concordance", summary:"Words found in the concordance of a Bible, excluding names and places.")
         self.concordance.purchased = true
         
-        // Angels category.
         self.angels = Category(title:"Angels",summary:"The names of the Angels from the Bible and from Christian-Judeo mythology.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") {
             self.angels.purchased = true
         } else {
             self.angels.purchased = false
         }
-        
-        // Books and Movies category.
         self.books = Category(title:"Books and Movies",summary: "Christian and Christian-friendly books and movies, as well as the books of the Bible.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.books") {
             self.books.purchased = true
         } else {
             self.books.purchased = false
         }
-            
-
-        // Christian Nation
         self.christiannation = Category(title:"Christian Nation",summary: "Early American colonies, the American Revolution, US Government, major Founding Fathers, all US President, and all US States.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.christiannation") {
             self.christiannation.purchased = true
         } else {
             self.christiannation.purchased = false
         }
-        
-        
-        // Christmas Time
         self.christmastime = Category(title:"Christmas Time",summary:"Titles of songs and carols, food, characters, and other words associated with celebrating the Birth of Jesus Christ.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.christmastime") {
             self.christmastime.purchased = true
         } else {
             self.christmastime.purchased = false
         }
-        
-        
-        // Commands
         self.commands = Category(title:"Commands",summary: "Words of Biblical mandates  * answers with more than one word do not have to be exact, but must contain the main words.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.commands") {
             self.commands.purchased = true
         } else {
             self.commands.purchased = false
         }
-        
-
-        // Denominations
         self.denominations = Category(title:"Denominations",summary: "Christian denominations, beliefs and practices within different denominations, words associated with different denominations.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.denominations") {
             self.denominations.purchased = true
         } else {
             self.denominations.purchased = false
         }
-        
-        // Easter
         self.easter = Category(title:"Easter",summary: "All words related to the holiday in which we celebrate the Resurrection of Jesus Christ, including the days leading up to it.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.easter") {
             self.easter.purchased = true
         } else {
             self.easter.purchased = false
         }
-        
-        
-        // Famous Christians
         self.famous = Category(title:"Famous Christians",summary: "Historical and influential Christians, TV evangelists, and Celebrities who have claimed Faith in Christ.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.famouschristians") {
                 self.famous.purchased = true
             } else {
                 self.famous.purchased = false
             }
-    
-        // Feasts
         self.feasts = Category(title:"Feasts",summary: "Biblical and/or Jewish feasts, Christian holidays, as well as food and drink mentioned in the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.feasts") {
                 self.feasts.purchased = true
             } else {
                 self.feasts.purchased = false
             }
- 
-        // History
         self.history = Category(title:"History",summary: "The movements, councils, people, wars, translations, churches, schools and more that shaped Christianity.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.history") {
             self.history.purchased = true
         } else {
             self.history.purchased = false
         }
-
-        // Kids
         self.kids = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
             self.kids.purchased = true
         } else {
             self.kids.purchased = false
         }
-  
-        // Relics and Saints
         self.relics = Category(title:"Relics and Saints",summary: "Religious artifacts throughout history and the names of Catholic Saints.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.relicsandsaints") {
                 self.relics.purchased = true
             } else {
                 self.relics.purchased = false
             }
-
-        // Revelation
         self.revelation = Category(title:"Revelation",summary:"Words and phrases of the prophetic last book of the Bible.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.revelation") {
                 self.revelation.purchased = true
             } else {
                 self.revelation.purchased = false
             }
-  
-        // Sins
         self.sins = Category(title:"Sins",summary: "Transgressions described by the Bible and/or the Church.  * answers with more than one word do not have to be exact, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.sins") {
                 self.sins.purchased = true
             } else {
                 self.sins.purchased = false
             }
-        
-        // Worship
         self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” do not have to be exact, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
                 self.worship.purchased = true
@@ -255,7 +212,6 @@ class Game {
 
     }
     
-    
     func newGame() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
@@ -263,17 +219,16 @@ class Game {
         self.roundInProgress = true
     }
     
-    
     func resetGame() {
         self.teamOneScore = 0
         self.teamTwoScore = 0
     }
     
     func checkForWinner() {
-        if self.teamOneScore == 10 {
+        if self.teamOneScore == 25 {
             self.won = true
             self.winnerTitle = "Team One Wins!"
-        } else if self.teamTwoScore == 10 {
+        } else if self.teamTwoScore == 25 {
             self.won = true
             self.winnerTitle = "Team Two Wins!"
         }
@@ -336,7 +291,7 @@ class Game {
         
         if arrayOfUsedWords.contains(word) {
             let temp = self.getWord(categorySelected)
-            print(temp)
+            NSLog(temp)
             
         } else {
             self.arrayOfUsedWords.append(word)
