@@ -17,8 +17,8 @@ class Game {
     var showPopUp = false
     var roundInProgress = true
     var teamOneIsActive = true
-    var teamOneScore = 21
-    var teamTwoScore = 19
+    var teamOneScore = 0
+    var teamTwoScore = 0
     var arrayOfUsedWords = [String]()
     var word = String()
     var won = false
@@ -225,10 +225,10 @@ class Game {
     }
     
     func checkForWinner() {
-        if self.teamOneScore == 25 {
+        if self.teamOneScore == 1 {
             self.won = true
             self.winnerTitle = "Team One Wins!"
-        } else if self.teamTwoScore == 25 {
+        } else if self.teamTwoScore == 1 {
             self.won = true
             self.winnerTitle = "Team Two Wins!"
         }
