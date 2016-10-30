@@ -13,43 +13,29 @@ import CoreData
 
 class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationDelegate {
     
-    // MARK: - Variables
     var categoryTapped = Int()
     var backgroundColor = UIColor()
     var purchasedCategory:Bool!
     
-    // MARK: - View Outlets
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var selectButtonView: UIView!
     @IBOutlet weak var lockView: UIView!
     @IBOutlet var mainView: UIView!
     
-    // MARK: - Button Outlets
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
 
-    // MARK: - Labels
     @IBOutlet weak var categoryTitleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
-    // MARK: - Transition Managers
     let gameScreenTransitionManager = GameScreenTransitionManager()
     let categoryScreenTransitionManager = CategoriesTransitionManager()
-    
-    // Used by GameViewController to determine if a segue occured from this VC.
     var fromDetailVC:Bool!
-    
-    // Used to check internet reachability.
     var reachability: Reachability?
-    // Used to check network status.
     var networkStatus : NetworkStatus? = nil
-    
-    // Used to save boolean state that determines if tutorial is enabled.
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-   
     var purchasedCategoriesEntity:PurchasedCategories!
-    
     var categoryKeys : [String: String] = [ "com.thewordgame.angels": "angels",
                                             "com.thewordgame.books": "booksAndMovies",
                                             "com.thewordgame.christiannation": "christianNation",
@@ -75,7 +61,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +82,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         self.setColor(categoryTapped)
         self.setDescription(categoryTapped)
         
-        // Check to see if the category in the categoriesArray has been purchased.
         if (Game.sharedGameInstance.categoriesArray[categoryTapped].purchased == true)  {
             self.selectButton.setTitle(("Select"), for: UIControlState())
         } else {
@@ -108,13 +92,14 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     }
     
     // MARK: - Network Methods
+    
     func getNetworkStatus() {
         self.reachability = Reachability.forInternetConnection()
         self.reachability?.startNotifier()
         self.networkStatus = reachability!.currentReachabilityStatus()
     }
     
-    
+
     func updateEntityPurchasedCategories() {
         for (categoryKey, purchasedCategoryKey) in self.categoryKeys {
             if UserDefaults.standard.bool(forKey: categoryKey ) == true {
@@ -124,8 +109,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
         }
     }
 
-
-    // MARK: - Button Actions.
+    // MARK: - Button Actions
+    
     @IBAction func backButtonTapped(_ sender: AnyObject)  {
         self.updateEntityPurchasedCategories()
         performSegue(withIdentifier: "unwindToCategories", sender: self)
@@ -160,23 +145,17 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             performSegue(withIdentifier: "segueToGame", sender: self)
         case "Angels":
             
-            // NO NETWORK + PURCHASED [FROM COREDATA]
             if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == true
             {
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                
-            // NO NETWORK + NOT PURCHASED [FROM COREDATA]
             else if networkStatus == NotReachable && self.purchasedCategoriesEntity.angels == false
             {
                self.connectToNetworkAlert()
             }
-            
-            // NETWORK OK + APPLE PURCHASE TRUE
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == true
             {
-                // UPDATE COREDATA
                 if self.purchasedCategoriesEntity.angels == false {
                     self.purchasedCategoriesEntity.angels = true
                     self.saveContext()
@@ -185,8 +164,6 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                 self.selectButton.setTitle("Select", for: UIControlState())
                 performSegue(withIdentifier: "segueToGame", sender: self)
             }
-                
-            // NETWORK OK + APPLE PURCHASE FALSE
             else if UserDefaults.standard.bool(forKey: "com.thewordgame.angels") == false
             {
                 IAPManager.sharedInstance.createPaymentRequestForProduct(IAPManager.sharedInstance.products.object(at: 0) as! SKProduct)
@@ -535,6 +512,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - CoreData
+    
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -574,12 +552,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     //MARK: View configuration
+    
     func setCategory(_ category: Int) {
         categoryTitleLabel.text = Game.sharedGameInstance.categoriesArray[category].title
     }
     
     func setColor(_ category: Int) {
-        self.view.backgroundColor = Game.sharedGameInstance.gameColor
+            self.view.backgroundColor = Game.sharedGameInstance.gameColor
     }
     
     func setDescription(_ category: Int) {
@@ -597,6 +576,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - Animation Methods
+    
     func startAnimations() {
         UIView.animate(withDuration: 0.2, delay: 0.2,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
             self.categoryTitleView.alpha = 1
@@ -634,6 +614,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
 
     /// MARK: - Lock animations
+    
     func lockCategory() {
             UIView.animate(withDuration: 0.5, delay:0.8,usingSpringWithDamping: 0.8,initialSpringVelocity: 0.9,options: [], animations: {
                 self.lockView.alpha = 1
@@ -656,6 +637,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - IAPManagerDelegate
+    
     func managerDidRestorePurchases() {
         self.unlockCategory()
         self.selectButton.setTitle(("Select"), for: UIControlState())
@@ -665,6 +647,7 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
     
     
     // MARK: - Alert Views
+    
     func connectToNetworkAlert() {
         let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to download this categroy. Please connect and try again.", preferredStyle: .alert)
         let okAction = UIAlertAction(title:"OK", style:.default)

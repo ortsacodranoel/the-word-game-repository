@@ -36,8 +36,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     }
     
 
-
-    // MARK: - Alert Views 
+    // MARK: - Alert Views
     func connectToNetworkAlert() {
         let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to restore your purchases. Please connect and try again.", preferredStyle: .alert)
         let okAction = UIAlertAction(title:"OK", style:.default)
@@ -112,7 +111,8 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     }
 
     
-    // MARK: - Core Data Methods
+    // MARK: - CoreData Methods
+    
     func getPurchasedCategoryEntity() {
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
         if #available(iOS 10.0, OSX 10.12, *) {
@@ -135,7 +135,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             }
         } catch {
             let fetchError = error as NSError
-            print(fetchError)
+            NSLog("Unresolved error \(fetchError), \(fetchError.userInfo)")
         }
     }
     
@@ -215,6 +215,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - In-App Purchase Methods
+    
     func managerDidRestorePurchases() {
         self.getPurchasedCategoryEntity()
         let alertController = UIAlertController(title: "In-App Purchase", message: "Your purchases have been restored", preferredStyle: .alert)
@@ -229,6 +230,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
 
     // MARK: - Swipe Gestures
+    
     func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

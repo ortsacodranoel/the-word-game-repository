@@ -11,11 +11,10 @@ import AVFoundation
 
 class SplashScreenViewController: UIViewController {
 
-    // MARK: - Initializer methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        perform(#selector(SplashScreenViewController.showMainController), with: nil, afterDelay: 1.5)
+        perform(#selector(SplashScreenViewController.showMainController), with: nil, afterDelay: 3.0)
     }
 
     func showMainController() {
