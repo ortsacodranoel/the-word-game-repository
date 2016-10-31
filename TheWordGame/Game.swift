@@ -225,10 +225,10 @@ class Game {
     }
     
     func checkForWinner() {
-        if self.teamOneScore == 1 {
+        if self.teamOneScore == 25 {
             self.won = true
             self.winnerTitle = "Team One Wins!"
-        } else if self.teamTwoScore == 1 {
+        } else if self.teamTwoScore == 25 {
             self.won = true
             self.winnerTitle = "Team Two Wins!"
         }
