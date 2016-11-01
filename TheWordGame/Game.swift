@@ -292,7 +292,6 @@ class Game {
         if arrayOfUsedWords.contains(word) {
             let temp = self.getWord(categorySelected)
             NSLog(temp)
-            
         } else {
             self.arrayOfUsedWords.append(word)
         }

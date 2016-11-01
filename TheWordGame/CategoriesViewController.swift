@@ -26,7 +26,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
     var popAudioPlayer = AVAudioPlayer()
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     var reachability: Reachability?
-    var purchasedCategoriesEntity:PurchasedCategories!
+    var purchasedCategoriesEntity: PurchasedCategories!
     
 
     // MARK: - View Methods
@@ -62,8 +62,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         do {
             try context.save()
         } catch {
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            // let nserror = error as NSError
+            // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
@@ -82,8 +82,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         do {
             try context.save()
         } catch {
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            // let nserror = error as NSError
+            // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
 
@@ -166,13 +166,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
                         self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
                     }
                 } catch {
-                    let fetchError = error as NSError
-                    print(fetchError)
+                    // let fetchError = error as NSError
+                    // print(fetchError)
                 }
             }
         } catch {
-            let fetchError = error as NSError
-            NSLog("Unresolved error \(fetchError), \(fetchError.userInfo)")
+            // let fetchError = error as NSError
+            // NSLog("Unresolved error \(fetchError), \(fetchError.userInfo)")
         }
 
         _ = indexPath.row
@@ -321,9 +321,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDelegate, UICo
         do {
             self.popAudioPlayer = try AVAudioPlayer(contentsOf: self.popSound, fileTypeHint: "mp3")
             self.popAudioPlayer.prepareToPlay()
-        } catch {
-            // print("Unable to load sound files.")
-        }
+        } catch {}
     }
     
     func playPopSound() {

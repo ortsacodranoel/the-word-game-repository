@@ -105,8 +105,8 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             try context.save()
             Game.sharedGameInstance.showPopUp = true
         } catch {
-//            let nserror = error as NSError
-//            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            // let nserror = error as NSError
+            // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
 
@@ -129,13 +129,13 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
                         self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
                     }
                 } catch {
-//                    let fetchError = error as NSError
-//                    print(fetchError)
+                    // let fetchError = error as NSError
+                    // print(fetchError)
                 }
             }
         } catch {
-//            let fetchError = error as NSError
-//            NSLog("Unresolved error \(fetchError), \(fetchError.userInfo)")
+                // let fetchError = error as NSError
+                // NSLog("Unresolved error \(fetchError), \(fetchError.userInfo)")
         }
     }
     

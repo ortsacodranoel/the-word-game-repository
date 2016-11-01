@@ -518,8 +518,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             do {
                 try managedObjectContext.save()
             } catch {
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                // let nserror = error as NSError
+                // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -610,9 +610,8 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
             self.backButton.alpha = 0
             }, completion: nil)
     }
-
     
-
+    
     /// MARK: - Lock animations
     
     func lockCategory() {

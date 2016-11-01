@@ -18,7 +18,6 @@ var reachability: Reachability?
 var reachabilityStatus = kReachabilityWithWiFi
 
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -29,27 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        self.setupPurchasedCategoriesEntity()
         
+        self.setupPurchasedCategoriesEntity()
         if SKPaymentQueue.canMakePayments(){
             canPurchase = true
             IAPManager.sharedInstance.setupInAppPurchases()
         }
-        
         let fetchRequest : NSFetchRequest<TutorialPopUp>
         if #available(iOS 10.0, OSX 10.12, *) {
             fetchRequest = TutorialPopUp.fetchRequest()
         } else {
             fetchRequest = NSFetchRequest(entityName: "TutorialPopUp")
         }
-        
         do {
-            
             let entities = try managedObjectContext.fetch(fetchRequest)
-   
             if entities.count < 1 {
-                
                 let tutorial = NSEntityDescription.insertNewObject(forEntityName: "TutorialPopUp", into: self.managedObjectContext) as! TutorialPopUp
                 
                 tutorial.categoriesScreenEnabled = true
@@ -58,15 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 do {
                     let result = try self.managedObjectContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-                    
                     if (result.count > 0) {
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
                         self.sharedTutorialEntity.setValue(true, forKey: "categoriesScreenEnabled")
                         self.sharedTutorialEntity.setValue(true, forKey: "gameScreenEnabled")
                     }
                     } catch {
-                        let fetchError = error as NSError
-                        print(fetchError)
+                        // let fetchError = error as NSError
+                        // print(fetchError)
                     }
             
             } else if entities.count > 0 {
@@ -77,19 +69,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.sharedTutorialEntity = result[0] as! NSManagedObject
                     }
                 } catch {
-                    let fetchError = error as NSError
-                    print(fetchError)
+                    // let fetchError = error as NSError
+                    // print(fetchError)
                 }
-                
             }
-        } catch let error {
-            print(error.localizedDescription)
-        }
+        } catch { }
         
         return true
     }
 
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -143,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+            // NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
         }
         
         return coordinator
@@ -161,8 +149,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try managedObjectContext.save()
             } catch {
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                // let nserror = error as NSError
+                // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

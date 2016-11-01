@@ -120,8 +120,8 @@ class GameViewController: UIViewController {
         do {
             try context.save()
         } catch {
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+          //  let nserror = error as NSError
+          //  NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
@@ -216,8 +216,8 @@ class GameViewController: UIViewController {
             self.popAudioPlayer.prepareToPlay()
             
         } catch {
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+           // let nserror = error as NSError
+           // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     

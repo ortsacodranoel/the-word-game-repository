@@ -20,7 +20,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     var request:SKProductsRequest!
     var products:NSArray!
-    
     var delegate:IAPManagerDelegate?
     
     func setupInAppPurchases() {
@@ -33,7 +32,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         if let url = Bundle.main.url(forResource: "iap_product_ids", withExtension: "plist") {
             identifiers = NSArray(contentsOf: url)!
         }
-        
         return identifiers
     }
     
@@ -45,21 +43,15 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         productRequest.start()
     }
     
-    
     func createPaymentRequestForProduct(_ product:SKProduct){
         let payment = SKMutablePayment(product: product)
         payment.quantity = 1
-
         SKPaymentQueue.default().add(payment)
     }
-    
-    
     
     func productsRequest(_ request:SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products as NSArray!
     }
-    
-    
     
     //MARK: SKPaymentTransactionObserver Delegate Protocol
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -84,14 +76,11 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         }
     }
     
-    
     func validatePurchaseArray(_ purchases:NSArray){
             for purchase in purchases as! [NSDictionary]{
             self.unlockPurchasedFunctionalityforProductIdentifier(purchase["product_id"] as! String)
         }
     }
-    
-    
     
     func verifyReceipt(_ transaction:SKPaymentTransaction?){
         
@@ -103,11 +92,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
             
             // Build a request.
             do {
-                
-                // JSON serialize the request content.
                 let requestData = try JSONSerialization.data(withJSONObject: requestContents, options: JSONSerialization.WritingOptions(rawValue: 0))
-                
-                // Build URL Mutable Request.
                 let storeURL = URL(string: "https://buy.itunes.apple.com/verifyReceipt")
                 
                 // Create and configure the request.
@@ -117,15 +102,11 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                 
                 // Create the session.
                 let session = URLSession.shared
-               
                 let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                     do {
-                        
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary
-                        
                         // Check if the receipt that we received is valid. The 0 means it's valid and we can further process that receipt.
                         if (json.object(forKey: "status") as! NSNumber) == 0 {
-
                             if let latest_receipt = json["latest_receipt_info"]{
                                 self.validatePurchaseArray(latest_receipt as! NSArray)
                             } else {
@@ -134,38 +115,29 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                                     self.validatePurchaseArray(purchases)
                                 }
                             }
-                            
-                            
                             if transaction != nil {
                                 SKPaymentQueue.default().finishTransaction(transaction!)
                             }
-                            
                             DispatchQueue.main.sync(execute: { () -> Void in
                                 self.delegate?.managerDidRestorePurchases()
                             })
-                            
                         } else {
                             //Debug the receipt
                            // print(json.object(forKey: "status") as! NSNumber)
                         }
-                        
                     } catch {
                         //print("JSON error:\(error)")
                     }
                 })
-                
-                task.resume()
-                
+                    task.resume()
             } catch {
               //  print(error)
             }
-            
         } else {
             //Receipt does not exist
            // print("No Receipt")
         }
     }
-    
     
     func unlockPurchasedFunctionalityforProductIdentifier(_ productIdentifier:String){
         UserDefaults.standard.set(true, forKey: productIdentifier)
