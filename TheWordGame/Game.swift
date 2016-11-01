@@ -24,20 +24,17 @@ class Game {
     var won = false
     var winnerTitle = String()
     var gameBegan = false
-    
     var gameColor:UIColor!
     var segueFromDetailVC:Bool!
     
     // MARK: - Array properties
     
-    /// Categories array.
     var categoriesArray = [Category]()
-    /// Used to store missed words.
     var missedWordsArray = [String]()
-    /// Used to store correct words.
     var correctWordsArray = [String]()
     
-    // MARK: - Colors for screens and categories.
+    // MARK: - Colors
+    
     let colors = [
         UIColor(red: 43/255, green: 100/255, blue: 130/225, alpha: 1),
         UIColor(red: 207/255, green: 127/255, blue: 110/225, alpha: 1),
@@ -209,7 +206,6 @@ class Game {
                                 self.revelation,
                                 self.sins,
                                 self.worship]
-
     }
     
     func newGame() {
@@ -298,7 +294,6 @@ class Game {
         return word
     }
     
-    /// Updates each team's turn.
     func updateTeamTurn() {
         if self.teamOneIsActive {
             self.teamOneIsActive = false
@@ -307,19 +302,15 @@ class Game {
         }
     }
     
-    // Returns the current score for Team One.
     func getTeamOneScore() -> Int {
         return teamOneScore
     }
     
-    
-    // Returns the current score for Team Two.
     func getTeamTwoScore() -> Int {
         return teamTwoScore
     }
     
     func getCategoryForProductKey(_ productIdentifier: String) -> Category {
-        
         switch productIdentifier{
         case "com.thewordgame.angels":
             return self.categoriesArray[5]
@@ -365,18 +356,5 @@ class Game {
     func clearArrays() {
         self.correctWordsArray = []
         self.missedWordsArray = []
-    }
-    
-    func printCorrectMissedArray() {
-      
-        print("Missed words:")
-        for word in missedWordsArray {
-            print("   " + word)
-        }
-        
-        print("\n" + "Words guessed:")
-        for word in correctWordsArray {
-            print("   " + word)
-        }
     }
 }

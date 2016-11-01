@@ -53,25 +53,24 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         self.products = response.products as NSArray!
     }
     
-    //MARK: SKPaymentTransactionObserver Delegate Protocol
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions as [SKPaymentTransaction]{
             switch transaction.transactionState{
             case .purchasing:
-               // print("Purchasing")
+                // print("Purchasing")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
             case .deferred:
-            //    print("Deferrred")
+                // print("Deferrred")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
-            //    print("Failed")
+                // print("Failed")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case.purchased:
-            //    print("Purchased")
+                // print("Purchased")
                 self.verifyReceipt(transaction)
             case .restored:
-               print("Restored")
+               NSLog("Restored")
             }
         }
     }
@@ -83,24 +82,17 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     }
     
     func verifyReceipt(_ transaction:SKPaymentTransaction?){
-        
         let receiptURL = Bundle.main.appStoreReceiptURL!
-        
         if let receipt = try? Data(contentsOf: receiptURL){
-            
             let requestContents = ["receipt-data" : receipt.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)), "password" : "326200e390c84cda8f7fb53750b72e05"]
-            
-            // Build a request.
             do {
                 let requestData = try JSONSerialization.data(withJSONObject: requestContents, options: JSONSerialization.WritingOptions(rawValue: 0))
                 let storeURL = URL(string: "https://buy.itunes.apple.com/verifyReceipt")
                 
-                // Create and configure the request.
                 let request = NSMutableURLRequest(url: storeURL!)
                     request.httpMethod = "Post"
                     request.httpBody = requestData
                 
-                // Create the session.
                 let session = URLSession.shared
                 let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                     do {
@@ -122,20 +114,20 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                                 self.delegate?.managerDidRestorePurchases()
                             })
                         } else {
-                            //Debug the receipt
-                           // print(json.object(forKey: "status") as! NSNumber)
+                            // Debug the receipt
+                            // print(json.object(forKey: "status") as! NSNumber)
                         }
                     } catch {
                         //print("JSON error:\(error)")
                     }
                 })
-                    task.resume()
+                task.resume()
             } catch {
-              //  print(error)
+              // print(error)
             }
         } else {
-            //Receipt does not exist
-           // print("No Receipt")
+            // Receipt does not exist
+            // print("No Receipt")
         }
     }
     
@@ -149,6 +141,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
     
     
     /// MARK: - Restore functions
+    
     func restorePurchases() {
         let request = SKReceiptRefreshRequest()
         request.delegate = self

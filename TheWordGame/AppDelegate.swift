@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import StoreKit
 
-
 let kReachabilityWithWiFi = "ReachableWithWIFI"
 let kNorReachable = "NotReachable"
 let kReachableWithWWAN = "ReachableWithWWAN"
@@ -28,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         self.setupPurchasedCategoriesEntity()
         if SKPaymentQueue.canMakePayments(){
             canPurchase = true
@@ -156,24 +154,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupPurchasedCategoriesEntity() {
-        
         let purchasedCategoriesFetchRequest : NSFetchRequest<PurchasedCategories>
         if #available(iOS 10.0, OSX 10.12, *) {
             purchasedCategoriesFetchRequest = PurchasedCategories.fetchRequest()
         } else {
             purchasedCategoriesFetchRequest = NSFetchRequest(entityName: "PurchasedCategories")
         }
-        
         do {
-            
             let purchasedCategoryEntities = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest)
-            
             if purchasedCategoryEntities.count < 1 {
                 _ = NSEntityDescription.insertNewObject(forEntityName: "PurchasedCategories", into: self.managedObjectContext) as! PurchasedCategories
                 try self.managedObjectContext.save()
-               
                 do {
-                    
                     let result = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (result.count > 0) {
                         self.purchasedCategoriesSharedInstance = result[0] as! NSManagedObject
@@ -202,24 +194,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.saveContext()
                     }
                     } catch {
-                        let fetchError = error as NSError
-                        print(fetchError)
+                        // let fetchError = error as NSError
+                        // print(fetchError)
                     }
             } else if purchasedCategoryEntities.count > 0 {
-                
                 do {
-                    
                     let purchasedCategoryEntitiesInMOC = try self.managedObjectContext.fetch(purchasedCategoriesFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
                     if (purchasedCategoryEntitiesInMOC.count > 0) {
                         self.purchasedCategoriesSharedInstance = purchasedCategoryEntitiesInMOC[0] as! NSManagedObject
                     }
                     } catch {
-                        let fetchError = error as NSError
-                        print(fetchError)
+                        // let fetchError = error as NSError
+                        // print(fetchError)
                     }
                 }
-        } catch let error {
-            print(error.localizedDescription)
+        } catch {
+            // let fetchError = error as
+            // print(fetchError.localizedDescription)
         }
     }
  }

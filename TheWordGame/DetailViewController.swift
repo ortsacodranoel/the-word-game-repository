@@ -540,13 +540,13 @@ class DetailViewController: UIViewController, IAPManagerDelegate, UIApplicationD
                         self.purchasedCategoriesEntity = purchasedCategoryEntitiesInMOC[0] as! PurchasedCategories
                     }
                 } catch {
-                    let fetchError = error as NSError
-                    print(fetchError)
+                    // let fetchError = error as NSError
+                    // print(fetchError)
                 }
             }
         } catch {
-            let fetchError = error as NSError
-            print(fetchError)
+            // let fetchError = error as NSError
+            // print(fetchError)
         }
     }
     

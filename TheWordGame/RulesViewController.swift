@@ -29,6 +29,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
 
     
     // MARK: - Network Methods
+    
     func getNetworkStatus() {
         self.reachability = Reachability.forInternetConnection()
         self.reachability?.startNotifier()
@@ -37,6 +38,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
 
     // MARK: - Alert Views
+    
     func connectToNetworkAlert() {
         let alertController = UIAlertController(title: "Network Required", message: "You must connect to the internet to restore your purchases. Please connect and try again.", preferredStyle: .alert)
         let okAction = UIAlertAction(title:"OK", style:.default)
@@ -45,6 +47,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     }
     
     // MARK: - View Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         IAPManager.sharedInstance.delegate = self
@@ -70,6 +73,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Button Actions
+    
     @IBAction func rulesButtonTapped(_ sender: AnyObject) {
         if let url = URL(string: "http://www.thewordgameapp.com/official-rules-of-the-game/") {
             UIApplication.shared.openURL(url)
@@ -96,6 +100,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
     
     
     // MARK: - Tutorial Methods 
+    
     func enablePopUps() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.managedObjectContext
@@ -207,7 +212,7 @@ class RulesViewController: UIViewController, IAPManagerDelegate {
             do {
                 try managedObjectContext.save()
             } catch {
-               //  let nserror = error as NSError
+               // let nserror = error as NSError
                // NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }

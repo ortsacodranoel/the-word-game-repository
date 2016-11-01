@@ -16,7 +16,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var lockView: UIView!
-    
+   
+    // MARK: Actions
     @IBAction func buttonTouched(_ sender: AnyObject) {
     }
 }
