@@ -108,7 +108,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                 let requestData = try JSONSerialization.data(withJSONObject: requestContents, options: JSONSerialization.WritingOptions(rawValue: 0))
                 
                 // Build URL Mutable Request.
-                let storeURL = URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")
+                let storeURL = URL(string: "https://buy.itunes.apple.com/verifyReceipt")
                 
                 // Create and configure the request.
                 let request = NSMutableURLRequest(url: storeURL!)
