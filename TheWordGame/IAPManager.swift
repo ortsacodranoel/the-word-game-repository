@@ -66,20 +66,20 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
         for transaction in transactions as [SKPaymentTransaction]{
             switch transaction.transactionState{
             case .purchasing:
-                print("Purchasing")
+               // print("Purchasing")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
             case .deferred:
-                print("Deferrred")
+            //    print("Deferrred")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
-                print("Failed")
+            //    print("Failed")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case.purchased:
-                print("Purchased")
+            //    print("Purchased")
                 self.verifyReceipt(transaction)
             case .restored:
-                print("Restored")
+               print("Restored")
             }
         }
     }
@@ -118,12 +118,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                 // Create the session.
                 let session = URLSession.shared
                
-                // Create the data task.
-                //let task = session.dataTask(with: request, completionHandler: { (responseData:Data?, response:URLResponse?, error:NSError?) -> Void in
-                
-                
-                
-                
                 let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                     do {
                         
@@ -156,7 +150,6 @@ class IAPManager: NSObject, SKProductsRequestDelegate,SKPaymentTransactionObserv
                         }
                         
                     } catch {
-                        
                         //print("JSON error:\(error)")
                     }
                 })
