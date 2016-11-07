@@ -86,7 +86,7 @@ class Game {
         self.people = Category(title: "People", summary: "Men and women of the Bible, from Genesis to Revelation and from the meek to the mighty.")
         self.people.purchased = true
       
-        self.places = Category(title: "Places", summary: "Stories from the Bible as well as Jesus’ parables.  * answers do not have to be exact, but must contain the main words.")
+        self.places = Category(title: "Places", summary: "Countries, cities, lands, bodies of water, geological landmarks, and man-made structures of the Bible and Bible times.")
         self.places.purchased = true
       
         self.sunday = Category(title: "Sunday School", summary: "Stories from the Bible as well as Jesus’ parables.  * answers do not have to be exact, but must contain the main words.")
@@ -155,7 +155,7 @@ class Game {
         } else {
             self.history.purchased = false
         }
-        self.kids = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, and animals. Answers in quotation marks are song titles.")
+        self.kids = Category(title:"Kids",summary: "Easier words from Sunday School and the Bible, including people, places, food, animals, and songs.")
         if UserDefaults.standard.bool(forKey: "com.thewordgame.kids") {
             self.kids.purchased = true
         } else {
@@ -179,7 +179,7 @@ class Game {
             } else {
                 self.sins.purchased = false
             }
-        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * “song titles” do not have to be exact, but must contain the main words.")
+        self.worship = Category(title:"Worship",summary: "Hymns, words and songs of worship, Christian bands/singers, Biblical instruments.  * song titles do not have to be exact, but must contain the main words.")
             if UserDefaults.standard.bool(forKey: "com.thewordgame.worship") {
                 self.worship.purchased = true
             } else {

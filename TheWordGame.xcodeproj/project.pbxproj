@@ -389,6 +389,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 2PRLD92U5Y;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -637,13 +638,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 2PRLD92U5Y;
 				INFOPLIST_FILE = "$(SRCROOT)/TheWordGame/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
 				PRODUCT_NAME = TheWordGame;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "49f74e84-c8d1-4e54-b897-ca9c9d733290";
+				PROVISIONING_PROFILE_SPECIFIER = TheWordGameDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "TheWordGame/TheWordGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -663,7 +665,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielcastro.thewordgame;
 				PRODUCT_NAME = TheWordGame;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "49f74e84-c8d1-4e54-b897-ca9c9d733290";
+				PROVISIONING_PROFILE_SPECIFIER = TheWordGameDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "TheWordGame/TheWordGame-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
